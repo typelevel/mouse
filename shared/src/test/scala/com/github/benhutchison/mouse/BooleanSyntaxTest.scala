@@ -1,11 +1,8 @@
 package com.github.benhutchison.mouse
 
 import cats.data.Xor
-import com.github.benhutchison.mouse.boolean._
 
-import org.scalatest.{FunSuite, Matchers}
-
-class BooleanSyntaxTest extends FunSuite with Matchers {
+class BooleanSyntaxTest extends MouseSuite {
 
   true.option(1) shouldEqual Option(1)
 
