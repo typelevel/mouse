@@ -15,7 +15,15 @@ lazy val mouseCross = crossProject.in(file(".")).
       "org.typelevel" %%% "cats" % "0.6.0",
       "org.scalatest" %%% "scalatest" % "3.0.0-M15" %  "test"
     ),
-    publishTo <<= version { (v: String) =>
+    scalacOptions ++= Seq(
+      "-Xfatal-warnings",
+      "-deprecation",
+      "-unchecked",
+      "-feature",
+      "-Xlint",
+      "-language:implicitConversions",
+      "-language:higherKinds"),
+      publishTo <<= version { (v: String) =>
       Some("releases"  at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
     },
     publishMavenStyle := true,
