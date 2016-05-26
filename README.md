@@ -20,6 +20,7 @@ Mouse includes enrichments for:
 
 - [Boolean](./shared/src/main/scala/com/github/benhutchison/mouse/boolean.scala)
 - [Option](./shared/src/main/scala/com/github/benhutchison/mouse/option.scala)
+- [String](./shared/src/main/scala/com/github/benhutchison/mouse/string.scala)
 
 ####Example:
 
@@ -33,6 +34,11 @@ res0: Option[String] = Some(Its true!)
 scala> res0.cata(msg => s"Message received: ${msg}", "No message")
 res1: String = Message received: Its true!
 
+scala> "1.0".parseFloat
+res0: cats.data.Xor[NumberFormatException,Float] = Right(1.0)
+
+scala> "foo".parseIntValidated
+res1: cats.data.Validated[NumberFormatException,Int] = Invalid(java.lang.NumberFormatException: For input string: "foo")
 ```
 
 ##Scope of Library
