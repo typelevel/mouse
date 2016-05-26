@@ -4,7 +4,7 @@ import org.scalacheck.Arbitrary._
 import org.scalacheck.{Arbitrary, Gen}
 import cats.syntax.all._
 
-class StringTests extends MouseSuite {
+class StringSyntaxTests extends MouseSuite {
 
   test("parseInt") {
     "123".parseInt should ===(123.right[NumberFormatException])
@@ -17,6 +17,10 @@ class StringTests extends MouseSuite {
 
     forAll { i: Int =>
       i.toString.parseInt.toOption should ===(i.toString.parseIntOption)
+    }
+
+    forAll { i: Int =>
+      i.toString.parseInt.toValidated should ===(i.toString.parseIntValidated)
     }
 
   }
@@ -34,6 +38,10 @@ class StringTests extends MouseSuite {
       i.toString.parseLong.toOption should ===(i.toString.parseLongOption)
     }
 
+    forAll { i: Long =>
+      i.toString.parseLong.toValidated should ===(i.toString.parseLongValidated)
+    }
+
   }
 
   test("parseShort") {
@@ -47,6 +55,10 @@ class StringTests extends MouseSuite {
 
     forAll { i: Short =>
       i.toString.parseShort.toOption should ===(i.toString.parseShortOption)
+    }
+
+    forAll { i: Short =>
+      i.toString.parseShort.toValidated should ===(i.toString.parseShortValidated)
     }
 
   }
@@ -63,6 +75,10 @@ class StringTests extends MouseSuite {
     forAll { i: Double =>
       i.toString.parseDouble.toOption should ===(i.toString.parseDoubleOption)
     }
+
+    forAll { i: Double =>
+      i.toString.parseDouble.toValidated should ===(i.toString.parseDoubleValidated)
+    }
   }
 
   test("parseFloat") {
@@ -74,6 +90,10 @@ class StringTests extends MouseSuite {
 
     forAll { i: Float =>
       i.toString.parseFloat.toOption should ===(i.toString.parseFloatOption)
+    }
+
+    forAll { i: Float =>
+      i.toString.parseFloat.toValidated should ===(i.toString.parseFloatValidated)
     }
   }
 
@@ -89,13 +109,19 @@ class StringTests extends MouseSuite {
     forAll { i: Byte =>
       i.toString.parseByte.toOption should ===(i.toString.parseByteOption)
     }
+
+    forAll { i: Byte =>
+      i.toString.parseByte.toValidated should ===(i.toString.parseByteValidated)
+    }
   }
 
   test("parseBoolean") {
     "true".parseBoolean should ===(true.right[IllegalArgumentException])
     "true".parseBoolean.toOption should ===("true".parseBooleanOption)
+    "true".parseBoolean.toValidated should ===("true".parseBooleanValidated)
     "false".parseBoolean should ===(false.right[IllegalArgumentException])
     "false".parseBoolean.toOption should ===("false".parseBooleanOption)
+    "false".parseBoolean.toValidated should ===("false".parseBooleanValidated)
 
     "TRUE".parseBoolean should ===("true".parseBoolean)
     "FALSE".parseBoolean should ===("false".parseBoolean)
