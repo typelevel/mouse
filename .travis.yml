@@ -3,8 +3,7 @@ scala:
    - 2.10.6
    - 2.11.8
 
-script:
-  - sbt clean coverage test
-
-after_success:
-   - bash <(curl -s https://codecov.io/bash)
+cache:
+  directories:
+    - $HOME/.ivy2/cache
+    - $HOME/.sbt

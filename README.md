@@ -13,7 +13,6 @@ For scala.js:
 `"com.github.benhutchison" %%% "mouse" % "0.1"`
 
 [![Build Status](https://travis-ci.org/benhutchison/mouse.svg?branch=master)](https://travis-ci.org/benhutchison/mouse)
-[![codecov.io](http://codecov.io/github/benhutchison/mouse/coverage.svg?branch=master)](http://codecov.io/github/benhutchison/mouse?branch=master)
 
 ##Content
 
