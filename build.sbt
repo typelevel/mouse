@@ -9,10 +9,10 @@ lazy val mouseCross = crossProject.in(file(".")).
   settings(
     name := "mouse",
     organization := "com.github.benhutchison",
-    version := "0.1",
+    version := "0.2",
     scalaVersion := "2.11.8",
     libraryDependencies ++= Seq(
-      "org.typelevel" %%% "cats" % "0.5.0",
+      "org.typelevel" %%% "cats" % "0.6.0",
       "org.scalatest" %%% "scalatest" % "3.0.0-M15" %  "test"
     ),
     publishTo <<= version { (v: String) =>

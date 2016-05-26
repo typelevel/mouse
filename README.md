@@ -6,11 +6,11 @@ The library arose from this [Cats issue](https://github.com/typelevel/cats/issue
 
 Mouse is published Scala 2.10.x and 2.11.x. For Scala.jvm:
 
-`"com.github.benhutchison" %% "mouse" % "0.1"`
+`"com.github.benhutchison" %% "mouse" % "0.2"`
  
 For scala.js:
 
-`"com.github.benhutchison" %%% "mouse" % "0.1"`
+`"com.github.benhutchison" %%% "mouse" % "0.2"`
 
 [![Build Status](https://travis-ci.org/benhutchison/mouse.svg?branch=master)](https://travis-ci.org/benhutchison/mouse)
 
