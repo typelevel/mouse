@@ -8,8 +8,8 @@ trait BooleanSyntax {
 
 final class BooleanOps(val b: Boolean) extends AnyVal {
 
-  def option[A](a: A): Option[A] = if (b) Some(a) else None
+  def option[A](a: => A): Option[A] = if (b) Some(a) else None
 
-  def xor[L, R](l: L, r: R): Xor[L, R] = if (b) Xor.right(r) else Xor.left(l)
+  def xor[L, R](l: =>L, r: =>R): Xor[L, R] = if (b) Xor.right(r) else Xor.left(l)
 
 }
