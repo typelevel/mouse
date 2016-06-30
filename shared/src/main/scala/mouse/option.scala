@@ -3,7 +3,7 @@ package mouse
 import scala.util.{Failure, Success, Try}
 
 trait OptionSyntax {
-  implicit final def optionSyntax[A](oa: Option[A]): OptionOps[A] = new OptionOps(oa)
+  implicit final def optionSyntaxMouse[A](oa: Option[A]): OptionOps[A] = new OptionOps(oa)
 }
 
 final class OptionOps[A](val oa: Option[A]) extends AnyVal {

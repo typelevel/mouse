@@ -3,7 +3,7 @@ package mouse
 import cats.data.Xor
 
 trait BooleanSyntax {
-  implicit final def booleanSyntax(b: Boolean): BooleanOps = new BooleanOps(b)
+  implicit final def booleanSyntaxMouse(b: Boolean): BooleanOps = new BooleanOps(b)
 }
 
 final class BooleanOps(val b: Boolean) extends AnyVal {

@@ -3,7 +3,7 @@ package mouse
 import cats.data.{Validated, Xor}
 
 trait StringSyntax {
-  implicit def stringSyntax(s: String): StringOps = new StringOps(s)
+  implicit def stringSyntaxMouse(s: String): StringOps = new StringOps(s)
 }
 
 final class StringOps(val s: String) extends AnyVal {
