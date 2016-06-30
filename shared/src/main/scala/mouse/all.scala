@@ -1,4 +1,4 @@
-package com.github.benhutchison.mouse
+package mouse
 
 trait AllSyntax
   extends OptionSyntax

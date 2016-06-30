@@ -1,4 +1,4 @@
-package com.github.benhutchison.mouse
+package mouse
 
 import cats._
 import cats.std.AllInstances

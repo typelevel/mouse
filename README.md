@@ -2,15 +2,15 @@
 Mouse is a small companion to the [Cats](https://github.com/typelevel/cats) functional programming library for Scala. It
 includes convenient syntax (aka extension methods) found in [scalaz](https://github.com/scalaz/scalaz) that are considered out of scope for Cats proper.
 
-The library arose from this [Cats issue](https://github.com/typelevel/cats/issues/791) and the longer-term aspiration is that it join the [Typelevel "stack"](http://typelevel.org/projects/).
+The library arose from this [Cats issue](https://github.com/typelevel/cats/issues/791) and is a [Typelevel incubator](http://typelevel.org/projects/).
 
 Mouse is published Scala 2.10.x and 2.11.x. For Scala.jvm:
 
-`"com.github.benhutchison" %% "mouse" % "0.3"`
+`"com.github.benhutchison" %% "mouse" % "0.4"`
  
 For scala.js:
 
-`"com.github.benhutchison" %%% "mouse" % "0.3"`
+`"com.github.benhutchison" %%% "mouse" % "0.4"`
 
 [![Build Status](https://travis-ci.org/benhutchison/mouse.svg?branch=master)](https://travis-ci.org/benhutchison/mouse)
 
@@ -25,8 +25,8 @@ Mouse includes enrichments for:
 ####Example:
 
 ```
-scala> import com.github.benhutchison.mouse.all._
-import com.github.benhutchison.mouse.all._
+scala> import mouse.all._
+import mouse.all._
 
 scala> true.option("Its true!")
 res0: Option[String] = Some(Its true!)
@@ -40,6 +40,11 @@ res0: cats.data.Xor[NumberFormatException,Float] = Right(1.0)
 scala> "foo".parseIntValidated
 res1: cats.data.Validated[NumberFormatException,Int] = Invalid(java.lang.NumberFormatException: For input string: "foo")
 ```
+
+####Release Notes
+
+Note version `0.4` (July 2016) includes a breaking package rename from `com.github.benhutchison.mouse` -> `mouse`. Rationale was
+to follow cats and other modern libs convention of short, convenient package names. 
 
 ##Scope of Library
 

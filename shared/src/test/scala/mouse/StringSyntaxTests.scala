@@ -1,4 +1,4 @@
-package com.github.benhutchison.mouse
+package mouse
 
 import org.scalacheck.Arbitrary._
 import org.scalacheck.{Arbitrary, Gen}
