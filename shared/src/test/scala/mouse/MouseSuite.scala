@@ -1,7 +1,7 @@
 package mouse
 
 import cats._
-import cats.std.AllInstances
+import cats.instances.AllInstances
 import org.scalactic.TripleEqualsSupport.BToAEquivalenceConstraint
 import org.scalactic.{CanEqual, Equivalence}
 import org.scalatest.prop.GeneratorDrivenPropertyChecks

@@ -6,11 +6,11 @@ The library arose from this [Cats issue](https://github.com/typelevel/cats/issue
 
 Mouse is published Scala 2.10.x and 2.11.x. For Scala.jvm:
 
-`"com.github.benhutchison" %% "mouse" % "0.4"`
+`"com.github.benhutchison" %% "mouse" % "0.5"`
  
 For scala.js:
 
-`"com.github.benhutchison" %%% "mouse" % "0.4"`
+`"com.github.benhutchison" %%% "mouse" % "0.5"`
 
 [![Build Status](https://travis-ci.org/benhutchison/mouse.svg?branch=master)](https://travis-ci.org/benhutchison/mouse)
 
@@ -43,7 +43,9 @@ res1: cats.data.Validated[NumberFormatException,Int] = Invalid(java.lang.NumberF
 
 ####Release Notes
 
-Note version `0.4` (July 2016) includes a breaking package rename from `com.github.benhutchison.mouse` -> `mouse`. Rationale was
+Version `0.5` (Aug 16) is built against cats `0.7.0` but otherwise unchanged.
+
+Version `0.4` (July 2016) includes a breaking package rename from `com.github.benhutchison.mouse` -> `mouse`. Rationale was
 to follow cats and other modern libs convention of short, convenient package names. 
 
 ##Scope of Library
