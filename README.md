@@ -18,9 +18,9 @@ For scala.js:
 
 Mouse includes enrichments for:
 
-- [Boolean](./shared/src/main/scala/com/github/benhutchison/mouse/boolean.scala)
-- [Option](./shared/src/main/scala/com/github/benhutchison/mouse/option.scala)
-- [String](./shared/src/main/scala/com/github/benhutchison/mouse/string.scala)
+- [Boolean](./shared/src/main/scala/mouse/boolean.scala)
+- [Option](./shared/src/main/scala/mouse/option.scala)
+- [String](./shared/src/main/scala/mouse/string.scala)
 
 ####Example:
 
