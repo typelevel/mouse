@@ -6,13 +6,18 @@ import cats.syntax.all._
 
 class StringSyntaxTests extends MouseSuite {
 
-  test("parseInt") {
-    "123".parseInt should ===(123.right[NumberFormatException])
+  //FIXME fixed in master, remove post 0.8.2
+  implicit def catsSyntaxEitherId[A](a: A): EitherIdOps[A] = new EitherIdOps(a)
 
-    "blah".parseInt should ===(new NumberFormatException("For input string: \"blah\"").left)
+  
+
+  test("parseInt") {
+    "123".parseInt should ===(123.asRight[NumberFormatException])
+
+    "blah".parseInt should ===(new NumberFormatException("For input string: \"blah\"").asLeft)
 
     forAll { i: Int =>
-      i.toString.parseInt should ===(i.right[NumberFormatException])
+      i.toString.parseInt should ===(i.asRight[NumberFormatException])
     }
 
     forAll { i: Int =>
@@ -26,12 +31,12 @@ class StringSyntaxTests extends MouseSuite {
   }
 
   test("parseLong") {
-    "123".parseLong should ===(123L.right[NumberFormatException])
+    "123".parseLong should ===(123L.asRight[NumberFormatException])
 
-    "blah".parseLong should ===(new NumberFormatException("For input string: \"blah\"").left)
+    "blah".parseLong should ===(new NumberFormatException("For input string: \"blah\"").asLeft)
 
     forAll { i: Long =>
-      i.toString.parseLong should ===(i.right[NumberFormatException])
+      i.toString.parseLong should ===(i.asRight[NumberFormatException])
     }
 
     forAll { i: Long =>
@@ -45,12 +50,12 @@ class StringSyntaxTests extends MouseSuite {
   }
 
   test("parseShort") {
-    "123".parseShort should ===(123.toShort.right[NumberFormatException])
+    "123".parseShort should ===(123.toShort.asRight[NumberFormatException])
 
-    "blah".parseShort should ===(new NumberFormatException("For input string: \"blah\"").left)
+    "blah".parseShort should ===(new NumberFormatException("For input string: \"blah\"").asLeft)
 
     forAll { i: Short =>
-      i.toString.parseShort should ===(i.right[NumberFormatException])
+      i.toString.parseShort should ===(i.asRight[NumberFormatException])
     }
 
     forAll { i: Short =>
@@ -64,12 +69,12 @@ class StringSyntaxTests extends MouseSuite {
   }
 
   test("parseDouble") {
-    "123.1".parseDouble should ===(123.1.right[NumberFormatException])
+    "123.1".parseDouble should ===(123.1.asRight[NumberFormatException])
 
-    "blah".parseDouble should ===(new NumberFormatException("For input string: \"blah\"").left)
+    "blah".parseDouble should ===(new NumberFormatException("For input string: \"blah\"").asLeft)
 
     forAll { i: Double =>
-      i.toString.parseDouble should ===(i.right[NumberFormatException])
+      i.toString.parseDouble should ===(i.asRight[NumberFormatException])
     }
 
     forAll { i: Double =>
@@ -82,10 +87,10 @@ class StringSyntaxTests extends MouseSuite {
   }
 
   test("parseFloat") {
-    "blah".parseFloat should ===(new NumberFormatException("For input string: \"blah\"").left)
+    "blah".parseFloat should ===(new NumberFormatException("For input string: \"blah\"").asLeft)
 
     forAll { i: Float =>
-      i.toString.parseFloat should ===(i.right[NumberFormatException])
+      i.toString.parseFloat should ===(i.asRight[NumberFormatException])
     }
 
     forAll { i: Float =>
@@ -98,12 +103,12 @@ class StringSyntaxTests extends MouseSuite {
   }
 
   test("parseByte") {
-    "123".parseByte should ===(123.toByte.right[NumberFormatException])
+    "123".parseByte should ===(123.toByte.asRight[NumberFormatException])
 
-    "blah".parseByte should ===(new NumberFormatException("For input string: \"blah\"").left)
+    "blah".parseByte should ===(new NumberFormatException("For input string: \"blah\"").asLeft)
 
     forAll { i: Byte =>
-      i.toString.parseByte should ===(i.right[NumberFormatException])
+      i.toString.parseByte should ===(i.asRight[NumberFormatException])
     }
 
     forAll { i: Byte =>
@@ -116,10 +121,10 @@ class StringSyntaxTests extends MouseSuite {
   }
 
   test("parseBoolean") {
-    "true".parseBoolean should ===(true.right[IllegalArgumentException])
+    "true".parseBoolean should ===(true.asRight[IllegalArgumentException])
     "true".parseBoolean.toOption should ===("true".parseBooleanOption)
     "true".parseBoolean.toValidated should ===("true".parseBooleanValidated)
-    "false".parseBoolean should ===(false.right[IllegalArgumentException])
+    "false".parseBoolean should ===(false.asRight[IllegalArgumentException])
     "false".parseBoolean.toOption should ===("false".parseBooleanOption)
     "false".parseBoolean.toValidated should ===("false".parseBooleanValidated)
 
@@ -129,8 +134,16 @@ class StringSyntaxTests extends MouseSuite {
     val stringGen: Gen[String] = Arbitrary.arbString.arbitrary.filter(s => !s.equalsIgnoreCase("true") && !s.equalsIgnoreCase("false"))
 
     forAll(stringGen) { s: String =>
-      s.parseBoolean should ===(new IllegalArgumentException("For input string: \"" + s + "\"").left)
+      s.parseBoolean should ===(new IllegalArgumentException("For input string: \"" + s + "\"").asLeft)
     }
   }
 
+}
+
+final class EitherIdOps[A](val obj: A) extends AnyVal {
+  /** Wrap a value in `Left`. */
+  def asLeft[B]: Either[A, B] = Left(obj)
+
+  /** Wrap a value in `Right`. */
+  def asRight[B]: Either[B, A] = Right(obj)
 }

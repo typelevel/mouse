@@ -6,11 +6,11 @@ The library arose from this [Cats issue](https://github.com/typelevel/cats/issue
 
 Mouse is published Scala 2.10.x and 2.11.x. For Scala.jvm:
 
-`"com.github.benhutchison" %% "mouse" % "0.5"`
+`"com.github.benhutchison" %% "mouse" % "0.6"`
  
 For scala.js:
 
-`"com.github.benhutchison" %%% "mouse" % "0.5"`
+`"com.github.benhutchison" %%% "mouse" % "0.6"`
 
 [![Build Status](https://travis-ci.org/benhutchison/mouse.svg?branch=master)](https://travis-ci.org/benhutchison/mouse)
 
@@ -42,6 +42,8 @@ res1: cats.data.Validated[NumberFormatException,Int] = Invalid(java.lang.NumberF
 ```
 
 ####Release Notes
+
+Version `0.6` (Nov 16) is built against cats `0.8.1` and migrates `Xor` boolean syntax to `Either`.
 
 Version `0.5` (Aug 16) is built against cats `0.7.0` but otherwise unchanged.
 

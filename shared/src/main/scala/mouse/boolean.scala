@@ -1,7 +1,5 @@
 package mouse
 
-import cats.data.Xor
-
 trait BooleanSyntax {
   implicit final def booleanSyntaxMouse(b: Boolean): BooleanOps = new BooleanOps(b)
 }
@@ -10,6 +8,9 @@ final class BooleanOps(val b: Boolean) extends AnyVal {
 
   def option[A](a: => A): Option[A] = if (b) Some(a) else None
 
-  def xor[L, R](l: =>L, r: =>R): Xor[L, R] = if (b) Xor.right(r) else Xor.left(l)
+  @deprecated("Use `either` instead", "0.6")
+  def xor[L, R](l: =>L, r: =>R): Either[L, R] = either(l, r)
+
+  def either[L, R](l: =>L, r: =>R): Either[L, R] = if (b) Right(r) else Left(l)
 
 }

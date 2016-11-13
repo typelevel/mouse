@@ -1,6 +1,6 @@
 package mouse
 
-import cats.data.Xor
+import cats.syntax.either._
 
 class BooleanSyntaxTest extends MouseSuite {
 
@@ -8,8 +8,8 @@ class BooleanSyntaxTest extends MouseSuite {
 
   false.option(1) shouldEqual Option.empty[Int]
 
-  true.xor("error", 1) shouldEqual Xor.right(1)
+  true.xor("error", 1) shouldEqual Either.right(1)
 
-  false.xor("error", 1) shouldEqual Xor.left("error")
+  false.xor("error", 1) shouldEqual Either.left("error")
 
 }
