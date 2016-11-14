@@ -4,13 +4,16 @@ includes convenient syntax (aka extension methods) found in [scalaz](https://git
 
 The library arose from this [Cats issue](https://github.com/typelevel/cats/issues/791) and is a [Typelevel incubator](http://typelevel.org/projects/).
 
-Mouse is published Scala 2.10.x and 2.11.x. For Scala.jvm:
+Mouse is published Scala 2.10, 2.11, 2,12. For Scala.jvm:
 
-`"com.github.benhutchison" %% "mouse" % "0.6"`
+`"com.github.benhutchison" %% "mouse" % version`
  
 For scala.js:
 
-`"com.github.benhutchison" %%% "mouse" % "0.6"`
+`"com.github.benhutchison" %%% "mouse" % version`
+
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.benhutchison/mouse_2.12.svg)][search.maven]
+
 
 [![Build Status](https://travis-ci.org/benhutchison/mouse.svg?branch=master)](https://travis-ci.org/benhutchison/mouse)
 
