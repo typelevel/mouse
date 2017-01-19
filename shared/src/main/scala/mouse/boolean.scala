@@ -13,4 +13,6 @@ final class BooleanOps(val b: Boolean) extends AnyVal {
 
   def either[L, R](l: =>L, r: =>R): Either[L, R] = if (b) Right(r) else Left(l)
 
+  def fold[A](t: => A, f: => A): A = if (b) t else f
+
 }
