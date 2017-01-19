@@ -6,13 +6,13 @@ trait BooleanSyntax {
 
 final class BooleanOps(val b: Boolean) extends AnyVal {
 
-  def option[A](a: => A): Option[A] = if (b) Some(a) else None
+  final def option[A](a: => A): Option[A] = fold(Some(a), None)
 
   @deprecated("Use `either` instead", "0.6")
-  def xor[L, R](l: =>L, r: =>R): Either[L, R] = either(l, r)
+  final def xor[L, R](l: =>L, r: =>R): Either[L, R] = either(l, r)
 
-  def either[L, R](l: =>L, r: =>R): Either[L, R] = if (b) Right(r) else Left(l)
+  final def either[L, R](l: =>L, r: =>R): Either[L, R] = fold(Right(r), Left(l))
 
-  def fold[A](t: => A, f: => A): A = if (b) t else f
+  final def fold[A](t: => A, f: => A): A = if (b) t else f
 
 }
