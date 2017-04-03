@@ -12,12 +12,12 @@ For scala.js:
 
 `"com.github.benhutchison" %%% "mouse" % version`
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.github.benhutchison/mouse_2.12.svg)][search.maven]
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.benhutchison/mouse_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.benhutchison/mouse_2.12)
 
 
 [![Build Status](https://travis-ci.org/benhutchison/mouse.svg?branch=master)](https://travis-ci.org/benhutchison/mouse)
 
-##Content
+## Content
 
 Mouse includes enrichments for:
 
@@ -25,7 +25,7 @@ Mouse includes enrichments for:
 - [Option](./shared/src/main/scala/mouse/option.scala)
 - [String](./shared/src/main/scala/mouse/string.scala)
 
-####Example:
+#### Example:
 
 ```
 scala> import mouse.all._
@@ -44,7 +44,7 @@ scala> "foo".parseIntValidated
 res1: cats.data.Validated[NumberFormatException,Int] = Invalid(java.lang.NumberFormatException: For input string: "foo")
 ```
 
-####Release Notes
+#### Release Notes
 
 Version `0.6` (Nov 16) is built against cats `0.8.1` and migrates `Xor` boolean syntax to `Either`.
 
@@ -53,14 +53,14 @@ Version `0.5` (Aug 16) is built against cats `0.7.0` but otherwise unchanged.
 Version `0.4` (July 2016) includes a breaking package rename from `com.github.benhutchison.mouse` -> `mouse`. Rationale was
 to follow cats and other modern libs convention of short, convenient package names. 
 
-##Scope of Library
+## Scope of Library
 
 - Provide enrichments to classes from the Scala standard library that convert to Cats datatypes, 
 or otherwise improve the functional programming experience.
 
 - Make it easier to migrate source code between Scalaz and Cats.
 
-##Contributing
+## Contributing
 
 Issues and pull requests are welcome. Code contributions should be aligned with the above scope to be included, and include unit tests.
 
