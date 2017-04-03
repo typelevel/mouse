@@ -12,7 +12,7 @@ For scala.js:
 
 `"com.github.benhutchison" %%% "mouse" % version`
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.github.benhutchison/mouse_2.12.svg)][search.maven]
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.benhutchison/mouse_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.benhutchison/mouse_2.12)
 
 
 [![Build Status](https://travis-ci.org/benhutchison/mouse.svg?branch=master)](https://travis-ci.org/benhutchison/mouse)
