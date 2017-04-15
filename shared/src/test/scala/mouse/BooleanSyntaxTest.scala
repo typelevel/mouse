@@ -8,8 +8,12 @@ class BooleanSyntaxTest extends MouseSuite {
 
   false.option(1) shouldEqual Option.empty[Int]
 
-  true.xor("error", 1) shouldEqual Either.right(1)
+  true.either("error", 1) shouldEqual Either.right(1)
 
-  false.xor("error", 1) shouldEqual Either.left("error")
+  false.either("error", 1) shouldEqual Either.left("error")
+
+  true.fold("t", "f") shouldEqual "t"
+  
+  false.fold("t", "f") shouldEqual "f"
 
 }
