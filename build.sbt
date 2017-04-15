@@ -17,7 +17,8 @@ lazy val cross = crossProject.in(file(".")).
     publishMavenStyle := true,
     licenses += ("MIT license", url("http://opensource.org/licenses/MIT")),
     homepage := Some(url("https://github.com/benhutchison/mouse")),
-    developers := List(Developer("benhutchison", "Ben Hutchison", "brhutchison@gmail.com", url = url("https://github.com/benhutchison")))
+    developers := List(Developer("benhutchison", "Ben Hutchison", "brhutchison@gmail.com", url = url("https://github.com/benhutchison"))),
+    scmInfo := Some(ScmInfo(url("https://github.com/benhutchison/mouse"), "scm:git:https://github.com/benhutchison/mouse.git"))
   )
 
 lazy val jvm = cross.jvm

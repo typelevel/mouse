@@ -46,6 +46,8 @@ res1: cats.data.Validated[NumberFormatException,Int] = Invalid(java.lang.NumberF
 
 #### Release Notes
 
+Version `0.7` (Apr 17) is built against cats `0.9`, Boolean `fold`, Option `right` and `left`.
+
 Version `0.6` (Nov 16) is built against cats `0.8.1` and migrates `Xor` boolean syntax to `Either`.
 
 Version `0.5` (Aug 16) is built against cats `0.7.0` but otherwise unchanged.
