@@ -17,4 +17,15 @@ final class OptionOps[A](val oa: Option[A]) extends AnyVal {
 
   def toTryMsg(msg: =>String): Try[A] = toTry(new RuntimeException(msg))
 
+  /**
+   * Same as oa.toRight except that it fixes the type to Either[B, A]
+   * On Scala prior to 2.12, toRight returns `Serializable with Product with Either[B, A]`
+   */
+  def right[B](b: => B) : Either[B, A] = oa.toRight(b)
+
+  /**
+   * Same as oa.toLeft except that it fixes the type to Either[A, B]
+   * On Scala prior to 2.12, toLeft returns `Serializable with Product with Either[A, B]`
+   */
+  def left[B](b: => B) : Either[A, B] = oa.toLeft(b)
 }
