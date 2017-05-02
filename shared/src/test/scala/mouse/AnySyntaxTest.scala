@@ -1,6 +1,5 @@
 package mouse
 
-
 class AnySyntaxTest extends MouseSuite {
 
   true |> (!_) shouldEqual false
@@ -19,4 +18,5 @@ class AnySyntaxTest extends MouseSuite {
 
   1200 |> (_*2) |> (_-5) |> (_/3) shouldBe (((1200 * 2) - 5) / 3)
 
+  "anythingAtAll" |> mouse.ignore shouldBe ()
 }
