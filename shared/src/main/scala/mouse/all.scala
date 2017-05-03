@@ -1,6 +1,7 @@
 package mouse
 
 trait AllSyntax
-  extends OptionSyntax
+  extends AnySyntax
+  with OptionSyntax
   with BooleanSyntax
   with StringSyntax

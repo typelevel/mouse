@@ -4,4 +4,5 @@ package object mouse {
   object boolean extends BooleanSyntax
   object string extends StringSyntax
 
+  def ignore(a: Any): Unit = ()
 }
