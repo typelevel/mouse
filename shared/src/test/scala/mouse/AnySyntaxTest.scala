@@ -12,9 +12,7 @@ class AnySyntaxTest extends MouseSuite {
           |> (_.capitalize)
           |> Function.const("at bat")) shouldEqual "at bat"
 
-  true.ignore shouldBe ()
-
-  "anythingAtAll" |> (_.ignore) shouldBe ()
+  mouse.ignore(true) shouldBe ()
 
   1200 |> (_*2) |> (_-5) |> (_/3) shouldBe (((1200 * 2) - 5) / 3)
 

@@ -7,6 +7,4 @@ trait AnySyntax {
 final class AnyOps[A](val oa: A) extends AnyVal {
   def |>[B] (f: A => B) = f(oa)
   def thrush[B] (f: A => B) = f(oa)
-
-  def ignore = mouse ignore oa
 }
