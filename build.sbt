@@ -18,7 +18,8 @@ lazy val cross = crossProject.in(file(".")).
     licenses += ("MIT license", url("http://opensource.org/licenses/MIT")),
     homepage := Some(url("https://github.com/benhutchison/mouse")),
     developers := List(Developer("benhutchison", "Ben Hutchison", "brhutchison@gmail.com", url = url("https://github.com/benhutchison"))),
-    scmInfo := Some(ScmInfo(url("https://github.com/benhutchison/mouse"), "scm:git:https://github.com/benhutchison/mouse.git"))
+    scmInfo := Some(ScmInfo(url("https://github.com/benhutchison/mouse"), "scm:git:https://github.com/benhutchison/mouse.git")),
+    scalacOptions ++= Seq("-feature", "-deprecation", "-language:implicitConversions")
   )
 
 lazy val jvm = cross.jvm
