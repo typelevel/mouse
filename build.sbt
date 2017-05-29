@@ -12,7 +12,8 @@ lazy val cross = crossProject.in(file(".")).
     scalaVersion := "2.12.1",
     libraryDependencies ++= Seq(
       "org.typelevel" %%% "cats" % "0.9.0",
-      "org.scalatest" %%% "scalatest" % "3.0.0" %  "test"
+      "org.scalatest" %%% "scalatest" % "3.0.0" %  "test",
+      "org.scalacheck" %%% "scalacheck" % "1.13.5" %  "test"
     ),
     publishMavenStyle := true,
     licenses += ("MIT license", url("http://opensource.org/licenses/MIT")),
