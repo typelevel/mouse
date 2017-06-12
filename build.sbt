@@ -1,7 +1,7 @@
 lazy val root = project.in(file(".")).aggregate(js, jvm).
   settings(
     publishArtifact := false,
-    crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.1"),
+    crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.2"),
     sonatypeProfileName := "com.github.benhutchison"
   )
 

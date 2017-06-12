@@ -44,13 +44,7 @@ res0: cats.data.Xor[NumberFormatException,Float] = Right(1.0)
 scala> "foo".parseIntValidated
 res1: cats.data.Validated[NumberFormatException,Int] = Invalid(java.lang.NumberFormatException: For input string: "foo")
 
-scala> import java.net.URL
-import java.net.URL
-
-scala> import scala.util.Try
-import scala.util.Try
-
-scala> val t1 = Try(new URL("https://www.github.com"))
+scala> val t1 = scala.util.Try(new java.net.URL("https://www.github.com"))
 t1: scala.util.Try[java.net.URL] = Success(https://www.github.com)
 
 t1.cata(msg => s"URL is valid!", error => s"URL is invalid: ${error.getMessage}")
@@ -59,7 +53,7 @@ res1: String = URL is valid!
 scala> t1.either
 res2: Either[Throwable,java.net.URL] = Right(https://www.github.com)
 
-scala> val t2 = Try(new URL("https//www.github.com"))
+scala> val t2 = scala.util.Try(new java.net.URL("https//www.github.com"))
 t2: scala.util.Try[java.net.URL] = Failure(java.net.MalformedURLException: no protocol: https//www.github.com)
 
 scala> t2.cata(msg => s"URL is valid!", error => s"URL is invalid: ${error.getMessage}")
@@ -70,6 +64,8 @@ res4: Either[Throwable,java.net.URL] = Left(java.net.MalformedURLException: no p
 ```
 
 #### Release Notes
+
+Version `0.8` (Jun 17) is built against cats `0.9`, `cata` and `either` on Try.
 
 Version `0.7` (Apr 17) is built against cats `0.9`, Boolean `fold`, Option `right` and `left`.
 
