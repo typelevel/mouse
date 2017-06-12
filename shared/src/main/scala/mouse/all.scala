@@ -5,3 +5,4 @@ trait AllSyntax
   with OptionSyntax
   with BooleanSyntax
   with StringSyntax
+  with TrySyntax
