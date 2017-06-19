@@ -14,5 +14,5 @@ final class TryOps[A](val ta: Try[A]) extends AnyVal {
       case Failure(error) => failure(error)
     }
 
-  def either: Either[Throwable, A] = cata[Either[Throwable, A]](Right(_), Left(_))
+  def toEither: Either[Throwable, A] = cata[Either[Throwable, A]](Right(_), Left(_))
 }
