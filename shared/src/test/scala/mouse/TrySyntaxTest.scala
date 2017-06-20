@@ -48,11 +48,11 @@ class TrySyntaxTest extends MouseSuite {
   }
 
   forAll(genTryString) { case (msg, tr) =>
-    tr.either shouldEqual Right(msg)
+    tr.toEither shouldEqual Right(msg)
   }
 
   forAll(genTryFailure[String]) { case (th, tr) =>
-    tr.either shouldEqual Left(th)
+    tr.toEither shouldEqual Left(th)
   }
 
   implicit class ExtraTest[A](a: A) {
@@ -60,6 +60,6 @@ class TrySyntaxTest extends MouseSuite {
   }
 
   forAll(genTryBoolean, minSuccessful(10)) { case (_, t) =>
-    t.either.shouldBeA[Either[Throwable, Boolean]]
+    t.toEither.shouldBeA[Either[Throwable, Boolean]]
   }
 }
