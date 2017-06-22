@@ -50,7 +50,7 @@ t1: scala.util.Try[java.net.URL] = Success(https://www.github.com)
 t1.cata(msg => s"URL is valid!", error => s"URL is invalid: ${error.getMessage}")
 res1: String = URL is valid!
 
-scala> t1.either
+scala> t1.toEither
 res2: Either[Throwable,java.net.URL] = Right(https://www.github.com)
 
 scala> val t2 = scala.util.Try(new java.net.URL("https//www.github.com"))
@@ -59,7 +59,7 @@ t2: scala.util.Try[java.net.URL] = Failure(java.net.MalformedURLException: no pr
 scala> t2.cata(msg => s"URL is valid!", error => s"URL is invalid: ${error.getMessage}")
 res3: String = URL is invalid: no protocol: https//www.github.com
 
-scala> t2.either
+scala> t2.toEither
 res4: Either[Throwable,java.net.URL] = Left(java.net.MalformedURLException: no protocol: https//www.github.com)
 ```
 
