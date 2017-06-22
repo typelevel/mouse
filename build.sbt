@@ -9,7 +9,7 @@ lazy val cross = crossProject.in(file(".")).
   settings(
     name := "mouse",
     organization := "com.github.benhutchison",
-    scalaVersion := "2.12.1",
+    scalaVersion := "2.12.2",
     libraryDependencies ++= Seq(
       "org.typelevel" %%% "cats" % "0.9.0",
       "org.scalatest" %%% "scalatest" % "3.0.0" %  "test",

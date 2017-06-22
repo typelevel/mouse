@@ -65,6 +65,8 @@ res4: Either[Throwable,java.net.URL] = Left(java.net.MalformedURLException: no p
 
 #### Release Notes
 
+Version `0.9` (Jun 17) is built against cats `0.9`, rename `either`->`toEither` on Try to align with 2.12 core changes.
+
 Version `0.8` (Jun 17) is built against cats `0.9`, `cata` and `either` on Try.
 
 Version `0.7` (Apr 17) is built against cats `0.9`, Boolean `fold`, Option `right` and `left`.
