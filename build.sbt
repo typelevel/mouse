@@ -11,7 +11,7 @@ lazy val cross = crossProject.in(file(".")).
     organization := "com.github.benhutchison",
     scalaVersion := "2.12.2",
     libraryDependencies ++= Seq(
-      "org.typelevel" %%% "cats" % "0.9.0",
+      "org.typelevel" %%% "cats-core" % "0.9.0",
       "org.scalatest" %%% "scalatest" % "3.0.0" %  "test",
       "org.scalacheck" %%% "scalacheck" % "1.13.5" %  "test"
     ),
