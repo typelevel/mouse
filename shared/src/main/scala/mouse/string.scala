@@ -1,6 +1,6 @@
 package mouse
 
-import cats.data.{Validated}
+import cats.data.Validated
 import cats.syntax.either._
 
 trait StringSyntax {

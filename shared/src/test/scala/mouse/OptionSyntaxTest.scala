@@ -1,7 +1,8 @@
 package mouse
 
+import org.scalatest.Assertion
+
 import scala.util.{Failure, Success}
-import cats.implicits._
 
 class OptionSyntaxTest extends MouseSuite {
 
@@ -24,7 +25,7 @@ class OptionSyntaxTest extends MouseSuite {
   None.left("S") shouldEqual None.toLeft("S")
 
   implicit class ExtraTest[A](a: A) {
-    def shouldBeA[T](implicit ev: T =:= A) = succeed
+    def shouldBeA[T](implicit ev: T =:= A): Assertion = succeed
   }
 
   Option(3).right("S").shouldBeA[Either[String, Int]]

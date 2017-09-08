@@ -6,10 +6,8 @@ import cats.syntax.all._
 
 class StringSyntaxTests extends MouseSuite {
 
-  //FIXME fixed in master, remove post 0.8.2
+  // FIXME fixed in master, remove post 0.8.2
   implicit def catsSyntaxEitherId[A](a: A): EitherIdOps[A] = new EitherIdOps(a)
-
-  
 
   test("parseInt") {
     "123".parseInt should ===(123.asRight[NumberFormatException])
