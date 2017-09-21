@@ -28,7 +28,7 @@ Mouse includes enrichments for:
 
 #### Example:
 
-```
+```scala
 scala> import mouse.all._
 import mouse.all._
 
@@ -39,7 +39,7 @@ scala> res0.cata(msg => s"Message received: ${msg}", "No message")
 res1: String = Message received: Its true!
 
 scala> "1.0".parseFloat
-res0: cats.data.Xor[NumberFormatException,Float] = Right(1.0)
+res0: Either[NumberFormatException, Float] = Right(1.0F)
 
 scala> "foo".parseIntValidated
 res1: cats.data.Validated[NumberFormatException,Int] = Invalid(java.lang.NumberFormatException: For input string: "foo")
