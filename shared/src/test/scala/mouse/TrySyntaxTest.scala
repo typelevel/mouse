@@ -2,7 +2,7 @@ package mouse
 
 import scala.util.{Failure, Success, Try}
 import org.scalacheck.Gen
-import cats.implicits._
+import org.scalatest.Assertion
 
 class TrySyntaxTest extends MouseSuite {
 
@@ -42,9 +42,9 @@ class TrySyntaxTest extends MouseSuite {
     t.cata(identity, _ => n * n) shouldEqual n
   }
 
-  forAll(genTryFailure[Int]) { case (th, tr) =>
+  forAll(genTryFailure[Int]) { case (_, tr) =>
     val rnd = randomNumber(50000, 60000)
-    tr.cata(identity, _ => rnd) shouldEqual (rnd)
+    tr.cata(identity, _ => rnd) shouldEqual rnd
   }
 
   forAll(genTryString) { case (msg, tr) =>
@@ -56,7 +56,7 @@ class TrySyntaxTest extends MouseSuite {
   }
 
   implicit class ExtraTest[A](a: A) {
-    def shouldBeA[T](implicit ev: T =:= A) = succeed
+    def shouldBeA[T](implicit ev: T =:= A): Assertion = succeed
   }
 
   forAll(genTryBoolean, minSuccessful(10)) { case (_, t) =>

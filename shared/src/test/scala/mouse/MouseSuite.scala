@@ -13,15 +13,11 @@ trait MouseSuite
     with GeneratorDrivenPropertyChecks
     with AllSyntax
     with AllInstances {
-  implicit val eq0 = new Eq[NumberFormatException] {
-    override def eqv(x: NumberFormatException, y: NumberFormatException): Boolean =
-      x.getMessage == y.getMessage
-  }
+  implicit val eq0: Eq[NumberFormatException] =
+    (x: NumberFormatException, y: NumberFormatException) => x.getMessage == y.getMessage
 
-  implicit val eq1 = new Eq[IllegalArgumentException] {
-    override def eqv(x: IllegalArgumentException, y: IllegalArgumentException): Boolean =
-      x.getMessage == y.getMessage
-  }
+  implicit val eq1: Eq[IllegalArgumentException] =
+    (x: IllegalArgumentException, y: IllegalArgumentException) => x.getMessage == y.getMessage
 
   final class MouseEquivalence[T](T: Eq[T]) extends Equivalence[T] {
     def areEquivalent(a: T, b: T): Boolean = T.eqv(a, b)

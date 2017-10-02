@@ -20,7 +20,7 @@ lazy val cross = crossProject.in(file(".")).
     homepage := Some(url("https://github.com/benhutchison/mouse")),
     developers := List(Developer("benhutchison", "Ben Hutchison", "brhutchison@gmail.com", url = url("https://github.com/benhutchison"))),
     scmInfo := Some(ScmInfo(url("https://github.com/benhutchison/mouse"), "scm:git:https://github.com/benhutchison/mouse.git")),
-    scalacOptions ++= Seq("-feature", "-deprecation", "-language:implicitConversions")
+    scalacOptions ++= Seq("-feature", "-deprecation", "-language:implicitConversions", "-Xfuture")
   )
 
 lazy val jvm = cross.jvm
