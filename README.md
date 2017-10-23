@@ -2,20 +2,20 @@
 Mouse is a small companion to the [Cats](https://github.com/typelevel/cats) functional programming library for Scala. It
 includes convenient syntax (aka extension methods) found in [scalaz](https://github.com/scalaz/scalaz) that are considered out of scope for Cats proper.
 
-The library arose from this [Cats issue](https://github.com/typelevel/cats/issues/791) and is a [Typelevel incubator](http://typelevel.org/projects/).
+The library arose from this [Cats issue](https://github.com/typelevel/cats/issues/791) and is a [Typelevel member](http://typelevel.org/projects/).
 
 Mouse is published Scala 2.10, 2.11, 2,12. For Scala.jvm:
 
-`"com.github.benhutchison" %% "mouse" % version`
+`"org.typelevel" %% "mouse" % version`
 
 For scala.js:
 
-`"com.github.benhutchison" %%% "mouse" % version`
+`"org.typelevel" %%% "mouse" % version`
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.github.benhutchison/mouse_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.benhutchison/mouse_2.12)
+[![Maven Central](https://img.shields.io/maven-central/v/org.typelevel/mouse_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/org.typelevel/mouse_2.12)
 
 
-[![Build Status](https://travis-ci.org/benhutchison/mouse.svg?branch=master)](https://travis-ci.org/benhutchison/mouse)
+[![Build Status](https://travis-ci.org/typelevel/mouse.svg?branch=master)](https://travis-ci.org/typelevel/mouse)
 
 ## Content
 
@@ -64,6 +64,8 @@ res4: Either[Throwable,java.net.URL] = Left(java.net.MalformedURLException: no p
 ```
 
 #### Release Notes
+
+Version `0.11` (Oct 17) migrates to `org.typelevel` group and remains built against cats `1.0.0-MF`
 
 Version `0.10-MF` (Aug 17) is built against cats `1.0.0-MF`. It mainly supports compat testing for cats 1.0 release.
 
