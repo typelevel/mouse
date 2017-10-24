@@ -16,4 +16,20 @@ class BooleanSyntaxTest extends MouseSuite {
   
   false.fold("t", "f") shouldEqual "f"
 
+  true.valueOrZero(Option(())) shouldEqual Option(())
+
+  false.valueOrZero(Option(())) shouldEqual Option.empty[Unit]
+
+  true.valueOrZero("Yellow") shouldEqual "Yellow"
+
+  false.valueOrZero("Yellow") shouldEqual ""
+
+  true.zeroOrValue("Yellow") shouldEqual ""
+
+  false.zeroOrValue("Yellow") shouldEqual "Yellow"
+
+  true.??("Yellow") shouldEqual "Yellow"
+
+  true.!?("Yellow") shouldEqual ""
+
 }
