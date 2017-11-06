@@ -65,6 +65,8 @@ res4: Either[Throwable,java.net.URL] = Left(java.net.MalformedURLException: no p
 
 #### Release Notes
 
+Version `0.12` (Nov 17) include Boolean Monoid operations and is built against cats `1.0.0-RC1`
+
 Version `0.11` (Oct 17) migrates to `org.typelevel` group and remains built against cats `1.0.0-MF`
 
 Version `0.10-MF` (Aug 17) is built against cats `1.0.0-MF`. It mainly supports compat testing for cats 1.0 release.
@@ -95,5 +97,3 @@ Issues and pull requests are welcome. Code contributions should be aligned with 
 
 This project supports the Typelevel [code of conduct](http://typelevel.org/conduct.html) and aims that its channels
 (mailing list, Gitter, github, etc.) to be welcoming environments for everyone.
-
-
