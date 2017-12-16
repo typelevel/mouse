@@ -25,6 +25,9 @@ Mouse includes enrichments for:
 - [Option](./shared/src/main/scala/mouse/option.scala)
 - [String](./shared/src/main/scala/mouse/string.scala)
 - [Try](./shared/src/main/scala/mouse/try.scala)
+- [Int](./shared/src/main/scala/mouse/int.scala)
+- [Long](./shared/src/main/scala/mouse/long.scala)
+- [Double](./shared/src/main/scala/mouse/double.scala)
 
 #### Example:
 
@@ -61,9 +64,17 @@ res3: String = URL is invalid: no protocol: https//www.github.com
 
 scala> t2.toEither
 res4: Either[Throwable,java.net.URL] = Left(java.net.MalformedURLException: no protocol: https//www.github.com)
+
+scala> val intToBytes = 123456789.toByteArray
+intToBytes: Array[Byte] = Array(7, 91, -51, 21)
+
+scala> val longToBase64 = 123456789L.toBase64
+longToBase64: String = AAAAAAdbzRU
 ```
 
 #### Release Notes
+
+Version `0.13` (Dec 17) include Int/Long/Double toByteArray and toBase64 operations and is built against cats `1.0.0-RC1`
 
 Version `0.12` (Nov 17) include Boolean Monoid operations and is built against cats `1.0.0-RC1`
 
