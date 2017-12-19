@@ -12,7 +12,7 @@ lazy val cross = crossProject.in(file(".")).
     crossScalaVersions := Seq("2.10.6", "2.11.11", "2.12.4"),
     sonatypeProfileName := "org.typelevel",
     libraryDependencies ++= Seq(
-      "org.typelevel" %%% "cats-core" % "1.0.0-RC1",
+      "org.typelevel" %%% "cats-core" % "1.0.0-RC2",
       "org.scalatest" %%% "scalatest" % "3.0.1" %  "test",
       "org.scalacheck" %%% "scalacheck" % "1.13.5" %  "test"
     ),
