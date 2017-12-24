@@ -6,4 +6,6 @@ class IntSyntaxTest extends MouseSuite {
 
   123456789.toBase64 shouldEqual "B1vNFQ"
 
+  7.squared shouldEqual 49
+
 }

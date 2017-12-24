@@ -1,6 +1,7 @@
 # Mouse
 Mouse is a small companion to the [Cats](https://github.com/typelevel/cats) functional programming library for Scala. It
-includes convenient syntax (aka extension methods) found in [scalaz](https://github.com/scalaz/scalaz) that are considered out of scope for Cats proper.
+includes convenience extension methods for Scala standard library classes, including some found in
+[scalaz](https://github.com/scalaz/scalaz) that are not in Cats.
 
 The library arose from this [Cats issue](https://github.com/typelevel/cats/issues/791) and is a [Typelevel member](http://typelevel.org/projects/).
 
@@ -70,9 +71,14 @@ intToBytes: Array[Byte] = Array(7, 91, -51, 21)
 
 scala> val longToBase64 = 123456789L.toBase64
 longToBase64: String = AAAAAAdbzRU
+
+scala> 5.squared
+res0: Int = 25
 ```
 
 #### Release Notes
+
+Version `0.14` (Dec 17) include Int/Long/Double squared and is built against cats `1.0.0-RC2`
 
 Version `0.13` (Dec 17) include Int/Long/Double toByteArray and toBase64 operations and is built against cats `1.0.0-RC1`
 

@@ -12,4 +12,6 @@ final class LongOps(val n: Long) extends AnyVal {
   /** Base64 encoding (without final terminator). Shortcut for `java.util.Base64.getEncoder.withoutPadding.encodeToString`*/
   @inline final def toBase64: String = java.util.Base64.getEncoder.withoutPadding.encodeToString(toByteArray)
 
+  @inline final def squared: Long = n * n
+
 }

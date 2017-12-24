@@ -6,4 +6,6 @@ class LongSyntaxTest extends MouseSuite {
 
   123456789123456789L.toBase64 shouldEqual "AbabS6zQXxU"
 
+  7L.squared shouldEqual 49L
+
 }
