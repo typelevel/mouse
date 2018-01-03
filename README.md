@@ -78,6 +78,8 @@ res0: Int = 25
 
 #### Release Notes
 
+Version `0.16` (Jan 2) is built against cats `1.0.1`
+
 Version `0.15` (Dec 17) is built against cats `1.0.0`
 
 Version `0.14` (Dec 17) include Int/Long/Double squared and is built against cats `1.0.0-RC2`
