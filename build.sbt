@@ -35,15 +35,6 @@ lazy val cross = crossProject.in(file(".")).
       else
         Opts.resolver.sonatypeStaging
       ),
-    pomExtra := (
-      <developers>
-        <developer>
-          <id>benhutchison</id>
-          <name>Ben Hutchison</name>
-          <url>http://benhutchison.wordpress.com</url>
-        </developer>
-      </developers>
-     ),
     releaseCrossBuild := true,
     releasePublishArtifactsAction := PgpKeys.publishSigned.value,
     releaseProcess := Seq[ReleaseStep](
