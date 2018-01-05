@@ -2,6 +2,7 @@ import com.typesafe.sbt.pgp.PgpKeys.publishSigned
 import ReleaseTransformations._
 import sbt._
 
+
 lazy val root = project.in(file(".")).aggregate(js, jvm).
   settings(
     skip in publish := true,
@@ -48,7 +49,7 @@ lazy val cross = crossProject.in(file(".")).
       publishArtifacts,
       setNextVersion,
       commitNextVersion,
-      ReleaseStep(action = Command.process("sonatypeReleaseAll", _)),
+      releaseStepCommand("sonatypeReleaseAll"),
       pushChanges
     )
   )
