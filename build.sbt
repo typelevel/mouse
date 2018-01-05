@@ -1,3 +1,8 @@
+import com.typesafe.sbt.pgp.PgpKeys.publishSigned
+import ReleaseTransformations._
+import sbt._
+
+
 lazy val root = project.in(file(".")).aggregate(js, jvm).
   settings(
     skip in publish := true,
@@ -22,13 +27,37 @@ lazy val cross = crossProject.in(file(".")).
     developers := List(Developer("benhutchison", "Ben Hutchison", "brhutchison@gmail.com", url = url("https://github.com/benhutchison"))),
     scmInfo := Some(ScmInfo(url("https://github.com/typelevel/mouse"), "scm:git:https://github.com/typelevel/mouse.git")),
     scalacOptions ++= Seq("-feature", "-deprecation", "-language:implicitConversions"),
+    publishMavenStyle := true,
+    publishArtifact in Test := false,
+    pomIncludeRepository := { _ => false },
     publishTo := Some(
       if (isSnapshot.value)
         Opts.resolver.sonatypeSnapshots
       else
         Opts.resolver.sonatypeStaging
-      )
+      ),
+    releaseCrossBuild := true,
+    releasePublishArtifactsAction := PgpKeys.publishSigned.value,
+    releaseProcess := Seq[ReleaseStep](
+      checkSnapshotDependencies,
+      inquireVersions,
+      runClean,
+      runTest,
+      setReleaseVersion,
+      commitReleaseVersion,
+      tagRelease,
+      publishArtifacts,
+      setNextVersion,
+      commitNextVersion,
+      releaseStepCommand("sonatypeReleaseAll"),
+      pushChanges
+    )
   )
 
 lazy val jvm = cross.jvm
 lazy val js = cross.js
+
+credentials ++= (for {
+  username <- Option(System.getenv().get("SONATYPE_USERNAME"))
+  password <- Option(System.getenv().get("SONATYPE_PASSWORD"))
+} yield Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", username, password)).toSeq
