@@ -26,7 +26,7 @@ lazy val cross = crossProject.in(file(".")).
     homepage := Some(url("https://github.com/typelevel/mouse")),
     developers := List(Developer("benhutchison", "Ben Hutchison", "brhutchison@gmail.com", url = url("https://github.com/benhutchison"))),
     scmInfo := Some(ScmInfo(url("https://github.com/typelevel/mouse"), "scm:git:https://github.com/typelevel/mouse.git")),
-    scalacOptions ++= Seq("-feature", "-deprecation", "-language:implicitConversions"),
+    scalacOptions ++= Seq("-feature", "-deprecation", "-language:implicitConversions", "-language:higherKinds"),
     publishMavenStyle := true,
     publishArtifact in Test := false,
     pomIncludeRepository := { _ => false },

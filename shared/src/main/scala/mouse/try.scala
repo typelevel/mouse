@@ -1,6 +1,9 @@
 package mouse
 
-import scala.util.{Failure, Success, Try}
+import cats.Applicative
+import cats.data.EitherT
+
+import scala.util.{ Failure, Success, Try }
 
 trait TrySyntax {
   @inline implicit final def trySyntaxMouse[A](ta: Try[A]): TryOps[A] = new TryOps(ta)
@@ -15,4 +18,10 @@ final class TryOps[A](val ta: Try[A]) extends AnyVal {
     }
 
   @inline final def toEither: Either[Throwable, A] = cata[Either[Throwable, A]](Right(_), Left(_))
+
+  /**
+    * Converts a `Try[A]` to a `EitherT[F, Throwable, A]`.
+    */
+  @inline final def toEitherT[F[_]](implicit F: Applicative[F]): EitherT[F, Throwable, A] =
+    EitherT.fromEither[F](toEither)
 }
