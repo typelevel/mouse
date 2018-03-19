@@ -10,10 +10,7 @@ final class OptionOps[A](val oa: Option[A]) extends AnyVal {
 
   @inline final def cata[B](some: A => B, none: => B): B = oa.fold[B](none)(some)
 
-  def toTry(ex: =>Throwable): Try[A] = oa match {
-    case Some(x) => Success(x)
-    case None => Failure(ex)
-  }
+  @inline final def toTry(ex: =>Throwable): Try[A] = cata(Success(_), Failure(ex))
 
   @inline final def toTryMsg(msg: =>String): Try[A] = toTry(new RuntimeException(msg))
 
