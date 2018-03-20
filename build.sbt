@@ -1,4 +1,3 @@
-import com.typesafe.sbt.pgp.PgpKeys.publishSigned
 import ReleaseTransformations._
 import sbt._
 
@@ -17,7 +16,7 @@ lazy val cross = crossProject.in(file(".")).
     crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.4"),
     sonatypeProfileName := "org.typelevel",
     libraryDependencies ++= Seq(
-      "org.typelevel" %%% "cats-core" % "1.0.1",
+      "org.typelevel" %%% "cats-core" % "1.1.0",
       "org.scalatest" %%% "scalatest" % "3.0.1" %  "test",
       "org.scalacheck" %%% "scalacheck" % "1.13.5" %  "test"
     ),

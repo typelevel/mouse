@@ -2,7 +2,7 @@ package mouse
 
 
 trait DoubleSyntax {
-  implicit final def DoubleSyntaxMouse(n: Double): DoubleOps = new DoubleOps(n)
+  implicit final def doubleSyntaxMouse(n: Double): DoubleOps = new DoubleOps(n)
 }
 
 final class DoubleOps(val n: Double) extends AnyVal {

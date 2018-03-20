@@ -11,8 +11,7 @@ trait TrySyntax {
 
 final class TryOps[A](val ta: Try[A]) extends AnyVal {
 
-  final def cata[B](success: A => B, failure: Throwable => B): B =
-    ta match {
+  final def cata[B](success: A => B, failure: Throwable => B): B = ta match {
       case Success(value) => success(value)
       case Failure(error) => failure(error)
     }
