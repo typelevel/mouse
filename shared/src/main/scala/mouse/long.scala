@@ -7,11 +7,11 @@ trait LongSyntax {
 
 final class LongOps(val n: Long) extends AnyVal {
 
-  @inline final def toByteArray: Array[Byte] = java.nio.ByteBuffer.allocate(8).putLong(n).array()
+  @inline def toByteArray: Array[Byte] = java.nio.ByteBuffer.allocate(8).putLong(n).array()
 
   /** Base64 encoding (without final terminator). Shortcut for `java.util.Base64.getEncoder.withoutPadding.encodeToString`*/
-  @inline final def toBase64: String = java.util.Base64.getEncoder.withoutPadding.encodeToString(toByteArray)
+  @inline def toBase64: String = java.util.Base64.getEncoder.withoutPadding.encodeToString(toByteArray)
 
-  @inline final def squared: Long = n * n
+  @inline def squared: Long = n * n
 
 }
