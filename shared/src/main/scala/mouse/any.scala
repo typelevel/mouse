@@ -5,6 +5,6 @@ trait AnySyntax {
 }
 
 final class AnyOps[A](val oa: A) extends AnyVal {
-  @inline final def |>[B] (f: A => B) = f(oa)
-  @inline final def thrush[B] (f: A => B) = f(oa)
+  @inline def |>[B] (f: A => B) = f(oa)
+  @inline def thrush[B] (f: A => B) = f(oa)
 }
