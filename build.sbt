@@ -5,7 +5,7 @@ import sbt._
 lazy val root = project.in(file(".")).aggregate(js, jvm).
   settings(
     publish / skip := true,
-    sonatypeProfileName := "org.typelevel"
+    sonatypeProfileName := "org.typelevel",
   )
 
 lazy val cross = crossProject.in(file(".")).
@@ -29,12 +29,6 @@ lazy val cross = crossProject.in(file(".")).
     publishMavenStyle := true,
     Test / publishArtifact := false,
     pomIncludeRepository := { _ => false },
-    publishTo := Some(
-      if (isSnapshot.value)
-        Opts.resolver.sonatypeSnapshots
-      else
-        Opts.resolver.sonatypeStaging
-      ),
     releaseCrossBuild := true,
     releasePublishArtifactsAction := PgpKeys.publishSigned.value,
     releaseProcess := Seq[ReleaseStep](
@@ -50,6 +44,13 @@ lazy val cross = crossProject.in(file(".")).
       commitNextVersion,
     )
   )
+
+ThisBuild / publishTo := Some(
+  if (isSnapshot.value)
+    Opts.resolver.sonatypeSnapshots
+  else
+    Opts.resolver.sonatypeStaging
+)
 
 lazy val jvm = cross.jvm
 lazy val js = cross.js
