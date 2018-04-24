@@ -4,7 +4,7 @@ import sbt._
 
 lazy val root = project.in(file(".")).aggregate(js, jvm).
   settings(
-    skip in publish := true,
+    publish / skip := true,
     sonatypeProfileName := "org.typelevel"
   )
 
@@ -12,8 +12,8 @@ lazy val cross = crossProject.in(file(".")).
   settings(
     name := "mouse",
     organization := "org.typelevel",
-    scalaVersion := "2.12.4",
-    crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.4"),
+    scalaVersion := "2.12.5",
+    crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.5"),
     sonatypeProfileName := "org.typelevel",
     libraryDependencies ++= Seq(
       "org.typelevel" %%% "cats-core" % "1.1.0",
@@ -27,7 +27,7 @@ lazy val cross = crossProject.in(file(".")).
     scmInfo := Some(ScmInfo(url("https://github.com/typelevel/mouse"), "scm:git:https://github.com/typelevel/mouse.git")),
     scalacOptions ++= Seq("-feature", "-deprecation", "-language:implicitConversions", "-language:higherKinds"),
     publishMavenStyle := true,
-    publishArtifact in Test := false,
+    Test / publishArtifact := false,
     pomIncludeRepository := { _ => false },
     publishTo := Some(
       if (isSnapshot.value)
@@ -48,8 +48,6 @@ lazy val cross = crossProject.in(file(".")).
       publishArtifacts,
       setNextVersion,
       commitNextVersion,
-      releaseStepCommand("sonatypeReleaseAll"),
-      pushChanges
     )
   )
 
