@@ -78,6 +78,8 @@ res0: Int = 25
 
 #### Release Notes
 
+Version `0.17` (Apr 18) is built against cats `1.1.0`
+
 Version `0.16` (Jan 18) is built against cats `1.0.1`
 
 Version `0.15` (Dec 17) is built against cats `1.0.0`
