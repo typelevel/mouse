@@ -22,6 +22,7 @@ For scala.js:
 
 Mouse includes enrichments for:
 
+- [Any](./shared/src/main/scala/mouse/any.scala)
 - [Boolean](./shared/src/main/scala/mouse/boolean.scala)
 - [Option](./shared/src/main/scala/mouse/option.scala)
 - [String](./shared/src/main/scala/mouse/string.scala)
@@ -74,6 +75,9 @@ longToBase64: String = AAAAAAdbzRU
 
 scala> 5.squared
 res0: Int = 25
+
+scala> 1.5 |> (_.toInt) |> (_.toString)
+res0: String = 1
 ```
 
 #### Release Notes
