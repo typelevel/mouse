@@ -6,6 +6,8 @@ lazy val root = project.in(file(".")).aggregate(js, jvm).
   settings(
     publish / skip := true,
     sonatypeProfileName := "org.typelevel",
+    releaseCrossBuild := true,
+    crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.6"),
   )
 
 lazy val cross = crossProject.in(file(".")).
@@ -13,7 +15,6 @@ lazy val cross = crossProject.in(file(".")).
     name := "mouse",
     organization := "org.typelevel",
     scalaVersion := "2.12.6",
-    crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.6"),
     sonatypeProfileName := "org.typelevel",
     libraryDependencies ++= Seq(
       "org.typelevel" %%% "cats-core" % "1.2.0",
@@ -29,7 +30,6 @@ lazy val cross = crossProject.in(file(".")).
     publishMavenStyle := true,
     Test / publishArtifact := false,
     pomIncludeRepository := { _ => false },
-    releaseCrossBuild := true,
     releasePublishArtifactsAction := PgpKeys.publishSigned.value,
     releaseProcess := Seq[ReleaseStep](
       checkSnapshotDependencies,
