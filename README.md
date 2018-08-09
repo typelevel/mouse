@@ -78,6 +78,11 @@ res0: Int = 25
 
 scala> 1.5 |> (_.toInt) |> (_.toString)
 res0: String = 1
+
+//lift a partial function into a total function to an Either, when you want to treat unhandled input cases as an error
+scala> liftEither[Option[Int]]({case Some(n) => n}, a => s"Unexpected: $a")(Some(6))
+liftEither[Option[Int]]({case Some(n) => n}, a => s"Unexpected: $a")(Some(6))
+res0: Either[String,Int] = Right(6)
 ```
 
 #### Release Notes
