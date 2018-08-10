@@ -9,3 +9,4 @@ trait AllSyntax
   with IntSyntax
   with LongSyntax
   with DoubleSyntax
+  with PartialFunctionLift
