@@ -1,25 +1,30 @@
 import ReleaseTransformations._
 import sbt._
+import sbtcrossproject.crossProject
 
+lazy val commonSettings = Def.settings(
+  scalaVersion := "2.12.6",
+  crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.6", "2.13.0-M4")
+)
 
 lazy val root = project.in(file(".")).aggregate(js, jvm).
   settings(
+    commonSettings,
     publish / skip := true,
     sonatypeProfileName := "org.typelevel",
-    releaseCrossBuild := true,
-    crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.6"),
+    releaseCrossBuild := true
   )
 
-lazy val cross = crossProject.in(file(".")).
+lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
   settings(
     name := "mouse",
     organization := "org.typelevel",
-    scalaVersion := "2.12.6",
+    commonSettings,
     sonatypeProfileName := "org.typelevel",
     libraryDependencies ++= Seq(
       "org.typelevel" %%% "cats-core" % "1.2.0",
-      "org.scalatest" %%% "scalatest" % "3.0.1" %  "test",
-      "org.scalacheck" %%% "scalacheck" % "1.13.5" %  "test"
+      "org.scalatest" %%% "scalatest" % "3.0.6-SNAP1" %  "test",
+      "org.scalacheck" %%% "scalacheck" % "1.14.0" %  "test"
     ),
     publishMavenStyle := true,
     licenses += ("MIT license", url("http://opensource.org/licenses/MIT")),
