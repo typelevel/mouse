@@ -7,4 +7,12 @@ trait AnySyntax {
 final class AnyOps[A](val oa: A) extends AnyVal {
   @inline def |>[B] (f: A => B) = f(oa)
   @inline def thrush[B] (f: A => B) = f(oa)
+  @inline def <|(f: A => Unit): A = {
+    f(oa)
+    oa
+  }
+  @inline def unsafeTap(f: A => Unit): A = {
+    f(oa)
+    oa
+  }
 }
