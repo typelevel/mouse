@@ -1,5 +1,6 @@
 import ReleaseTransformations._
 import sbt._
+import sbtcrossproject.crossProject
 
 lazy val commonSettings = Def.settings(
   scalaVersion := "2.12.6",
