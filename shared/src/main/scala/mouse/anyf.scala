@@ -6,5 +6,6 @@ trait AnyFSyntax {
 }
 
 final class AnyFOps[F[_], A](val fa: F[A]) extends AnyVal {
+  @inline def ||>[G[_]](f: F ~> G): G[A] = f(fa)
   @inline def thrushK[G[_]](f: F ~> G): G[A] = f(fa)
 }

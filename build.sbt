@@ -1,14 +1,14 @@
 import ReleaseTransformations._
 import sbt._
-import sbtcrossproject.crossProject
 
 lazy val commonSettings = Def.settings(
   scalaVersion := "2.12.6",
-  crossScalaVersions := Seq("2.10.7", "2.11.12", "2.12.6", "2.13.0-M4")
+  crossScalaVersions := Seq("2.11.12", "2.12.6", "2.13.0-M4")
 )
 
 lazy val root = project.in(file(".")).aggregate(js, jvm).
   settings(
+    name := "mouse",
     commonSettings,
     publish / skip := true,
     sonatypeProfileName := "org.typelevel",
@@ -25,7 +25,7 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
       "org.typelevel" %%% "cats-core" % "1.4.0",
       "org.scalatest" %%% "scalatest" % "3.0.6-SNAP1" %  "test",
       "org.scalacheck" %%% "scalacheck" % "1.14.0" %  "test",
-      compilerPlugin("org.spire-math" %% "kind-projector" % "0.9.8")
+      compilerPlugin("org.spire-math" %% "kind-projector" % "0.9.7")
     ),
     publishMavenStyle := true,
     licenses += ("MIT license", url("http://opensource.org/licenses/MIT")),
