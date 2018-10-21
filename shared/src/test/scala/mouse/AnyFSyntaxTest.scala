@@ -18,7 +18,7 @@ class AnyFSyntaxTest extends MouseSuite {
     "thing"
   )
 
-  (List("This") thrushK double
-    thrushK λ[List ~> Option](_.headOption)
-    thrushK λ[Option ~> Id](_.head)) shouldEqual "This"
+  (List("This") ||> double
+    ||> λ[List ~> Option](_.headOption)
+    ||> λ[Option ~> Id](_.head)) shouldEqual "This"
 }
