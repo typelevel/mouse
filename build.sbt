@@ -33,7 +33,13 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
     homepage := Some(url("https://github.com/typelevel/mouse")),
     developers := List(Developer("benhutchison", "Ben Hutchison", "brhutchison@gmail.com", url = url("https://github.com/benhutchison"))),
     scmInfo := Some(ScmInfo(url("https://github.com/typelevel/mouse"), "scm:git:https://github.com/typelevel/mouse.git")),
-    scalacOptions ++= Seq("-feature", "-deprecation", "-language:implicitConversions", "-language:higherKinds", "-Ypartial-unification"),
+    scalacOptions ++= Seq("-feature", "-deprecation", "-language:implicitConversions", "-language:higherKinds"),
+    scalacOptions ++= {
+      scalaVersion.value match {
+        case v if v.startsWith("2.13") => Nil
+        case _ => Seq("-Ypartial-unification")
+      }
+    },
     publishMavenStyle := true,
     Test / publishArtifact := false,
     pomIncludeRepository := { _ => false },
