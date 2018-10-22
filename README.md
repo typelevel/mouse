@@ -5,7 +5,7 @@ includes convenience extension methods for Scala standard library classes, inclu
 
 The library arose from this [Cats issue](https://github.com/typelevel/cats/issues/791) and is a [Typelevel member](http://typelevel.org/projects/).
 
-Mouse is published Scala 2.10, 2.11, 2,12. For Scala.jvm:
+Mouse is published for Scala 2.11 and 2.12. For Scala.jvm:
 
 `"org.typelevel" %% "mouse" % version`
 
@@ -23,6 +23,7 @@ For scala.js:
 Mouse includes enrichments for:
 
 - [Any](./shared/src/main/scala/mouse/any.scala)
+- [F\[A\] for any F, A](./shared/src/main/scala/mouse/anyf.scala)
 - [Boolean](./shared/src/main/scala/mouse/boolean.scala)
 - [Option](./shared/src/main/scala/mouse/option.scala)
 - [String](./shared/src/main/scala/mouse/string.scala)
@@ -86,6 +87,8 @@ res0: Either[String,Int] = Right(6)
 ```
 
 #### Release Notes
+
+Version `0.19` (To be released) adds syntax for F[A] and is built against cats `1.4.0`. Support for Scala 2.10 is removed in this release.
 
 Version `0.18` (Aug 18) adds PartialFunction lift to Either and is built against cats `1.2.0`
 
