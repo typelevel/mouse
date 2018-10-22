@@ -88,7 +88,7 @@ res0: Either[String,Int] = Right(6)
 
 #### Release Notes
 
-Version `0.19` (To be released) adds syntax for F[A] and is built against cats `1.4.0`. Support for Scala 2.10 is removed in this release.
+Version `0.19` (Oct 18) adds syntax for F[A] and is built against cats `1.4.0`. Support for Scala 2.10 is removed in this release.
 
 Version `0.18` (Aug 18) adds PartialFunction lift to Either and is built against cats `1.2.0`
 
