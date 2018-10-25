@@ -3,8 +3,8 @@ import sbt._
 import sbtcrossproject.crossProject
 
 lazy val commonSettings = Def.settings(
-  scalaVersion := "2.12.6",
-  crossScalaVersions := Seq("2.11.12", "2.12.6", "2.13.0-M4")
+  scalaVersion := "2.12.7",
+  crossScalaVersions := Seq("2.11.12", "2.12.7", "2.13.0-M4")
 )
 
 lazy val root = project.in(file(".")).aggregate(js, jvm).
