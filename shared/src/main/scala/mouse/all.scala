@@ -11,3 +11,4 @@ trait AllSyntax
   with LongSyntax
   with DoubleSyntax
   with PartialFunctionLift
+  with MapSyntax

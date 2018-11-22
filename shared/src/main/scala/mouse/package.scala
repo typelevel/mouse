@@ -9,6 +9,7 @@ package object mouse {
   object int extends IntSyntax
   object double extends DoubleSyntax
   object long extends LongSyntax
+  object map extends MapSyntax
 
   /**
     * Evaluate but ignore the provided argument. This function makes value discarding an explicit operation,
