@@ -31,6 +31,7 @@ Mouse includes enrichments for:
 - [Int](./shared/src/main/scala/mouse/int.scala)
 - [Long](./shared/src/main/scala/mouse/long.scala)
 - [Double](./shared/src/main/scala/mouse/double.scala)
+- [Map](./shared/src/main/scala/mouse/map.scala)
 
 #### Example:
 
@@ -84,6 +85,9 @@ res0: String = 1
 scala> liftEither[Option[Int]]({case Some(n) => n}, a => s"Unexpected: $a")(Some(6))
 liftEither[Option[Int]]({case Some(n) => n}, a => s"Unexpected: $a")(Some(6))
 res0: Either[String,Int] = Right(6)
+
+scala> val mapped = Map(1 -> 2, 3 -> 4).mapKeys(_ * 2)
+mapped: Map[Int,Int] = Map(2 -> 2, 6 -> 4)
 ```
 
 #### Release Notes
