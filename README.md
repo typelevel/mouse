@@ -5,7 +5,7 @@ includes convenience extension methods for Scala standard library classes, inclu
 
 The library arose from this [Cats issue](https://github.com/typelevel/cats/issues/791) and is a [Typelevel member](http://typelevel.org/projects/).
 
-Mouse is published for Scala 2.11 and 2.12. For Scala.jvm:
+Mouse is published for Scala 2.11, 2.12 and 2.13. For Scala.jvm:
 
 `"org.typelevel" %% "mouse" % version`
 
@@ -91,6 +91,8 @@ mapped: Map[Int,Int] = Map(2 -> 2, 6 -> 4)
 ```
 
 #### Release Notes
+
+Version `0.20` (Dec 18) adds syntax for Map and add support for Scala 2.13.0 M5. Built against cats `1.5.0`.
 
 Version `0.19` (Oct 18) adds syntax for F[A] and is built against cats `1.4.0`. Support for Scala 2.10 is removed in this release.
 
