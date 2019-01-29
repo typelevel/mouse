@@ -140,7 +140,7 @@ class StringSyntaxTests extends MouseSuite {
 
 }
 
-final class EitherIdOps[A](val obj: A) extends AnyVal {
+final class EitherIdOps[A](private val obj: A) extends AnyVal {
   /** Wrap a value in `Left`. */
   def asLeft[B]: Either[A, B] = Left(obj)
 

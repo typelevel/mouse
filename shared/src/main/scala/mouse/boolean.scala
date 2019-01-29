@@ -6,7 +6,7 @@ trait BooleanSyntax {
   implicit final def booleanSyntaxMouse(b: Boolean): BooleanOps = new BooleanOps(b)
 }
 
-final class BooleanOps(val b: Boolean) extends AnyVal {
+final class BooleanOps(private val b: Boolean) extends AnyVal {
 
   @inline def option[A](a: => A): Option[A] = fold(Some(a), None)
 

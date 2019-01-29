@@ -5,7 +5,7 @@ trait IntSyntax {
   implicit final def intSyntaxMouse(n: Int): IntOps = new IntOps(n)
 }
 
-final class IntOps(val n: Int) extends AnyVal {
+final class IntOps(private val n: Int) extends AnyVal {
 
   @inline def toByteArray: Array[Byte] = java.nio.ByteBuffer.allocate(4).putInt(n).array()
 
