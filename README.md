@@ -138,5 +138,5 @@ or otherwise improve the functional programming experience.
 
 Issues and pull requests are welcome. Code contributions should be aligned with the above scope to be included, and include unit tests.
 
-This project supports the Typelevel [code of conduct](http://typelevel.org/conduct.html) and aims that its channels
+This project supports the [Scala code of conduct](https://www.scala-lang.org/conduct/) and aims that its channels
 (mailing list, Gitter, github, etc.) to be welcoming environments for everyone.
