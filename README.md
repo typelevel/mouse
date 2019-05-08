@@ -92,6 +92,9 @@ mapped: Map[Int,Int] = Map(2 -> 2, 6 -> 4)
 
 #### Release Notes
 
+
+Version `0.21` (May 19) is about support for Scala 2.13.0 RC1. Built against cats `2.0 M1`.
+
 Version `0.20` (Dec 18) adds syntax for Map and add support for Scala 2.13.0 M5. Built against cats `1.5.0`.
 
 Version `0.19` (Oct 18) adds syntax for F[A] and is built against cats `1.4.0`. Support for Scala 2.10 is removed in this release.
