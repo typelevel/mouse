@@ -51,6 +51,18 @@ final class StringOps(val s: String) extends AnyVal {
 
   @inline def parseShortOption: Option[Short] = parseShort.toOption
 
+  @inline def parseBigInt: NumberFormatException Either BigInt = parse(BigInt.apply)
+
+  @inline def parseBigIntValidated: Validated[NumberFormatException, BigInt] = parseBigInt.toValidated
+
+  @inline def parseBigIntOption: Option[BigInt] = parseBigInt.toOption
+
+  @inline def parseBigDecimal: NumberFormatException Either BigDecimal = parse(BigDecimal.apply)
+
+  @inline def parseBigDecimalValidated: Validated[NumberFormatException, BigDecimal] = parseBigDecimal.toValidated
+
+  @inline def parseBigDecimalOption: Option[BigDecimal] = parseBigDecimal.toOption
+
   private def parse[A](f: String => A): NumberFormatException Either A = Either.catchOnly[NumberFormatException](f(s))
 
 }

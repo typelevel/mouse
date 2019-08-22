@@ -9,8 +9,6 @@ class StringSyntaxTests extends MouseSuite {
   //FIXME fixed in master, remove post 0.8.2
   implicit def catsSyntaxEitherId[A](a: A): EitherIdOps[A] = new EitherIdOps(a)
 
-  
-
   test("parseInt") {
     "123".parseInt should ===(123.asRight[NumberFormatException])
 
@@ -117,6 +115,43 @@ class StringSyntaxTests extends MouseSuite {
 
     forAll { i: Byte =>
       i.toString.parseByte.toValidated should ===(i.toString.parseByteValidated)
+    }
+  }
+
+  test("parseBigInt") {
+    "123".parseBigInt should ===(BigInt("123").asRight[NumberFormatException])
+
+    "blah".parseBigInt should ===(new NumberFormatException("For input string: \"blah\"").asLeft)
+
+    forAll { i: BigInt =>
+      i.toString.parseBigInt should ===(i.asRight[NumberFormatException])
+    }
+
+    forAll { i: BigInt =>
+      i.toString.parseBigInt.toOption should ===(i.toString.parseBigIntOption)
+    }
+
+    forAll { i: BigInt =>
+      i.toString.parseBigInt.toValidated should ===(i.toString.parseBigIntValidated)
+    }
+  }
+
+  test("parseBigDecimal") {
+    "123.45".parseBigDecimal should ===(BigDecimal("123.45").asRight[NumberFormatException])
+
+    // We assert the class of the exception because the error message differs between the JVM and JS
+    "blah".parseBigDecimal.leftMap(_.getClass) should ===(classOf[NumberFormatException].asLeft)
+
+    forAll { i: BigDecimal =>
+      i.toString.parseBigDecimal should ===(i.asRight[NumberFormatException])
+    }
+
+    forAll { i: BigDecimal =>
+      i.toString.parseBigDecimal.toOption should ===(i.toString.parseBigDecimalOption)
+    }
+
+    forAll { i: BigDecimal =>
+      i.toString.parseBigDecimal.toValidated should ===(i.toString.parseBigDecimalValidated)
     }
   }
 
