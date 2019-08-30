@@ -14,7 +14,11 @@ class StringJvmTests extends MouseSuite {
 
   test("parseURL") {
     implicit val urlEq: Eq[URL] = Eq.fromUniversalEquals
-    implicit val malformedURLExceptionEq: Eq[MalformedURLException] = _.getMessage == _.getMessage
+    implicit val malformedURLExceptionEq: Eq[MalformedURLException] =
+      new Eq[MalformedURLException] {
+        override def eqv(x: MalformedURLException, y: MalformedURLException): Boolean =
+          x.getMessage == y.getMessage
+      }
 
     "http://example.com".parseURL should ===(new URL("http://example.com").asRight[MalformedURLException])
 
