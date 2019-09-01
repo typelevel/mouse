@@ -1,6 +1,6 @@
 package mouse
 
-import java.net.{MalformedURLException, URL}
+import java.net.{MalformedURLException, URI, URISyntaxException, URL}
 
 import cats.Eq
 import cats.syntax.all._
@@ -23,6 +23,19 @@ class StringJvmTests extends MouseSuite {
     "http://example.com".parseURL should ===(new URL("http://example.com").asRight[MalformedURLException])
 
     "blah".parseURL should ===(new MalformedURLException("no protocol: blah").asLeft)
+  }
+
+  test("parseURI") {
+    implicit val urlEq: Eq[URI] = Eq.fromUniversalEquals
+    implicit val malformedURIExceptionEq: Eq[URISyntaxException] =
+      new Eq[URISyntaxException] {
+        override def eqv(x: URISyntaxException, y: URISyntaxException): Boolean =
+          x.getMessage == y.getMessage
+      }
+
+    "http://example.com".parseURI should ===(new URI("http://example.com").asRight[URISyntaxException])
+
+    "invalid uri".parseURI should ===(new URISyntaxException("invalid uri", "Illegal character in path at index 7").asLeft)
   }
 
 }
