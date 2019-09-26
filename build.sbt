@@ -25,7 +25,7 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
     libraryDependencies ++= Seq(
       "org.typelevel" %%% "cats-core" % "2.0.0",
       "org.scalatest" %%% "scalatest" % "3.0.8" % "test",
-      "org.scalacheck" %%% "scalacheck" % "1.14.0" % "test",
+      "org.scalacheck" %%% "scalacheck" % "1.14.2" % "test",
       compilerPlugin("org.typelevel" %% "kind-projector" % "0.10.3" cross CrossVersion.binary)
     ),
     publishMavenStyle := true,
