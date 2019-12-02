@@ -54,7 +54,7 @@ res1: cats.data.Validated[NumberFormatException,Int] = Invalid(java.lang.NumberF
 scala> val t1 = scala.util.Try(new java.net.URL("https://www.github.com"))
 t1: scala.util.Try[java.net.URL] = Success(https://www.github.com)
 
-t1.cata(msg => s"URL is valid!", error => s"URL is invalid: ${error.getMessage}")
+scala> t1.cata(msg => s"URL is valid!", error => s"URL is invalid: ${error.getMessage}")
 res1: String = URL is valid!
 
 scala> t1.toEither
@@ -83,7 +83,6 @@ res0: String = 1
 
 //lift a partial function into a total function to an Either, when you want to treat unhandled input cases as an error
 scala> liftEither[Option[Int]]({case Some(n) => n}, a => s"Unexpected: $a")(Some(6))
-liftEither[Option[Int]]({case Some(n) => n}, a => s"Unexpected: $a")(Some(6))
 res0: Either[String,Int] = Right(6)
 
 scala> val mapped = Map(1 -> 2, 3 -> 4).mapKeys(_ * 2)
