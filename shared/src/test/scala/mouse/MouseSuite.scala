@@ -11,7 +11,7 @@ trait MouseSuite
   extends FunSuite
     with Matchers
     with GeneratorDrivenPropertyChecks
-    with AllSyntax
+    with AllSharedSyntax
     with AllInstances {
   implicit val eq0 = new Eq[NumberFormatException] {
     override def eqv(x: NumberFormatException, y: NumberFormatException): Boolean =

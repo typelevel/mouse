@@ -1,0 +1,3 @@
+package mouse
+
+trait AllJsSyntax

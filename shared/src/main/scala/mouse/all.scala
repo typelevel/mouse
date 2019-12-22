@@ -1,6 +1,6 @@
 package mouse
 
-trait AllSyntax
+trait AllSharedSyntax
   extends AnySyntax
   with AnyFSyntax
   with OptionSyntax
