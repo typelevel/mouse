@@ -91,6 +91,8 @@ mapped: Map[Int,Int] = Map(2 -> 2, 6 -> 4)
 
 #### Release Notes
 
+Version `0.24` (Dec 19) adds `valueOrPure` for Boolean and `parseUrl`/`parseUri` for String. Drops 2.11 support. Built against cats `2.1.0`.
+
 Version `0.23` (Aug 19) adds parsing of `BigInt` and `BigDecimal`. Built against cats `2.0.0-RC1`.
 
 Version `0.22` (June 19) is about support for Scala 2.13.0. Built against cats `2.0.0-M4`.
