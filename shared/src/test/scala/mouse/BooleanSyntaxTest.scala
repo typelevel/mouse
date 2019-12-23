@@ -32,4 +32,7 @@ class BooleanSyntaxTest extends MouseSuite {
 
   true.!?("Yellow") shouldEqual ""
 
+  true.valueOrPure(Option(1))(2) shouldEqual Some(1)
+
+  false.valueOrPure(Option(1))(2) shouldEqual Some(2)
 }

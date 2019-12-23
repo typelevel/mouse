@@ -1,6 +1,6 @@
 package mouse
 
-import cats.Monoid
+import cats.{ Applicative, Monoid }
 
 trait BooleanSyntax {
   implicit final def booleanSyntaxMouse(b: Boolean): BooleanOps = new BooleanOps(b)
@@ -24,4 +24,6 @@ final class BooleanOps(val b: Boolean) extends AnyVal {
   @inline def ??[A](a: => A)(implicit M: Monoid[A]): A = valueOrZero(a)
 
   @inline def !?[A](a: => A)(implicit M: Monoid[A]): A = zeroOrValue(a)
+
+  @inline def valueOrPure[F[_], A](fa: =>F[A])(a: =>A)(implicit F: Applicative[F]) = if (b) fa else F.pure(a)
 }
