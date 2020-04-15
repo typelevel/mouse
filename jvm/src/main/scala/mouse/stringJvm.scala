@@ -9,7 +9,7 @@ trait StringJvmSyntax {
   implicit def stringJvmSyntaxMouse(s: String): JvmStringOps = new JvmStringOps(s)
 }
 
-final class JvmStringOps(val s: String) extends AnyVal {
+final class JvmStringOps(private val s: String) extends AnyVal {
 
   @inline def parseURL: MalformedURLException Either URL = Either.catchOnly[MalformedURLException](new URL(s))
 
