@@ -9,7 +9,7 @@ trait TrySyntax {
   @inline implicit final def trySyntaxMouse[A](ta: Try[A]): TryOps[A] = new TryOps(ta)
 }
 
-final class TryOps[A](val ta: Try[A]) extends AnyVal {
+final class TryOps[A](private val ta: Try[A]) extends AnyVal {
 
   @inline def cata[B](success: A => B, failure: Throwable => B): B = ta match {
     case Success(value) => success(value)

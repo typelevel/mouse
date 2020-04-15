@@ -7,7 +7,7 @@ trait StringSyntax {
   implicit def stringSyntaxMouse(s: String): StringOps = new StringOps(s)
 }
 
-final class StringOps(val s: String) extends AnyVal {
+final class StringOps(private val s: String) extends AnyVal {
 
   @inline def parseBoolean: IllegalArgumentException Either Boolean = Either.catchOnly[IllegalArgumentException](s.toBoolean)
 
