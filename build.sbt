@@ -1,6 +1,6 @@
 import ReleaseTransformations._
 import sbt._
-import sbtcrossproject.crossProject
+import sbtcrossproject.CrossPlugin.autoImport.crossProject
 
 lazy val commonSettings = Def.settings(
   scalaVersion := "2.13.1",
@@ -23,10 +23,11 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
     commonSettings,
     sonatypeProfileName := "org.typelevel",
     libraryDependencies ++= Seq(
-      "org.typelevel" %%% "cats-core" % "2.1.0",
-      "org.scalatest" %%% "scalatest" % "3.0.8" % "test",
-      "org.scalacheck" %%% "scalacheck" % "1.14.0" % "test",
-      compilerPlugin("org.typelevel" %% "kind-projector" % "0.10.3" cross CrossVersion.binary)
+      "org.typelevel" %%% "cats-core" % "2.1.1",
+      "org.scalatest" %%% "scalatest" % "3.1.1" % Test,
+      "org.scalatestplus" %%% "scalacheck-1-14" % "3.1.1.1" % Test,
+      "org.scalacheck" %%% "scalacheck" % "1.14.3" % Test,
+      compilerPlugin("org.typelevel" %% "kind-projector" % "0.11.0" cross CrossVersion.full)
     ),
     publishMavenStyle := true,
     licenses += ("MIT license", url("http://opensource.org/licenses/MIT")),
