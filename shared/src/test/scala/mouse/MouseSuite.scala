@@ -4,13 +4,14 @@ import cats._
 import cats.instances.AllInstances
 import org.scalactic.TripleEqualsSupport.BToAEquivalenceConstraint
 import org.scalactic.{CanEqual, Equivalence}
-import org.scalatest.prop.GeneratorDrivenPropertyChecks
-import org.scalatest.{Matchers, FunSuite}
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
+import org.scalatestplus.scalacheck.ScalaCheckDrivenPropertyChecks
 
 trait MouseSuite
-  extends FunSuite
+  extends AnyFunSuite
     with Matchers
-    with GeneratorDrivenPropertyChecks
+    with ScalaCheckDrivenPropertyChecks
     with AllSharedSyntax
     with AllInstances {
   implicit val eq0 = new Eq[NumberFormatException] {
