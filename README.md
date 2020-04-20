@@ -5,11 +5,11 @@ includes convenience extension methods for Scala standard library classes, inclu
 
 The library arose from this [Cats issue](https://github.com/typelevel/cats/issues/791) and is a [Typelevel member](http://typelevel.org/projects/).
 
-Mouse is published for Scala 2.11, 2.12 and 2.13. For Scala.jvm:
+Mouse is published for Scala 2.12 and 2.13. For Scala.jvm:
 
 `"org.typelevel" %% "mouse" % version`
 
-For scala.js:
+For scala.js 1.x:
 
 `"org.typelevel" %%% "mouse" % version`
 
