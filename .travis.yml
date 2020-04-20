@@ -1,6 +1,6 @@
 language: scala
 scala:
-   - 2.12.8
+   - 2.12.11
    - 2.13.1
 
 jdk:
@@ -9,7 +9,7 @@ jdk:
 matrix:
   include:
     - jdk: openjdk11
-      scala: 2.13.0
+      scala: 2.13.1
 
 cache:
   directories:

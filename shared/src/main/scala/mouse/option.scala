@@ -6,7 +6,7 @@ trait OptionSyntax {
   implicit final def optionSyntaxMouse[A](oa: Option[A]): OptionOps[A] = new OptionOps(oa)
 }
 
-final class OptionOps[A](val oa: Option[A]) extends AnyVal {
+final class OptionOps[A](private val oa: Option[A]) extends AnyVal {
 
   @inline def cata[B](some: A => B, none: => B): B = oa.fold[B](none)(some)
 

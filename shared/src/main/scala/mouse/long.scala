@@ -5,7 +5,7 @@ trait LongSyntax {
   implicit final def longSyntaxMouse(n: Long): LongOps = new LongOps(n)
 }
 
-final class LongOps(val n: Long) extends AnyVal {
+final class LongOps(private val n: Long) extends AnyVal {
 
   @inline def toByteArray: Array[Byte] = java.nio.ByteBuffer.allocate(8).putLong(n).array()
 
