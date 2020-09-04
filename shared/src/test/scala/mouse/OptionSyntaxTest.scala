@@ -1,7 +1,6 @@
 package mouse
 
 import scala.util.{Failure, Success}
-import cats.implicits._
 
 class OptionSyntaxTest extends MouseSuite {
 
