@@ -2,7 +2,6 @@ package mouse
 
 import scala.util.{Failure, Success, Try}
 import org.scalacheck.Gen
-import cats.implicits._
 
 class TrySyntaxTest extends MouseSuite {
 
