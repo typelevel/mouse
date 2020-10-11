@@ -27,5 +27,8 @@ final class BooleanOps(private val b: Boolean) extends AnyVal {
 
   @inline def valueOrPure[F[_], A](fa: =>F[A])(a: =>A)(implicit F: Applicative[F]) = if (b) fa else F.pure(a)
   
-  @inline def applyIf[A, B](a: A)(f: A => A): A = if (b) f(a) else a
+  class ApplyIfPartiallyApplied[A](a: A) {
+    @inline def apply[B >: A](f: B => B): B = if (b) f(a) else a
+  }
+  @inline def applyIf[A](a:A): ApplyIfPartiallyApplied[A] = new ApplyIfPartiallyApplied[A](a)
 }
