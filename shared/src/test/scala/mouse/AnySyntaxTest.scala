@@ -17,4 +17,8 @@ class AnySyntaxTest extends MouseSuite {
   1200 |> (_*2) |> (_-5) |> (_/3) shouldBe (((1200 * 2) - 5) / 3)
 
   "anythingAtAll" |> mouse.ignore shouldBe (())
+
+  def mutilate(x: CharSequence): CharSequence = x.subSequence(1, 2)
+  "foo".applyIf(true)(mutilate) shouldEqual "o"
+  "foo".applyIf(false)(mutilate) shouldEqual "foo"
 }
