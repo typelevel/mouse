@@ -42,9 +42,6 @@ import mouse.all._
 scala> true.option("Its true!")
 res0: Option[String] = Some(Its true!)
 
-scala> def makeEven(i: Int) = (i % 2 == 1).applyIf(i)(_ - 1)
-def makeEven(i: Int): Int
-
 scala> res0.cata(msg => s"Message received: ${msg}", "No message")
 res1: String = Message received: Its true!
 
