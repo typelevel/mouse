@@ -26,6 +26,4 @@ final class BooleanOps(private val b: Boolean) extends AnyVal {
   @inline def !?[A](a: => A)(implicit M: Monoid[A]): A = zeroOrValue(a)
 
   @inline def valueOrPure[F[_], A](fa: =>F[A])(a: =>A)(implicit F: Applicative[F]) = if (b) fa else F.pure(a)
-  
-  @inline def applyIf[A, B](a: A)(f: A => A): A = if (b) f(a) else a
 }
