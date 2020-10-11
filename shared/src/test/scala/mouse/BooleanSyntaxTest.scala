@@ -35,4 +35,10 @@ class BooleanSyntaxTest extends MouseSuite {
   true.valueOrPure(Option(1))(2) shouldEqual Some(1)
 
   false.valueOrPure(Option(1))(2) shouldEqual Some(2)
+  
+  def mutilate(x: CharSequence): CharSequence = x.subSequence(1, 2)
+  true.applyIf("foo")(mutilate) shouldEqual "o"
+  false.applyIf("foo")(mutilate) shouldEqual "foo"
+  
+  true.applyIf(5)(_ - 1)
 }
