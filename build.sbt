@@ -26,7 +26,7 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
       "org.typelevel" %%% "cats-core" % "2.2.0",
       "org.scalatest" %%% "scalatest" % "3.2.2" % Test,
       "org.scalatestplus" %%% "scalacheck-1-14" % "3.2.2.0" % Test,
-      "org.scalacheck" %%% "scalacheck" % "1.14.3" % Test,
+      "org.scalacheck" %%% "scalacheck" % "1.15.0" % Test,
       compilerPlugin("org.typelevel" %% "kind-projector" % "0.11.0" cross CrossVersion.full)
     ),
     publishMavenStyle := true,
