@@ -2,9 +2,13 @@ import ReleaseTransformations._
 import sbt._
 import sbtcrossproject.CrossPlugin.autoImport.crossProject
 
+ThisBuild / githubWorkflowPublishTargetBranches := Seq()
+
+ThisBuild / crossScalaVersions := Seq("2.12.11", "2.13.1")
+
 lazy val commonSettings = Def.settings(
   scalaVersion := "2.13.1",
-  crossScalaVersions := Seq("2.12.11", "2.13.1")
+  crossScalaVersions := (ThisBuild / crossScalaVersions).value
 )
 
 lazy val root = project.in(file(".")).aggregate(js, jvm).
