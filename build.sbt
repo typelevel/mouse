@@ -32,7 +32,6 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
       "org.scalatestplus" %%% "scalacheck-1-15" % "3.2.3.0" % Test,
       compilerPlugin("org.typelevel" %% "kind-projector" % "0.11.2" cross CrossVersion.full)
     ),
-    publishMavenStyle := true,
     licenses += ("MIT license", url("http://opensource.org/licenses/MIT")),
     homepage := Some(url("https://github.com/typelevel/mouse")),
     developers := List(Developer("benhutchison", "Ben Hutchison", "brhutchison@gmail.com", url = url("https://github.com/benhutchison"))),
@@ -44,7 +43,6 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
         case _ => Seq("-Ypartial-unification")
       }
     },
-    publishMavenStyle := true,
     Test / publishArtifact := false,
     pomIncludeRepository := { _ => false },
     releasePublishArtifactsAction := PgpKeys.publishSigned.value,
@@ -81,17 +79,5 @@ ThisBuild / githubWorkflowPublish := Seq(
   )
 )
 
-ThisBuild / publishTo := Some(
-  if (isSnapshot.value)
-    Opts.resolver.sonatypeSnapshots
-  else
-    Opts.resolver.sonatypeStaging
-)
-
 lazy val jvm = cross.jvm
 lazy val js = cross.js
-
-credentials ++= (for {
-  username <- Option(System.getenv().get("SONATYPE_USERNAME"))
-  password <- Option(System.getenv().get("SONATYPE_PASSWORD"))
-} yield Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", username, password)).toSeq
