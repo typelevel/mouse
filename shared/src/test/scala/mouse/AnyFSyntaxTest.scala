@@ -14,7 +14,7 @@ class AnyFSyntaxTest extends MouseSuite {
 
   List(5, 10) thrushK double shouldEqual List(5, 10, 5, 10)
 
-  "thing".some thrushK (λ[Option ~> Either[String, ?]](_.toRight("foo"))) shouldEqual Right(
+  "thing".some thrushK (λ[Option ~> Either[String, *]](_.toRight("foo"))) shouldEqual Right(
     "thing"
   )
 
