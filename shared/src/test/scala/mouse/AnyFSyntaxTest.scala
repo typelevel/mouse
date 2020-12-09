@@ -1,24 +1,22 @@
 package mouse
 
-import cats.syntax.option._
-import cats.syntax.functor._
-import cats.{Id, ~>}
+import cats.syntax.all._
+import cats.{Id}
 
-class AnyFSyntaxTest extends MouseSuite {
+import mouse.anyf._
 
-  val emptyK: List ~> List = λ[List ~> List](_ => Nil)
+class AnyFSyntaxTest extends MouseSuite:
 
-  val double: List ~> List = λ[List ~> List](list => list ::: list)
+  type ~>[F[_], G[_]] = [A] => F[A] => G[A]
 
-  List(1, 2, 3) thrushK emptyK shouldEqual Nil
+  val emptyK: List ~> List = [A] => (_: List[A]) => Nil
 
-  List(5, 10) thrushK double shouldEqual List(5, 10, 5, 10)
-
-  "thing".some thrushK (λ[Option ~> Either[String, *]](_.toRight("foo"))) shouldEqual Right(
-    "thing"
-  )
-
-  (List("This") ||> double
-    ||> λ[List ~> Option](_.headOption)
-    ||> λ[Option ~> Id](_.head)) shouldEqual "This"
-}
+//  val double: List ~> List = [T] => ((list) => list ::: list)
+//
+//  testEquals(List(1, 2, 3) thrushK emptyK, Nil, "thrushK emptyK")
+//
+//  testEquals(List(5, 10) thrushK double, List(5, 10, 5, 10), "thrushK double")
+//
+//  testEquals("thing".some thrushK ((_.toRight("foo")): Option ~> Either[String, *]), Right("thing"))
+//
+//  testEquals((List("This") ||> double ||> List ~> Option(_.headOption) ||> Option ~> Id(_.head)), "This")

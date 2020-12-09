@@ -1,13 +1,6 @@
 package mouse
 
-trait MouseFunctions {
+@deprecated("Use `: Unit` type ascription instead, see also https://github.com/scala/scala/pull/7563", "1.0.0")
+def ignore(a: Any): Unit = ()
 
-  /**
-   * Evaluate but ignore the provided argument. This function makes value discarding an explicit operation,
-   * helpful when the `-Ywarn-discard-values` compiler flag is enable to explicitly satisfy warnings.
-   *
-   * @param a - the value to be evaluated and ignored.
-   */
-  def ignore(a: Any): Unit = ()
 
-}
