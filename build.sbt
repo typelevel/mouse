@@ -2,6 +2,7 @@ import sbt._
 
 inThisBuild(Seq(
   name := "mouse",
+  version := "1.0.0-M1",
   scalaVersion := "3.0.0-M2",
   crossScalaVersions := Seq("3.0.0-M2"),
   organization := "org.typelevel",

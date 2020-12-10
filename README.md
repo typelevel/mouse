@@ -5,7 +5,9 @@ includes convenience extension methods for Scala standard library classes, inclu
 
 The library arose from this [Cats issue](https://github.com/typelevel/cats/issues/791) and is a [Typelevel member](http://typelevel.org/projects/).
 
-Mouse is published for Scala 2.12 and 2.13. For Scala.jvm:
+Mouse 1.x is published for Scala 3.x and is the main branch. Mouse 0.26 is published for Scala 2.12 and 2.13, and will be updated for bugfixes but not new features in future. 
+
+For Scala.jvm:
 
 `"org.typelevel" %% "mouse" % version`
 
@@ -100,6 +102,11 @@ mapped: Map[Int,Int] = Map(2 -> 2, 6 -> 4)
 ```
 
 #### Release Notes
+
+Version `1.0.0-M1` (Dec 20)  is a rewrite to Scala 3.x syntax. It is source-compatible with earlier versions but binary-incompatible. Mouse aims to add a minimal feature set over the standard library and Cats; its ideal is to "disappear over time". Accordingly, this version deprecates a number of methods, either because good solutions are available upstream now, or to align names better with emerging standard library conventions.
+
+The 1.x series migrates from Scalatest and Scalacheck to Munit, in pursuit of simplicitly and low maintenance. Note in this release, there's a change to how the library's extensions are made available. The syntax `import mouse.all._` remains, but it is no longer a package object inheriting from a stack of traits. Rather `all` is a package and we use Scala 3's `export` to export extension methods via this package. For users, there should be no change required beyond recompilation.
+
 
 Version `0.26` (Dec 20) adds `applyIf` for Boolean and builds against Cats 2.3.0.
 
