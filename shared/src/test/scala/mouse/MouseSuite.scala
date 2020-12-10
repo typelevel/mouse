@@ -35,7 +35,14 @@ trait MouseSuite extends munit.FunSuite:
         Diffs.assertNoDiff(
           munitPrint(obtained),
           munitPrint(expected),
-          message => fail(message),
+          new munit.internal.difflib.ComparisonFailExceptionHandler {
+            def handle(
+                        message: String,
+                        obtained: String,
+                        expected: String,
+                        loc: Location
+                      ): Nothing = fail(message)
+          },
           munitPrint(clue),
           printObtainedAsStripMargin = false
         )
