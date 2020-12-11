@@ -39,4 +39,10 @@ class BooleanSyntaxTest extends MouseSuite {
   def mutilate(x: CharSequence): CharSequence = x.subSequence(1, 2)
   true.applyIf("foo")(mutilate) shouldEqual "o"
   false.applyIf("foo")(mutilate) shouldEqual "foo"
+
+  true.whenA("foo".asLeft[Int]) shouldEqual Left("foo")
+  false.whenA("foo".asLeft[Int]) shouldEqual Right(())
+
+  true.unlessA("foo".asLeft[Int]) shouldEqual Right(())
+  false.unlessA("foo".asLeft[Int]) shouldEqual Left("foo")
 }
