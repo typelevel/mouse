@@ -45,6 +45,15 @@ res0: Option[String] = Some(Its true!)
 scala> def makeEven(i: Int) = (i % 2 == 1).applyIf(i)(_ - 1)
 def makeEven(i: Int): Int
 
+scala> val e1: Either[String, Int] = Left("failed")
+e1: Either[String,Int] = Left(failed)
+
+scala> true.whenA(e1)
+res0: Either[String,Unit] = Left(failed)
+
+scala> false.whenA(e1)
+res1: Either[String,Unit] = Right(())
+
 scala> res0.cata(msg => s"Message received: ${msg}", "No message")
 res1: String = Message received: Its true!
 
