@@ -30,7 +30,7 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
       "org.typelevel" %%% "cats-core" % "2.3.1",
       "org.scalatest" %%% "scalatest" % "3.2.3" % Test,
       "org.scalatestplus" %%% "scalacheck-1-15" % "3.2.3.0" % Test,
-      compilerPlugin("org.typelevel" %% "kind-projector" % "0.11.2" cross CrossVersion.full)
+      compilerPlugin("org.typelevel" %% "kind-projector" % "0.11.3" cross CrossVersion.full)
     ),
     licenses += ("MIT license", url("http://opensource.org/licenses/MIT")),
     homepage := Some(url("https://github.com/typelevel/mouse")),
