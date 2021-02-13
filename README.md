@@ -14,9 +14,7 @@ For scala.js 1.x:
 `"org.typelevel" %%% "mouse" % version`
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.typelevel/mouse_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/org.typelevel/mouse_2.12)
-
-
-[![Build Status](https://travis-ci.org/typelevel/mouse.svg?branch=master)](https://travis-ci.org/typelevel/mouse)
+![Continuous Integration](https://github.com/typelevel/mouse/workflows/Continuous%20Integration/badge.svg)
 
 ## Content
 
