@@ -2,47 +2,48 @@ package mouse
 
 import cats.syntax.either._
 
-class BooleanSyntaxTest extends MouseSuite {
+import mouse.boolean._
 
-  true.option(1) shouldEqual Option(1)
+class BooleanSyntaxTest extends MouseSuite:
 
-  false.option(1) shouldEqual Option.empty[Int]
+  testEquals(true.option(1), Option(1))
 
-  true.either("error", 1) shouldEqual Either.right(1)
+  testEquals(false.option(1), Option.empty[Int])
 
-  false.either("error", 1) shouldEqual Either.left("error")
+  testEquals(true.either("error", 1), Either.right(1))
 
-  true.fold("t", "f") shouldEqual "t"
-  
-  false.fold("t", "f") shouldEqual "f"
+  testEquals(false.either("error", 1), Either.left("error"))
 
-  true.valueOrZero(Option(())) shouldEqual Option(())
+  testEquals(true.fold("t", "f"), "t")
 
-  false.valueOrZero(Option(())) shouldEqual Option.empty[Unit]
+  testEquals(false.fold("t", "f"), "f")
 
-  true.valueOrZero("Yellow") shouldEqual "Yellow"
+  testEquals(true.valueOrZero(Option(())), Option(()))
 
-  false.valueOrZero("Yellow") shouldEqual ""
+  testEquals(false.valueOrZero(Option(())), Option.empty[Unit])
 
-  true.zeroOrValue("Yellow") shouldEqual ""
+  testEquals(true.valueOrZero("Yellow"), "Yellow")
 
-  false.zeroOrValue("Yellow") shouldEqual "Yellow"
+  testEquals(false.valueOrZero("Yellow"), "")
 
-  true.??("Yellow") shouldEqual "Yellow"
+  testEquals(true.zeroOrValue("Yellow"), "")
 
-  true.!?("Yellow") shouldEqual ""
+  testEquals(false.zeroOrValue("Yellow"), "Yellow")
 
-  true.valueOrPure(Option(1))(2) shouldEqual Some(1)
+  testEquals(true.??("Yellow"), "Yellow")
 
-  false.valueOrPure(Option(1))(2) shouldEqual Some(2)
-  
-  def mutilate(x: CharSequence): CharSequence = x.subSequence(1, 2)
-  true.applyIf("foo")(mutilate) shouldEqual "o"
-  false.applyIf("foo")(mutilate) shouldEqual "foo"
+  testEquals(true.!?("Yellow"), "")
 
-  true.whenA("foo".asLeft[Int]) shouldEqual Left("foo")
-  false.whenA("foo".asLeft[Int]) shouldEqual Right(())
+  testEquals(true.valueOrPure(Option(1))(2), Some(1))
 
-  true.unlessA("foo".asLeft[Int]) shouldEqual Right(())
-  false.unlessA("foo".asLeft[Int]) shouldEqual Left("foo")
-}
+  testEquals(false.valueOrPure(Option(1))(2), Some(2))
+
+  def mutilate(x: String): String = x.substring(1, 2)
+  testEquals(true.applyIf("foo")(mutilate), "o")
+  testEquals(false.applyIf("foo")(mutilate), "foo")
+
+  testEquals(true.whenA("foo".asLeft[Int]), Left("foo"))
+  testEquals(false.whenA("foo".asLeft[Int]), Right(()))
+
+  testEquals(true.unlessA("foo".asLeft[Int]), Right(()))
+  testEquals(false.unlessA("foo".asLeft[Int]), Left("foo"))

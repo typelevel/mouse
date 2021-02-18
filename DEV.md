@@ -9,20 +9,10 @@ short or generic names if possible.
 
 * Mention in the example section and in the release notes in README.md
 
+## Tests
+
+The tests dont have good descriptive labels as at Dec 2020. I've long believed that the best label for a well written test is the source code itself. The plan is to use [Sourcecode]() to generate labels based on the test code, however Sourcecode isn't published for Scala3+ScalaJS yet. Try again in a month or two.rr
+
 ### Release Process
 
-Commit but don't push all changes.
-
-```
-> sbt
-
-sbt> release
-
-//manual check of console output looks correct
-
-sbt> sonatypeRelease
-
-> git push
-
-
-```
+Releases now occur via Github Actions CI. The server uses Ben Hutchison's Sonatype credentials to publish to maven. Push a tag as per https://github.com/olafurpg/sbt-ci-release#git

@@ -1,20 +1,19 @@
 package mouse
 
-class AnySyntaxTest extends MouseSuite {
+import mouse.any._
 
-  true |> (!_) shouldEqual false
+class AnySyntaxTest extends MouseSuite:
 
-  5 |> (_ + 44) shouldEqual 49
+  testEquals(true |> (!_),  false)
 
-  Some("thing") |> (_ getOrElse "that") shouldEqual "thing"
+  testEquals(5 |> (_ + 44),  49)
 
-  ("This" |> Function.const("that")
-          |> (_.capitalize)
-          |> Function.const("at bat")) shouldEqual "at bat"
+  testEquals(Some("thing") |> (_ getOrElse "that"),  "thing")
 
-  mouse.ignore(true) shouldBe (())
+  testEquals(("This" |> Function.const("that")
+        |> (_.capitalize)
+        |> Function.const("at bat")),  "at bat")
 
-  1200 |> (_*2) |> (_-5) |> (_/3) shouldBe (((1200 * 2) - 5) / 3)
+  testEquals(1200 |> (_*2) |> (_-5) |> (_/3), (((1200 * 2) - 5) / 3))
 
-  "anythingAtAll" |> mouse.ignore shouldBe (())
-}
+  testEquals("anythingAtAll" |> mouse.ignore, ())

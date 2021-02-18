@@ -1,11 +1,11 @@
 package mouse
 
-class IntSyntaxTest extends MouseSuite {
+import mouse.int._
 
-  123456789.toByteArray shouldEqual Array(7, 91, -51, 21)
+class IntSyntaxTest extends MouseSuite:
 
-  123456789.toBase64 shouldEqual "B1vNFQ"
+  testEquals(123456789.toByteArray, Array[Byte](7, 91, -51, 21))
 
-  7.squared shouldEqual 49
+  testEquals(123456789.toBase64, "B1vNFQ")
 
-}
+  testEquals(7.squared, 49)

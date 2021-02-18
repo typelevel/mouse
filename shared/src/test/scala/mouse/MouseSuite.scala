@@ -1,33 +1,62 @@
 package mouse
 
 import cats._
+import cats.syntax.all._
 import cats.instances.AllInstances
-import org.scalactic.TripleEqualsSupport.BToAEquivalenceConstraint
-import org.scalactic.{CanEqual, Equivalence}
-import org.scalatest.funsuite.AnyFunSuite
-import org.scalatest.matchers.should.Matchers
-import org.scalatestplus.scalacheck.ScalaCheckDrivenPropertyChecks
 
-trait MouseSuite
-  extends AnyFunSuite
-    with Matchers
-    with ScalaCheckDrivenPropertyChecks
-    with AllSharedSyntax
-    with AllInstances {
-  implicit val eq0 = new Eq[NumberFormatException] {
-    override def eqv(x: NumberFormatException, y: NumberFormatException): Boolean =
-      x.getMessage == y.getMessage
+import munit._
+
+import munit.internal.console.{Lines, Printers, StackTraces}
+import munit.internal.difflib.Diffs
+
+import scala.reflect.ClassTag
+import scala.util.control.NonFatal
+import scala.collection.mutable
+import munit.internal.console.AnsiColors
+import org.junit.AssumptionViolatedException
+import munit.internal.MacroCompat
+
+trait MouseSuite extends munit.FunSuite:
+
+  given Eq[Array[Byte]] = Eq.instance(_ sameElements _)
+
+  given [T <: Throwable]: Eq[T] = Eq.instance(_.getMessage == _.getMessage)
+  
+  def testEquals[T: Eq](obtained: T, expected: T): Unit =
+    test(getClass.getSimpleName)(assertEq(obtained, expected))
+
+  def assertEq[T: Eq](
+                       obtained: T,
+                       expected: T,
+                       clue: => Any = "values are not the same"
+                     )(implicit loc: munit.Location): Unit = {
+    StackTraces.dropInside {
+      if (obtained =!= expected) {
+        Diffs.assertNoDiff(
+          munitPrint(obtained),
+          munitPrint(expected),
+          new munit.internal.difflib.ComparisonFailExceptionHandler {
+            def handle(
+                        message: String,
+                        obtained: String,
+                        expected: String,
+                        loc: Location
+                      ): Nothing = fail(message)
+          },
+          munitPrint(clue),
+          printObtainedAsStripMargin = false
+        )
+        // try with `.toString` in case `munitPrint()` produces identical formatting for both values.
+        Diffs.assertNoDiff(
+          obtained.toString(),
+          expected.toString(),
+          message => fail(message),
+          munitPrint(clue),
+          printObtainedAsStripMargin = false
+        )
+        fail(
+          s"values are not equal even if they have the same `toString()`: $obtained"
+        )
+      }
+    }
   }
-
-  implicit val eq1 = new Eq[IllegalArgumentException] {
-    override def eqv(x: IllegalArgumentException, y: IllegalArgumentException): Boolean =
-      x.getMessage == y.getMessage
-  }
-
-  final class MouseEquivalence[T](T: Eq[T]) extends Equivalence[T] {
-    def areEquivalent(a: T, b: T): Boolean = T.eqv(a, b)
-  }
-
-  implicit def mouseCanEqual[A, B](implicit A: Eq[A], ev: B <:< A): CanEqual[A, B] =
-    new BToAEquivalenceConstraint[A, B](new MouseEquivalence(A), ev)
-}
