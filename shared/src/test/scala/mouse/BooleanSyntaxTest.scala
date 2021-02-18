@@ -42,8 +42,8 @@ class BooleanSyntaxTest extends MouseSuite:
   testEquals(true.applyIf("foo")(mutilate), "o")
   testEquals(false.applyIf("foo")(mutilate), "foo")
 
-  true.whenA("foo".asLeft[Int]) shouldEqual Left("foo")
-  false.whenA("foo".asLeft[Int]) shouldEqual Right(())
+  testEquals(true.whenA("foo".asLeft[Int]), Left("foo"))
+  testEquals(false.whenA("foo".asLeft[Int]), Right(()))
 
-  true.unlessA("foo".asLeft[Int]) shouldEqual Right(())
-  false.unlessA("foo".asLeft[Int]) shouldEqual Left("foo")
+  testEquals(true.unlessA("foo".asLeft[Int]), Right(()))
+  testEquals(false.unlessA("foo".asLeft[Int]), Left("foo"))
