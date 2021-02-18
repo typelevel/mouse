@@ -1,7 +1,7 @@
 package mouse
 
 object long:
-  extension (n: Long):
+  extension (n: Long)
     @inline def toByteArray: Array[Byte] = java.nio.ByteBuffer.allocate(8).putLong(n).array()
 
     /** Base64 encoding (without final terminator). Shortcut for `java.util.Base64.getEncoder.withoutPadding.encodeToString`*/

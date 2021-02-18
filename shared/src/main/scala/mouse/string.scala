@@ -4,7 +4,7 @@ import cats.data.Validated
 import cats.syntax.all._
 
 object string:
-  extension (s: String):
+  extension (s: String)
 
     @inline def toBooleanEither: Either[String, Boolean] = s.toBooleanOption.toRight(s)
     @inline def toBooleanValidated: Validated[String, Boolean] = s.toBooleanOption.toValid(s)

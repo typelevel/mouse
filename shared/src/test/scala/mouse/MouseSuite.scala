@@ -20,7 +20,7 @@ trait MouseSuite extends munit.FunSuite:
 
   given Eq[Array[Byte]] = Eq.instance(_ sameElements _)
 
-  given [T <: Throwable] as Eq[T] = Eq.instance(_.getMessage == _.getMessage)
+  given [T <: Throwable]: Eq[T] = Eq.instance(_.getMessage == _.getMessage)
   
   def testEquals[T: Eq](obtained: T, expected: T): Unit =
     test(getClass.getSimpleName)(assertEq(obtained, expected))

@@ -3,8 +3,8 @@ import sbt._
 inThisBuild(Seq(
   name := "mouse",
   version := "1.0.0-M1",
-  scalaVersion := "3.0.0-M2",
-  crossScalaVersions := Seq("3.0.0-M2"),
+  scalaVersion := "3.0.0-RC1",
+  crossScalaVersions := Seq("3.0.0-RC1"),
   organization := "org.typelevel",
   sonatypeProfileName := "org.typelevel",
   testFrameworks += new TestFramework("munit.Framework"),
@@ -14,8 +14,8 @@ inThisBuild(Seq(
 lazy val root = crossProject(JSPlatform, JVMPlatform).withoutSuffixFor(JVMPlatform).in(file(".")).
   settings(
     libraryDependencies ++= Seq(
-      "org.typelevel" %%% "cats-core" % "2.3.0",
-      "org.scalameta" %% "munit" % "0.7.19" % Test,
+      "org.typelevel" %%% "cats-core" % "2.4.2",
+      "org.scalameta" %% "munit" % "0.7.22" % Test,
     ),
     scalacOptions ++= Seq("-feature", "-deprecation", "-language:higherKinds"),
     

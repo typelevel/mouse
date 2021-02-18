@@ -4,7 +4,7 @@ import cats.{ Applicative, Monoid }
 
 
 object boolean:
-  extension [A](b: Boolean):
+  extension [A](b: Boolean)
     @inline def option(a: => A): Option[A] = fold(Some(a), None)
 
     @inline def fold(t: => A, f: => A): A = if (b) t else f
@@ -19,11 +19,11 @@ object boolean:
 
     @inline def applyIf(a: A): ApplyIfPartiallyApplied[A] = new ApplyIfPartiallyApplied[A](b, a)
 
-  extension [L, R](b: Boolean):
+  extension [L, R](b: Boolean)
     @inline def either(l: =>L, r: =>R): Either[L, R] = b.fold(Right(r), Left(l))
 
 
-  extension [F[_], A](b: Boolean):
+  extension [F[_], A](b: Boolean)
     @inline def valueOrPure(fa: =>F[A])(a: =>A)(using F: Applicative[F]) = if (b) fa else F.pure(a)
 
     @inline def whenA(fa: F[A])(using F: Applicative[F]): F[Unit] = 

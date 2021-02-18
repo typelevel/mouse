@@ -2,7 +2,7 @@ package mouse
 
 
 object any:
-  extension [A](oa: A):
+  extension [A](oa: A)
     @inline def <|(f: A => Unit): A =
       f(oa)
       oa
@@ -11,6 +11,6 @@ object any:
       f(oa)
       oa
 
-  extension [A, B](oa: A):
+  extension [A, B](oa: A)
     @inline def |>(f: A => B) = f(oa)
     @inline def thrush(f: A => B) = f(oa)

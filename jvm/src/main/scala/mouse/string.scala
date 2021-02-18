@@ -6,7 +6,7 @@ import cats.data.Validated
 import cats.syntax.either._
 
 object stringJvm:
-  extension (s: String):
+  extension (s: String)
 
     @inline def parseURL: Either[MalformedURLException, URL] = Either.catchOnly[MalformedURLException](new URL(s))
 

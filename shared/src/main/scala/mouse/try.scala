@@ -6,7 +6,7 @@ import cats.data.EitherT
 import scala.util.{Failure, Success, Try}
 
 object `try`:
-  extension [A, B] (ta: Try[A]):
+  extension [A, B] (ta: Try[A])
     @deprecated("Use `fold` instead", "1.0.0")
     @inline def cata(success: A => B, failure: Throwable => B): B = ta.fold(failure, success)
 
