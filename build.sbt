@@ -29,7 +29,7 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
     libraryDependencies ++= Seq(
       "org.typelevel" %%% "cats-core" % "2.4.2",
       "org.scalatest" %%% "scalatest" % "3.2.5" % Test,
-      "org.scalatestplus" %%% "scalacheck-1-15" % "3.2.4.0" % Test,
+      "org.scalatestplus" %%% "scalacheck-1-15" % "3.2.5.0" % Test,
       compilerPlugin("org.typelevel" %% "kind-projector" % "0.11.3" cross CrossVersion.full)
     ),
     licenses += ("MIT license", url("http://opensource.org/licenses/MIT")),
