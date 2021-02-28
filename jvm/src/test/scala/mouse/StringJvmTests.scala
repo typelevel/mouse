@@ -1,10 +1,13 @@
 package mouse
 
 import java.net.{MalformedURLException, URI, URISyntaxException, URL}
-
 import cats.Eq
 import cats.syntax.all._
 import mouse.string._
+import org.scalacheck.{Arbitrary, Gen}
+
+import java.util.UUID
+import scala.util.Try
 
 class StringJvmTests extends MouseSuite {
 
@@ -36,6 +39,32 @@ class StringJvmTests extends MouseSuite {
     "http://example.com".parseURI should ===(new URI("http://example.com").asRight[URISyntaxException])
 
     "invalid uri".parseURI should ===(new URISyntaxException("invalid uri", "Illegal character in path at index 7").asLeft)
+  }
+
+  test("parseUUID") {
+    val validUUIDStr = "00000000-0000-0000-0000-000000000000"
+    val invalidUUIDStr = "invalid"
+
+    validUUIDStr.parseUUID should ===(UUID.fromString(validUUIDStr).asRight[IllegalArgumentException])
+    validUUIDStr.parseUUID.toValidated should ===(validUUIDStr.parseUUIDValidated)
+    validUUIDStr.parseUUID.toOption should ===(validUUIDStr.parseUUIDOption)
+
+    invalidUUIDStr.parseUUID should ===(new IllegalArgumentException("Invalid UUID string: invalid").asLeft[UUID])
+    invalidUUIDStr.parseUUID.toValidated should ===(invalidUUIDStr.parseUUIDValidated)
+    invalidUUIDStr.parseUUID.toOption.isEmpty shouldBe true
+
+    val uuidStringGen: Gen[String] = Arbitrary.arbUuid.arbitrary.map(_.toString)
+
+    forAll(uuidStringGen) { s: String =>
+      s.parseUUID should ===(UUID.fromString(s).asRight)
+    }
+
+    val stringGen: Gen[String] = Arbitrary.arbString.arbitrary.filter(s => Try(UUID.fromString(s)).isFailure)
+
+    forAll(stringGen) { s: String =>
+      s.parseUUID.isLeft shouldBe true
+    }
+
   }
 
 }
