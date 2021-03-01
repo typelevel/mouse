@@ -4,7 +4,7 @@ import sbtcrossproject.CrossPlugin.autoImport.crossProject
 
 ThisBuild / githubWorkflowPublishTargetBranches := Seq()
 
-ThisBuild / crossScalaVersions := Seq("2.12.12", "2.13.5")
+ThisBuild / crossScalaVersions := Seq("2.12.13", "2.13.4")
 
 lazy val commonSettings = Def.settings(
   scalaVersion := "2.13.1",
