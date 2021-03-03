@@ -14,12 +14,12 @@ trait MouseSuite
     with ScalaCheckDrivenPropertyChecks
     with AllSharedSyntax
     with AllInstances {
-  implicit val eq0 = new Eq[NumberFormatException] {
+  implicit val eq0: Eq[NumberFormatException] = new Eq[NumberFormatException] {
     override def eqv(x: NumberFormatException, y: NumberFormatException): Boolean =
       x.getMessage == y.getMessage
   }
 
-  implicit val eq1 = new Eq[IllegalArgumentException] {
+  implicit val eq1: Eq[IllegalArgumentException] = new Eq[IllegalArgumentException] {
     override def eqv(x: IllegalArgumentException, y: IllegalArgumentException): Boolean =
       x.getMessage == y.getMessage
   }
