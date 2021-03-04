@@ -1,9 +1,10 @@
 package mouse
 
 import java.net.{MalformedURLException, URI, URISyntaxException, URL}
-
 import cats.data.Validated
 import cats.syntax.either._
+
+import java.util.UUID
 
 trait StringJvmSyntax {
   implicit def stringJvmSyntaxMouse(s: String): JvmStringOps = new JvmStringOps(s)
@@ -22,5 +23,11 @@ final class JvmStringOps(private val s: String) extends AnyVal {
   @inline def parseURIValidated: Validated[URISyntaxException, URI] = parseURI.toValidated
 
   @inline def parseURIOption: Option[URI] = parseURI.toOption
+
+  @inline def parseUUID: IllegalArgumentException Either UUID = Either.catchOnly[IllegalArgumentException](UUID.fromString(s))
+
+  @inline def parseUUIDValidated: Validated[IllegalArgumentException, UUID] = parseUUID.toValidated
+
+  @inline def parseUUIDOption: Option[UUID] = parseUUID.toOption
 
 }
