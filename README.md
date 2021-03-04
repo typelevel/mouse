@@ -5,7 +5,7 @@ includes convenience extension methods for Scala standard library classes, inclu
 
 The library arose from this [Cats issue](https://github.com/typelevel/cats/issues/791) and is a [Typelevel member](http://typelevel.org/projects/).
 
-Mouse is published for Scala 2.12 and 2.13. For Scala.jvm:
+Mouse is published for Scala 2.12, 2.13 and 3.0-RC1. For Scala.jvm:
 
 `"org.typelevel" %% "mouse" % version`
 
@@ -100,6 +100,8 @@ mapped: Map[Int,Int] = Map(2 -> 2, 6 -> 4)
 ```
 
 #### Release Notes
+
+Please see [Releases](https://github.com/typelevel/mouse/releases) for newer releases >= `1.0.0` (Mar 21)
 
 Version `0.26` (Dec 20) adds `applyIf` for Boolean and builds against Cats 2.3.0.
 
