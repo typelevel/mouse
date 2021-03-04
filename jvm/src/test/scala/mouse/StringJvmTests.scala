@@ -52,19 +52,6 @@ class StringJvmTests extends MouseSuite {
     invalidUUIDStr.parseUUID should ===(new IllegalArgumentException("Invalid UUID string: invalid").asLeft[UUID])
     invalidUUIDStr.parseUUID.toValidated should ===(invalidUUIDStr.parseUUIDValidated)
     invalidUUIDStr.parseUUID.toOption.isEmpty shouldBe true
-
-    val uuidStringGen: Gen[String] = Arbitrary.arbUuid.arbitrary.map(_.toString)
-
-    forAll(uuidStringGen) { s: String =>
-      s.parseUUID should ===(UUID.fromString(s).asRight)
-    }
-
-    val stringGen: Gen[String] = Arbitrary.arbString.arbitrary.filter(s => Try(UUID.fromString(s)).isFailure)
-
-    forAll(stringGen) { s: String =>
-      s.parseUUID.isLeft shouldBe true
-    }
-
   }
 
 }
