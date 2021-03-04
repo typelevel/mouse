@@ -4,17 +4,13 @@ import sbtcrossproject.CrossPlugin.autoImport.crossProject
 
 ThisBuild / githubWorkflowPublishTargetBranches := Seq()
 
-ThisBuild / crossScalaVersions := Seq("2.12.13", "2.13.4")
+ThisBuild / crossScalaVersions := Seq("2.12.13", "2.13.4", "3.0.0-RC1")
 
-lazy val commonSettings = Def.settings(
-  scalaVersion := "2.13.1",
-  crossScalaVersions := (ThisBuild / crossScalaVersions).value
-)
+ThisBuild / scalaVersion := "2.13.4"
 
 lazy val root = project.in(file(".")).aggregate(js, jvm).
   settings(
     name := "mouse",
-    commonSettings,
     publish / skip := true,
     sonatypeProfileName := "org.typelevel",
     releaseCrossBuild := true
@@ -24,13 +20,11 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
   settings(
     name := "mouse",
     organization := "org.typelevel",
-    commonSettings,
     sonatypeProfileName := "org.typelevel",
     libraryDependencies ++= Seq(
       "org.typelevel" %%% "cats-core" % "2.4.2",
       "org.scalatest" %%% "scalatest" % "3.2.5" % Test,
-      "org.scalatestplus" %%% "scalacheck-1-15" % "3.2.5.0" % Test,
-      compilerPlugin("org.typelevel" %% "kind-projector" % "0.11.3" cross CrossVersion.full)
+      "org.scalatestplus" %%% "scalacheck-1-15" % "3.2.5.0" % Test
     ),
     licenses += ("MIT license", url("http://opensource.org/licenses/MIT")),
     homepage := Some(url("https://github.com/typelevel/mouse")),
@@ -39,11 +33,19 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
     scalacOptions ++= Seq("-feature", "-deprecation", "-language:implicitConversions", "-language:higherKinds"),
     scalacOptions ++= {
       scalaVersion.value match {
-        case v if v.startsWith("2.13") => Nil
-        case _ => Seq("-Ypartial-unification")
+        case v if v.startsWith("2.12") => Seq("-Ypartial-unification")
+        case v if v.startsWith("3") => Seq("-source", "3.0-migration")
+        case _ => Nil
       }
     },
     Test / publishArtifact := false,
+    Compile / doc / sources := {
+      val old = (Compile / doc / sources).value
+      if (isDotty.value)
+        Seq()
+      else
+        old
+    },
     pomIncludeRepository := { _ => false },
     releasePublishArtifactsAction := PgpKeys.publishSigned.value,
     releaseProcess := Seq[ReleaseStep](
@@ -58,6 +60,10 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
       setNextVersion,
       commitNextVersion,
     )
+  )
+  .jsSettings(
+    crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2")),
+    publishConfiguration := publishConfiguration.value.withOverwrite(true)
   )
 
 ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
