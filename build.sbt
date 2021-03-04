@@ -1,4 +1,3 @@
-import ReleaseTransformations._
 import sbt._
 import sbtcrossproject.CrossPlugin.autoImport.crossProject
 
@@ -48,18 +47,6 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
     },
     pomIncludeRepository := { _ => false },
     releasePublishArtifactsAction := PgpKeys.publishSigned.value,
-    releaseProcess := Seq[ReleaseStep](
-      checkSnapshotDependencies,
-      inquireVersions,
-      runClean,
-      runTest,
-      setReleaseVersion,
-      commitReleaseVersion,
-      tagRelease,
-      publishArtifacts,
-      setNextVersion,
-      commitNextVersion,
-    )
   )
   .jsSettings(
     crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2")),
