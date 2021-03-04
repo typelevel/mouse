@@ -1,4 +1,3 @@
-import ReleaseTransformations._
 import sbt._
 import sbtcrossproject.CrossPlugin.autoImport.crossProject
 
@@ -13,7 +12,6 @@ lazy val root = project.in(file(".")).aggregate(js, jvm).
     name := "mouse",
     publish / skip := true,
     sonatypeProfileName := "org.typelevel",
-    releaseCrossBuild := true
   )
 
 lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
@@ -47,19 +45,6 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
         old
     },
     pomIncludeRepository := { _ => false },
-    releasePublishArtifactsAction := PgpKeys.publishSigned.value,
-    releaseProcess := Seq[ReleaseStep](
-      checkSnapshotDependencies,
-      inquireVersions,
-      runClean,
-      runTest,
-      setReleaseVersion,
-      commitReleaseVersion,
-      tagRelease,
-      publishArtifacts,
-      setNextVersion,
-      commitNextVersion,
-    )
   )
   .jsSettings(
     crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2")),
