@@ -12,7 +12,6 @@ lazy val root = project.in(file(".")).aggregate(js, jvm).
     name := "mouse",
     publish / skip := true,
     sonatypeProfileName := "org.typelevel",
-    releaseCrossBuild := true
   )
 
 lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
@@ -46,7 +45,6 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
         old
     },
     pomIncludeRepository := { _ => false },
-    releasePublishArtifactsAction := PgpKeys.publishSigned.value,
   )
   .jsSettings(
     crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2")),
