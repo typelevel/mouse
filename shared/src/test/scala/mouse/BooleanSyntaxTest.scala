@@ -1,5 +1,6 @@
 package mouse
 
+import cats.data.{NonEmptyList, Validated}
 import cats.syntax.either._
 
 class BooleanSyntaxTest extends MouseSuite {
@@ -11,6 +12,20 @@ class BooleanSyntaxTest extends MouseSuite {
   true.either("error", 1) shouldEqual Either.right(1)
 
   false.either("error", 1) shouldEqual Either.left("error")
+
+  true.eitherNel("error", 1) shouldEqual Either.right(1)
+
+  false.eitherNel("error", 1) shouldEqual Either.left(NonEmptyList.one("error"))
+
+  true.validatedNel("error", 1) shouldEqual Validated.validNel(1)
+
+  false.validatedNel("error", 1) shouldEqual Validated.invalidNel("error")
+
+  type F[A] = Either[String, A]
+
+  true.liftTo[F]("error") shouldEqual Either.right(())
+
+  false.liftTo[F]("error") shouldEqual Either.left("error")
 
   true.fold("t", "f") shouldEqual "t"
   
