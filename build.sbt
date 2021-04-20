@@ -20,7 +20,7 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
     organization := "org.typelevel",
     sonatypeProfileName := "org.typelevel",
     libraryDependencies ++= Seq(
-      "org.typelevel" %%% "cats-core" % "2.5.0",
+      "org.typelevel" %%% "cats-core" % "2.6.0",
       "org.scalatest" %%% "scalatest" % "3.2.7" % Test,
       "org.scalatestplus" %%% "scalacheck-1-15" % "3.2.7.0" % Test,
     ),
