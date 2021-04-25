@@ -3,7 +3,7 @@ import sbtcrossproject.CrossPlugin.autoImport.crossProject
 
 ThisBuild / githubWorkflowPublishTargetBranches := Seq()
 
-ThisBuild / crossScalaVersions := Seq("2.12.13", "2.13.4", "3.0.0-RC2")
+ThisBuild / crossScalaVersions := Seq("2.12.13", "2.13.4", "3.0.0-RC3")
 
 ThisBuild / scalaVersion := "2.13.4"
 
@@ -21,8 +21,8 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
     sonatypeProfileName := "org.typelevel",
     libraryDependencies ++= Seq(
       "org.typelevel" %%% "cats-core" % "2.6.0",
-      "org.scalatest" %%% "scalatest" % "3.2.7" % Test,
-      "org.scalatestplus" %%% "scalacheck-1-15" % "3.2.7.0" % Test,
+      "org.scalatest" %%% "scalatest" % "3.2.8" % Test,
+      "org.scalatestplus" %%% "scalacheck-1-15" % "3.2.8.0" % Test,
     ),
     licenses += ("MIT license", url("http://opensource.org/licenses/MIT")),
     homepage := Some(url("https://github.com/typelevel/mouse")),
@@ -37,13 +37,6 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
       }
     },
     Test / publishArtifact := false,
-    Compile / doc / sources := {
-      val old = (Compile / doc / sources).value
-      if (isDotty.value)
-        Seq()
-      else
-        old
-    },
     pomIncludeRepository := { _ => false },
   )
   .jsSettings(
