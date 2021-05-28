@@ -3,7 +3,7 @@ import sbtcrossproject.CrossPlugin.autoImport.crossProject
 
 ThisBuild / githubWorkflowPublishTargetBranches := Seq()
 
-ThisBuild / crossScalaVersions := Seq("2.12.13", "2.13.6", "3.0.0-RC3")
+ThisBuild / crossScalaVersions := Seq("2.12.13", "2.13.4", "3.0.0")
 
 ThisBuild / scalaVersion := "2.13.6"
 
@@ -20,9 +20,9 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
     organization := "org.typelevel",
     sonatypeProfileName := "org.typelevel",
     libraryDependencies ++= Seq(
-      "org.typelevel" %%% "cats-core" % "2.6.0",
-      "org.scalatest" %%% "scalatest" % "3.2.8" % Test,
-      "org.scalatestplus" %%% "scalacheck-1-15" % "3.2.8.0" % Test,
+      "org.typelevel" %%% "cats-core" % "2.6.1",
+      "org.scalatest" %%% "scalatest" % "3.2.9" % Test,
+      "org.scalatestplus" %%% "scalacheck-1-15" % "3.2.9.0" % Test,
     ),
     licenses += ("MIT license", url("http://opensource.org/licenses/MIT")),
     homepage := Some(url("https://github.com/typelevel/mouse")),
