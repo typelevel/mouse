@@ -65,4 +65,18 @@ final class StringOps(private val s: String) extends AnyVal {
 
   private def parse[A](f: String => A): NumberFormatException Either A = Either.catchOnly[NumberFormatException](f(s))
 
+  /**
+   * Wraps a `String` in `Throwable`.
+   */
+  @inline def asThrowable: Throwable = new Throwable(s)
+
+  /**
+   * Wraps a `String` in `Error`.
+   */
+  @inline def asError: Error = new Error(s)
+
+  /**
+   * Wraps a `String` in `Exception`.
+   */
+  @inline def asException: Exception = new Exception(s)
 }

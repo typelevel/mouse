@@ -173,6 +173,14 @@ class StringSyntaxTests extends MouseSuite {
     }
   }
 
+  test("asThrowable, asError and asException") {
+    forAll { s: String =>
+      s.asThrowable.toString should ===(new Throwable(s).toString)
+      s.asError.toString should ===(new Error(s).toString)
+      s.asException.toString should ===(new Exception(s).toString)
+    }
+  }
+
 }
 
 final class EitherIdOps[A](val obj: A) extends AnyVal {
