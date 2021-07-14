@@ -1,20 +1,22 @@
 package mouse
 
-class AnySyntaxTest extends MouseSuite {
+class AnySyntaxTest extends MouseSuite with MouseFunctions {
+  test("AnySyntax.|>") {
+    assertEquals(true |> (!_), false)
 
-  true |> (!_) shouldEqual false
+    assertEquals(5 |> (_ + 44), 49)
 
-  5 |> (_ + 44) shouldEqual 49
+    assertEquals(Some("thing") |> (_ getOrElse "that"), "thing")
 
-  Some("thing") |> (_ getOrElse "that") shouldEqual "thing"
+    assertEquals(
+      "This" |> Function.const("that") |> (_.capitalize) |> Function.const("at bat"),
+      "at bat"
+    )
 
-  ("This" |> Function.const("that")
-          |> (_.capitalize)
-          |> Function.const("at bat")) shouldEqual "at bat"
+    assertEquals(ignore(true), ())
 
-  mouse.ignore(true) shouldBe (())
+    assertEquals(1200 |> (_*2) |> (_-5) |> (_/3), ((1200 * 2) - 5) / 3)
 
-  1200 |> (_*2) |> (_-5) |> (_/3) shouldBe (((1200 * 2) - 5) / 3)
-
-  "anythingAtAll" |> mouse.ignore shouldBe (())
+    assertEquals("anythingAtAll" |> ignore, ())
+  }
 }
