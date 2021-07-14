@@ -4,25 +4,19 @@ import cats._
 import cats.instances.AllInstances
 import org.scalactic.TripleEqualsSupport.BToAEquivalenceConstraint
 import org.scalactic.{CanEqual, Equivalence}
-import org.scalatest.funsuite.AnyFunSuite
-import org.scalatest.matchers.should.Matchers
-import org.scalatestplus.scalacheck.ScalaCheckDrivenPropertyChecks
+import munit.ScalaCheckSuite
+import munit.FunSuite
 
 trait MouseSuite
-  extends AnyFunSuite
-    with Matchers
-    with ScalaCheckDrivenPropertyChecks
+  extends FunSuite
+    with ScalaCheckSuite
     with AllSharedSyntax
     with AllInstances {
-  implicit val eq0: Eq[NumberFormatException] = new Eq[NumberFormatException] {
-    override def eqv(x: NumberFormatException, y: NumberFormatException): Boolean =
-      x.getMessage == y.getMessage
-  }
+  implicit val eq0: Eq[NumberFormatException] =
+    (x: NumberFormatException, y: NumberFormatException) => x.getMessage == y.getMessage
 
-  implicit val eq1: Eq[IllegalArgumentException] = new Eq[IllegalArgumentException] {
-    override def eqv(x: IllegalArgumentException, y: IllegalArgumentException): Boolean =
-      x.getMessage == y.getMessage
-  }
+  implicit val eq1: Eq[IllegalArgumentException] =
+    (x: IllegalArgumentException, y: IllegalArgumentException) => x.getMessage == y.getMessage
 
   final class MouseEquivalence[T](T: Eq[T]) extends Equivalence[T] {
     def areEquivalent(a: T, b: T): Boolean = T.eqv(a, b)
