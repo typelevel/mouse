@@ -1,10 +1,13 @@
 package mouse
 
-import scala.util.{Failure, Success, Try}
+import cats.syntax.eq._
+
 import org.scalacheck.Gen
+import org.scalacheck.Prop._
+
+import scala.util.{Failure, Success, Try}
 
 class TrySyntaxTest extends MouseSuite {
-
   private val exceptionList =
     Seq(
       new RuntimeException(_: String),
@@ -37,28 +40,32 @@ class TrySyntaxTest extends MouseSuite {
 
   private def randomNumber(min: Int, max: Int): Int = Gen.choose(min, max).sample.get
 
-  forAll(genTryInt) { case (n, t) =>
-    t.cata(identity, _ => n * n) shouldEqual n
-  }
+  property("cata") {
+    forAll(genTryInt) { case (n, t) =>
+      t.cata(identity, _ => n * n) === n
+    }
 
-  forAll(genTryFailure[Int]) { case (th, tr) =>
-    val rnd = randomNumber(50000, 60000)
-    tr.cata(identity, _ => rnd) shouldEqual (rnd)
-  }
-
-  forAll(genTryString) { case (msg, tr) =>
-    tr.toEither shouldEqual Right(msg)
-  }
-
-  forAll(genTryFailure[String]) { case (th, tr) =>
-    tr.toEither shouldEqual Left(th)
+    forAll(genTryFailure[Int]) { case (_, tr) =>
+      val rnd = randomNumber(50000, 60000)
+      tr.cata(identity, _ => rnd) === rnd
+    }
   }
 
   implicit class ExtraTest[A](a: A) {
-    def shouldBeA[T](implicit ev: T =:= A) = succeed
+    def shouldBeA[T](implicit ev: T =:= A): Unit = ()
   }
 
-  forAll(genTryBoolean, minSuccessful(10)) { case (_, t) =>
-    t.toEither.shouldBeA[Either[Throwable, Boolean]]
+  property("toEither") {
+    forAll(genTryString) { case (msg, tr) =>
+      tr.toEither == Right(msg)
+    }
+
+    forAll(genTryFailure[String]) { case (th, tr) =>
+      tr.toEither == Left(th)
+    }
+
+    forAll(genTryBoolean) { case (_, t) =>
+      t.toEither.shouldBeA[Either[Throwable, Boolean]]
+    }
   }
 }
