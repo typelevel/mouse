@@ -1,183 +1,194 @@
 package mouse
 
-import org.scalacheck.Arbitrary._
-import org.scalacheck.{Arbitrary, Gen}
 import cats.syntax.all._
+import org.scalacheck.Arbitrary._
+import org.scalacheck.Prop._
+import org.scalacheck.{Arbitrary, Gen}
 
 class StringSyntaxTests extends MouseSuite {
-
-  //FIXME fixed in master, remove post 0.8.2
-  implicit def catsSyntaxEitherId[A](a: A): EitherIdOps[A] = new EitherIdOps(a)
-
   test("parseInt") {
-    "123".parseInt should ===(123.asRight[NumberFormatException])
+    assertEquals("123".parseInt, 123.asRight[NumberFormatException])
 
-    "blah".parseInt should ===(new NumberFormatException("For input string: \"blah\"").asLeft)
+    assertEquals("blah".parseInt, new NumberFormatException("For input string: \"blah\"").asLeft)
 
-    forAll { i: Int =>
-      i.toString.parseInt should ===(i.asRight[NumberFormatException])
+    property("parseInt") {
+      forAll { i: Int =>
+        i.toString.parseInt === i.asRight[NumberFormatException]
+      }
+
+      forAll { i: Int =>
+        i.toString.parseInt.toOption === i.toString.parseIntOption
+      }
+
+      forAll { i: Int =>
+        i.toString.parseInt.toValidated === i.toString.parseIntValidated
+      }
     }
-
-    forAll { i: Int =>
-      i.toString.parseInt.toOption should ===(i.toString.parseIntOption)
-    }
-
-    forAll { i: Int =>
-      i.toString.parseInt.toValidated should ===(i.toString.parseIntValidated)
-    }
-
   }
 
   test("parseLong") {
-    "123".parseLong should ===(123L.asRight[NumberFormatException])
+    assertEquals("123".parseLong, 123L.asRight[NumberFormatException])
 
-    "blah".parseLong should ===(new NumberFormatException("For input string: \"blah\"").asLeft)
+    assertEquals("blah".parseLong, new NumberFormatException("For input string: \"blah\"").asLeft)
 
-    forAll { i: Long =>
-      i.toString.parseLong should ===(i.asRight[NumberFormatException])
+    property("parseLong") {
+      forAll { i: Long =>
+        i.toString.parseLong === i.asRight[NumberFormatException]
+      }
+
+      forAll { i: Long =>
+        i.toString.parseLong.toOption === i.toString.parseLongOption
+      }
+
+      forAll { i: Long =>
+        i.toString.parseLong.toValidated === i.toString.parseLongValidated
+      }
     }
-
-    forAll { i: Long =>
-      i.toString.parseLong.toOption should ===(i.toString.parseLongOption)
-    }
-
-    forAll { i: Long =>
-      i.toString.parseLong.toValidated should ===(i.toString.parseLongValidated)
-    }
-
   }
 
   test("parseShort") {
-    "123".parseShort should ===(123.toShort.asRight[NumberFormatException])
+    assertEquals("123".parseShort, 123.toShort.asRight[NumberFormatException])
 
-    "blah".parseShort should ===(new NumberFormatException("For input string: \"blah\"").asLeft)
+    assertEquals("blah".parseShort, new NumberFormatException("For input string: \"blah\"").asLeft)
 
-    forAll { i: Short =>
-      i.toString.parseShort should ===(i.asRight[NumberFormatException])
+    property("parseLong") {
+      forAll { i: Short =>
+        i.toString.parseShort === i.asRight[NumberFormatException]
+      }
+
+      forAll { i: Short =>
+        i.toString.parseShort.toOption === i.toString.parseShortOption
+      }
+
+      forAll { i: Short =>
+        i.toString.parseShort.toValidated === i.toString.parseShortValidated
+      }
     }
-
-    forAll { i: Short =>
-      i.toString.parseShort.toOption should ===(i.toString.parseShortOption)
-    }
-
-    forAll { i: Short =>
-      i.toString.parseShort.toValidated should ===(i.toString.parseShortValidated)
-    }
-
   }
 
   test("parseDouble") {
-    "123.1".parseDouble should ===(123.1.asRight[NumberFormatException])
+    assertEquals("123.1".parseDouble, 123.1.asRight[NumberFormatException])
 
-    "blah".parseDouble should ===(new NumberFormatException("For input string: \"blah\"").asLeft)
+    assertEquals("blah".parseDouble, new NumberFormatException("For input string: \"blah\"").asLeft)
 
-    forAll { i: Double =>
-      i.toString.parseDouble should ===(i.asRight[NumberFormatException])
-    }
+    property("parseDouble") {
+      forAll { i: Double =>
+        i.toString.parseDouble === i.asRight[NumberFormatException]
+      }
 
-    forAll { i: Double =>
-      i.toString.parseDouble.toOption should ===(i.toString.parseDoubleOption)
-    }
+      forAll { i: Double =>
+        i.toString.parseDouble.toOption === i.toString.parseDoubleOption
+      }
 
-    forAll { i: Double =>
-      i.toString.parseDouble.toValidated should ===(i.toString.parseDoubleValidated)
+      forAll { i: Double =>
+        i.toString.parseDouble.toValidated === i.toString.parseDoubleValidated
+      }
     }
   }
 
   test("parseFloat") {
-    "blah".parseFloat should ===(new NumberFormatException("For input string: \"blah\"").asLeft)
+    assertEquals("blah".parseFloat, new NumberFormatException("For input string: \"blah\"").asLeft)
 
-    forAll { i: Float =>
-      i.toString.parseFloat should ===(i.asRight[NumberFormatException])
-    }
+    property("parseFloat") {
+      forAll { i: Float =>
+        i.toString.parseFloat === i.asRight[NumberFormatException]
+      }
 
-    forAll { i: Float =>
-      i.toString.parseFloat.toOption should ===(i.toString.parseFloatOption)
-    }
+      forAll { i: Float =>
+        i.toString.parseFloat.toOption === i.toString.parseFloatOption
+      }
 
-    forAll { i: Float =>
-      i.toString.parseFloat.toValidated should ===(i.toString.parseFloatValidated)
+      forAll { i: Float =>
+        i.toString.parseFloat.toValidated === i.toString.parseFloatValidated
+      }
     }
   }
 
   test("parseByte") {
-    "123".parseByte should ===(123.toByte.asRight[NumberFormatException])
+    assertEquals("123".parseByte, 123.toByte.asRight[NumberFormatException])
 
-    "blah".parseByte should ===(new NumberFormatException("For input string: \"blah\"").asLeft)
+    assertEquals("blah".parseByte, new NumberFormatException("For input string: \"blah\"").asLeft)
 
-    forAll { i: Byte =>
-      i.toString.parseByte should ===(i.asRight[NumberFormatException])
-    }
+    property("parseByte") {
+      forAll { i: Byte =>
+        i.toString.parseByte === i.asRight[NumberFormatException]
+      }
 
-    forAll { i: Byte =>
-      i.toString.parseByte.toOption should ===(i.toString.parseByteOption)
-    }
+      forAll { i: Byte =>
+        i.toString.parseByte.toOption === i.toString.parseByteOption
+      }
 
-    forAll { i: Byte =>
-      i.toString.parseByte.toValidated should ===(i.toString.parseByteValidated)
+      forAll { i: Byte =>
+        i.toString.parseByte.toValidated === i.toString.parseByteValidated
+      }
     }
   }
 
   test("parseBigInt") {
-    "123".parseBigInt should ===(BigInt("123").asRight[NumberFormatException])
+    assertEquals("123".parseBigInt, BigInt("123").asRight[NumberFormatException])
 
-    "blah".parseBigInt should ===(new NumberFormatException("For input string: \"blah\"").asLeft)
+    assertEquals("blah".parseBigInt, new NumberFormatException("For input string: \"blah\"").asLeft)
 
-    forAll { i: BigInt =>
-      i.toString.parseBigInt should ===(i.asRight[NumberFormatException])
-    }
+    property("parseBigInt") {
+      forAll { i: BigInt =>
+        i.toString.parseBigInt === i.asRight[NumberFormatException]
+      }
 
-    forAll { i: BigInt =>
-      i.toString.parseBigInt.toOption should ===(i.toString.parseBigIntOption)
-    }
+      forAll { i: BigInt =>
+        i.toString.parseBigInt.toOption === i.toString.parseBigIntOption
+      }
 
-    forAll { i: BigInt =>
-      i.toString.parseBigInt.toValidated should ===(i.toString.parseBigIntValidated)
+      forAll { i: BigInt =>
+        i.toString.parseBigInt.toValidated === i.toString.parseBigIntValidated
+      }
     }
   }
 
   test("parseBigDecimal") {
-    "123.45".parseBigDecimal should ===(BigDecimal("123.45").asRight[NumberFormatException])
+    assertEquals("123.45".parseBigDecimal, BigDecimal("123.45").asRight[NumberFormatException])
 
     // We assert the class of the exception because the error message differs between the JVM and JS
-    "blah".parseBigDecimal.leftMap(_.getClass) should ===(classOf[NumberFormatException].asLeft)
+    assertEquals("blah".parseBigDecimal.leftMap(_.getClass), classOf[NumberFormatException].asLeft)
 
-    forAll { i: BigDecimal =>
-      i.toString.parseBigDecimal should ===(i.asRight[NumberFormatException])
-    }
-
-    forAll { i: BigDecimal =>
-      i.toString.parseBigDecimal.toOption should ===(i.toString.parseBigDecimalOption)
-    }
-
-    forAll { i: BigDecimal =>
-      i.toString.parseBigDecimal.toValidated should ===(i.toString.parseBigDecimalValidated)
+    property("parseBigDecimal") {
+      forAll { i: BigDecimal =>
+        i.toString.parseBigDecimal === i.asRight[NumberFormatException]
+      }
+  
+      forAll { i: BigDecimal =>
+        i.toString.parseBigDecimal.toOption === i.toString.parseBigDecimalOption
+      }
+  
+      forAll { i: BigDecimal =>
+        i.toString.parseBigDecimal.toValidated === i.toString.parseBigDecimalValidated
+      }
     }
   }
 
   test("parseBoolean") {
-    "true".parseBoolean should ===(true.asRight[IllegalArgumentException])
-    "true".parseBoolean.toOption should ===("true".parseBooleanOption)
-    "true".parseBoolean.toValidated should ===("true".parseBooleanValidated)
-    "false".parseBoolean should ===(false.asRight[IllegalArgumentException])
-    "false".parseBoolean.toOption should ===("false".parseBooleanOption)
-    "false".parseBoolean.toValidated should ===("false".parseBooleanValidated)
+    assertEquals("true".parseBoolean, true.asRight[IllegalArgumentException])
+    assertEquals("true".parseBoolean.toOption, "true".parseBooleanOption)
+    assertEquals("true".parseBoolean.toValidated, "true".parseBooleanValidated)
+    assertEquals("false".parseBoolean, false.asRight[IllegalArgumentException])
+    assertEquals("false".parseBoolean.toOption, "false".parseBooleanOption)
+    assertEquals("false".parseBoolean.toValidated, "false".parseBooleanValidated)
 
-    "TRUE".parseBoolean should ===("true".parseBoolean)
-    "FALSE".parseBoolean should ===("false".parseBoolean)
+    assertEquals("TRUE".parseBoolean, "true".parseBoolean)
+    assertEquals("FALSE".parseBoolean, "false".parseBoolean)
 
-    val stringGen: Gen[String] = Arbitrary.arbString.arbitrary.filter(s => !s.equalsIgnoreCase("true") && !s.equalsIgnoreCase("false"))
+    val stringGen: Gen[String] =
+      Arbitrary.arbString.arbitrary.filter(s => !s.equalsIgnoreCase("true") && !s.equalsIgnoreCase("false"))
 
     forAll(stringGen) { s: String =>
-      s.parseBoolean should ===(new IllegalArgumentException("For input string: \"" + s + "\"").asLeft)
+      s.parseBoolean === new IllegalArgumentException("For input string: \"" + s + "\"").asLeft
     }
   }
 
   test("asThrowable, asError and asException") {
     forAll { s: String =>
-      s.asThrowable.toString should ===(new Throwable(s).toString)
-      s.asError.toString should ===(new Error(s).toString)
-      s.asException.toString should ===(new Exception(s).toString)
+      assertEquals(s.asThrowable.toString, new Throwable(s).toString)
+      assertEquals(s.asError.toString, new Error(s).toString)
+      assertEquals(s.asException.toString, Exception(new Throwable(s)).toString)
     }
   }
 
