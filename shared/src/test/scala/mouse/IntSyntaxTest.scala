@@ -1,11 +1,15 @@
 package mouse
 
 class IntSyntaxTest extends MouseSuite {
+  test("IntSyntax.toByteArray") {
+    assertEquals(123456789.toByteArray, Array(7, 91, -51, 21): Array[Byte])
+  }
 
-  123456789.toByteArray shouldEqual Array(7, 91, -51, 21)
+  test("IntSyntax.toBase64") {
+    assertEquals(123456789.toBase64, "B1vNFQ")
+  }
 
-  123456789.toBase64 shouldEqual "B1vNFQ"
-
-  7.squared shouldEqual 49
-
+  test("IntSyntax.squared") {
+    assertEquals(7.squared, 49)
+  }
 }
