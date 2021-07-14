@@ -2,9 +2,9 @@ package mouse
 
 class LongSyntaxTest extends MouseSuite {
   test("LongSyntax.toByteArray") {
-    assertEquals(
-      123456789123456789L.toByteArray,
-      Array(1, -74, -101, 75, -84, -48, 95, 21): Array[Byte]
+    assert(
+      123456789123456789L.toByteArray sameElements
+      Array(1, -74, -101, 75, -84, -48, 95, 21)
     )
   }
 
