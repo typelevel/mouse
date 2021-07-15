@@ -65,3 +65,7 @@ ThisBuild / githubWorkflowPublish := Seq(
 
 lazy val jvm = cross.jvm
 lazy val js = cross.js
+
+// Scalafmt
+addCommandAlias("fmt", "; Compile / scalafmt; Test / scalafmt; scalafmtSbt")
+addCommandAlias("fmtCheck", "; Compile / scalafmtCheck; Test / scalafmtCheck; scalafmtSbtCheck")
