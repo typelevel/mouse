@@ -17,13 +17,14 @@ final class BooleanOps(private val b: Boolean) extends AnyVal {
   @inline def option[A](a: => A): Option[A] = fold(Some(a), None)
 
   @deprecated("Use `either` instead", "0.6")
-  @inline def xor[L, R](l: =>L, r: =>R): Either[L, R] = either(l, r)
+  @inline def xor[L, R](l: => L, r: => R): Either[L, R] = either(l, r)
 
-  @inline def either[L, R](l: =>L, r: =>R): Either[L, R] = fold(Right(r), Left(l))
+  @inline def either[L, R](l: => L, r: => R): Either[L, R] = fold(Right(r), Left(l))
 
   @inline def eitherNel[L, R](ifFalse: => L, ifTrue: => R): EitherNel[L, R] = either(NonEmptyList.one(ifFalse), ifTrue)
 
-  @inline def validatedNel[L, R](ifFalse: => L, ifTrue: => R): ValidatedNel[L, R] = fold(Validated.validNel(ifTrue), Validated.invalidNel(ifFalse))
+  @inline def validatedNel[L, R](ifFalse: => L, ifTrue: => R): ValidatedNel[L, R] =
+    fold(Validated.validNel(ifTrue), Validated.invalidNel(ifFalse))
 
   @inline def fold[A](t: => A, f: => A): A = if (b) t else f
 
@@ -35,8 +36,8 @@ final class BooleanOps(private val b: Boolean) extends AnyVal {
 
   @inline def !?[A](a: => A)(implicit M: Monoid[A]): A = zeroOrValue(a)
 
-  @inline def valueOrPure[F[_], A](fa: =>F[A])(a: =>A)(implicit F: Applicative[F]) = if (b) fa else F.pure(a)
-  
+  @inline def valueOrPure[F[_], A](fa: => F[A])(a: => A)(implicit F: Applicative[F]) = if (b) fa else F.pure(a)
+
   @inline def applyIf[A](a: A): ApplyIfPartiallyApplied[A] = new ApplyIfPartiallyApplied[A](b, a)
 
   @inline def whenA[F[_], A](fa: F[A])(implicit F: Applicative[F]): F[Unit] = F.whenA(b)(fa)
@@ -50,6 +51,6 @@ final class BooleanOps(private val b: Boolean) extends AnyVal {
 object BooleanSyntax {
   final private[mouse] class LiftToPartiallyApplied[F[_]](private val b: Boolean) extends AnyVal {
     def apply[E](ifFalse: => E)(implicit F: ApplicativeError[F, _ >: E]): F[Unit] =
-      if(b) F.unit else F.raiseError(ifFalse)
+      if (b) F.unit else F.raiseError(ifFalse)
   }
 }

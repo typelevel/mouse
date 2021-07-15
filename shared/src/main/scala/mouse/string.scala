@@ -9,7 +9,8 @@ trait StringSyntax {
 
 final class StringOps(private val s: String) extends AnyVal {
 
-  @inline def parseBoolean: IllegalArgumentException Either Boolean = Either.catchOnly[IllegalArgumentException](s.toBoolean)
+  @inline def parseBoolean: IllegalArgumentException Either Boolean =
+    Either.catchOnly[IllegalArgumentException](s.toBoolean)
 
   @inline def parseBooleanValidated: Validated[IllegalArgumentException, Boolean] = parseBoolean.toValidated
 
