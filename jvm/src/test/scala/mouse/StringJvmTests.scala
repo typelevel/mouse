@@ -25,21 +25,15 @@ class StringJvmTests extends MouseSuite {
       new URL("http://example.com").asRight[MalformedURLException]
     )
 
-   assert("blah".parseURL === new MalformedURLException("no protocol: blah").asLeft)
+   assertEquals("blah".parseURL.leftMap(_.getMessage), "no protocol: blah".asLeft)
   }
 
   test("parseURI") {
-    implicit val urlEq: Eq[URI] = Eq.fromUniversalEquals
-    implicit val malformedURIExceptionEq: Eq[URISyntaxException] =
-      new Eq[URISyntaxException] {
-        override def eqv(x: URISyntaxException, y: URISyntaxException): Boolean =
-          x.getMessage == y.getMessage
-      }
-
     assertEquals("http://example.com".parseURI, new URI("http://example.com").asRight[URISyntaxException])
 
-    assert(
-      "invalid uri".parseURI === new URISyntaxException("invalid uri", "Illegal character in path at index 7").asLeft
+    assertEquals(
+      "invalid uri".parseURI.leftMap(e => e.getInput -> e.getReason),
+      ("invalid uri", "Illegal character in path").asLeft
     )
   }
 
@@ -51,11 +45,15 @@ class StringJvmTests extends MouseSuite {
     assertEquals(validUUIDStr.parseUUID.toValidated, validUUIDStr.parseUUIDValidated)
     assertEquals(validUUIDStr.parseUUID.toOption, validUUIDStr.parseUUIDOption)
 
-    assert(
-      invalidUUIDStr.parseUUID === new IllegalArgumentException("Invalid UUID string: invalid").asLeft[UUID]
+    assertEquals(
+      invalidUUIDStr.parseUUID.leftMap(_.getMessage), "Invalid UUID string: invalid".asLeft[UUID]
     )
 
-    assert(invalidUUIDStr.parseUUID.toValidated === invalidUUIDStr.parseUUIDValidated)
-    assert(invalidUUIDStr.parseUUID.toOption.isEmpty)
+    assertEquals(
+      invalidUUIDStr.parseUUID.toValidated.leftMap(_.getMessage),
+      invalidUUIDStr.parseUUIDValidated.leftMap(_.getMessage)
+    )
+
+    assertEquals(invalidUUIDStr.parseUUID.toOption, None)
   }
 }
