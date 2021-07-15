@@ -7,37 +7,44 @@ ThisBuild / crossScalaVersions := Seq("2.12.14", "2.13.6", "3.0.0")
 
 ThisBuild / scalaVersion := "2.13.6"
 
-lazy val root = project.in(file(".")).aggregate(js, jvm).
-  settings(
+lazy val root = project
+  .in(file("."))
+  .aggregate(js, jvm)
+  .settings(
     name := "mouse",
     publish / skip := true,
-    sonatypeProfileName := "org.typelevel",
+    sonatypeProfileName := "org.typelevel"
   )
 
-lazy val cross = crossProject(JSPlatform, JVMPlatform).in(file(".")).
-  settings(
+lazy val cross = crossProject(JSPlatform, JVMPlatform)
+  .in(file("."))
+  .settings(
     name := "mouse",
     organization := "org.typelevel",
     sonatypeProfileName := "org.typelevel",
     libraryDependencies ++= Seq(
       "org.typelevel" %%% "cats-core" % "2.6.1",
       "org.scalatest" %%% "scalatest" % "3.2.9" % Test,
-      "org.scalatestplus" %%% "scalacheck-1-15" % "3.2.9.0" % Test,
+      "org.scalatestplus" %%% "scalacheck-1-15" % "3.2.9.0" % Test
     ),
     licenses += ("MIT license", url("http://opensource.org/licenses/MIT")),
     homepage := Some(url("https://github.com/typelevel/mouse")),
-    developers := List(Developer("benhutchison", "Ben Hutchison", "brhutchison@gmail.com", url = url("https://github.com/benhutchison"))),
-    scmInfo := Some(ScmInfo(url("https://github.com/typelevel/mouse"), "scm:git:https://github.com/typelevel/mouse.git")),
+    developers := List(
+      Developer("benhutchison", "Ben Hutchison", "brhutchison@gmail.com", url = url("https://github.com/benhutchison"))
+    ),
+    scmInfo := Some(
+      ScmInfo(url("https://github.com/typelevel/mouse"), "scm:git:https://github.com/typelevel/mouse.git")
+    ),
     scalacOptions ++= Seq("-feature", "-deprecation", "-language:implicitConversions", "-language:higherKinds"),
     scalacOptions ++= {
       scalaVersion.value match {
         case v if v.startsWith("2.12") => Seq("-Ypartial-unification")
-        case v if v.startsWith("3") => Seq("-source", "3.0-migration")
-        case _ => Nil
+        case v if v.startsWith("3")    => Seq("-source", "3.0-migration")
+        case _                         => Nil
       }
     },
     Test / publishArtifact := false,
-    pomIncludeRepository := { _ => false },
+    pomIncludeRepository := { _ => false }
   )
   .jsSettings(
     crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2")),
