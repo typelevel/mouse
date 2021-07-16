@@ -1,11 +1,10 @@
 package mouse
 
 class PartialFunctionLiftTest extends MouseSuite {
+  private val f = liftEither[Option[Int]]({case Some(n) => n}, a => s"Unexpected: $a")
 
-  val f = liftEither[Option[Int]]({case Some(n) => n}, a => s"Unexpected: $a")
-
-  f(Some(6)) shouldEqual Right(6)
-
-  f(None) shouldEqual Left("Unexpected: None")
-
+  test("PartialFunctionLift.liftEither") {
+    assertEquals(f(Some(6)), Right(6))
+    assertEquals(f(None), Left("Unexpected: None"))
+  }
 }
