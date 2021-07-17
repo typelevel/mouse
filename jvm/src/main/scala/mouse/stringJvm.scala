@@ -24,7 +24,8 @@ final class JvmStringOps(private val s: String) extends AnyVal {
 
   @inline def parseURIOption: Option[URI] = parseURI.toOption
 
-  @inline def parseUUID: IllegalArgumentException Either UUID = Either.catchOnly[IllegalArgumentException](UUID.fromString(s))
+  @inline def parseUUID: IllegalArgumentException Either UUID =
+    Either.catchOnly[IllegalArgumentException](UUID.fromString(s))
 
   @inline def parseUUIDValidated: Validated[IllegalArgumentException, UUID] = parseUUID.toValidated
 

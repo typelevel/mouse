@@ -18,12 +18,12 @@ class TrySyntaxTest extends MouseSuite {
     )
 
   private def genThrowable: Gen[Throwable] = for {
-    message   <- Gen.alphaStr
+    message <- Gen.alphaStr
     throwable <- Gen.oneOf(exceptionList)
   } yield throwable(message)
 
   private def genTrySuccess[T](genT: => Gen[T]): Gen[(T, Try[T])] = for {
-    n  <- genT
+    n <- genT
     tr <- Gen.oneOf(Try(n), Success(n))
   } yield (n, tr)
 

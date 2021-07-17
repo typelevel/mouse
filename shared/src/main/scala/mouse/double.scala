@@ -1,6 +1,5 @@
 package mouse
 
-
 trait DoubleSyntax {
   implicit final def doubleSyntaxMouse(n: Double): DoubleOps = new DoubleOps(n)
 }

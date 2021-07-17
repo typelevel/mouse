@@ -1,4 +1,3 @@
 package mouse
 
-trait AllJvmSyntax
-  extends StringJvmSyntax
+trait AllJvmSyntax extends StringJvmSyntax

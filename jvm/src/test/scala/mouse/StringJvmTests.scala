@@ -25,7 +25,7 @@ class StringJvmTests extends MouseSuite {
       new URL("http://example.com").asRight[MalformedURLException]
     )
 
-   assertEquals("blah".parseURL.leftMap(_.getMessage), "no protocol: blah".asLeft)
+    assertEquals("blah".parseURL.leftMap(_.getMessage), "no protocol: blah".asLeft)
   }
 
   test("parseURI") {
@@ -46,7 +46,8 @@ class StringJvmTests extends MouseSuite {
     assertEquals(validUUIDStr.parseUUID.toOption, validUUIDStr.parseUUIDOption)
 
     assertEquals(
-      invalidUUIDStr.parseUUID.leftMap(_.getMessage), "Invalid UUID string: invalid".asLeft[UUID]
+      invalidUUIDStr.parseUUID.leftMap(_.getMessage),
+      "Invalid UUID string: invalid".asLeft[UUID]
     )
 
     assertEquals(

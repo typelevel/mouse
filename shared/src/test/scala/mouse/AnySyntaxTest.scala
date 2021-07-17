@@ -6,7 +6,7 @@ class AnySyntaxTest extends MouseSuite with MouseFunctions {
 
     assertEquals(5 |> (_ + 44), 49)
 
-    assertEquals(Some("thing") |> (_ getOrElse "that"), "thing")
+    assertEquals(Some("thing") |> (_.getOrElse("that")), "thing")
 
     assertEquals(
       "This" |> Function.const("that") |> (_.capitalize) |> Function.const("at bat"),
@@ -15,7 +15,7 @@ class AnySyntaxTest extends MouseSuite with MouseFunctions {
 
     assertEquals(ignore(true), ())
 
-    assertEquals(1200 |> (_*2) |> (_-5) |> (_/3), ((1200 * 2) - 5) / 3)
+    assertEquals(1200 |> (_ * 2) |> (_ - 5) |> (_ / 3), ((1200 * 2) - 5) / 3)
 
     assertEquals("anythingAtAll" |> ignore, ())
   }

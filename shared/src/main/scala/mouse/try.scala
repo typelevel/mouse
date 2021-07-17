@@ -19,8 +19,8 @@ final class TryOps[A](private val ta: Try[A]) extends AnyVal {
   @inline def toEither: Either[Throwable, A] = cata[Either[Throwable, A]](Right(_), Left(_))
 
   /**
-    * Converts a `Try[A]` to a `EitherT[F, Throwable, A]`.
-    */
+   * Converts a `Try[A]` to a `EitherT[F, Throwable, A]`.
+   */
   @inline def toEitherT[F[_]](implicit F: Applicative[F]): EitherT[F, Throwable, A] =
     EitherT.fromEither[F](toEither)
 }

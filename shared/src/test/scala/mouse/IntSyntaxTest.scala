@@ -2,7 +2,7 @@ package mouse
 
 class IntSyntaxTest extends MouseSuite {
   test("IntSyntax.toByteArray") {
-    assert(123456789.toByteArray sameElements Array(7, 91, -51, 21))
+    assert(123456789.toByteArray.sameElements(Array(7, 91, -51, 21)))
   }
 
   test("IntSyntax.toBase64") {
