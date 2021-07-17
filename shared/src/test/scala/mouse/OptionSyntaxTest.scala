@@ -6,7 +6,7 @@ class OptionSyntaxTest extends MouseSuite {
   implicit class ExtraTest[A](a: A) {
     def shouldBeA[T](implicit ev: T =:= A): Unit = ()
   }
-  
+
   test("OptionSyntax.cata") {
     assertEquals(Option(1).cata(_.toString, ""), "1")
     assertEquals(Option.empty[Int].cata(_.toString, ""), "")
@@ -18,7 +18,6 @@ class OptionSyntaxTest extends MouseSuite {
     val ex = new RuntimeException("Err")
     assertEquals(Option.empty[Int].toTry(ex), Failure(ex))
   }
-
 
   test("OptionSyntax.right") {
     assertEquals(Option(3).right("S"), Option(3).toRight("S"))

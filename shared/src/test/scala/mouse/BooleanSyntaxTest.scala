@@ -31,7 +31,6 @@ class BooleanSyntaxTest extends MouseSuite {
     assertEquals(false.liftTo[F]("error"), Either.left("error"))
   }
 
-
   test("BooleanSyntax.fold") {
     assertEquals(true.fold("t", "f"), "t")
     assertEquals(false.fold("t", "f"), "f")

@@ -2,7 +2,7 @@ package mouse
 
 import cats.syntax.option._
 import cats.syntax.functor._
-import cats.{Id, ~>}
+import cats.{~>, Id}
 
 class AnyFSyntaxTest extends MouseSuite {
   private val emptyK = new (List ~> List) {
@@ -28,11 +28,11 @@ class AnyFSyntaxTest extends MouseSuite {
   }
 
   test("AnyFSyntax.thrushK") {
-    assertEquals(List(1, 2, 3) thrushK emptyK, List.empty)
+    assertEquals(List(1, 2, 3).thrushK(emptyK), List.empty)
 
-    assertEquals(List(5, 10) thrushK double, List(5, 10, 5, 10))
+    assertEquals(List(5, 10).thrushK(double), List(5, 10, 5, 10))
 
-    assertEquals("thing".some thrushK toRight, Right("thing"))
+    assertEquals("thing".some.thrushK(toRight), Right("thing"))
 
     assertEquals(
       List("This") ||> double ||> headOption ||> optionGet,

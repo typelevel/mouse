@@ -5,11 +5,7 @@ import cats.instances.AllInstances
 import munit.FunSuite
 import munit.ScalaCheckSuite
 
-trait MouseSuite
-  extends FunSuite
-    with ScalaCheckSuite
-    with AllSharedSyntax
-    with AllInstances {
+trait MouseSuite extends FunSuite with ScalaCheckSuite with AllSharedSyntax with AllInstances {
   implicit val eq0: Eq[NumberFormatException] =
     (x: NumberFormatException, y: NumberFormatException) => x.getMessage == y.getMessage
 
