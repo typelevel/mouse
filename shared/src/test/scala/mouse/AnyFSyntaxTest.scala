@@ -5,37 +5,38 @@ import cats.syntax.functor._
 import cats.{Id, ~>}
 
 class AnyFSyntaxTest extends MouseSuite {
-
-  val emptyK = new (List ~> List) {
+  private val emptyK = new (List ~> List) {
     def apply[A](x: List[A]) = Nil
   }
 
-  val double = new (List ~> List) {
+  private val double = new (List ~> List) {
     def apply[A](x: List[A]) = x ::: x
   }
 
-  type E[B] = Either[String, B]
-  val toRight = new (Option ~> E) {
+  private type E[B] = Either[String, B]
+
+  private val toRight = new (Option ~> E) {
     def apply[A](x: Option[A]) = x.toRight("foo")
   }
 
-  val headOption = new (List ~> Option) {
+  private val headOption = new (List ~> Option) {
     def apply[A](x: List[A]) = x.headOption
   }
 
-  val optionGet = new (Option ~> Id) {
+  private val optionGet = new (Option ~> Id) {
     def apply[A](x: Option[A]) = x.get
   }
 
-  List(1, 2, 3) thrushK emptyK shouldEqual Nil
+  test("AnyFSyntax.thrushK") {
+    assertEquals(List(1, 2, 3) thrushK emptyK, List.empty)
 
-  List(5, 10) thrushK double shouldEqual List(5, 10, 5, 10)
+    assertEquals(List(5, 10) thrushK double, List(5, 10, 5, 10))
 
-  "thing".some thrushK toRight shouldEqual Right(
-    "thing"
-  )
+    assertEquals("thing".some thrushK toRight, Right("thing"))
 
-  (List("This") ||> double
-    ||> headOption
-    ||> optionGet) shouldEqual "This"
+    assertEquals(
+      List("This") ||> double ||> headOption ||> optionGet,
+      "This"
+    )
+  }
 }
