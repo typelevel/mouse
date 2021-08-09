@@ -24,8 +24,8 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform)
     sonatypeProfileName := "org.typelevel",
     libraryDependencies ++= Seq(
       "org.typelevel" %%% "cats-core" % "2.6.1",
-      "org.scalameta" %%% "munit" % "0.7.27" % Test,
-      "org.scalameta" %%% "munit-scalacheck" % "0.7.27" % Test
+      "org.scalameta" %%% "munit" % "0.7.28" % Test,
+      "org.scalameta" %%% "munit-scalacheck" % "0.7.28" % Test
     ),
     licenses += ("MIT license", url("http://opensource.org/licenses/MIT")),
     homepage := Some(url("https://github.com/typelevel/mouse")),
