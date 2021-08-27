@@ -9,7 +9,8 @@ final class LongOps(private val n: Long) extends AnyVal {
   @inline def toByteArray: Array[Byte] = java.nio.ByteBuffer.allocate(8).putLong(n).array()
 
   /**
-   * Base64 encoding (without final terminator). Shortcut for `java.util.Base64.getEncoder.withoutPadding.encodeToString`
+   * Base64 encoding (without final terminator). Shortcut for
+   * `java.util.Base64.getEncoder.withoutPadding.encodeToString`
    */
   @inline def toBase64: String = java.util.Base64.getEncoder.withoutPadding.encodeToString(toByteArray)
 
