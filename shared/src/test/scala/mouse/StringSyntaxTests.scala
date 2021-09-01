@@ -12,15 +12,15 @@ class StringSyntaxTests extends MouseSuite {
   }
 
   property("scalacheck-suite: StringOps.parseInt") {
-    forAll { i: Int =>
+    forAll { (i: Int) =>
       assertEquals(i.toString.parseInt, i.asRight[NumberFormatException])
     }
 
-    forAll { i: Int =>
+    forAll { (i: Int) =>
       assertEquals(i.toString.parseInt.toOption, i.toString.parseIntOption)
     }
 
-    forAll { i: Int =>
+    forAll { (i: Int) =>
       assertEquals(i.toString.parseInt.toValidated, i.toString.parseIntValidated)
     }
   }
@@ -31,15 +31,15 @@ class StringSyntaxTests extends MouseSuite {
   }
 
   property("scalacheck-suite: StringOps.parseLong") {
-    forAll { i: Long =>
+    forAll { (i: Long) =>
       assertEquals(i.toString.parseLong, i.asRight[NumberFormatException])
     }
 
-    forAll { i: Long =>
+    forAll { (i: Long) =>
       assertEquals(i.toString.parseLong.toOption, i.toString.parseLongOption)
     }
 
-    forAll { i: Long =>
+    forAll { (i: Long) =>
       assertEquals(i.toString.parseLong.toValidated, i.toString.parseLongValidated)
     }
   }
@@ -50,15 +50,15 @@ class StringSyntaxTests extends MouseSuite {
   }
 
   property("scalacheck-suite: StringOps.parseShort") {
-    forAll { i: Short =>
+    forAll { (i: Short) =>
       assertEquals(i.toString.parseShort, i.asRight[NumberFormatException])
     }
 
-    forAll { i: Short =>
+    forAll { (i: Short) =>
       assertEquals(i.toString.parseShort.toOption, i.toString.parseShortOption)
     }
 
-    forAll { i: Short =>
+    forAll { (i: Short) =>
       assertEquals(i.toString.parseShort.toValidated, i.toString.parseShortValidated)
     }
   }
@@ -69,15 +69,15 @@ class StringSyntaxTests extends MouseSuite {
   }
 
   property("scalacheck-suite: StringOps.parseDouble") {
-    forAll { i: Double =>
+    forAll { (i: Double) =>
       assertEquals(i.toString.parseDouble, i.asRight[NumberFormatException])
     }
 
-    forAll { i: Double =>
+    forAll { (i: Double) =>
       assertEquals(i.toString.parseDouble.toOption, i.toString.parseDoubleOption)
     }
 
-    forAll { i: Double =>
+    forAll { (i: Double) =>
       assertEquals(i.toString.parseDouble.toValidated, i.toString.parseDoubleValidated)
     }
   }
@@ -87,15 +87,15 @@ class StringSyntaxTests extends MouseSuite {
   }
 
   property("scalacheck-suite: StringOps.parseFloat") {
-    forAll { i: Float =>
+    forAll { (i: Float) =>
       assertEquals(i.toString.parseFloat, i.asRight[NumberFormatException])
     }
 
-    forAll { i: Float =>
+    forAll { (i: Float) =>
       assertEquals(i.toString.parseFloat.toOption, i.toString.parseFloatOption)
     }
 
-    forAll { i: Float =>
+    forAll { (i: Float) =>
       assertEquals(i.toString.parseFloat.toValidated, i.toString.parseFloatValidated)
     }
   }
@@ -106,15 +106,15 @@ class StringSyntaxTests extends MouseSuite {
   }
 
   property("scalacheck-suite: StringOps.parseByte") {
-    forAll { i: Byte =>
+    forAll { (i: Byte) =>
       assertEquals(i.toString.parseByte, i.asRight[NumberFormatException])
     }
 
-    forAll { i: Byte =>
+    forAll { (i: Byte) =>
       assertEquals(i.toString.parseByte.toOption, i.toString.parseByteOption)
     }
 
-    forAll { i: Byte =>
+    forAll { (i: Byte) =>
       assertEquals(i.toString.parseByte.toValidated, i.toString.parseByteValidated)
     }
   }
@@ -125,15 +125,15 @@ class StringSyntaxTests extends MouseSuite {
   }
 
   property("scalacheck-suite: StringOps.parseBigInt") {
-    forAll { i: BigInt =>
+    forAll { (i: BigInt) =>
       assertEquals(i.toString.parseBigInt, i.asRight[NumberFormatException])
     }
 
-    forAll { i: BigInt =>
+    forAll { (i: BigInt) =>
       assertEquals(i.toString.parseBigInt.toOption, i.toString.parseBigIntOption)
     }
 
-    forAll { i: BigInt =>
+    forAll { (i: BigInt) =>
       assertEquals(i.toString.parseBigInt.toValidated, i.toString.parseBigIntValidated)
     }
   }
@@ -146,15 +146,15 @@ class StringSyntaxTests extends MouseSuite {
   }
 
   property("scalacheck-suite: StringOps.parseBigDecimal") {
-    forAll { i: BigDecimal =>
+    forAll { (i: BigDecimal) =>
       assertEquals(i.toString.parseBigDecimal, i.asRight[NumberFormatException])
     }
 
-    forAll { i: BigDecimal =>
+    forAll { (i: BigDecimal) =>
       assertEquals(i.toString.parseBigDecimal.toOption, i.toString.parseBigDecimalOption)
     }
 
-    forAll { i: BigDecimal =>
+    forAll { (i: BigDecimal) =>
       assertEquals(i.toString.parseBigDecimal.toValidated, i.toString.parseBigDecimalValidated)
     }
   }
@@ -174,13 +174,13 @@ class StringSyntaxTests extends MouseSuite {
     val stringGen: Gen[String] =
       Arbitrary.arbString.arbitrary.filter(s => !s.equalsIgnoreCase("true") && !s.equalsIgnoreCase("false"))
 
-    forAll(stringGen) { s: String =>
+    forAll(stringGen) { (s: String) =>
       assertEquals(s.parseBoolean.leftMap(_.getMessage), ("For input string: \"" + s + "\"").asLeft)
     }
   }
 
   property("asThrowable, asError and asException") {
-    forAll { s: String =>
+    forAll { (s: String) =>
       assertEquals(s.asThrowable.toString, new Throwable(s).toString)
       assertEquals(s.asError.toString, new Error(s).toString)
       assertEquals(s.asException.toString, new java.lang.Exception(s).toString)
