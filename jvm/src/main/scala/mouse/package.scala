@@ -10,4 +10,6 @@ package object mouse extends MouseFunctions {
   object double extends DoubleSyntax
   object long extends LongSyntax
   object map extends MapSyntax
+  object iterableonce extends IterableOnceSyntax
+  object foldable extends FoldableSyntax
 }

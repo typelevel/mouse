@@ -43,6 +43,8 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform)
         case _                         => Nil
       }
     },
+    Compile / unmanagedSourceDirectories ++= scalaVersionSpecificFolders("main", baseDirectory.value, scalaVersion.value),
+    Test / unmanagedSourceDirectories ++= scalaVersionSpecificFolders("test", baseDirectory.value, scalaVersion.value),
     Test / publishArtifact := false,
     pomIncludeRepository := { _ => false }
   )
@@ -50,6 +52,17 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform)
     crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2")),
     publishConfiguration := publishConfiguration.value.withOverwrite(true)
   )
+
+def scalaVersionSpecificFolders(srcName: String, srcBaseDir: java.io.File, scalaVersion: String) = {
+  def extraDirs(suffix: String) =
+    List(CrossType.Pure, CrossType.Full)
+      .flatMap(_.sharedSrcDir(srcBaseDir, srcName).toList.map(f => file(f.getPath + suffix)))
+  CrossVersion.partialVersion(scalaVersion) match {
+    case Some((2, y))     => extraDirs("-2.x") ++ (if (y >= 13) extraDirs("-2.13+") else Nil)
+    case Some((0 | 3, _)) => extraDirs("-2.13+") ++ extraDirs("-3.x")
+    case _                => Nil
+  }
+}
 
 ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
 ThisBuild / githubWorkflowPublishTargetBranches :=

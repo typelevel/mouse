@@ -3,7 +3,7 @@ package mouse
 import java.net.{MalformedURLException, URI, URISyntaxException, URL}
 import cats.Eq
 import cats.syntax.all._
-import mouse.string._
+import string._
 
 import java.util.UUID
 

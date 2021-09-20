@@ -12,3 +12,5 @@ trait AllSharedSyntax
     with DoubleSyntax
     with PartialFunctionLift
     with MapSyntax
+    with IterableOnceSyntax
+    with FoldableSyntax
