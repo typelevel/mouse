@@ -19,7 +19,7 @@ final class FOptionOps[F[_], A](private val foa: F[Option[A]]) extends AnyVal {
 
   def existsF(f: A => F[Boolean])(implicit F: Monad[F]): F[Boolean] =
     F.flatMap(foa) {
-      case None => F.pure(false)
+      case None    => F.pure(false)
       case Some(a) => f(a)
     }
 
@@ -40,7 +40,7 @@ final class FOptionOps[F[_], A](private val foa: F[Option[A]]) extends AnyVal {
 
   def forallF(f: A => F[Boolean])(implicit F: Monad[F]): F[Boolean] =
     F.flatMap(foa) {
-      case None => F.pure(true)
+      case None    => F.pure(true)
       case Some(a) => f(a)
     }
 
@@ -56,7 +56,7 @@ final class FOptionOps[F[_], A](private val foa: F[Option[A]]) extends AnyVal {
   def orElseIn(default: Option[A])(implicit F: Functor[F]): F[Option[A]] =
     F.map(foa) {
       case None => default
-      case x => x
+      case x    => x
     }
 
   def orElseF(defaultF: => F[Option[A]])(implicit F: Monad[F]): F[Option[A]] =
