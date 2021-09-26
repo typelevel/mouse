@@ -12,3 +12,4 @@ trait AllSharedSyntax
     with DoubleSyntax
     with PartialFunctionLift
     with MapSyntax
+    with FOptionSyntax
