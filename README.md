@@ -30,6 +30,7 @@ Mouse includes enrichments for:
 - [Long](./shared/src/main/scala/mouse/long.scala)
 - [Double](./shared/src/main/scala/mouse/double.scala)
 - [Map](./shared/src/main/scala/mouse/map.scala)
+- [F\[Option\[A\]\]](./shared/src/main/scala/mouse/foption.scala)
 
 #### Example:
 
@@ -97,6 +98,9 @@ res0: Either[String,Int] = Right(6)
 
 scala> val mapped = Map(1 -> 2, 3 -> 4).mapKeys(_ * 2)
 mapped: Map[Int,Int] = Map(2 -> 2, 6 -> 4)
+
+scala> val foption = List(Option(1), Option(2), Option(4)).mapIn(_ * 2)
+foption: List[Option[Int]] = List(Some(2), Some(4), Some(8))
 ```
 
 #### Release Notes
