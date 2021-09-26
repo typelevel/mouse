@@ -14,7 +14,7 @@ final class FOptionOps[F[_], A](private val foa: F[Option[A]]) extends AnyVal {
   def cataF[B](default: => F[B], f: A => F[B])(implicit F: FlatMap[F]): F[B] =
     F.flatMap(foa)(_.fold(default)(f))
 
-  def exists(f: A => Boolean)(implicit F: Functor[F]): F[Boolean] =
+  def existsIn(f: A => Boolean)(implicit F: Functor[F]): F[Boolean] =
     F.map(foa)(_.exists(f))
 
   def existsF(f: A => F[Boolean])(implicit F: Monad[F]): F[Boolean] =
@@ -29,13 +29,13 @@ final class FOptionOps[F[_], A](private val foa: F[Option[A]]) extends AnyVal {
   def flatMapF[B](f: A => F[Option[B]])(implicit F: Monad[F]): F[Option[B]] =
     F.flatMap(foa)(_.fold(F.pure(Option.empty[B]))(f))
 
-  def fold[B](default: => B)(f: A => B)(implicit F: Functor[F]): F[B] =
+  def foldIn[B](default: => B)(f: A => B)(implicit F: Functor[F]): F[B] =
     cata(default, f)
 
   def foldF[B](default: => F[B])(f: A => F[B])(implicit F: FlatMap[F]): F[B] =
     cataF(default, f)
 
-  def forall(f: A => Boolean)(implicit F: Functor[F]): F[Boolean] =
+  def forallIn(f: A => Boolean)(implicit F: Functor[F]): F[Boolean] =
     F.map(foa)(_.forall(f))
 
   def forallF(f: A => F[Boolean])(implicit F: Monad[F]): F[Boolean] =
@@ -53,7 +53,7 @@ final class FOptionOps[F[_], A](private val foa: F[Option[A]]) extends AnyVal {
   def mapIn[B](f: A => B)(implicit F: Functor[F]): F[Option[B]] =
     F.map(foa)(_.map(f))
 
-  def orElse(default: Option[A])(implicit F: Functor[F]): F[Option[A]] =
+  def orElseIn(default: Option[A])(implicit F: Functor[F]): F[Option[A]] =
     F.map(foa) {
       case None => default
       case x => x
