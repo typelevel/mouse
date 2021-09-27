@@ -91,4 +91,16 @@ class FOptionSyntaxTest extends MouseSuite {
     assertEquals(List(Option(1)).orElseF(List(Option(0))), List(Option(1)))
     assertEquals(List(Option.empty[Int]).orElseF(List(Option(0))), List(Option(0)))
   }
+
+  test("FOptionSyntax.traverseIn") {
+    assertEquals(List(Option(1)).traverseIn(a => List(a * 2)), List(List(Option(2))))
+    assertEquals(List.empty[Option[Int]].traverseIn(a => List(a * 2)), List.empty[List[Option[Int]]])
+    assertEquals(List(Option.empty[Int]).traverseIn(a => List(a * 2)), List(List(Option.empty[Int])))
+  }
+
+  test("FOptionSyntax.traverseF") {
+    assertEquals(List(Option(1)).traverseF(a => Option(a * 2)), Option(List(Option(2))))
+    assertEquals(List.empty[Option[Int]].traverseF(a => Option(a * 2)), Option(List.empty[Option[Int]]))
+    assertEquals(List(Option.empty[Int]).traverseF(a => Option(a * 2)), Option(List(Option.empty[Int])))
+  }
 }
