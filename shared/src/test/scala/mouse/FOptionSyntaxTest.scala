@@ -23,6 +23,18 @@ class FOptionSyntaxTest extends MouseSuite {
     assertEquals(Option(Option.empty[Int]).existsF(a => Option(a > 2)), Option(false))
   }
 
+  test("FOptionSyntax.filterIn") {
+    assertEquals(Option(Option(1)).filterIn(_ > 2), Option(Option.empty[Int]))
+    assertEquals(Option(Option(1)).filterIn(_ == 1), Option(Option(1)))
+    assertEquals(Option(Option.empty[Int]).filterIn(_ > 2), Option(Option.empty))
+  }
+
+  test("FOptionSyntax.filterF") {
+    assertEquals(Option(Option(1)).filterF(a => Option(a > 2)), Option(Option.empty[Int]))
+    assertEquals(Option(Option(1)).filterF(a => Option(a == 1)), Option(Option(1)))
+    assertEquals(Option(Option.empty[Int]).filterF(a => Option(a > 2)), Option(Option.empty[Int]))
+  }
+
   test("FOptionSyntax.flatMapIn") {
     assertEquals(List(Option(1)).flatMapIn(a => Option(a * 2)), List(Option(2)))
     assertEquals(List(Option.empty[Int]).flatMapIn(a => Option(a * 2)), List(Option.empty[Int]))
