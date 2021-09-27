@@ -23,6 +23,19 @@ final class FOptionOps[F[_], A](private val foa: F[Option[A]]) extends AnyVal {
       case Some(a) => f(a)
     }
 
+  def filterIn(f: A => Boolean)(implicit F: Functor[F]): F[Option[A]] =
+    F.map(foa)(_.filter(f))
+
+  def filterF(f: A => F[Boolean])(implicit F: Monad[F]): F[Option[A]] =
+    F.flatMap(foa) {
+      case None => F.pure(None)
+      case s @ Some(v) =>
+        F.map(f(v)) {
+          case true => s
+          case _    => None
+        }
+    }
+
   def flatMapIn[B](f: A => Option[B])(implicit F: Functor[F]): F[Option[B]] =
     F.map(foa)(_.flatMap(f))
 
