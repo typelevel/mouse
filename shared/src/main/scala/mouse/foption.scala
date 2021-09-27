@@ -1,6 +1,6 @@
 package mouse
 
-import cats.{FlatMap, Functor, Monad}
+import cats.{Applicative, FlatMap, Functor, Monad, Traverse}
 
 trait FOptionSyntax {
   implicit final def FOptionSyntaxMouse[F[_], A](foa: F[Option[A]]): FOptionOps[F, A] = new FOptionOps(foa)
@@ -77,4 +77,10 @@ final class FOptionOps[F[_], A](private val foa: F[Option[A]]) extends AnyVal {
       case None => defaultF
       case x    => F.pure(x)
     }
+
+  def traverseIn[G[_]: Applicative, B](f: A => G[B])(implicit F: Functor[F]): F[G[Option[B]]] =
+    F.map(foa)(a => Traverse[Option].traverse(a)(f))
+
+  def traverseF[G[_]: Applicative, B](f: A => G[B])(implicit F: Traverse[F]): G[F[Option[B]]] =
+    F.traverse(foa)(a => Traverse[Option].traverse(a)(f))
 }
