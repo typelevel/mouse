@@ -18,6 +18,12 @@ final class FEitherOps[F[_], L, R](private val felr: F[Either[L, R]]) extends An
   def flatMapIn[A >: L, B](f: R => Either[A, B])(implicit F: Functor[F]): F[Either[A, B]] =
     F.map(felr)(_.flatMap(f))
 
+  def flatMapF[A >: L, B](f: R => F[Either[A, B]])(implicit F: Monad[F]): F[Either[A, B]] =
+    F.flatMap(felr) {
+      case l @ Left(_)  => F.pure(l.asInstanceOf[Left[A, B]])
+      case Right(value) => f(value)
+    }
+
   def foldIn[A](left: L => A)(right: R => A)(implicit F: Functor[F]): F[A] =
     cata(left, right)
 
@@ -29,6 +35,24 @@ final class FEitherOps[F[_], L, R](private val felr: F[Either[L, R]]) extends An
 
   def getOrElseF[A >: R](right: => F[A])(implicit F: Monad[F]): F[A] =
     F.flatMap(felr)(_.fold(_ => right, F.pure))
+
+  def leftFlatMapIn[A, B >: R](f: L => Either[A, B])(implicit F: Functor[F]): F[Either[A, B]] =
+    F.map(felr) {
+      case Left(value)  => f(value)
+      case r @ Right(_) => r.asInstanceOf[Right[A, B]]
+    }
+
+  def leftFlatMapF[A, B >: R](f: L => F[Either[A, B]])(implicit F: Monad[F]): F[Either[A, B]] =
+    F.flatMap(felr) {
+      case Left(left)   => f(left)
+      case r @ Right(_) => F.pure(r.asInstanceOf[Right[A, B]])
+    }
+
+  def leftMapIn[A](f: L => A)(implicit F: Functor[F]): F[Either[A, R]] =
+    F.map(felr) {
+      case Left(value)  => Left(f(value))
+      case r @ Right(_) => r.asInstanceOf[Right[A, R]]
+    }
 
   def leftTraverseIn[G[_], A](f: L => G[A])(implicit F: Functor[F], G: Applicative[G]): F[G[Either[A, R]]] =
     F.map(felr) {
