@@ -1,5 +1,7 @@
 package mouse
 
+import cats.Id
+
 import scala.util.{Failure, Success}
 
 class OptionSyntaxTest extends MouseSuite {
@@ -29,5 +31,16 @@ class OptionSyntaxTest extends MouseSuite {
     assertEquals(Option(3).left("S"), Option(3).toLeft("S"))
     assertEquals(None.left("S"), None.toLeft("S"))
     Option(3).left("S").shouldBeA[Either[Int, String]]
+  }
+
+  test("OptionSyntax.whenExistsA") {
+    var a = 1
+    var b = 1
+    val f: Int => Id[Unit] = i => a = i
+    val g: Int => Id[Unit] = i => b = i
+    Option(2).whenExistsA(f).shouldBeA[Id[Unit]]
+    Option.empty[Int].whenExistsA(g)
+    assertEquals(a, 2)
+    assertEquals(b, 1)
   }
 }

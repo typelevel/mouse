@@ -1,5 +1,7 @@
 package mouse
 
+import cats.Applicative
+
 import scala.util.{Failure, Success, Try}
 
 trait OptionSyntax {
@@ -13,6 +15,8 @@ final class OptionOps[A](private val oa: Option[A]) extends AnyVal {
   @inline def toTry(ex: => Throwable): Try[A] = cata(Success(_), Failure(ex))
 
   @inline def toTryMsg(msg: => String): Try[A] = toTry(new RuntimeException(msg))
+
+  @inline def whenExistsA[F[_]: Applicative](f: A => F[Unit]): F[Unit] = cata(f, Applicative[F].unit)
 
   /**
    * Same as oa.toRight except that it fixes the type to Either[B, A] On Scala prior to 2.12, toRight returns
