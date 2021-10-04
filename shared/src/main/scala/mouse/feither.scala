@@ -30,7 +30,7 @@ final class FEitherOps[F[_], L, R](private val felr: F[Either[L, R]]) extends An
   def foldF[A](left: L => F[A])(right: R => F[A])(implicit F: FlatMap[F]): F[A] =
     cataF(left, right)
 
-  def getOrElse[A >: R](right: => A)(implicit F: Functor[F]): F[A] =
+  def getOrElseIn[A >: R](right: => A)(implicit F: Functor[F]): F[A] =
     F.map(felr)(_.fold(_ => right, identity))
 
   def getOrElseF[A >: R](right: => F[A])(implicit F: Monad[F]): F[A] =

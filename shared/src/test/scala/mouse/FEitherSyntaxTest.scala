@@ -36,9 +36,9 @@ class FEitherSyntaxTest extends MouseSuite {
     assertEquals(leftValue.foldF(_ => List(0))(_ => List(1)), List(0))
   }
 
-  test("FEitherSyntax.getOrElse") {
-    assertEquals(rightValue.getOrElse(0), List(42))
-    assertEquals(leftValue.getOrElse(0), List(0))
+  test("FEitherSyntax.getOrElseIn") {
+    assertEquals(rightValue.getOrElseIn(0), List(42))
+    assertEquals(leftValue.getOrElseIn(0), List(0))
   }
 
   test("FEitherSyntax.getOrElseF") {
