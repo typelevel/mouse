@@ -31,6 +31,7 @@ Mouse includes enrichments for:
 - [Double](./shared/src/main/scala/mouse/double.scala)
 - [Map](./shared/src/main/scala/mouse/map.scala)
 - [F\[Option\[A\]\]](./shared/src/main/scala/mouse/foption.scala)
+- [F\[Either\[A, B\]\]](./shared/src/main/scala/mouse/feither.scala)
 
 #### Example:
 
@@ -101,6 +102,9 @@ mapped: Map[Int,Int] = Map(2 -> 2, 6 -> 4)
 
 scala> val foption = List(Option(1), Option(2), Option(4)).mapIn(_ * 2)
 foption: List[Option[Int]] = List(Some(2), Some(4), Some(8))
+
+scala> val feither = List(Either.cond(true, 1, "0")).mapIn(_ * 2)
+foption: List[Either[String, Int]] = List(Right(2))
 ```
 
 #### Release Notes
