@@ -13,3 +13,4 @@ trait AllSharedSyntax
     with PartialFunctionLift
     with MapSyntax
     with FOptionSyntax
+    with FEitherSyntax
