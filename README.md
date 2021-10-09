@@ -1,4 +1,5 @@
-# Mouse
+# Mouse ![Continuous Integration](https://github.com/typelevel/mouse/workflows/Continuous%20Integration/badge.svg) [![Maven Central](https://img.shields.io/maven-central/v/org.typelevel/mouse_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/org.typelevel/mouse_2.12)
+
 Mouse is a small companion to the [Cats](https://github.com/typelevel/cats) functional programming library for Scala. It
 includes convenience extension methods for Scala standard library classes, including some found in
 [scalaz](https://github.com/scalaz/scalaz) that are not in Cats.
@@ -12,9 +13,6 @@ Mouse is published for Scala 2.12, 2.13 and 3.0-RC1. For Scala.jvm:
 For scala.js 1.x:
 
 `"org.typelevel" %%% "mouse" % version`
-
-[![Maven Central](https://img.shields.io/maven-central/v/org.typelevel/mouse_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/org.typelevel/mouse_2.12)
-![Continuous Integration](https://github.com/typelevel/mouse/workflows/Continuous%20Integration/badge.svg)
 
 ## Content
 
