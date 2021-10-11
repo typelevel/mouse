@@ -50,6 +50,7 @@ class TupleSyntaxTest extends MouseSuite {
   test("Tuple2Syntax.init") {
     assertEquals((a1, a2).init, a1)
   }
+
   test("Tuple2Syntax.tail") {
     assertEquals((a1, a2).tail, a2)
   }
