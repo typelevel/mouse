@@ -55,6 +55,10 @@ class TupleSyntaxTest extends MouseSuite {
     assertEquals((a1, a2).head, a1)
   }
 
+  test("Tuple2Syntax.last") {
+    assertEquals((a1, a2).last, a2)
+  }
+
   test("Tuple2Syntax.tail") {
     assertEquals((a1, a2).tail, a2)
   }
@@ -65,6 +69,10 @@ class TupleSyntaxTest extends MouseSuite {
 
   test("Tuple3Syntax.head") {
     assertEquals((a1, a2, a3).head, a1)
+  }
+
+  test("Tuple3Syntax.last") {
+    assertEquals((a1, a2, a3).last, a3)
   }
 
   test("Tuple3Syntax.tail") {
@@ -79,6 +87,10 @@ class TupleSyntaxTest extends MouseSuite {
     assertEquals((a1, a2, a3, a4).head, a1)
   }
 
+  test("Tuple4Syntax.last") {
+    assertEquals((a1, a2, a3, a4).last, a4)
+  }
+
   test("Tuple4Syntax.tail") {
     assertEquals((a1, a2, a3, a4).tail, (a2, a3, a4))
   }
@@ -89,6 +101,10 @@ class TupleSyntaxTest extends MouseSuite {
 
   test("Tuple5Syntax.head") {
     assertEquals((a1, a2, a3, a4, a5).head, a1)
+  }
+
+  test("Tuple5Syntax.last") {
+    assertEquals((a1, a2, a3, a4, a5).last, a5)
   }
 
   test("Tuple5Syntax.tail") {
@@ -103,6 +119,10 @@ class TupleSyntaxTest extends MouseSuite {
     assertEquals((a1, a2, a3, a4, a5, a6).head, a1)
   }
 
+  test("Tuple6Syntax.last") {
+    assertEquals((a1, a2, a3, a4, a5, a6).last, a6)
+  }
+
   test("Tuple6Syntax.tail") {
     assertEquals((a1, a2, a3, a4, a5, a6).tail, (a2, a3, a4, a5, a6))
   }
@@ -113,6 +133,10 @@ class TupleSyntaxTest extends MouseSuite {
 
   test("Tuple7Syntax.head") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7).head, a1)
+  }
+
+  test("Tuple7Syntax.last") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7).last, a7)
   }
 
   test("Tuple7Syntax.tail") {
@@ -127,6 +151,10 @@ class TupleSyntaxTest extends MouseSuite {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8).head, a1)
   }
 
+  test("Tuple8Syntax.last") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8).last, a8)
+  }
+
   test("Tuple8Syntax.tail") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8).tail, (a2, a3, a4, a5, a6, a7, a8))
   }
@@ -137,6 +165,10 @@ class TupleSyntaxTest extends MouseSuite {
 
   test("Tuple9Syntax.head") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9).head, a1)
+  }
+
+  test("Tuple9Syntax.last") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9).last, a9)
   }
 
   test("Tuple9Syntax.tail") {
@@ -151,6 +183,10 @@ class TupleSyntaxTest extends MouseSuite {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10).head, a1)
   }
 
+  test("Tuple10Syntax.last") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10).last, a10)
+  }
+
   test("Tuple10Syntax.tail") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10).tail, (a2, a3, a4, a5, a6, a7, a8, a9, a10))
   }
@@ -161,6 +197,10 @@ class TupleSyntaxTest extends MouseSuite {
 
   test("Tuple11Syntax.head") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11).head, a1)
+  }
+
+  test("Tuple11Syntax.last") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11).last, a11)
   }
 
   test("Tuple11Syntax.tail") {
@@ -175,6 +215,10 @@ class TupleSyntaxTest extends MouseSuite {
 
   test("Tuple12Syntax.head") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12).head, a1)
+  }
+
+  test("Tuple12Syntax.last") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12).last, a12)
   }
 
   test("Tuple12Syntax.tail") {
@@ -193,6 +237,10 @@ class TupleSyntaxTest extends MouseSuite {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13).head, a1)
   }
 
+  test("Tuple13Syntax.last") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13).last, a13)
+  }
+
   test("Tuple13Syntax.tail") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13).tail,
                  (a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13)
@@ -207,6 +255,10 @@ class TupleSyntaxTest extends MouseSuite {
 
   test("Tuple14Syntax.head") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14).head, a1)
+  }
+
+  test("Tuple14Syntax.last") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14).last, a14)
   }
 
   test("Tuple14Syntax.tail") {
@@ -225,6 +277,10 @@ class TupleSyntaxTest extends MouseSuite {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15).head, a1)
   }
 
+  test("Tuple15Syntax.last") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15).last, a15)
+  }
+
   test("Tuple15Syntax.tail") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15).tail,
                  (a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15)
@@ -239,6 +295,10 @@ class TupleSyntaxTest extends MouseSuite {
 
   test("Tuple16Syntax.head") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16).head, a1)
+  }
+
+  test("Tuple16Syntax.last") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16).last, a16)
   }
 
   test("Tuple16Syntax.tail") {
@@ -257,6 +317,10 @@ class TupleSyntaxTest extends MouseSuite {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17).head, a1)
   }
 
+  test("Tuple17Syntax.last") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17).last, a17)
+  }
+
   test("Tuple17Syntax.tail") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17).tail,
                  (a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17)
@@ -271,6 +335,10 @@ class TupleSyntaxTest extends MouseSuite {
 
   test("Tuple18Syntax.head") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18).head, a1)
+  }
+
+  test("Tuple18Syntax.last") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18).last, a18)
   }
 
   test("Tuple18Syntax.tail") {
@@ -289,6 +357,10 @@ class TupleSyntaxTest extends MouseSuite {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19).head, a1)
   }
 
+  test("Tuple19Syntax.last") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19).last, a19)
+  }
+
   test("Tuple19Syntax.tail") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19).tail,
                  (a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19)
@@ -303,6 +375,10 @@ class TupleSyntaxTest extends MouseSuite {
 
   test("Tuple20Syntax.head") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20).head, a1)
+  }
+
+  test("Tuple20Syntax.last") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20).last, a20)
   }
 
   test("Tuple20Syntax.tail") {
@@ -324,6 +400,13 @@ class TupleSyntaxTest extends MouseSuite {
     )
   }
 
+  test("Tuple21Syntax.last") {
+    assertEquals(
+      (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21).last,
+      a21
+    )
+  }
+
   test("Tuple21Syntax.tail") {
     assertEquals(
       (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21).tail,
@@ -342,6 +425,13 @@ class TupleSyntaxTest extends MouseSuite {
     assertEquals(
       (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22).head,
       a1
+    )
+  }
+
+  test("Tuple22Syntax.last") {
+    assertEquals(
+      (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22).last,
+      a22
     )
   }
 
