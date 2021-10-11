@@ -92,9 +92,7 @@ trait TupleSyntax {
 
 final class Tuple2SyntaxOps[A1, A2](private val t: (A1, A2)) extends AnyVal {
   @inline def head: A1 = t._1
-  @inline def init: A1 = t._1
   @inline def last: A2 = t._2
-  @inline def tail: A2 = t._2
 }
 
 final class Tuple3SyntaxOps[A1, A2, A3](private val t: (A1, A2, A3)) extends AnyVal {

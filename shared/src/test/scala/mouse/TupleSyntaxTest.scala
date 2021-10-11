@@ -47,20 +47,12 @@ class TupleSyntaxTest extends MouseSuite {
   private val a21 = new A21()
   private val a22 = new A22()
 
-  test("Tuple2Syntax.init") {
-    assertEquals((a1, a2).init, a1)
-  }
-
   test("Tuple2Syntax.head") {
     assertEquals((a1, a2).head, a1)
   }
 
   test("Tuple2Syntax.last") {
     assertEquals((a1, a2).last, a2)
-  }
-
-  test("Tuple2Syntax.tail") {
-    assertEquals((a1, a2).tail, a2)
   }
 
   test("Tuple3Syntax.init") {
