@@ -3,11 +3,10 @@ package mouse
 import java.net.{MalformedURLException, URI, URISyntaxException, URL}
 import cats.Eq
 import cats.syntax.all._
-import mouse.string._
 
 import java.util.UUID
 
-class StringJvmTests extends MouseSuite {
+class StringJvmTests extends MouseSuite with StringJvmSyntax {
   test("parseFloat") {
     assertEquals("123.1".parseFloat, 123.1f.asRight[NumberFormatException])
   }

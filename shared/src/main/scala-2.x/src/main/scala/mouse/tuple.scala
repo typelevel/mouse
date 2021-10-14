@@ -1,7 +1,8 @@
 package mouse
 
 trait TupleSyntax {
-  implicit final def Tuple2SyntaxMouse[A1, A2](t: (A1, A2)): Tuple2SyntaxOps[A1, A2] = new Tuple2SyntaxOps(t)
+  implicit final def Tuple2SyntaxMouse[A1, A2](t: (A1, A2)): Tuple2SyntaxOps[A1, A2] =
+    new Tuple2SyntaxOps(t)
 
   implicit final def Tuple3SyntaxMouse[A1, A2, A3](t: (A1, A2, A3)): Tuple3SyntaxOps[A1, A2, A3] =
     new Tuple3SyntaxOps(t)
@@ -59,34 +60,28 @@ trait TupleSyntax {
 
   implicit final def Tuple17SyntaxMouse[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17](
     t: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17)
-  ): Tuple17SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17] =
-    new Tuple17SyntaxOps(t)
+  ): Tuple17SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17] = new Tuple17SyntaxOps(t)
 
   // format: off
   implicit final def Tuple18SyntaxMouse[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18](
     t: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18)
-  ): Tuple18SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18] =
-    new Tuple18SyntaxOps(t)
+  ): Tuple18SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18] = new Tuple18SyntaxOps(t)
 
   implicit final def Tuple19SyntaxMouse[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19](
     t: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19)
-  ): Tuple19SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19] =
-    new Tuple19SyntaxOps(t)
+  ): Tuple19SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19] = new Tuple19SyntaxOps(t)
 
   implicit final def Tuple20SyntaxMouse[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20](
     t: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20)
-  ): Tuple20SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20] =
-    new Tuple20SyntaxOps(t)
+  ): Tuple20SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20] = new Tuple20SyntaxOps(t)
 
   implicit final def Tuple21SyntaxMouse[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21](
     t: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21)
-  ): Tuple21SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21] =
-    new Tuple21SyntaxOps(t)
+  ): Tuple21SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21] = new Tuple21SyntaxOps(t)
 
   implicit final def Tuple22SyntaxMouse[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22](
     t: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22)
-  ): Tuple22SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22] =
-    new Tuple22SyntaxOps(t)
+  ): Tuple22SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22] = new Tuple22SyntaxOps(t)
   // format: on
 }
 

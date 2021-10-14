@@ -7,21 +7,47 @@ ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.6", "3.0.2")
 
 ThisBuild / scalaVersion := "2.13.6"
 
+def scalaVersionSpecificFolders(srcName: String, srcBaseDir: java.io.File, scalaVersion: String) = {
+  def extraDirs(suffix: String) =
+    List(CrossType.Pure, CrossType.Full)
+      .flatMap(_.sharedSrcDir(srcBaseDir, srcName).toList.map(f => file(f.getPath + suffix)))
+
+  CrossVersion.partialVersion(scalaVersion) match {
+    case Some((2, _)) => extraDirs("-2.x")
+    case Some((0 | 3, _)) => extraDirs("-3.x")
+    case _ => Nil
+  }
+}
+
+// general settings
+lazy val commonSettings = Seq(
+  name := "mouse",
+  organization := "org.typelevel",
+  sonatypeProfileName := "org.typelevel",
+  Compile / unmanagedSourceDirectories ++= scalaVersionSpecificFolders(
+    "main",
+    baseDirectory.value,
+    scalaVersion.value
+  ),
+  Test / unmanagedSourceDirectories ++= scalaVersionSpecificFolders(
+    "test",
+    baseDirectory.value,
+    scalaVersion.value
+  )
+)
+
 lazy val root = project
   .in(file("."))
   .aggregate(js, jvm)
   .settings(
-    name := "mouse",
-    publish / skip := true,
-    sonatypeProfileName := "org.typelevel"
+    commonSettings,
+    publish / skip := true
   )
 
 lazy val cross = crossProject(JSPlatform, JVMPlatform)
   .in(file("."))
   .settings(
-    name := "mouse",
-    organization := "org.typelevel",
-    sonatypeProfileName := "org.typelevel",
+    commonSettings,
     libraryDependencies ++= Seq(
       "org.typelevel" %%% "cats-core" % "2.6.1",
       "org.scalameta" %%% "munit" % "0.7.29" % Test,
@@ -68,6 +94,16 @@ ThisBuild / githubWorkflowPublish := Seq(
       "SONATYPE_USERNAME" -> "${{ secrets.SONATYPE_USERNAME }}"
     )
   )
+)
+
+ThisBuild / githubWorkflowBuild := Seq(
+  WorkflowStep
+    .Sbt(
+      List("scalafmtCheckAll", "scalafmtSbtCheck"),
+      name = Some("Check formatting")
+    ),
+  WorkflowStep.Sbt(List("Test/compile"), name = Some("Compile")),
+  WorkflowStep.Sbt(List("test"), name = Some("Run tests")),
 )
 
 lazy val jvm = cross.jvm

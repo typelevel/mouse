@@ -14,4 +14,3 @@ trait AllSharedSyntax
     with MapSyntax
     with FOptionSyntax
     with FEitherSyntax
-    with TupleSyntax
