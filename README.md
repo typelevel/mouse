@@ -103,6 +103,12 @@ foption: List[Option[Int]] = List(Some(2), Some(4), Some(8))
 
 scala> val feither = List(Either.cond(true, 1, "0")).mapIn(_ * 2)
 foption: List[Either[String, Int]] = List(Right(2))
+
+scala> val listOption = List(Option(1), Option(2)).mapNested2(_ * 2)
+listOption: List[Option[Int]] = List(Some(2), Some(4))
+
+scala> val listOptionList = List(Option(List(1)), Option(List(2))).mapNested3(_ * 2)
+listOptionList: List[Option[List[Int]]] = List(Some(List(2)), Some(List(4)))
 ```
 
 #### Release Notes
