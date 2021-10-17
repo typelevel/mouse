@@ -40,9 +40,25 @@ final class BooleanOps(private val b: Boolean) extends AnyVal {
 
   @inline def applyIf[A](a: A): ApplyIfPartiallyApplied[A] = new ApplyIfPartiallyApplied[A](b, a)
 
+  /**
+   * That method has the by-value parameter `F[A]`. For by-name semantic on the `F[A]` parameter use [[whenAL]].
+   */
   @inline def whenA[F[_], A](fa: F[A])(implicit F: Applicative[F]): F[Unit] = F.whenA(b)(fa)
 
+  /**
+   * The same as [[whenA]] except for by-name parameter `F[A]`.
+   */
+  @inline def whenAL[F[_], A](fa: => F[A])(implicit F: Applicative[F]): F[Unit] = F.whenA(b)(fa)
+
+  /**
+   * That method has the by-value parameter `F[A]`. For by-name semantic on the `F[A]` parameter use [[unlessAL]].
+   */
   @inline def unlessA[F[_], A](fa: F[A])(implicit F: Applicative[F]): F[Unit] = F.unlessA(b)(fa)
+
+  /**
+   * The same as [[unlessA]] except for by-name parameter `F[A]`.
+   */
+  @inline def unlessAL[F[_], A](fa: => F[A])(implicit F: Applicative[F]): F[Unit] = F.unlessA(b)(fa)
 
   @inline def liftTo[F[_]]: LiftToPartiallyApplied[F] = new LiftToPartiallyApplied(b)
 
