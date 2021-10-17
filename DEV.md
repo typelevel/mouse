@@ -9,6 +9,12 @@ short or generic names if possible.
 
 * Mention in the example section and in the release notes in README.md
 
+## Conventions
+
+* When an operation is provided in two variants that do the same thing, but differ in whether the arguments are evaluated lazily ("by-name") or eagerly, we have used the suffix `L` (for Lazy) to distinguish the names (see #247)[https://github.com/typelevel/mouse/issues/247] for example).
+
+However, for new operations, simply providing a lazy by-name variant is often the best choice unless there are clear reasons (eg performance impact) for needing an eager variant.
+ 
 ### Release Process
 
 Mouse uses Github Actions, https://github.com/djspiewak/sbt-github-actions and https://github.com/olafurpg/sbt-ci-release for CI releases. Use the Github Create Release feature to tag a release, and it will publish to Sonatype automatically (using @benhutchison credentials).
