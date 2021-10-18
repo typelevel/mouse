@@ -3,7 +3,7 @@ import sbtcrossproject.CrossPlugin.autoImport.crossProject
 
 ThisBuild / githubWorkflowPublishTargetBranches := Seq()
 
-ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.6", "3.0.2")
+ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.6", "3.1.0")
 
 ThisBuild / scalaVersion := "2.13.6"
 
