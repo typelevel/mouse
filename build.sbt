@@ -96,7 +96,7 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform)
     ),
     Test / unmanagedSourceDirectories ++= scalaVersionSpecificJVMFolder(
       "test",
-      (Test / baseDirectory).value.getParentFile() ,
+      (Test / baseDirectory).value.getParentFile(),
       scalaVersion.value
     )
   )
