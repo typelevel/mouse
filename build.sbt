@@ -11,6 +11,18 @@ ThisBuild / crossScalaVersions := Seq(Scala212, Scala213, Scala3)
 
 ThisBuild / scalaVersion := Scala213
 
+def scalaVersionSpecificJVMFolder(srcName: String, srcBaseDir: java.io.File, scalaVersion: String) = {
+  def extraDir(suffix: String) = {
+    List(srcBaseDir / "jvm" / "src" / srcName / s"scala$suffix")
+  }
+
+  CrossVersion.partialVersion(scalaVersion) match {
+    case Some((2, _))     => extraDir("-2.x")
+    case Some((0 | 3, _)) => extraDir("-3.x")
+    case _                => Nil
+  }
+}
+
 def scalaVersionSpecificFolders(srcName: String, srcBaseDir: java.io.File, scalaVersion: String) = {
   def extraDirs(suffix: String) =
     List(CrossType.Pure, CrossType.Full)
@@ -75,6 +87,18 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform)
     },
     Test / publishArtifact := false,
     pomIncludeRepository := { _ => false }
+  )
+  .jvmSettings(
+    Compile / unmanagedSourceDirectories ++= scalaVersionSpecificJVMFolder(
+      "main",
+      (Compile / baseDirectory).value.getParentFile(),
+      scalaVersion.value
+    ),
+    Test / unmanagedSourceDirectories ++= scalaVersionSpecificJVMFolder(
+      "test",
+      (Test / baseDirectory).value.getParentFile() ,
+      scalaVersion.value
+    )
   )
   .jsSettings(
     crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2")),
