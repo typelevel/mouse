@@ -77,4 +77,32 @@ class BooleanSyntaxTest extends MouseSuite {
     assertEquals(true.unlessA("foo".asLeft[Int]), Right(()))
     assertEquals(false.unlessA("foo".asLeft[Int]), Left("foo"))
   }
+
+  test("BooleanSyntax.whenAL") {
+    var lazinessChecker: Int = 0
+
+    assertEquals(true.whenAL("foo".asLeft[Int]), Left("foo"))
+    assertEquals(
+      false.whenAL(Either.left {
+        lazinessChecker = 1
+        "foo"
+      }),
+      Right(())
+    )
+    assertEquals(lazinessChecker, 0)
+  }
+
+  test("BooleanSyntax.unlessAL") {
+    var lazinessChecker: Int = 0
+
+    assertEquals(false.unlessAL("foo".asLeft[Int]), Left("foo"))
+    assertEquals(
+      true.unlessAL(Either.left {
+        lazinessChecker = 1
+        "foo"
+      }),
+      Right(())
+    )
+    assertEquals(lazinessChecker, 0)
+  }
 }

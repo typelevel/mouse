@@ -5,6 +5,7 @@ package object mouse extends MouseFunctions {
   object boolean extends BooleanSyntax
   object double extends DoubleSyntax
   object feither extends FEitherSyntax
+  object fnested extends FNestedSyntax
   object foption extends FOptionSyntax
   object int extends IntSyntax
   object long extends LongSyntax
