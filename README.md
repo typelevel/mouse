@@ -1,12 +1,10 @@
-# Mouse ![Continuous Integration](https://github.com/typelevel/mouse/workflows/Continuous%20Integration/badge.svg) [![Maven Central](https://img.shields.io/maven-central/v/org.typelevel/mouse_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/org.typelevel/mouse_2.12)
+# Mouse ![Continuous Integration](https://github.com/typelevel/mouse/workflows/Continuous%20Integration/badge.svg) [![Maven Central](https://img.shields.io/maven-central/v/org.typelevel/mouse_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/org.typelevel/mouse_2.12) <a href="https://typelevel.org/cats/"><img src="https://typelevel.org/cats/img/cats-badge.svg" height="40px" align="right" alt="Cats friendly" /></a>
 
-Mouse is a small companion to the [Cats](https://github.com/typelevel/cats) functional programming library for Scala. It
-includes convenience extension methods for Scala standard library classes, including some found in
-[scalaz](https://github.com/scalaz/scalaz) that are not in Cats.
+Mouse is a small companion to the [Cats](https://github.com/typelevel/cats) functional programming library and the Scala standard library.
 
 The library arose from this [Cats issue](https://github.com/typelevel/cats/issues/791) and is a [Typelevel member](http://typelevel.org/projects/).
 
-Mouse is published for Scala 2.12, 2.13 and 3.0-RC1. For Scala.jvm:
+Mouse is published for Scala 2.12, 2.13 and 3.0. For Scala.jvm:
 
 `"org.typelevel" %% "mouse" % version`
 
@@ -167,13 +165,12 @@ to follow cats and other modern libs convention of short, convenient package nam
 - Provide enrichments to classes from the Scala standard library that convert to Cats datatypes,
 or otherwise improve the functional programming experience.
 
-- Make it easier to migrate source code between Scalaz and Cats.
-
 ## Contributing
 
 Mouse is maintained by @benhutchison and @danicheg
 
 Issues and pull requests are welcome. Code contributions should be aligned with the above scope to be included, and include unit tests.
+See [contributing guide](./DEV.md) for more details.
 
 This project supports the [Scala code of conduct](https://www.scala-lang.org/conduct/) and aims that its channels
 (mailing list, Gitter, github, etc.) to be welcoming environments for everyone.
