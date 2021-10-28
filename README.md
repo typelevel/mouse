@@ -22,6 +22,8 @@ Mouse includes enrichments for:
 - [F\[A\] for any F, A](./shared/src/main/scala/mouse/anyf.scala)
 - [F\[Either\[A, B\]\]](./shared/src/main/scala/mouse/feither.scala)
 - [F\[Option\[A\]\]](./shared/src/main/scala/mouse/foption.scala)
+- [F\[G\[A\]\]](./shared/src/main/scala/mouse/fnested.scala)
+- [F\[G\[H\[A\]\]\]](./shared/src/main/scala/mouse/fnested.scala)
 - [Int](./shared/src/main/scala/mouse/int.scala)
 - [Long](./shared/src/main/scala/mouse/long.scala)
 - [Map](./shared/src/main/scala/mouse/map.scala)
