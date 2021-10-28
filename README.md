@@ -28,7 +28,7 @@ Mouse includes enrichments for:
 - [Option](./shared/src/main/scala/mouse/option.scala)
 - [String](./shared/src/main/scala/mouse/string.scala)
 - [Try](./shared/src/main/scala/mouse/try.scala)
-- [Tuple](./shared/src/main/scala/mouse/tuple.scala)
+- [Tuple](./shared/src/main/scala-2.x/src/main/scala/mouse/tuple.scala)
 
 #### Example:
 
