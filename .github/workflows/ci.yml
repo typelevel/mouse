@@ -53,8 +53,18 @@ jobs:
       - name: Check that workflows are up to date
         run: sbt ++${{ matrix.scala }} githubWorkflowCheck
 
-      - name: Build project
-        run: sbt ++${{ matrix.scala }} test
+      - name: Check formatting
+        run: sbt ++${{ matrix.scala }} scalafmtCheckAll scalafmtSbtCheck
+
+      - name: Compile
+        run: sbt ++${{ matrix.scala }} Test/compile
+
+      - name: Run tests on JVM
+        run: sbt ++${{ matrix.scala }} crossJVM/test
+
+      - name: Run tests on JS
+        if: matrix.scala != '3.0.2'
+        run: sbt ++${{ matrix.scala }} crossJS/test
 
       - name: Compress target directories
         run: tar cf targets.tar target js/target jvm/target project/target

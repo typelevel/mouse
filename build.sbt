@@ -3,25 +3,67 @@ import sbtcrossproject.CrossPlugin.autoImport.crossProject
 
 ThisBuild / githubWorkflowPublishTargetBranches := Seq()
 
-ThisBuild / crossScalaVersions := Seq("2.12.15", "2.13.6", "3.0.2")
+val Scala212 = "2.12.15"
+val Scala213 = "2.13.6"
+val Scala3 = "3.0.2"
 
-ThisBuild / scalaVersion := "2.13.6"
+ThisBuild / crossScalaVersions := Seq(Scala212, Scala213, Scala3)
+
+ThisBuild / scalaVersion := Scala213
+
+def scalaVersionSpecificJVMFolder(srcName: String, srcBaseDir: java.io.File, scalaVersion: String) = {
+  def extraDir(suffix: String) = {
+    List(srcBaseDir / "jvm" / "src" / srcName / s"scala$suffix")
+  }
+
+  CrossVersion.partialVersion(scalaVersion) match {
+    case Some((2, _))     => extraDir("-2.x")
+    case Some((0 | 3, _)) => extraDir("-3.x")
+    case _                => Nil
+  }
+}
+
+def scalaVersionSpecificFolders(srcName: String, srcBaseDir: java.io.File, scalaVersion: String) = {
+  def extraDirs(suffix: String) =
+    List(CrossType.Pure, CrossType.Full)
+      .flatMap(_.sharedSrcDir(srcBaseDir, srcName).toList.map(f => file(f.getPath + suffix)))
+
+  CrossVersion.partialVersion(scalaVersion) match {
+    case Some((2, _))     => extraDirs("-2.x")
+    case Some((0 | 3, _)) => extraDirs("-3.x")
+    case _                => Nil
+  }
+}
+
+// general settings
+lazy val commonSettings = Seq(
+  name := "mouse",
+  organization := "org.typelevel",
+  sonatypeProfileName := "org.typelevel",
+  Compile / unmanagedSourceDirectories ++= scalaVersionSpecificFolders(
+    "main",
+    baseDirectory.value,
+    scalaVersion.value
+  ),
+  Test / unmanagedSourceDirectories ++= scalaVersionSpecificFolders(
+    "test",
+    baseDirectory.value,
+    scalaVersion.value
+  )
+)
 
 lazy val root = project
   .in(file("."))
   .aggregate(js, jvm)
   .settings(
-    name := "mouse",
-    publish / skip := true,
-    sonatypeProfileName := "org.typelevel"
+    commonSettings,
+    publish / skip := true
   )
 
 lazy val cross = crossProject(JSPlatform, JVMPlatform)
   .in(file("."))
   .settings(
-    name := "mouse",
-    organization := "org.typelevel",
-    sonatypeProfileName := "org.typelevel",
+    commonSettings,
     libraryDependencies ++= Seq(
       "org.typelevel" %%% "cats-core" % "2.6.1",
       "org.scalameta" %%% "munit" % "0.7.29" % Test,
@@ -45,6 +87,18 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform)
     },
     Test / publishArtifact := false,
     pomIncludeRepository := { _ => false }
+  )
+  .jvmSettings(
+    Compile / unmanagedSourceDirectories ++= scalaVersionSpecificJVMFolder(
+      "main",
+      (Compile / baseDirectory).value.getParentFile(),
+      scalaVersion.value
+    ),
+    Test / unmanagedSourceDirectories ++= scalaVersionSpecificJVMFolder(
+      "test",
+      (Test / baseDirectory).value.getParentFile(),
+      scalaVersion.value
+    )
   )
   .jsSettings(
     crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2")),
@@ -71,6 +125,19 @@ ThisBuild / githubWorkflowPublish := Seq(
       "SONATYPE_USERNAME" -> "${{ secrets.SONATYPE_USERNAME }}"
     )
   )
+)
+
+val NotScala3Cond = s"matrix.scala != '$Scala3'"
+
+ThisBuild / githubWorkflowBuild := Seq(
+  WorkflowStep
+    .Sbt(
+      List("scalafmtCheckAll", "scalafmtSbtCheck"),
+      name = Some("Check formatting")
+    ),
+  WorkflowStep.Sbt(List("Test/compile"), name = Some("Compile")),
+  WorkflowStep.Sbt(List("crossJVM/test"), name = Some("Run tests on JVM")),
+  WorkflowStep.Sbt(List("crossJS/test"), name = Some("Run tests on JS"), cond = Some(NotScala3Cond))
 )
 
 lazy val jvm = cross.jvm

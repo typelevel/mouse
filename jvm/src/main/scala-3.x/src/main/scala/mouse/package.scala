@@ -1,5 +1,5 @@
 package object mouse extends MouseFunctions {
-  object all extends AllSharedSyntax with AllJsSyntax
+  object all extends AllSharedSyntax with AllJvmSyntax
   object any extends AnySyntax
   object anyf extends AnyFSyntax
   object boolean extends BooleanSyntax
@@ -11,7 +11,6 @@ package object mouse extends MouseFunctions {
   object long extends LongSyntax
   object map extends MapSyntax
   object option extends OptionSyntax
-  object string extends StringSyntax
+  object string extends StringSyntax with StringJvmSyntax
   object `try` extends TrySyntax
-  object tuple extends TupleSyntax
 }

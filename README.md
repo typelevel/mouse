@@ -17,17 +17,18 @@ For scala.js 1.x:
 Mouse includes enrichments for:
 
 - [Any](./shared/src/main/scala/mouse/any.scala)
-- [F\[A\] for any F, A](./shared/src/main/scala/mouse/anyf.scala)
 - [Boolean](./shared/src/main/scala/mouse/boolean.scala)
+- [Double](./shared/src/main/scala/mouse/double.scala)
+- [F\[A\] for any F, A](./shared/src/main/scala/mouse/anyf.scala)
+- [F\[Either\[A, B\]\]](./shared/src/main/scala/mouse/feither.scala)
+- [F\[Option\[A\]\]](./shared/src/main/scala/mouse/foption.scala)
+- [Int](./shared/src/main/scala/mouse/int.scala)
+- [Long](./shared/src/main/scala/mouse/long.scala)
+- [Map](./shared/src/main/scala/mouse/map.scala)
 - [Option](./shared/src/main/scala/mouse/option.scala)
 - [String](./shared/src/main/scala/mouse/string.scala)
 - [Try](./shared/src/main/scala/mouse/try.scala)
-- [Int](./shared/src/main/scala/mouse/int.scala)
-- [Long](./shared/src/main/scala/mouse/long.scala)
-- [Double](./shared/src/main/scala/mouse/double.scala)
-- [Map](./shared/src/main/scala/mouse/map.scala)
-- [F\[Option\[A\]\]](./shared/src/main/scala/mouse/foption.scala)
-- [F\[Either\[A, B\]\]](./shared/src/main/scala/mouse/feither.scala)
+- [Tuple](./shared/src/main/scala/mouse/tuple.scala)
 
 #### Example:
 
@@ -107,6 +108,12 @@ listOption: List[Option[Int]] = List(Some(2), Some(4))
 
 scala> val listOptionList = List(Option(List(1)), Option(List(2))).mapNested3(_ * 2)
 listOptionList: List[Option[List[Int]]] = List(Some(List(2)), Some(List(4)))
+
+scala> val tupleHead = (1, 2, 4, 8).head
+tupleHead: Int = 1
+
+scala> val tupleLast = (1, 2, 4, 8).last
+tupleHead: Int = 8
 ```
 
 #### Release Notes
