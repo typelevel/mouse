@@ -55,12 +55,28 @@ class TupleSyntaxTest extends MouseSuite {
     assertEquals((a1, a2).last, a2)
   }
 
+  test("Tuple2Syntax.prepend") {
+    assertEquals(a3 *: (a1, a2), (a3, a1, a2))
+  }
+
+  test("Tuple2Syntax.append") {
+    assertEquals((a1, a2) :* a3, (a1, a2, a3))
+  }
+
   test("Tuple3Syntax.init") {
     assertEquals((a1, a2, a3).init, (a1, a2))
   }
 
   test("Tuple3Syntax.head") {
     assertEquals((a1, a2, a3).head, a1)
+  }
+
+  test("Tuple3Syntax.prepend") {
+    assertEquals(a4 *: (a1, a2, a3), (a4, a1, a2, a3))
+  }
+
+  test("Tuple3Syntax.append") {
+    assertEquals((a1, a2, a3) :* a4, (a1, a2, a3, a4))
   }
 
   test("Tuple3Syntax.last") {
@@ -87,6 +103,14 @@ class TupleSyntaxTest extends MouseSuite {
     assertEquals((a1, a2, a3, a4).tail, (a2, a3, a4))
   }
 
+  test("Tuple4Syntax.prepend") {
+    assertEquals(a5 *: (a1, a2, a3, a4), (a5, a1, a2, a3, a4))
+  }
+
+  test("Tuple4Syntax.append") {
+    assertEquals((a1, a2, a3, a4) :* a5, (a1, a2, a3, a4, a5))
+  }
+
   test("Tuple5Syntax.init") {
     assertEquals((a1, a2, a3, a4, a5).init, (a1, a2, a3, a4))
   }
@@ -101,6 +125,14 @@ class TupleSyntaxTest extends MouseSuite {
 
   test("Tuple5Syntax.tail") {
     assertEquals((a1, a2, a3, a4, a5).tail, (a2, a3, a4, a5))
+  }
+
+  test("Tuple5Syntax.append") {
+    assertEquals((a1, a2, a3, a4, a5) :* a6, (a1, a2, a3, a4, a5, a6))
+  }
+
+  test("Tuple5Syntax.prepend") {
+    assertEquals(a6 *: (a1, a2, a3, a4, a5), (a6, a1, a2, a3, a4, a5))
   }
 
   test("Tuple6Syntax.init") {
@@ -119,6 +151,14 @@ class TupleSyntaxTest extends MouseSuite {
     assertEquals((a1, a2, a3, a4, a5, a6).tail, (a2, a3, a4, a5, a6))
   }
 
+  test("Tuple6Syntax.append") {
+    assertEquals((a1, a2, a3, a4, a5, a6) :* a7, (a1, a2, a3, a4, a5, a6, a7))
+  }
+
+  test("Tuple6Syntax.prepend") {
+    assertEquals(a7 *: (a1, a2, a3, a4, a5, a6), (a7, a1, a2, a3, a4, a5, a6))
+  }
+
   test("Tuple7Syntax.init") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7).init, (a1, a2, a3, a4, a5, a6))
   }
@@ -133,6 +173,14 @@ class TupleSyntaxTest extends MouseSuite {
 
   test("Tuple7Syntax.tail") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7).tail, (a2, a3, a4, a5, a6, a7))
+  }
+
+  test("Tuple7Syntax.append") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7) :* a8, (a1, a2, a3, a4, a5, a6, a7, a8))
+  }
+
+  test("Tuple7Syntax.prepend") {
+    assertEquals(a8 *: (a1, a2, a3, a4, a5, a6, a7), (a8, a1, a2, a3, a4, a5, a6, a7))
   }
 
   test("Tuple8Syntax.init") {
@@ -151,6 +199,14 @@ class TupleSyntaxTest extends MouseSuite {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8).tail, (a2, a3, a4, a5, a6, a7, a8))
   }
 
+  test("Tuple8Syntax.append") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8) :* a9, (a1, a2, a3, a4, a5, a6, a7, a8, a9))
+  }
+
+  test("Tuple8Syntax.prepend") {
+    assertEquals(a9 *: (a1, a2, a3, a4, a5, a6, a7, a8), (a9, a1, a2, a3, a4, a5, a6, a7, a8))
+  }
+
   test("Tuple9Syntax.init") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9).init, (a1, a2, a3, a4, a5, a6, a7, a8))
   }
@@ -165,6 +221,14 @@ class TupleSyntaxTest extends MouseSuite {
 
   test("Tuple9Syntax.tail") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9).tail, (a2, a3, a4, a5, a6, a7, a8, a9))
+  }
+
+  test("Tuple9Syntax.append") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9) :* a10, (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10))
+  }
+
+  test("Tuple9Syntax.prepend") {
+    assertEquals(a10 *: (a1, a2, a3, a4, a5, a6, a7, a8, a9), (a10, a1, a2, a3, a4, a5, a6, a7, a8, a9))
   }
 
   test("Tuple10Syntax.init") {
@@ -183,6 +247,14 @@ class TupleSyntaxTest extends MouseSuite {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10).tail, (a2, a3, a4, a5, a6, a7, a8, a9, a10))
   }
 
+  test("Tuple10Syntax.append") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10) :* a11, (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11))
+  }
+
+  test("Tuple10Syntax.prepend") {
+    assertEquals(a11 *: (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10), (a11, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10))
+  }
+
   test("Tuple11Syntax.init") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11).init, (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10))
   }
@@ -197,6 +269,18 @@ class TupleSyntaxTest extends MouseSuite {
 
   test("Tuple11Syntax.tail") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11).tail, (a2, a3, a4, a5, a6, a7, a8, a9, a10, a11))
+  }
+
+  test("Tuple11Syntax.append") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11) :* a12,
+                 (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12)
+    )
+  }
+
+  test("Tuple11Syntax.prepend") {
+    assertEquals(a12 *: (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11),
+                 (a12, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11)
+    )
   }
 
   test("Tuple12Syntax.init") {
@@ -216,6 +300,18 @@ class TupleSyntaxTest extends MouseSuite {
   test("Tuple12Syntax.tail") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12).tail,
                  (a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12)
+    )
+  }
+
+  test("Tuple12Syntax.append") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12) :* a13,
+                 (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13)
+    )
+  }
+
+  test("Tuple12Syntax.prepend") {
+    assertEquals(a13 *: (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12),
+                 (a13, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12)
     )
   }
 
@@ -239,6 +335,18 @@ class TupleSyntaxTest extends MouseSuite {
     )
   }
 
+  test("Tuple13Syntax.append") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13) :* a14,
+                 (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14)
+    )
+  }
+
+  test("Tuple13Syntax.prepend") {
+    assertEquals(a14 *: (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13),
+                 (a14, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13)
+    )
+  }
+
   test("Tuple14Syntax.init") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14).init,
                  (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13)
@@ -256,6 +364,18 @@ class TupleSyntaxTest extends MouseSuite {
   test("Tuple14Syntax.tail") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14).tail,
                  (a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14)
+    )
+  }
+
+  test("Tuple14Syntax.append") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14) :* a15,
+                 (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15)
+    )
+  }
+
+  test("Tuple14Syntax.prepend") {
+    assertEquals(a15 *: (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14),
+                 (a15, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14)
     )
   }
 
@@ -279,6 +399,18 @@ class TupleSyntaxTest extends MouseSuite {
     )
   }
 
+  test("Tuple15Syntax.append") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15) :* a16,
+                 (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16)
+    )
+  }
+
+  test("Tuple15Syntax.prepend") {
+    assertEquals(a16 *: (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15),
+                 (a16, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15)
+    )
+  }
+
   test("Tuple16Syntax.init") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16).init,
                  (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15)
@@ -296,6 +428,18 @@ class TupleSyntaxTest extends MouseSuite {
   test("Tuple16Syntax.tail") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16).tail,
                  (a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16)
+    )
+  }
+
+  test("Tuple16Syntax.append") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16) :* a17,
+                 (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17)
+    )
+  }
+
+  test("Tuple16Syntax.prepend") {
+    assertEquals(a17 *: (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16),
+                 (a17, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16)
     )
   }
 
@@ -319,6 +463,18 @@ class TupleSyntaxTest extends MouseSuite {
     )
   }
 
+  test("Tuple17Syntax.append") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17) :* a18,
+                 (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18)
+    )
+  }
+
+  test("Tuple17Syntax.prepend") {
+    assertEquals(a18 *: (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17),
+                 (a18, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17)
+    )
+  }
+
   test("Tuple18Syntax.init") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18).init,
                  (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17)
@@ -336,6 +492,18 @@ class TupleSyntaxTest extends MouseSuite {
   test("Tuple18Syntax.tail") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18).tail,
                  (a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18)
+    )
+  }
+
+  test("Tuple18Syntax.append") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18) :* a19,
+                 (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19)
+    )
+  }
+
+  test("Tuple18Syntax.prepend") {
+    assertEquals(a19 *: (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18),
+                 (a19, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18)
     )
   }
 
@@ -359,6 +527,18 @@ class TupleSyntaxTest extends MouseSuite {
     )
   }
 
+  test("Tuple19Syntax.append") {
+    assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19) :* a20,
+                 (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20)
+    )
+  }
+
+  test("Tuple19Syntax.prepend") {
+    assertEquals(a20 *: (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19),
+                 (a20, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19)
+    )
+  }
+
   test("Tuple20Syntax.init") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20).init,
                  (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19)
@@ -376,6 +556,20 @@ class TupleSyntaxTest extends MouseSuite {
   test("Tuple20Syntax.tail") {
     assertEquals((a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20).tail,
                  (a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20)
+    )
+  }
+
+  test("Tuple20Syntax.append") {
+    assertEquals(
+      (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20) :* a21,
+      (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21)
+    )
+  }
+
+  test("Tuple20Syntax.prepend") {
+    assertEquals(
+      a21 *: (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20),
+      (a21, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20)
     )
   }
 
@@ -403,6 +597,20 @@ class TupleSyntaxTest extends MouseSuite {
     assertEquals(
       (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21).tail,
       (a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21)
+    )
+  }
+
+  test("Tuple21Syntax.append") {
+    assertEquals(
+      (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21) :* a22,
+      (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22)
+    )
+  }
+
+  test("Tuple21Syntax.prepend") {
+    assertEquals(
+      a22 *: (a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21),
+      (a22, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21)
     )
   }
 
