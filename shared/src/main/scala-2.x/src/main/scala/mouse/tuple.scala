@@ -87,115 +87,298 @@ trait TupleSyntax {
 }
 
 final class Tuple2SyntaxOps[A1, A2](private val t: (A1, A2)) extends AnyVal {
+
+  /**
+   * Return a copy of `this` tuple with an element prepended.
+   *
+   * @example
+   *   {{{0 *: (1, 2) // the result is (0, 1, 2)}}}
+   */
   def *:[A0](elem: A0): (A0, A1, A2) = (elem, t._1, t._2)
+
+  /**
+   * Return a copy of `this` tuple with an element appended.
+   *
+   * @example
+   *   {{{(1, 2) :* 3 // the result is (1, 2, 3)}}}
+   */
   def :*[A3](elem: A3): (A1, A2, A3) = (t._1, t._2, elem)
+
   @inline def head: A1 = t._1
+
   @inline def last: A2 = t._2
 }
 
 final class Tuple3SyntaxOps[A1, A2, A3](private val t: (A1, A2, A3)) extends AnyVal {
+
+  /**
+   * Return a copy of `this` tuple with an element prepended.
+   *
+   * @example
+   *   {{{0 *: (1, 2, 3) // the result is (0, 1, 2, 3)}}}
+   */
   def *:[A0](elem: A0): (A0, A1, A2, A3) = (elem, t._1, t._2, t._3)
+
+  /**
+   * Return a copy of `this` tuple with an element appended.
+   *
+   * @example
+   *   {{{(1, 2, 3) :* 4 // the result is (1, 2, 3, 4)}}}
+   */
   def :*[A4](elem: A4): (A1, A2, A3, A4) = (t._1, t._2, t._3, elem)
+
   @inline def head: A1 = t._1
+
   def init: (A1, A2) = (t._1, t._2)
+
   @inline def last: A3 = t._3
+
   def tail: (A2, A3) = (t._2, t._3)
 }
 
 final class Tuple4SyntaxOps[A1, A2, A3, A4](private val t: (A1, A2, A3, A4)) extends AnyVal {
+
+  /**
+   * Return a copy of `this` tuple with an element prepended.
+   *
+   * @example
+   *   {{{0 *: (1, 2, 3, 4) // the result is (0, 1, 2, 3, 4)}}}
+   */
   def *:[A0](elem: A0): (A0, A1, A2, A3, A4) = (elem, t._1, t._2, t._3, t._4)
+
+  /**
+   * Return a copy of `this` tuple with an element appended.
+   *
+   * @example
+   *   {{{(1, 2, 3, 4) :* 5 // the result is (1, 2, 3, 4, 5)}}}
+   */
   def :*[A5](elem: A5): (A1, A2, A3, A4, A5) = (t._1, t._2, t._3, t._4, elem)
+
   @inline def head: A1 = t._1
+
   def init: (A1, A2, A3) = (t._1, t._2, t._3)
+
   @inline def last: A4 = t._4
+
   def tail: (A2, A3, A4) = (t._2, t._3, t._4)
 }
 
 final class Tuple5SyntaxOps[A1, A2, A3, A4, A5](private val t: (A1, A2, A3, A4, A5)) extends AnyVal {
+
+  /**
+   * Return a copy of `this` tuple with an element prepended.
+   *
+   * @example
+   *   {{{0 *: (1, 2, 3, 4, 5) // the result is (0, 1, 2, 3, 4, 5)}}}
+   */
   def *:[A0](elem: A0): (A0, A1, A2, A3, A4, A5) = (elem, t._1, t._2, t._3, t._4, t._5)
+
+  /**
+   * Return a copy of `this` tuple with an element appended.
+   *
+   * @example
+   *   {{{(1, 2, 3, 4, 5) :* 6 // the result is (1, 2, 3, 4, 5, 6)}}}
+   */
   def :*[A6](elem: A6): (A1, A2, A3, A4, A5, A6) = (t._1, t._2, t._3, t._4, t._5, elem)
+
   @inline def head: A1 = t._1
+
   def init: (A1, A2, A3, A4) = (t._1, t._2, t._3, t._4)
+
   @inline def last: A5 = t._5
+
   def tail: (A2, A3, A4, A5) = (t._2, t._3, t._4, t._5)
 }
 
 final class Tuple6SyntaxOps[A1, A2, A3, A4, A5, A6](private val t: (A1, A2, A3, A4, A5, A6)) extends AnyVal {
+
+  /**
+   * Return a copy of `this` tuple with an element prepended.
+   *
+   * @example
+   *   {{{0 *: (1, 2, 3, 4, 5, 6) // the result is (0, 1, 2, 3, 4, 5, 6)}}}
+   */
   def *:[A0](elem: A0): (A0, A1, A2, A3, A4, A5, A6) = (elem, t._1, t._2, t._3, t._4, t._5, t._6)
+
+  /**
+   * Return a copy of `this` tuple with an element appended.
+   *
+   * @example
+   *   {{{(1, 2, 3, 4, 5, 6) :* 7 // the result is (1, 2, 3, 4, 5, 6, 7)}}}
+   */
   def :*[A7](elem: A7): (A1, A2, A3, A4, A5, A6, A7) = (t._1, t._2, t._3, t._4, t._5, t._6, elem)
+
   @inline def head: A1 = t._1
+
   def init: (A1, A2, A3, A4, A5) = (t._1, t._2, t._3, t._4, t._5)
+
   @inline def last: A6 = t._6
+
   def tail: (A2, A3, A4, A5, A6) = (t._2, t._3, t._4, t._5, t._6)
 }
 
 final class Tuple7SyntaxOps[A1, A2, A3, A4, A5, A6, A7](private val t: (A1, A2, A3, A4, A5, A6, A7)) extends AnyVal {
+
+  /**
+   * Return a copy of `this` tuple with an element prepended.
+   *
+   * @example
+   *   {{{0 *: (1, 2, 3, 4, 5, 6, 7) // the result is (0, 1, 2, 3, 4, 5, 6, 7)}}}
+   */
   def *:[A0](elem: A0): (A0, A1, A2, A3, A4, A5, A6, A7) = (elem, t._1, t._2, t._3, t._4, t._5, t._6, t._7)
+
+  /**
+   * Return a copy of `this` tuple with an element appended.
+   *
+   * @example
+   *   {{{(1, 2, 3, 4, 5, 6, 7) :* 8 // the result is (1, 2, 3, 4, 5, 6, 7, 8)}}}
+   */
   def :*[A8](elem: A8): (A1, A2, A3, A4, A5, A6, A7, A8) = (t._1, t._2, t._3, t._4, t._5, t._6, t._7, elem)
+
   @inline def head: A1 = t._1
+
   def init: (A1, A2, A3, A4, A5, A6) = (t._1, t._2, t._3, t._4, t._5, t._6)
+
   @inline def last: A7 = t._7
+
   def tail: (A2, A3, A4, A5, A6, A7) = (t._2, t._3, t._4, t._5, t._6, t._7)
 }
 
 final class Tuple8SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8](private val t: (A1, A2, A3, A4, A5, A6, A7, A8))
     extends AnyVal {
+
+  /**
+   * Return a copy of `this` tuple with an element prepended.
+   *
+   * @example
+   *   {{{0 *: (1, 2, 3, 4, 5, 6, 7, 8) // the result is (0, 1, 2, 3, 4, 5, 6, 7, 8)}}}
+   */
   def *:[A0](elem: A0): (A0, A1, A2, A3, A4, A5, A6, A7, A8) = (elem, t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8)
+
+  /**
+   * Return a copy of `this` tuple with an element appended.
+   *
+   * @example
+   *   {{{(1, 2, 3, 4, 5, 6, 7, 8) :* 9 // the result is (1, 2, 3, 4, 5, 6, 7, 8, 9)}}}
+   */
   def :*[A9](elem: A9): (A1, A2, A3, A4, A5, A6, A7, A8, A9) = (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, elem)
+
   @inline def head: A1 = t._1
+
   def init: (A1, A2, A3, A4, A5, A6, A7) = (t._1, t._2, t._3, t._4, t._5, t._6, t._7)
+
   @inline def last: A8 = t._8
+
   def tail: (A2, A3, A4, A5, A6, A7, A8) = (t._2, t._3, t._4, t._5, t._6, t._7, t._8)
 }
 
 final class Tuple9SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9](private val t: (A1, A2, A3, A4, A5, A6, A7, A8, A9))
     extends AnyVal {
+
+  /**
+   * Return a copy of `this` tuple with an element prepended.
+   *
+   * @example
+   *   {{{0 *: (1, 2, 3, 4, 5, 6, 7, 8, 9) // the result is (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)}}}
+   */
   def *:[A0](elem: A0): (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9) =
     (elem, t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9)
+
+  /**
+   * Return a copy of `this` tuple with an element appended.
+   *
+   * @example
+   *   {{{(1, 2, 3, 4, 5, 6, 7, 8, 9) :* 10 // the result is (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)}}}
+   */
   def :*[A10](elem: A10): (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) =
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, elem)
+
   @inline def head: A1 = t._1
+
   def init: (A1, A2, A3, A4, A5, A6, A7, A8) = (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8)
+
   @inline def last: A9 = t._9
+
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9) = (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9)
 }
 
 final class Tuple10SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10](
   private val t: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10)
 ) extends AnyVal {
+
+  /**
+   * Return a copy of `this` tuple with an element prepended.
+   *
+   * @example
+   *   {{{0 *: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10) // the result is (0, 1, 2, 3, 4, 5, 6, 7, 8, 10)}}}
+   */
   def *:[A0](elem: A0): (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) =
     (elem, t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10)
+
+  /**
+   * Return a copy of `this` tuple with an element appended.
+   *
+   * @example
+   *   {{{(1, 2, 3, 4, 5, 6, 7, 8, 9, 10) :* 11 // the result is (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)}}}
+   */
   def :*[A11](elem: A11): (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) =
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, elem)
+
   @inline def head: A1 = t._1
+
   def init: (A1, A2, A3, A4, A5, A6, A7, A8, A9) = (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9)
+
   @inline def last: A10 = t._10
+
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10) = (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10)
 }
 
 final class Tuple11SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11](
   private val t: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11)
 ) extends AnyVal {
+
+  /**
+   * Return a copy of `this` tuple with an element prepended.
+   */
   def *:[A0](elem: A0): (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) =
     (elem, t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11)
+
+  /**
+   * Return a copy of `this` tuple with an element appended.
+   */
   def :*[A12](elem: A12): (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) =
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, elem)
+
   @inline def head: A1 = t._1
+
   def init: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) = (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10)
+
   @inline def last: A11 = t._11
+
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) = (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11)
 }
 
 final class Tuple12SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12](
   private val t: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12)
 ) extends AnyVal {
+
+  /**
+   * Return a copy of `this` tuple with an element prepended.
+   */
   def *:[A0](elem: A0): (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) =
     (elem, t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12)
+
+  /**
+   * Return a copy of `this` tuple with an element appended.
+   */
   def :*[A13](elem: A13): (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) =
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, elem)
+
   @inline def head: A1 = t._1
+
   def init: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) =
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11)
+
   @inline def last: A12 = t._12
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12)
@@ -204,14 +387,26 @@ final class Tuple12SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12](
 final class Tuple13SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13](
   private val t: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13)
 ) extends AnyVal {
+
+  /**
+   * Return a copy of `this` tuple with an element prepended.
+   */
   def *:[A0](elem: A0): (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) =
     (elem, t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13)
+
+  /**
+   * Return a copy of `this` tuple with an element appended.
+   */
   def :*[A14](elem: A14): (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) =
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, elem)
+
   @inline def head: A1 = t._1
+
   def init: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) =
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12)
+
   @inline def last: A13 = t._13
+
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13)
 }
@@ -219,14 +414,26 @@ final class Tuple13SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, 
 final class Tuple14SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14](
   private val t: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14)
 ) extends AnyVal {
+
+  /**
+   * Return a copy of `this` tuple with an element prepended.
+   */
   def *:[A0](elem: A0): (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) =
     (elem, t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14)
+
+  /**
+   * Return a copy of `this` tuple with an element appended.
+   */
   def :*[A15](elem: A15): (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) =
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, elem)
+
   @inline def head: A1 = t._1
+
   def init: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) =
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13)
+
   @inline def last: A14 = t._14
+
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14)
 }
@@ -234,14 +441,26 @@ final class Tuple14SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, 
 final class Tuple15SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15](
   private val t: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15)
 ) extends AnyVal {
+
+  /**
+   * Return a copy of `this` tuple with an element prepended.
+   */
   def *:[A0](elem: A0): (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) =
     (elem, t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15)
+
+  /**
+   * Return a copy of `this` tuple with an element appended.
+   */
   def :*[A16](elem: A16): (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16) =
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, elem)
+
   @inline def head: A1 = t._1
+
   def init: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) =
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14)
+
   @inline def last: A15 = t._15
+
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15)
 }
@@ -249,14 +468,26 @@ final class Tuple15SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, 
 final class Tuple16SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16](
   private val t: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16)
 ) extends AnyVal {
+
+  /**
+   * Return a copy of `this` tuple with an element prepended.
+   */
   def *:[A0](elem: A0): (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16) =
     (elem, t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16)
+
+  /**
+   * Return a copy of `this` tuple with an element appended.
+   */
   def :*[A17](elem: A17): (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17) =
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, elem)
+
   @inline def head: A1 = t._1
+
   def init: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) =
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15)
+
   @inline def last: A16 = t._16
+
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16)
 }
@@ -264,14 +495,26 @@ final class Tuple16SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, 
 final class Tuple17SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17](
   private val t: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17)
 ) extends AnyVal {
+
+  /**
+   * Return a copy of `this` tuple with an element prepended.
+   */
   def *:[A0](elem: A0): (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17) =
     (elem, t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17)
+
+  /**
+   * Return a copy of `this` tuple with an element appended.
+   */
   def :*[A18](elem: A18): (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18) =
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17, elem)
+
   @inline def head: A1 = t._1
+
   def init: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16) =
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16)
+
   @inline def last: A17 = t._17
+
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17)
 }
@@ -280,14 +523,28 @@ final class Tuple17SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, 
 final class Tuple18SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18](
   private val t: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18)
 ) extends AnyVal {
+
+  /**
+   * Return a copy of `this` tuple with an element prepended.
+   */
   def *:[A0](elem: A0): (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18) =
-    (elem, t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18)
+    (elem, t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8,
+      t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18)
+
+  /**
+   * Return a copy of `this` tuple with an element appended.
+   */
   def :*[A19](elem: A19): (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19) =
-    (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, elem)
+    (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9,
+      t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, elem)
+
   @inline def head: A1 = t._1
+
   def init: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17) =
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17)
+
   @inline def last: A18 = t._18
+
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18)
 }
@@ -295,14 +552,28 @@ final class Tuple18SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, 
 final class Tuple19SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19](
   private val t: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19)
 ) extends AnyVal {
+
+  /**
+   * Return a copy of `this` tuple with an element prepended.
+   */
   def *:[A0](elem: A0): (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19) =
-    (elem, t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19)
+    (elem, t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9,
+      t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19)
+
+  /**
+   * Return a copy of `this` tuple with an element appended.
+   */
   def :*[A20](elem: A20): (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20) =
-    (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19, elem)
+    (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10,
+      t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19, elem)
+
   @inline def head: A1 = t._1
+
   def init: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18) =
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18)
+
   @inline def last: A19 = t._19
+
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19)
 }
@@ -310,13 +581,29 @@ final class Tuple19SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, 
 final class Tuple20SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20](
   private val t: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20)
 ) extends AnyVal {
-  def *:[A0](elem: A0): (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20) = (elem, t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19, t._20)
-  def :*[A21](elem: A21): (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21) = (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19, t._20, elem)
+
+  /**
+   * Return a copy of `this` tuple with an element prepended.
+   */
+  def *:[A0](elem: A0): (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20) =
+    (elem, t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10,
+      t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19, t._20)
+
+  /**
+   * Return a copy of `this` tuple with an element appended.
+   */
+  def :*[A21](elem: A21): (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21) =
+    (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10,
+      t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19, t._20, elem)
+
   @inline def head: A1 = t._1
+
   def init: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19) =
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10,
       t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19)
+
   @inline def last: A20 = t._20
+
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10,
       t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19, t._20)
@@ -325,15 +612,29 @@ final class Tuple20SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, 
 final class Tuple21SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21](
   private val t: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21)
 ) extends AnyVal {
+
+  /**
+   * Return a copy of `this` tuple with an element prepended.
+   */
   def *:[A0](elem: A0): (A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21) =
-    (elem, t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19, t._20, t._21)
+    (elem, t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10,
+      t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19, t._20, t._21)
+
+  /**
+   * Return a copy of `this` tuple with an element appended.
+   */
   def :*[A22](elem: A22): (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22) =
-    (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19, t._20, t._21, elem)
+    (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10,
+      t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19, t._20, t._21, elem)
+
   @inline def head: A1 = t._1
+
   def init: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20) =
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10,
       t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19, t._20)
+
   @inline def last: A21 = t._21
+
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10,
       t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19, t._20, t._21)
@@ -343,10 +644,13 @@ final class Tuple22SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, 
   private val t: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22)
 ) extends AnyVal {
   @inline def head: A1 = t._1
+
   def init: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21) =
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10,
       t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19, t._20, t._21)
+
   @inline def last: A22 = t._22
+
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10,
       t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19, t._20, t._21, t._22)
