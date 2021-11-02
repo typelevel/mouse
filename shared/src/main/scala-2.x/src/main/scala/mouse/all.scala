@@ -5,6 +5,7 @@ trait AllSharedSyntax
     with AnyFSyntax
     with OptionSyntax
     with BooleanSyntax
+    with BooleanFSyntax
     with StringSyntax
     with TrySyntax
     with IntSyntax

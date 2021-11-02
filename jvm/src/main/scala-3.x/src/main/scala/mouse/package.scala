@@ -3,6 +3,7 @@ package object mouse extends MouseFunctions {
   object any extends AnySyntax
   object anyf extends AnyFSyntax
   object boolean extends BooleanSyntax
+  object booleanf extends BooleanFSyntax
   object double extends DoubleSyntax
   object feither extends FEitherSyntax
   object fnested extends FNestedSyntax
