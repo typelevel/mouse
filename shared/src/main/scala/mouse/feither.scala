@@ -1,5 +1,6 @@
 package mouse
 
+import cats.data.EitherT
 import cats.{Applicative, FlatMap, Functor, Monad, Traverse}
 import cats.instances.either._
 
@@ -86,4 +87,8 @@ final class FEitherOps[F[_], L, R](private val felr: F[Either[L, R]]) extends An
 
   def traverseF[G[_]: Applicative, A](f: R => G[A])(implicit F: Traverse[F]): G[F[Either[L, A]]] =
     F.traverse(felr)(elr => catsStdInstancesForEither[L].traverse(elr)(f))
+
+  def liftEitherT: EitherT[F, L, R] =
+    EitherT(felr)
+
 }
