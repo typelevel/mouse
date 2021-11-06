@@ -1,5 +1,6 @@
 package mouse
 
+import cats.data.OptionT
 import cats.{Applicative, FlatMap, Functor, Monad, Traverse}
 
 trait FOptionSyntax {
@@ -83,4 +84,7 @@ final class FOptionOps[F[_], A](private val foa: F[Option[A]]) extends AnyVal {
 
   def traverseF[G[_]: Applicative, B](f: A => G[B])(implicit F: Traverse[F]): G[F[Option[B]]] =
     F.traverse(foa)(a => Traverse[Option].traverse(a)(f))
+
+  def liftOptionT: OptionT[F, A] =
+    OptionT(foa)
 }

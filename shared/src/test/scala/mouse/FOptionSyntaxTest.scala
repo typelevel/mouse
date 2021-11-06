@@ -1,5 +1,7 @@
 package mouse
 
+import cats.data.OptionT
+
 class FOptionSyntaxTest extends MouseSuite {
   test("FOptionSyntax.cata") {
     assertEquals(List(Option(1)).cata(0, _ => 2), List(2))
@@ -102,5 +104,10 @@ class FOptionSyntaxTest extends MouseSuite {
     assertEquals(List(Option(1)).traverseF(a => Option(a * 2)), Option(List(Option(2))))
     assertEquals(List.empty[Option[Int]].traverseF(a => Option(a * 2)), Option(List.empty[Option[Int]]))
     assertEquals(List(Option.empty[Int]).traverseF(a => Option(a * 2)), Option(List(Option.empty[Int])))
+  }
+
+  test("FOptionSyntax.liftOptionT") {
+    assertEquals(List(Option(1)).liftOptionT, OptionT(List(Option(1))))
+    assertEquals(List(Option.empty[Int]).liftOptionT, OptionT(List(Option.empty[Int])))
   }
 }

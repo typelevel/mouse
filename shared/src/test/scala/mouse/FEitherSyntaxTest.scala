@@ -1,5 +1,6 @@
 package mouse
 
+import cats.data.EitherT
 import cats.syntax.either._
 
 class FEitherSyntaxTest extends MouseSuite {
@@ -94,5 +95,10 @@ class FEitherSyntaxTest extends MouseSuite {
   test("FEitherSyntax.traverseF") {
     assertEquals(rightValue.traverseF(_ => Option(1)), Option(List(1.asRight[String])))
     assertEquals(leftValue.traverseF(_ => Option(0)), Option(List("42".asLeft[Int])))
+  }
+
+  test("FEitherSyntax.liftEitherT") {
+    assertEquals(rightValue.liftEitherT, EitherT(rightValue))
+    assertEquals(leftValue.liftEitherT, EitherT(leftValue))
   }
 }
