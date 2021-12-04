@@ -107,6 +107,8 @@ final class Tuple2SyntaxOps[A1, A2](private val t: (A1, A2)) extends AnyVal {
   @inline def head: A1 = t._1
 
   @inline def last: A2 = t._2
+
+  def reverse: (A2, A1) = (t._2, t._1)
 }
 
 final class Tuple3SyntaxOps[A1, A2, A3](private val t: (A1, A2, A3)) extends AnyVal {
@@ -132,6 +134,8 @@ final class Tuple3SyntaxOps[A1, A2, A3](private val t: (A1, A2, A3)) extends Any
   def init: (A1, A2) = (t._1, t._2)
 
   @inline def last: A3 = t._3
+
+  def reverse: (A3, A2, A1) = (t._3, t._2, t._1)
 
   def tail: (A2, A3) = (t._2, t._3)
 }
@@ -160,6 +164,8 @@ final class Tuple4SyntaxOps[A1, A2, A3, A4](private val t: (A1, A2, A3, A4)) ext
 
   @inline def last: A4 = t._4
 
+  def reverse: (A4, A3, A2, A1) = (t._4, t._3, t._2, t._1)
+
   def tail: (A2, A3, A4) = (t._2, t._3, t._4)
 }
 
@@ -186,6 +192,8 @@ final class Tuple5SyntaxOps[A1, A2, A3, A4, A5](private val t: (A1, A2, A3, A4, 
   def init: (A1, A2, A3, A4) = (t._1, t._2, t._3, t._4)
 
   @inline def last: A5 = t._5
+
+  def reverse: (A5, A4, A3, A2, A1) = (t._5, t._4, t._3, t._2, t._1)
 
   def tail: (A2, A3, A4, A5) = (t._2, t._3, t._4, t._5)
 }
@@ -214,6 +222,8 @@ final class Tuple6SyntaxOps[A1, A2, A3, A4, A5, A6](private val t: (A1, A2, A3, 
 
   @inline def last: A6 = t._6
 
+  def reverse: (A6, A5, A4, A3, A2, A1) = (t._6, t._5, t._4, t._3, t._2, t._1)
+
   def tail: (A2, A3, A4, A5, A6) = (t._2, t._3, t._4, t._5, t._6)
 }
 
@@ -240,6 +250,8 @@ final class Tuple7SyntaxOps[A1, A2, A3, A4, A5, A6, A7](private val t: (A1, A2, 
   def init: (A1, A2, A3, A4, A5, A6) = (t._1, t._2, t._3, t._4, t._5, t._6)
 
   @inline def last: A7 = t._7
+
+  def reverse: (A7, A6, A5, A4, A3, A2, A1) = (t._7, t._6, t._5, t._4, t._3, t._2, t._1)
 
   def tail: (A2, A3, A4, A5, A6, A7) = (t._2, t._3, t._4, t._5, t._6, t._7)
 }
@@ -268,6 +280,8 @@ final class Tuple8SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8](private val t: (A1, 
   def init: (A1, A2, A3, A4, A5, A6, A7) = (t._1, t._2, t._3, t._4, t._5, t._6, t._7)
 
   @inline def last: A8 = t._8
+
+  def reverse: (A8, A7, A6, A5, A4, A3, A2, A1) = (t._8, t._7, t._6, t._5, t._4, t._3, t._2, t._1)
 
   def tail: (A2, A3, A4, A5, A6, A7, A8) = (t._2, t._3, t._4, t._5, t._6, t._7, t._8)
 }
@@ -298,6 +312,8 @@ final class Tuple9SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9](private val t: (
   def init: (A1, A2, A3, A4, A5, A6, A7, A8) = (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8)
 
   @inline def last: A9 = t._9
+
+  def reverse: (A9, A8, A7, A6, A5, A4, A3, A2, A1) = (t._9, t._8, t._7, t._6, t._5, t._4, t._3, t._2, t._1)
 
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9) = (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9)
 }
@@ -330,6 +346,9 @@ final class Tuple10SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10](
 
   @inline def last: A10 = t._10
 
+  def reverse: (A10, A9, A8, A7, A6, A5, A4, A3, A2, A1) =
+    (t._10, t._9, t._8, t._7, t._6, t._5, t._4, t._3, t._2, t._1)
+
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10) = (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10)
 }
 
@@ -354,6 +373,9 @@ final class Tuple11SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11](
   def init: (A1, A2, A3, A4, A5, A6, A7, A8, A9, A10) = (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10)
 
   @inline def last: A11 = t._11
+
+  def reverse: (A11, A10, A9, A8, A7, A6, A5, A4, A3, A2, A1) =
+    (t._11, t._10, t._9, t._8, t._7, t._6, t._5, t._4, t._3, t._2, t._1)
 
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11) = (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11)
 }
@@ -380,6 +402,10 @@ final class Tuple12SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12](
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11)
 
   @inline def last: A12 = t._12
+
+  def reverse: (A12, A11, A10, A9, A8, A7, A6, A5, A4, A3, A2, A1) =
+    (t._12, t._11, t._10, t._9, t._8, t._7, t._6, t._5, t._4, t._3, t._2, t._1)
+
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12)
 }
@@ -406,6 +432,9 @@ final class Tuple13SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, 
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12)
 
   @inline def last: A13 = t._13
+
+  def reverse: (A13, A12, A11, A10, A9, A8, A7, A6, A5, A4, A3, A2, A1) =
+    (t._13, t._12, t._11, t._10, t._9, t._8, t._7, t._6, t._5, t._4, t._3, t._2, t._1)
 
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13)
@@ -434,6 +463,9 @@ final class Tuple14SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, 
 
   @inline def last: A14 = t._14
 
+  def reverse: (A14, A13, A12, A11, A10, A9, A8, A7, A6, A5, A4, A3, A2, A1) =
+    (t._14, t._13, t._12, t._11, t._10, t._9, t._8, t._7, t._6, t._5, t._4, t._3, t._2, t._1)
+
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14)
 }
@@ -460,6 +492,9 @@ final class Tuple15SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, 
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14)
 
   @inline def last: A15 = t._15
+
+  def reverse: (A15, A14, A13, A12, A11, A10, A9, A8, A7, A6, A5, A4, A3, A2, A1) =
+    (t._15, t._14, t._13, t._12, t._11, t._10, t._9, t._8, t._7, t._6, t._5, t._4, t._3, t._2, t._1)
 
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15)
@@ -488,6 +523,9 @@ final class Tuple16SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, 
 
   @inline def last: A16 = t._16
 
+  def reverse: (A16, A15, A14, A13, A12, A11, A10, A9, A8, A7, A6, A5, A4, A3, A2, A1) =
+    (t._16, t._15, t._14, t._13, t._12, t._11, t._10, t._9, t._8, t._7, t._6, t._5, t._4, t._3, t._2, t._1)
+
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16)
 }
@@ -514,6 +552,9 @@ final class Tuple17SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, 
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16)
 
   @inline def last: A17 = t._17
+
+  def reverse: (A17, A16, A15, A14, A13, A12, A11, A10, A9, A8, A7, A6, A5, A4, A3, A2, A1) =
+    (t._17, t._16, t._15, t._14, t._13, t._12, t._11, t._10, t._9, t._8, t._7, t._6, t._5, t._4, t._3, t._2, t._1)
 
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17)
@@ -545,6 +586,10 @@ final class Tuple18SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, 
 
   @inline def last: A18 = t._18
 
+  def reverse: (A18, A17, A16, A15, A14, A13, A12, A11, A10, A9, A8, A7, A6, A5, A4, A3, A2, A1) =
+    (t._18, t._17, t._16, t._15, t._14, t._13, t._12, t._11,
+      t._10, t._9, t._8, t._7, t._6, t._5, t._4, t._3, t._2, t._1)
+
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18)
 }
@@ -573,6 +618,10 @@ final class Tuple19SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, 
     (t._1, t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18)
 
   @inline def last: A19 = t._19
+
+  def reverse: (A19, A18, A17, A16, A15, A14, A13, A12, A11, A10, A9, A8, A7, A6, A5, A4, A3, A2, A1) =
+    (t._19, t._18, t._17, t._16, t._15, t._14, t._13, t._12, t._11,
+      t._10, t._9, t._8, t._7, t._6, t._5, t._4, t._3, t._2, t._1)
 
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10, t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19)
@@ -603,6 +652,10 @@ final class Tuple20SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, 
       t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19)
 
   @inline def last: A20 = t._20
+
+  def reverse: (A20, A19, A18, A17, A16, A15, A14, A13, A12, A11, A10, A9, A8, A7, A6, A5, A4, A3, A2, A1) =
+    (t._20, t._19, t._18, t._17, t._16, t._15, t._14, t._13, t._12,
+      t._11, t._10, t._9, t._8, t._7, t._6, t._5, t._4, t._3, t._2, t._1)
 
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10,
@@ -635,6 +688,10 @@ final class Tuple21SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, 
 
   @inline def last: A21 = t._21
 
+  def reverse: (A21, A20, A19, A18, A17, A16, A15, A14, A13, A12, A11, A10, A9, A8, A7, A6, A5, A4, A3, A2, A1) =
+    (t._21, t._20, t._19, t._18, t._17, t._16, t._15, t._14, t._13, t._12,
+      t._11, t._10, t._9, t._8, t._7, t._6, t._5, t._4, t._3, t._2, t._1)
+
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10,
       t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19, t._20, t._21)
@@ -650,6 +707,10 @@ final class Tuple22SyntaxOps[A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, 
       t._11, t._12, t._13, t._14, t._15, t._16, t._17, t._18, t._19, t._20, t._21)
 
   @inline def last: A22 = t._22
+
+  def reverse: (A22, A21, A20, A19, A18, A17, A16, A15, A14, A13, A12, A11, A10, A9, A8, A7, A6, A5, A4, A3, A2, A1) =
+    (t._22, t._21, t._20, t._19, t._18, t._17, t._16, t._15, t._14, t._13,
+      t._12, t._11, t._10, t._9, t._8, t._7, t._6, t._5, t._4, t._3, t._2, t._1)
 
   def tail: (A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15, A16, A17, A18, A19, A20, A21, A22) =
     (t._2, t._3, t._4, t._5, t._6, t._7, t._8, t._9, t._10,
