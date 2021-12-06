@@ -105,8 +105,10 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform)
     publishConfiguration := publishConfiguration.value.withOverwrite(true)
   )
 
-ThisBuild / githubWorkflowEnv += ("JABBA_INDEX" -> "https://github.com/typelevel/jdk-index/raw/main/index.json")
-ThisBuild / githubWorkflowJavaVersions := Seq("adoptium@8", "adoptium@17")
+val JDK8 = JavaSpec.temurin("8")
+val JDK17 = JavaSpec.temurin("17")
+
+ThisBuild / githubWorkflowJavaVersions := Seq(JDK8, JDK17)
 
 ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
 ThisBuild / githubWorkflowPublishTargetBranches :=
