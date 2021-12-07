@@ -1,5 +1,6 @@
 package mouse
 
+import cats.data.EitherT
 import cats.data.OptionT
 import cats.{Applicative, FlatMap, Functor, Monad, Traverse}
 
@@ -87,4 +88,7 @@ final class FOptionOps[F[_], A](private val foa: F[Option[A]]) extends AnyVal {
 
   def liftOptionT: OptionT[F, A] =
     OptionT(foa)
+
+  def liftEitherT[E](ifNone: => E)(implicit F: Functor[F]): EitherT[F, E, A] =
+    EitherT.fromOptionF(foa, ifNone)
 }
