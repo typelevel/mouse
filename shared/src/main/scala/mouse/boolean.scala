@@ -2,7 +2,7 @@ package mouse
 
 import cats.data.{EitherNel, NonEmptyList, Validated, ValidatedNel}
 import cats.{Alternative, Applicative, ApplicativeError, Monoid}
-import mouse.BooleanSyntax.LiftToPartiallyApplied
+import mouse.BooleanSyntax._
 
 trait BooleanSyntax {
   implicit final def booleanSyntaxMouse(b: Boolean): BooleanOps = new BooleanOps(b)
@@ -10,11 +10,6 @@ trait BooleanSyntax {
 
 class ApplyIfPartiallyApplied[A](b: Boolean, a: A) {
   @inline def apply[B >: A](f: B => B): B = if (b) f(a) else a
-}
-
-class PureOrEmptyPartiallyApplied[F[_]](b: Boolean) {
-  @inline def apply[A](a: => A)(implicit F: Alternative[F]): F[A] =
-    if (b) F.pure(a) else F.empty
 }
 
 final class BooleanOps(private val b: Boolean) extends AnyVal {
@@ -76,4 +71,10 @@ object BooleanSyntax {
     def apply[E](ifFalse: => E)(implicit F: ApplicativeError[F, _ >: E]): F[Unit] =
       if (b) F.unit else F.raiseError(ifFalse)
   }
+
+  final private[mouse] class PureOrEmptyPartiallyApplied[F[_]](private val b: Boolean) extends AnyVal {
+    def apply[A](a: => A)(implicit F: Alternative[F]): F[A] =
+      if (b) F.pure(a) else F.empty
+  }
+
 }
