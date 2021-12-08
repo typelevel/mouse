@@ -10,8 +10,8 @@ class BooleanSyntaxTest extends MouseSuite {
   }
 
   test("BooleanSyntax.pureOrEmpty") {
-    assertEquals(true.pureOrEmpty[Vector](1), Vector(1))
-    assertEquals(false.pureOrEmpty[Vector](1), Vector.empty[Int])
+    assertEquals(true.alternative[Vector](1), Vector(1))
+    assertEquals(false.alternative[Vector](1), Vector.empty[Int])
   }
 
   test("BooleanSyntax.either") {

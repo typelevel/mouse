@@ -14,9 +14,9 @@ class ApplyIfPartiallyApplied[A](b: Boolean, a: A) {
 
 final class BooleanOps(private val b: Boolean) extends AnyVal {
 
-  @inline def option[A](a: => A): Option[A] = pureOrEmpty[Option](a)
+  @inline def option[A](a: => A): Option[A] = alternative[Option](a)
 
-  @inline def pureOrEmpty[F[_]]: PureOrEmptyPartiallyApplied[F] = new PureOrEmptyPartiallyApplied[F](b)
+  @inline def alternative[F[_]]: AlternativePartiallyApplied[F] = new AlternativePartiallyApplied[F](b)
 
   @deprecated("Use `either` instead", "0.6")
   @inline def xor[L, R](l: => L, r: => R): Either[L, R] = either(l, r)
@@ -72,7 +72,7 @@ object BooleanSyntax {
       if (b) F.unit else F.raiseError(ifFalse)
   }
 
-  final private[mouse] class PureOrEmptyPartiallyApplied[F[_]](private val b: Boolean) extends AnyVal {
+  final private[mouse] class AlternativePartiallyApplied[F[_]](private val b: Boolean) extends AnyVal {
     def apply[A](a: => A)(implicit F: Alternative[F]): F[A] =
       if (b) F.pure(a) else F.empty
   }
