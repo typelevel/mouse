@@ -1,7 +1,7 @@
 package mouse
 
 import cats.data.{EitherNel, NonEmptyList, Validated, ValidatedNel}
-import cats.{Applicative, ApplicativeError, Monoid}
+import cats.{Alternative, Applicative, ApplicativeError, Monoid}
 import mouse.BooleanSyntax.LiftToPartiallyApplied
 
 trait BooleanSyntax {
@@ -12,9 +12,16 @@ class ApplyIfPartiallyApplied[A](b: Boolean, a: A) {
   @inline def apply[B >: A](f: B => B): B = if (b) f(a) else a
 }
 
+class PureOrEmptyPartiallyApplied[F[_]](b: Boolean) {
+  @inline def apply[A](a: => A)(implicit F: Alternative[F]): F[A] =
+    if (b) F.pure(a) else F.empty
+}
+
 final class BooleanOps(private val b: Boolean) extends AnyVal {
 
-  @inline def option[A](a: => A): Option[A] = fold(Some(a), None)
+  @inline def option[A](a: => A): Option[A] = pureOrEmpty[Option](a)
+
+  @inline def pureOrEmpty[F[_]]: PureOrEmptyPartiallyApplied[F] = new PureOrEmptyPartiallyApplied[F](b)
 
   @deprecated("Use `either` instead", "0.6")
   @inline def xor[L, R](l: => L, r: => R): Either[L, R] = either(l, r)
