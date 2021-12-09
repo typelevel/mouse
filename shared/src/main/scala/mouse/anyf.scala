@@ -13,10 +13,10 @@ final class AnyFOps[F[_], A](private val fa: F[A]) extends AnyVal {
   @inline def ||>[G[_]](f: F ~> G): G[A] = f(fa)
   @inline def thrushK[G[_]](f: F ~> G): G[A] = f(fa)
 
-  def liftEitherT[E](implicit F: Functor[F]): EitherT[F, E, A] =
+  def liftRightT[E](implicit F: Functor[F]): EitherT[F, E, A] =
     EitherT.right[E](fa)
 
-  def liftOptionT(implicit F: Functor[F]): OptionT[F, A] =
+  def liftSomeT(implicit F: Functor[F]): OptionT[F, A] =
     OptionT.liftF(fa)
 
 }

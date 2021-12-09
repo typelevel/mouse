@@ -43,11 +43,11 @@ class AnyFSyntaxTest extends MouseSuite {
     )
   }
 
-  test("AnyFSyntax.liftEitherT") {
-    assertEquals(List(1).liftEitherT[String], EitherT(List(1.asRight[String])))
+  test("AnyFSyntax.liftRightT") {
+    assertEquals(List(1).liftRightT[String], EitherT(List(1.asRight[String])))
   }
 
-  test("AnyFSyntax.liftOptionT") {
-    assertEquals(List(1).liftOptionT, OptionT(List(Option(1))))
+  test("AnyFSyntax.liftSomeT") {
+    assertEquals(List(1).liftSomeT, OptionT(List(Option(1))))
   }
 }
