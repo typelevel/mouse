@@ -158,6 +158,10 @@ ThisBuild / githubWorkflowBuild := Seq(
       name = Some("Check formatting")
     ),
   WorkflowStep.Sbt(List("Test/compile"), name = Some("Compile")),
+  WorkflowStep.Sbt(
+    List("checkBinaryCompatibility"),
+    name = Some("Check binary compatibility")
+  ),
   WorkflowStep.Sbt(List("crossJVM/test"), name = Some("Run tests on JVM")),
   WorkflowStep.Sbt(List("crossJS/test"), name = Some("Run tests on JS"), cond = Some(NotScala3Cond))
 )
@@ -168,3 +172,5 @@ lazy val js = cross.js
 // Scalafmt
 addCommandAlias("fmt", "; Compile / scalafmt; Test / scalafmt; scalafmtSbt")
 addCommandAlias("fmtCheck", "; Compile / scalafmtCheck; Test / scalafmtCheck; scalafmtSbtCheck")
+
+addCommandAlias("checkBinaryCompatibility", "; crossJVM/mimaReportBinaryIssues; crossJS/mimaReportBinaryIssues")
