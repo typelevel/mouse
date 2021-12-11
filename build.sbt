@@ -11,6 +11,8 @@ ThisBuild / crossScalaVersions := Seq(Scala212, Scala213, Scala3)
 
 ThisBuild / scalaVersion := Scala213
 
+lazy val previousMouseVersion = "1.0.7"
+
 def scalaVersionSpecificJVMFolder(srcName: String, srcBaseDir: java.io.File, scalaVersion: String) = {
   def extraDir(suffix: String) = {
     List(srcBaseDir / "jvm" / "src" / srcName / s"scala$suffix")
@@ -49,7 +51,9 @@ lazy val commonSettings = Seq(
     "test",
     baseDirectory.value,
     scalaVersion.value
-  )
+  ),
+  mimaFailOnNoPrevious := false,
+  mimaPreviousArtifacts := Set(organization.value %% moduleName.value % previousMouseVersion)
 )
 
 lazy val root = project
@@ -102,7 +106,23 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform)
   )
   .jsSettings(
     crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2")),
-    publishConfiguration := publishConfiguration.value.withOverwrite(true)
+    publishConfiguration := publishConfiguration.value.withOverwrite(true),
+    mimaBinaryIssueFilters ++= {
+      import com.typesafe.tools.mima.core.ProblemFilters._
+      import com.typesafe.tools.mima.core._
+
+      Seq(
+        exclude[MissingClassProblem]("mouse.AllJvmSyntax"),
+        exclude[MissingClassProblem]("mouse.JvmStringOps"),
+        exclude[MissingClassProblem]("mouse.JvmStringOps$"),
+        exclude[MissingClassProblem]("mouse.StringJvmSyntax"),
+        exclude[MissingTypesProblem]("mouse.package$all$"),
+        exclude[MissingTypesProblem]("mouse.package$string$"),
+        exclude[DirectMissingMethodProblem]("mouse.package#all.stringJvmSyntaxMouse"),
+        exclude[DirectMissingMethodProblem]("mouse.package#string.stringJvmSyntaxMouse"),
+        exclude[DirectMissingMethodProblem]("mouse.package#string.stringJvmSyntaxMouse")
+      )
+    }
   )
 
 val JDK8 = JavaSpec.temurin("8")
@@ -138,6 +158,10 @@ ThisBuild / githubWorkflowBuild := Seq(
       name = Some("Check formatting")
     ),
   WorkflowStep.Sbt(List("Test/compile"), name = Some("Compile")),
+  WorkflowStep.Sbt(
+    List("checkBinaryCompatibility"),
+    name = Some("Check binary compatibility")
+  ),
   WorkflowStep.Sbt(List("crossJVM/test"), name = Some("Run tests on JVM")),
   WorkflowStep.Sbt(List("crossJS/test"), name = Some("Run tests on JS"), cond = Some(NotScala3Cond))
 )
@@ -148,3 +172,5 @@ lazy val js = cross.js
 // Scalafmt
 addCommandAlias("fmt", "; Compile / scalafmt; Test / scalafmt; scalafmtSbt")
 addCommandAlias("fmtCheck", "; Compile / scalafmtCheck; Test / scalafmtCheck; scalafmtSbtCheck")
+
+addCommandAlias("checkBinaryCompatibility", "; crossJVM/mimaReportBinaryIssues; crossJS/mimaReportBinaryIssues")

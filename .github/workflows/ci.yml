@@ -67,6 +67,9 @@ jobs:
       - name: Compile
         run: sbt ++${{ matrix.scala }} Test/compile
 
+      - name: Check binary compatibility
+        run: sbt ++${{ matrix.scala }} checkBinaryCompatibility
+
       - name: Run tests on JVM
         run: sbt ++${{ matrix.scala }} crossJVM/test
 
