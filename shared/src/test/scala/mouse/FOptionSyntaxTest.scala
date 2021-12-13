@@ -1,6 +1,8 @@
 package mouse
 
 import cats.data.OptionT
+import cats.data.EitherT
+import cats.syntax.either._
 
 class FOptionSyntaxTest extends MouseSuite {
   test("FOptionSyntax.cata") {
@@ -109,5 +111,10 @@ class FOptionSyntaxTest extends MouseSuite {
   test("FOptionSyntax.liftOptionT") {
     assertEquals(List(Option(1)).liftOptionT, OptionT(List(Option(1))))
     assertEquals(List(Option.empty[Int]).liftOptionT, OptionT(List(Option.empty[Int])))
+  }
+
+  test("FOptionSyntax.liftEitherT") {
+    assertEquals(List(Option(1)).liftEitherT("none"), EitherT(List(1.asRight[String])))
+    assertEquals(List(Option.empty[Int]).liftEitherT("none"), EitherT(List("none".asLeft[Int])))
   }
 }

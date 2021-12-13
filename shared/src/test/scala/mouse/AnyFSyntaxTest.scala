@@ -1,7 +1,10 @@
 package mouse
 
+import cats.data.EitherT
+import cats.data.OptionT
 import cats.syntax.option._
 import cats.syntax.functor._
+import cats.syntax.either._
 import cats.{~>, Id}
 
 class AnyFSyntaxTest extends MouseSuite {
@@ -38,5 +41,13 @@ class AnyFSyntaxTest extends MouseSuite {
       List("This") ||> double ||> headOption ||> optionGet,
       "This"
     )
+  }
+
+  test("AnyFSyntax.liftEitherT") {
+    assertEquals(List(1).liftEitherT[String], EitherT(List(1.asRight[String])))
+  }
+
+  test("AnyFSyntax.liftOptionT") {
+    assertEquals(List(1).liftOptionT, OptionT(List(Option(1))))
   }
 }
