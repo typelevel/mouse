@@ -6,7 +6,15 @@ import cats.{Applicative, FlatMap, Functor, Monad, Traverse}
 
 trait FOptionSyntax {
   implicit final def FOptionSyntaxMouse[F[_], A](foa: F[Option[A]]): FOptionOps[F, A] = new FOptionOps(foa)
+
+  def noneF[F[_], A](implicit F: Applicative[F]): F[Option[A]] =
+    F.pure(None)
+
+  def someF[F[_], A](a: => A)(implicit F: Applicative[F]): F[Option[A]] =
+    F.pure(Some(a))
 }
+
+private[mouse] object FOptionSyntax extends FOptionSyntax
 
 final class FOptionOps[F[_], A](private val foa: F[Option[A]]) extends AnyVal {
 
