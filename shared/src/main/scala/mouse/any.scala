@@ -7,9 +7,9 @@ trait AnySyntax {
 }
 
 final class AnyOps[A](private val a: A) extends AnyVal {
-  @inline def |>[B](f: A => B) = f(a)
+  @inline def |>[B](f: A => B): B = f(a)
 
-  @inline def thrush[B](f: A => B) = f(a)
+  @inline def thrush[B](f: A => B): B = f(a)
 
   @inline def <|(f: A => Unit): A = {
     f(a)
