@@ -21,9 +21,6 @@ final class AnyOps[A](private val a: A) extends AnyVal {
     a
   }
 
-  @inline def noneF[F[_]](implicit F: Applicative[F]): F[Option[A]] =
-    FOptionSyntax.noneF[F, A]
-
   @inline def someF[F[_]](implicit F: Applicative[F]): F[Option[A]] =
     FOptionSyntax.someF[F, A](a)
 
