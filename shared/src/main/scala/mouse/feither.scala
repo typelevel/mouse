@@ -7,7 +7,15 @@ import cats.instances.either._
 trait FEitherSyntax {
   implicit final def FEitherSyntaxMouse[F[_], L, R](felr: F[Either[L, R]]): FEitherOps[F, L, R] =
     new FEitherOps(felr)
+
+  def asLeftF[F[_], L, R](left: => L)(implicit F: Applicative[F]): F[Either[L, R]] =
+    F.pure(Left(left))
+
+  def asRightF[F[_], L, R](right: => R)(implicit F: Applicative[F]): F[Either[L, R]] =
+    F.pure(Right(right))
 }
+
+private[mouse] object FEitherSyntax extends FEitherSyntax
 
 final class FEitherOps[F[_], L, R](private val felr: F[Either[L, R]]) extends AnyVal {
   def cata[A](left: L => A, right: R => A)(implicit F: Functor[F]): F[A] =
