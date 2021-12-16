@@ -117,4 +117,12 @@ class FOptionSyntaxTest extends MouseSuite {
     assertEquals(List(Option(1)).liftEitherT("none"), EitherT(List(1.asRight[String])))
     assertEquals(List(Option.empty[Int]).liftEitherT("none"), EitherT(List("none".asLeft[Int])))
   }
+
+  test("FOptionSyntax.noneF") {
+    assertEquals(FOptionSyntax.noneF[List, Int], List(None))
+  }
+
+  test("FOptionSyntax.someF") {
+    assertEquals(FOptionSyntax.someF[List, Int](42), List(Some(42)))
+  }
 }

@@ -101,4 +101,12 @@ class FEitherSyntaxTest extends MouseSuite {
     assertEquals(rightValue.liftEitherT, EitherT(rightValue))
     assertEquals(leftValue.liftEitherT, EitherT(leftValue))
   }
+
+  test("FEitherSyntax.asLeftF") {
+    assertEquals(FEitherSyntax.asLeftF[List, String, Int](""), List(Left("")))
+  }
+
+  test("FEitherSyntax.asRightF") {
+    assertEquals(FEitherSyntax.asRightF[List, String, Int](42), List(Right(42)))
+  }
 }

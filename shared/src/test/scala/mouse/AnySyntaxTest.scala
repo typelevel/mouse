@@ -19,4 +19,16 @@ class AnySyntaxTest extends MouseSuite with MouseFunctions {
 
     assertEquals("anythingAtAll" |> ignore, ())
   }
+
+  test("AnySyntax.someF") {
+    assertEquals(42.someF[List], List(Option(42)))
+  }
+
+  test("AnySyntax.asLeftF") {
+    assertEquals("".asLeftF[List, Int], List(Left("")))
+  }
+
+  test("AnySyntax.asRightF") {
+    assertEquals(42.asRightF[List, String], List(Right(42)))
+  }
 }
