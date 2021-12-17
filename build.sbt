@@ -11,7 +11,7 @@ ThisBuild / crossScalaVersions := Seq(Scala212, Scala213, Scala3)
 
 ThisBuild / scalaVersion := Scala213
 
-lazy val previousMouseVersion = "1.0.7"
+lazy val previousMouseVersion = "1.0.8"
 
 def scalaVersionSpecificJVMFolder(srcName: String, srcBaseDir: java.io.File, scalaVersion: String) = {
   def extraDir(suffix: String) = {
