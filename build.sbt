@@ -50,7 +50,7 @@ ThisBuild / githubWorkflowJavaVersions := Seq(JDK8, JDK17)
 ThisBuild / githubWorkflowBuild ~= { steps =>
   val formatStep = WorkflowStep
     .Sbt(
-      List("scalafmtCheckAll", "scalafmtSbtCheck"),
+      List("scalafmtCheckAll", "project /", "scalafmtSbtCheck"),
       name = Some("Check formatting")
     )
   formatStep +: steps
