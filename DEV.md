@@ -17,6 +17,6 @@ However, for new operations, simply providing a lazy by-name variant is often th
  
 ### Release Process
 
-Mouse uses Github Actions, https://github.com/djspiewak/sbt-github-actions and https://github.com/olafurpg/sbt-ci-release for CI releases. Use the Github Create Release feature to tag a release, and it will publish to Sonatype automatically (using @benhutchison credentials).
+Mouse uses Github Actions, https://github.com/djspiewak/sbt-github-actions and https://github.com/typelevel/sbt-typelevel for CI releases. Use the Github Create Release feature to tag a release, and it will publish to Sonatype automatically (using @benhutchison credentials).
 
-sbt-release is no longer in use.
+sbt-release and sbt-ci-release is no longer in use.
