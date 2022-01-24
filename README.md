@@ -125,7 +125,7 @@ or otherwise improve the functional programming experience.
 
 ## Contributing
 
-Mouse is maintained by @benhutchison and @danicheg
+Mouse is maintained by @benhutchison and @danicheg.
 
 Issues and pull requests are welcome. Code contributions should be aligned with the above scope to be included, and include unit tests.
 See [contributing guide](./DEV.md) for more details.
