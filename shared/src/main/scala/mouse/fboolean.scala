@@ -1,6 +1,6 @@
 package mouse
 
-import cats.{Functor, FlatMap}
+import cats.{FlatMap, Functor}
 
 trait FBooleanSyntax {
   implicit final def FBooleanSyntaxMouse[F[_]](fBoolean: F[Boolean]): FBooleanOps[F] =
