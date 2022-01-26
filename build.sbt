@@ -1,85 +1,32 @@
-import sbt._
-import sbtcrossproject.CrossPlugin.autoImport.crossProject
-
-ThisBuild / githubWorkflowPublishTargetBranches := Seq()
-
 val Scala212 = "2.12.15"
 val Scala213 = "2.13.8"
 val Scala3 = "3.0.2"
 
-ThisBuild / crossScalaVersions := Seq(Scala212, Scala213, Scala3)
-
+ThisBuild / organization := "org.typelevel"
+ThisBuild / organizationName := "Typelevel"
+ThisBuild / tlBaseVersion := "1.0"
 ThisBuild / scalaVersion := Scala213
-
-lazy val previousMouseVersion = "1.0.8"
-
-def scalaVersionSpecificJVMFolder(srcName: String, srcBaseDir: java.io.File, scalaVersion: String) = {
-  def extraDir(suffix: String) = {
-    List(srcBaseDir / "jvm" / "src" / srcName / s"scala$suffix")
-  }
-
-  CrossVersion.partialVersion(scalaVersion) match {
-    case Some((2, _))     => extraDir("-2.x")
-    case Some((0 | 3, _)) => extraDir("-3.x")
-    case _                => Nil
-  }
-}
-
-def scalaVersionSpecificFolders(srcName: String, srcBaseDir: java.io.File, scalaVersion: String) = {
-  def extraDirs(suffix: String) =
-    List(CrossType.Pure, CrossType.Full)
-      .flatMap(_.sharedSrcDir(srcBaseDir, srcName).toList.map(f => file(f.getPath + suffix)))
-
-  CrossVersion.partialVersion(scalaVersion) match {
-    case Some((2, _))     => extraDirs("-2.x")
-    case Some((0 | 3, _)) => extraDirs("-3.x")
-    case _                => Nil
-  }
-}
-
-// general settings
-lazy val commonSettings = Seq(
-  name := "mouse",
-  organization := "org.typelevel",
-  sonatypeProfileName := "org.typelevel",
-  Compile / unmanagedSourceDirectories ++= scalaVersionSpecificFolders(
-    "main",
-    baseDirectory.value,
-    scalaVersion.value
-  ),
-  Test / unmanagedSourceDirectories ++= scalaVersionSpecificFolders(
-    "test",
-    baseDirectory.value,
-    scalaVersion.value
-  ),
-  mimaFailOnNoPrevious := false,
-  mimaPreviousArtifacts := Set(organization.value %% moduleName.value % previousMouseVersion)
-)
+ThisBuild / crossScalaVersions := Seq(Scala212, Scala213, Scala3)
+ThisBuild / tlVersionIntroduced := Map("3" -> "1.0.3")
+ThisBuild / tlCiReleaseBranches := Seq("main")
 
 lazy val root = project
   .in(file("."))
   .aggregate(js, jvm)
-  .settings(
-    commonSettings,
-    publish / skip := true
-  )
+  .enablePlugins(NoPublishPlugin)
 
 lazy val cross = crossProject(JSPlatform, JVMPlatform)
   .in(file("."))
   .settings(
-    commonSettings,
+    name := "mouse",
     libraryDependencies ++= Seq(
       "org.typelevel" %%% "cats-core" % "2.7.0",
       "org.scalameta" %%% "munit" % "0.7.29" % Test,
       "org.scalameta" %%% "munit-scalacheck" % "0.7.29" % Test
     ),
-    licenses += ("MIT license", url("http://opensource.org/licenses/MIT")),
-    homepage := Some(url("https://github.com/typelevel/mouse")),
+    licenses := List("MIT license" -> url("http://opensource.org/licenses/MIT")),
     developers := List(
       Developer("benhutchison", "Ben Hutchison", "brhutchison@gmail.com", url = url("https://github.com/benhutchison"))
-    ),
-    scmInfo := Some(
-      ScmInfo(url("https://github.com/typelevel/mouse"), "scm:git:https://github.com/typelevel/mouse.git")
     ),
     scalacOptions ++= Seq("-feature", "-deprecation", "-language:implicitConversions", "-language:higherKinds"),
     scalacOptions ++= {
@@ -89,40 +36,10 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform)
         case _                         => Nil
       }
     },
-    Test / publishArtifact := false,
-    pomIncludeRepository := { _ => false }
-  )
-  .jvmSettings(
-    Compile / unmanagedSourceDirectories ++= scalaVersionSpecificJVMFolder(
-      "main",
-      (Compile / baseDirectory).value.getParentFile(),
-      scalaVersion.value
-    ),
-    Test / unmanagedSourceDirectories ++= scalaVersionSpecificJVMFolder(
-      "test",
-      (Test / baseDirectory).value.getParentFile(),
-      scalaVersion.value
-    )
+    mimaPreviousArtifacts ~= { _.filterNot(_.revision == "1.0.1") }
   )
   .jsSettings(
-    crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2")),
-    publishConfiguration := publishConfiguration.value.withOverwrite(true),
-    mimaBinaryIssueFilters ++= {
-      import com.typesafe.tools.mima.core.ProblemFilters._
-      import com.typesafe.tools.mima.core._
-
-      Seq(
-        exclude[MissingClassProblem]("mouse.AllJvmSyntax"),
-        exclude[MissingClassProblem]("mouse.JvmStringOps"),
-        exclude[MissingClassProblem]("mouse.JvmStringOps$"),
-        exclude[MissingClassProblem]("mouse.StringJvmSyntax"),
-        exclude[MissingTypesProblem]("mouse.package$all$"),
-        exclude[MissingTypesProblem]("mouse.package$string$"),
-        exclude[DirectMissingMethodProblem]("mouse.package#all.stringJvmSyntaxMouse"),
-        exclude[DirectMissingMethodProblem]("mouse.package#string.stringJvmSyntaxMouse"),
-        exclude[DirectMissingMethodProblem]("mouse.package#string.stringJvmSyntaxMouse")
-      )
-    }
+    crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2"))
   )
 
 val JDK8 = JavaSpec.temurin("8")
@@ -130,41 +47,14 @@ val JDK17 = JavaSpec.temurin("17")
 
 ThisBuild / githubWorkflowJavaVersions := Seq(JDK8, JDK17)
 
-ThisBuild / githubWorkflowTargetTags ++= Seq("v*")
-ThisBuild / githubWorkflowPublishTargetBranches :=
-  Seq(RefPredicate.StartsWith(Ref.Tag("v")))
-
-ThisBuild / githubWorkflowPublishPreamble +=
-  WorkflowStep.Use(UseRef.Public("olafurpg", "setup-gpg", "v3"))
-
-ThisBuild / githubWorkflowPublish := Seq(
-  WorkflowStep.Sbt(
-    List("ci-release"),
-    env = Map(
-      "PGP_PASSPHRASE" -> "${{ secrets.PGP_PASSPHRASE }}",
-      "PGP_SECRET" -> "${{ secrets.PGP_SECRET }}",
-      "SONATYPE_PASSWORD" -> "${{ secrets.SONATYPE_PASSWORD }}",
-      "SONATYPE_USERNAME" -> "${{ secrets.SONATYPE_USERNAME }}"
-    )
-  )
-)
-
-val NotScala3Cond = s"matrix.scala != '$Scala3'"
-
-ThisBuild / githubWorkflowBuild := Seq(
-  WorkflowStep
+ThisBuild / githubWorkflowBuild ~= { steps =>
+  val formatStep = WorkflowStep
     .Sbt(
-      List("scalafmtCheckAll", "scalafmtSbtCheck"),
+      List("scalafmtCheckAll", "project /", "scalafmtSbtCheck"),
       name = Some("Check formatting")
-    ),
-  WorkflowStep.Sbt(List("Test/compile"), name = Some("Compile")),
-  WorkflowStep.Sbt(
-    List("checkBinaryCompatibility"),
-    name = Some("Check binary compatibility")
-  ),
-  WorkflowStep.Sbt(List("crossJVM/test"), name = Some("Run tests on JVM")),
-  WorkflowStep.Sbt(List("crossJS/test"), name = Some("Run tests on JS"), cond = Some(NotScala3Cond))
-)
+    )
+  formatStep +: steps
+}
 
 lazy val jvm = cross.jvm
 lazy val js = cross.js
