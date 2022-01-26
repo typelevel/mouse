@@ -20,7 +20,7 @@ final class FBooleanOps[F[_]](private val fBoolean: F[Boolean]) extends AnyVal {
    *
    * Wont evaluate `other` unless this evaluates to `true`
    */
-  def andM(other: => F[Boolean])(implicit F: Monad[F]): F[Boolean] =
+  def andM(other: => F[Boolean])(implicit F: FlatMap[F]): F[Boolean] =
     F.flatMap(fBoolean) {
       case false => F.pure(false)
       case true  => other
@@ -31,7 +31,7 @@ final class FBooleanOps[F[_]](private val fBoolean: F[Boolean]) extends AnyVal {
    *
    * Wont evaluate `other` unless this evaluates to `false`
    */
-  def orM(other: => F[Boolean])(implicit F: Monad[F]): F[Boolean] =
+  def orM(other: => F[Boolean])(implicit F: FlatMap[F]): F[Boolean] =
     F.flatMap(fBoolean) {
       case true  => F.pure(true)
       case false => other
