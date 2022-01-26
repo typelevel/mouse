@@ -3,15 +3,16 @@ package mouse
 trait AllSharedSyntax
     extends AnySyntax
     with AnyFSyntax
-    with OptionSyntax
     with BooleanSyntax
-    with StringSyntax
-    with TrySyntax
-    with IntSyntax
-    with LongSyntax
     with DoubleSyntax
-    with PartialFunctionLift
-    with MapSyntax
-    with FOptionSyntax
+    with FBooleanSyntax
     with FEitherSyntax
     with FNestedSyntax
+    with FOptionSyntax
+    with IntSyntax
+    with LongSyntax
+    with MapSyntax
+    with OptionSyntax
+    with PartialFunctionLift
+    with StringSyntax
+    with TrySyntax
