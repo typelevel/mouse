@@ -25,21 +25,21 @@ or otherwise improve the functional programming experience.
 
 Mouse includes enrichments for:
 
-- [Any](./shared/src/main/scala/mouse/any.scala)
-- [Boolean](./shared/src/main/scala/mouse/boolean.scala)
-- [Double](./shared/src/main/scala/mouse/double.scala)
-- [F\[A\] for any F, A](./shared/src/main/scala/mouse/anyf.scala)
-- [F\[Either\[A, B\]\]](./shared/src/main/scala/mouse/feither.scala)
-- [F\[Option\[A\]\]](./shared/src/main/scala/mouse/foption.scala)
-- [F\[G\[A\]\]](./shared/src/main/scala/mouse/fnested.scala)
-- [F\[G\[H\[A\]\]\]](./shared/src/main/scala/mouse/fnested.scala)
-- [Int](./shared/src/main/scala/mouse/int.scala)
-- [Long](./shared/src/main/scala/mouse/long.scala)
-- [Map](./shared/src/main/scala/mouse/map.scala)
-- [Option](./shared/src/main/scala/mouse/option.scala)
-- [String](./shared/src/main/scala/mouse/string.scala)
-- [Try](./shared/src/main/scala/mouse/try.scala)
-- [Tuple](./shared/src/main/scala-2.x/src/main/scala/mouse/tuple.scala)
+- [Any](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/AnyOps.html)
+- [Boolean](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/BooleanOps.html)
+- [Double](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/DoubleOps.html)
+- [F\[A\]](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/AnyFOps.html)
+- [F\[Either\[A, B\]\]](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/FEitherOps.html)
+- [F\[Option\[A\]\]](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/FOptionOps.html)
+- [F\[G\[A\]\]](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/FNested2SyntaxOps.html)
+- [F\[G\[H\[A\]\]\]](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/FNested3SyntaxOps.html)
+- [Int](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/IntOps.html)
+- [Long](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/LongOps.html)
+- [Map\[K, V\]](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/MapOps.html)
+- [Option\[A\]](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/OptionOps.html)
+- [String](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/StringOps.html)
+- [Try\[A\]](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/TryOps.html)
+- [Tuple](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/TupleSyntax.html)
 
 #### Example:
 
