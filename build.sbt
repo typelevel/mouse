@@ -8,7 +8,7 @@ ThisBuild / tlBaseVersion := "1.0"
 ThisBuild / scalaVersion := Scala213
 ThisBuild / crossScalaVersions := Seq(Scala212, Scala213, Scala3)
 ThisBuild / tlVersionIntroduced := Map("3" -> "1.0.3")
-ThisBuild / tlCiReleaseBranches := Seq("main")
+ThisBuild / tlCiReleaseBranches := Seq()
 
 lazy val root = project
   .in(file("."))
