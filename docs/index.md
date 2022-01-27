@@ -2,17 +2,17 @@
 
 ![Continuous Integration](https://github.com/typelevel/mouse/workflows/Continuous%20Integration/badge.svg) [![Maven Central](https://img.shields.io/maven-central/v/org.typelevel/mouse_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/org.typelevel/mouse_2.12) 
 
-Mouse is a small companion to the [Cats](https://github.com/typelevel/cats) functional programming library and the Scala standard library.
+Mouse is a small companion to the [Cats] functional programming library and the Scala standard library.
 
-The library arose from this [Cats issue](https://github.com/typelevel/cats/issues/791) and is a [Typelevel member](http://typelevel.org/projects/).
+The library arose from this [Cats issue] and is a [Typelevel member].
 
 Mouse is published for Scala 2.12, 2.13 and 3.0. For Scala.jvm:
-```
+```scala
 "org.typelevel" %% "mouse" % version
 ```
 
 For scala.js 1.x:
-```
+```scala
 "org.typelevel" %%% "mouse" % version
 ```
 
@@ -129,13 +129,19 @@ tupleHead: Int = 8
 
 ### Contributing
 
-Mouse is maintained by @benhutchison and @danicheg.
+Mouse is maintained by [@benhutchison] and [@danicheg].
 
 Issues and pull requests are welcome. Code contributions should be aligned with the above scope to be included, and include unit tests.
 See [contributing guide] for more details.
 
 This project supports the [Scala code of conduct] and aims that its channels
-(mailing list, Gitter, github, etc.) to be welcoming environments for everyone.
+(mailing list, Gitter, Github, etc.) to be welcoming environments for everyone.
 
+
+[Cats]: https://github.com/typelevel/cats
+[Cats issue]: https://github.com/typelevel/cats/issues/791
+[@benhutchison]: https://github.com/benhutchison
+[@danicheg]: https://github.com/danicheg
+[Typelevel member]: http://typelevel.org/projects/
 [contributing-guide]: ../contributing-guide/
 [Scala code of conduct]: https://www.scala-lang.org/conduct/
