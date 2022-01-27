@@ -42,6 +42,11 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform)
     crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2"))
   )
 
+lazy val docs = project
+  .in(file("site"))
+  .dependsOn(cross.jvm)
+  .enablePlugins(TypelevelSitePlugin)
+
 val JDK8 = JavaSpec.temurin("8")
 val JDK17 = JavaSpec.temurin("17")
 
