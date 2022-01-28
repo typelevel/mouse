@@ -16,6 +16,8 @@ For scala.js 1.x:
 "org.typelevel" %%% "mouse" % version
 ```
 
+Learn more about Mouse at https://typelevel.org/mouse/.
+
 ### Scope of Library
 
 Provide enrichments to classes from the Scala standard library that convert to Cats datatypes,
