@@ -43,88 +43,61 @@ Mouse includes enrichments for:
 
 #### Example:
 
-```scala
-scala> import mouse.all._
+```scala mdoc
 import mouse.all._
 
-scala> true.option("Its true!")
-res0: Option[String] = Some(Its true!)
+true.option("Its true!")
 
-scala> def makeEven(i: Int) = (i % 2 == 1).applyIf(i)(_ - 1)
-def makeEven(i: Int): Int
+def makeEven(i: Int) = (i % 2 == 1).applyIf(i)(_ - 1)
 
-scala> val e1: Either[String, Int] = Left("failed")
-e1: Either[String,Int] = Left(failed)
+val e1: Either[String, Int] = Left("failed")
 
-scala> true.whenA(e1)
-res0: Either[String,Unit] = Left(failed)
+true.whenA(e1)
 
-scala> false.whenA(e1)
-res1: Either[String,Unit] = Right(())
+false.whenA(e1)
 
-scala> res0.cata(msg => s"Message received: ${msg}", "No message")
-res1: String = Message received: Its true!
+res0.cata(msg => s"Message received: ${msg}", "No message")
 
-scala> "1.0".parseFloat
-res0: Either[NumberFormatException, Float] = Right(1.0F)
+"1.0".parseFloat
 
-scala> "foo".parseIntValidated
-res1: cats.data.Validated[NumberFormatException,Int] = Invalid(java.lang.NumberFormatException: For input string: "foo")
+"foo".parseIntValidated
 
-scala> val t1 = scala.util.Try(new java.net.URL("https://www.github.com"))
-t1: scala.util.Try[java.net.URL] = Success(https://www.github.com)
+val t1 = scala.util.Try(new java.net.URL("https://www.github.com"))
 
-scala> t1.cata(msg => s"URL is valid!", error => s"URL is invalid: ${error.getMessage}")
-res1: String = URL is valid!
+t1.cata(msg => s"URL is valid!", error => s"URL is invalid: ${error.getMessage}")
 
-scala> t1.toEither
-res2: Either[Throwable,java.net.URL] = Right(https://www.github.com)
+t1.toEither
 
-scala> val t2 = scala.util.Try(new java.net.URL("https//www.github.com"))
-t2: scala.util.Try[java.net.URL] = Failure(java.net.MalformedURLException: no protocol: https//www.github.com)
+val t2 = scala.util.Try(new java.net.URL("https//www.github.com"))
 
-scala> t2.cata(msg => s"URL is valid!", error => s"URL is invalid: ${error.getMessage}")
-res3: String = URL is invalid: no protocol: https//www.github.com
+t2.cata(msg => s"URL is valid!", error => s"URL is invalid: ${error.getMessage}")
 
-scala> t2.toEither
-res4: Either[Throwable,java.net.URL] = Left(java.net.MalformedURLException: no protocol: https//www.github.com)
+t2.toEither
 
-scala> val intToBytes = 123456789.toByteArray
-intToBytes: Array[Byte] = Array(7, 91, -51, 21)
+val intToBytes = 123456789.toByteArray
 
-scala> val longToBase64 = 123456789L.toBase64
-longToBase64: String = AAAAAAdbzRU
+val longToBase64 = 123456789L.toBase64
 
-scala> 5.squared
-res0: Int = 25
+5.squared
 
-scala> 1.5 |> (_.toInt) |> (_.toString)
-res0: String = 1
+1.5 |> (_.toInt) |> (_.toString)
 
 //lift a partial function into a total function to an Either, when you want to treat unhandled input cases as an error
-scala> liftEither[Option[Int]]({case Some(n) => n}, a => s"Unexpected: $a")(Some(6))
-res0: Either[String,Int] = Right(6)
+liftEither[Option[Int]]({case Some(n) => n}, a => s"Unexpected: $a")(Some(6))
 
-scala> val mapped = Map(1 -> 2, 3 -> 4).mapKeys(_ * 2)
-mapped: Map[Int,Int] = Map(2 -> 2, 6 -> 4)
+val mapped = Map(1 -> 2, 3 -> 4).mapKeys(_ * 2)
 
-scala> val foption = List(Option(1), Option(2), Option(4)).mapIn(_ * 2)
-foption: List[Option[Int]] = List(Some(2), Some(4), Some(8))
+val foption = List(Option(1), Option(2), Option(4)).mapIn(_ * 2)
 
-scala> val feither = List(Either.cond(true, 1, "0")).mapIn(_ * 2)
-foption: List[Either[String, Int]] = List(Right(2))
+val feither = List(Either.cond(true, 1, "0")).mapIn(_ * 2)
 
-scala> val listOption = List(Option(1), Option(2)).mapNested2(_ * 2)
-listOption: List[Option[Int]] = List(Some(2), Some(4))
+val listOption = List(Option(1), Option(2)).mapNested2(_ * 2)
 
-scala> val listOptionList = List(Option(List(1)), Option(List(2))).mapNested3(_ * 2)
-listOptionList: List[Option[List[Int]]] = List(Some(List(2)), Some(List(4)))
+val listOptionList = List(Option(List(1)), Option(List(2))).mapNested3(_ * 2)
 
-scala> val tupleHead = (1, 2, 4, 8).head
-tupleHead: Int = 1
+val tupleHead = (1, 2, 4, 8).head
 
-scala> val tupleLast = (1, 2, 4, 8).last
-tupleHead: Int = 8
+val tupleLast = (1, 2, 4, 8).last
 ```
 
 ### Contributing
