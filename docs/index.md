@@ -8,12 +8,12 @@ The library arose from this [Cats issue] and is a [Typelevel member].
 
 Mouse is published for Scala 2.12, 2.13 and 3.0. For Scala.jvm:
 ```scala
-"org.typelevel" %% "mouse" % version
+"org.typelevel" %% "mouse" % "@VERSION@"
 ```
 
 For scala.js 1.x:
 ```scala
-"org.typelevel" %%% "mouse" % version
+"org.typelevel" %%% "mouse" % "@VERSION@"
 ```
 
 ### Scope of Library
