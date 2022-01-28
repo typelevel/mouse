@@ -12,6 +12,8 @@ For scala.js 1.x:
 
 `"org.typelevel" %%% "mouse" % version`
 
+Learn more about Mouse at https://typelevel.org/mouse/.
+
 ## Content
 
 Mouse includes enrichments for:
