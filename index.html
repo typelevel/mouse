@@ -64,8 +64,8 @@
       </div>
       
       <ul class="nav-list">
-        <li class="level1"><a href="contributing-guide.html">Contributing guide</a></li>
         <li class="level1 active"><a href="#">Mouse</a></li>
+        <li class="level1"><a href="contributing-guide.html">Contributing guide</a></li>
       </ul>
       
     </nav>
@@ -92,9 +92,9 @@
         <p>Mouse is a small companion to the <a href="https://github.com/typelevel/cats">Cats</a> functional programming library and the Scala standard library.</p>
         <p>The library arose from this <a href="https://github.com/typelevel/cats/issues/791">Cats issue</a> and is a <a href="http://typelevel.org/projects/">Typelevel member</a>.</p>
         <p>Mouse is published for Scala 2.12, 2.13 and 3.0. For Scala.jvm:</p>
-        <pre class="keep-together pdf epub"><code class="nohighlight"><span class="string-literal">&quot;org.typelevel&quot;</span><span> %% </span><span class="string-literal">&quot;mouse&quot;</span><span> % </span><span class="identifier">version</span></code></pre>
+        <pre class="keep-together pdf epub"><code class="nohighlight"><span class="string-literal">&quot;org.typelevel&quot;</span><span> %% </span><span class="string-literal">&quot;mouse&quot;</span><span> % </span><span class="string-literal">&quot;1.0.9&quot;</span></code></pre>
         <p>For scala.js 1.x:</p>
-        <pre class="keep-together pdf epub"><code class="nohighlight"><span class="string-literal">&quot;org.typelevel&quot;</span><span> %%% </span><span class="string-literal">&quot;mouse&quot;</span><span> % </span><span class="identifier">version</span></code></pre>
+        <pre class="keep-together pdf epub"><code class="nohighlight"><span class="string-literal">&quot;org.typelevel&quot;</span><span> %%% </span><span class="string-literal">&quot;mouse&quot;</span><span> % </span><span class="string-literal">&quot;1.0.9&quot;</span></code></pre>
         
         <h3 id="scope-of-library" class="section">Scope of Library<a class="anchor-link right" href="#scope-of-library"><i class="icofont-laika">&#xef71;</i></a></h3>
         <p>Provide enrichments to classes from the Scala standard library that convert to Cats datatypes,
@@ -121,87 +121,100 @@
         </ul>
         
         <h4 id="example" class="section">Example:<a class="anchor-link right" href="#example"><i class="icofont-laika">&#xef71;</i></a></h4>
-        <pre><code class="nohighlight"><span class="identifier">scala</span><span>&gt; </span><span class="keyword">import</span><span> </span><span class="identifier">mouse</span><span>.</span><span class="identifier">all</span><span>.</span><span class="identifier">_</span><span>
-</span><span class="keyword">import</span><span> </span><span class="identifier">mouse</span><span>.</span><span class="identifier">all</span><span>.</span><span class="identifier">_</span><span>
+        <pre><code class="nohighlight"><span class="keyword">import</span><span> </span><span class="identifier">mouse</span><span>.</span><span class="identifier">all</span><span>.</span><span class="identifier">_</span><span>
 
-</span><span class="identifier">scala</span><span>&gt; </span><span class="boolean-literal">true</span><span>.</span><span class="identifier">option</span><span>(</span><span class="string-literal">&quot;Its true!&quot;</span><span>)
-</span><span class="identifier">res0</span><span>: </span><span class="type-name">Option</span><span>[</span><span class="type-name">String</span><span>] = </span><span class="type-name">Some</span><span>(</span><span class="type-name">Its</span><span> </span><span class="boolean-literal">true</span><span>!)
-
-</span><span class="identifier">scala</span><span>&gt; </span><span class="keyword">def</span><span> </span><span class="declaration-name">makeEven</span><span>(</span><span class="identifier">i</span><span>: </span><span class="type-name">Int</span><span>) = (</span><span class="identifier">i</span><span> % </span><span class="number-literal">2</span><span> == </span><span class="number-literal">1</span><span>).</span><span class="identifier">applyIf</span><span>(</span><span class="identifier">i</span><span>)(</span><span class="identifier">_</span><span> - </span><span class="number-literal">1</span><span>)
-</span><span class="keyword">def</span><span> </span><span class="declaration-name">makeEven</span><span>(</span><span class="identifier">i</span><span>: </span><span class="type-name">Int</span><span>): </span><span class="type-name">Int</span><span>
-
-</span><span class="identifier">scala</span><span>&gt; </span><span class="keyword">val</span><span> </span><span class="identifier">e1</span><span>: </span><span class="type-name">Either</span><span>[</span><span class="type-name">String</span><span>, </span><span class="type-name">Int</span><span>] = </span><span class="type-name">Left</span><span>(</span><span class="string-literal">&quot;failed&quot;</span><span>)
-</span><span class="identifier">e1</span><span>: </span><span class="type-name">Either</span><span>[</span><span class="type-name">String</span><span>,</span><span class="type-name">Int</span><span>] = </span><span class="type-name">Left</span><span>(</span><span class="identifier">failed</span><span>)
-
-</span><span class="identifier">scala</span><span>&gt; </span><span class="boolean-literal">true</span><span>.</span><span class="identifier">whenA</span><span>(</span><span class="identifier">e1</span><span>)
-</span><span class="identifier">res0</span><span>: </span><span class="type-name">Either</span><span>[</span><span class="type-name">String</span><span>,</span><span class="type-name">Unit</span><span>] = </span><span class="type-name">Left</span><span>(</span><span class="identifier">failed</span><span>)
-
-</span><span class="identifier">scala</span><span>&gt; </span><span class="boolean-literal">false</span><span>.</span><span class="identifier">whenA</span><span>(</span><span class="identifier">e1</span><span>)
-</span><span class="identifier">res1</span><span>: </span><span class="type-name">Either</span><span>[</span><span class="type-name">String</span><span>,</span><span class="type-name">Unit</span><span>] = </span><span class="type-name">Right</span><span>(())
-
-</span><span class="identifier">scala</span><span>&gt; </span><span class="identifier">res0</span><span>.</span><span class="identifier">cata</span><span>(</span><span class="identifier">msg</span><span> =&gt; </span><span class="string-literal">s&quot;Message received: </span><span class="substitution">${msg}</span><span class="string-literal">&quot;</span><span>, </span><span class="string-literal">&quot;No message&quot;</span><span>)
-</span><span class="identifier">res1</span><span>: </span><span class="type-name">String</span><span> = </span><span class="type-name">Message</span><span> </span><span class="identifier">received</span><span>: </span><span class="type-name">Its</span><span> </span><span class="boolean-literal">true</span><span>!
-
-</span><span class="identifier">scala</span><span>&gt; </span><span class="string-literal">&quot;1.0&quot;</span><span>.</span><span class="identifier">parseFloat</span><span>
-</span><span class="identifier">res0</span><span>: </span><span class="type-name">Either</span><span>[</span><span class="type-name">NumberFormatException</span><span>, </span><span class="type-name">Float</span><span>] = </span><span class="type-name">Right</span><span>(</span><span class="number-literal">1.0F</span><span>)
-
-</span><span class="identifier">scala</span><span>&gt; </span><span class="string-literal">&quot;foo&quot;</span><span>.</span><span class="identifier">parseIntValidated</span><span>
-</span><span class="identifier">res1</span><span>: </span><span class="identifier">cats</span><span>.</span><span class="identifier">data</span><span>.</span><span class="type-name">Validated</span><span>[</span><span class="type-name">NumberFormatException</span><span>,</span><span class="type-name">Int</span><span>] = </span><span class="type-name">Invalid</span><span>(</span><span class="identifier">java</span><span>.</span><span class="identifier">lang</span><span>.</span><span class="type-name">NumberFormatException</span><span>: </span><span class="type-name">For</span><span> </span><span class="identifier">input</span><span> </span><span class="identifier">string</span><span>: </span><span class="string-literal">&quot;foo&quot;</span><span>)
-
-</span><span class="identifier">scala</span><span>&gt; </span><span class="keyword">val</span><span> </span><span class="identifier">t1</span><span> = </span><span class="identifier">scala</span><span>.</span><span class="identifier">util</span><span>.</span><span class="type-name">Try</span><span>(</span><span class="keyword">new</span><span> </span><span class="identifier">java</span><span>.</span><span class="identifier">net</span><span>.</span><span class="type-name">URL</span><span>(</span><span class="string-literal">&quot;https://www.github.com&quot;</span><span>))
-</span><span class="identifier">t1</span><span>: </span><span class="identifier">scala</span><span>.</span><span class="identifier">util</span><span>.</span><span class="type-name">Try</span><span>[</span><span class="identifier">java</span><span>.</span><span class="identifier">net</span><span>.</span><span class="type-name">URL</span><span>] = </span><span class="type-name">Success</span><span>(</span><span class="identifier">https</span><span>:</span><span class="comment">//www.github.com)
+</span><span class="boolean-literal">true</span><span>.</span><span class="identifier">option</span><span>(</span><span class="string-literal">&quot;Its true!&quot;</span><span>)
+</span><span class="comment">// res0: Option[String] = Some(value = &quot;Its true!&quot;)
 </span><span>
-</span><span class="identifier">scala</span><span>&gt; </span><span class="identifier">t1</span><span>.</span><span class="identifier">cata</span><span>(</span><span class="identifier">msg</span><span> =&gt; </span><span class="string-literal">s&quot;URL is valid!&quot;</span><span>, </span><span class="identifier">error</span><span> =&gt; </span><span class="string-literal">s&quot;URL is invalid: </span><span class="substitution">${error.getMessage}</span><span class="string-literal">&quot;</span><span>)
-</span><span class="identifier">res1</span><span>: </span><span class="type-name">String</span><span> = </span><span class="type-name">URL</span><span> </span><span class="identifier">is</span><span> </span><span class="identifier">valid</span><span>!
+</span><span class="keyword">def</span><span> </span><span class="declaration-name">makeEven</span><span>(</span><span class="identifier">i</span><span>: </span><span class="type-name">Int</span><span>) = (</span><span class="identifier">i</span><span> % </span><span class="number-literal">2</span><span> == </span><span class="number-literal">1</span><span>).</span><span class="identifier">applyIf</span><span>(</span><span class="identifier">i</span><span>)(</span><span class="identifier">_</span><span> - </span><span class="number-literal">1</span><span>)
 
-</span><span class="identifier">scala</span><span>&gt; </span><span class="identifier">t1</span><span>.</span><span class="identifier">toEither</span><span>
-</span><span class="identifier">res2</span><span>: </span><span class="type-name">Either</span><span>[</span><span class="type-name">Throwable</span><span>,</span><span class="identifier">java</span><span>.</span><span class="identifier">net</span><span>.</span><span class="type-name">URL</span><span>] = </span><span class="type-name">Right</span><span>(</span><span class="identifier">https</span><span>:</span><span class="comment">//www.github.com)
+</span><span class="keyword">val</span><span> </span><span class="identifier">e1</span><span>: </span><span class="type-name">Either</span><span>[</span><span class="type-name">String</span><span>, </span><span class="type-name">Int</span><span>] = </span><span class="type-name">Left</span><span>(</span><span class="string-literal">&quot;failed&quot;</span><span>)
+</span><span class="comment">// e1: Either[String, Int] = Left(value = &quot;failed&quot;)
 </span><span>
-</span><span class="identifier">scala</span><span>&gt; </span><span class="keyword">val</span><span> </span><span class="identifier">t2</span><span> = </span><span class="identifier">scala</span><span>.</span><span class="identifier">util</span><span>.</span><span class="type-name">Try</span><span>(</span><span class="keyword">new</span><span> </span><span class="identifier">java</span><span>.</span><span class="identifier">net</span><span>.</span><span class="type-name">URL</span><span>(</span><span class="string-literal">&quot;https//www.github.com&quot;</span><span>))
-</span><span class="identifier">t2</span><span>: </span><span class="identifier">scala</span><span>.</span><span class="identifier">util</span><span>.</span><span class="type-name">Try</span><span>[</span><span class="identifier">java</span><span>.</span><span class="identifier">net</span><span>.</span><span class="type-name">URL</span><span>] = </span><span class="type-name">Failure</span><span>(</span><span class="identifier">java</span><span>.</span><span class="identifier">net</span><span>.</span><span class="type-name">MalformedURLException</span><span>: </span><span class="identifier">no</span><span> </span><span class="identifier">protocol</span><span>: </span><span class="identifier">https</span><span class="comment">//www.github.com)
+</span><span class="boolean-literal">true</span><span>.</span><span class="identifier">whenA</span><span>(</span><span class="identifier">e1</span><span>)
+</span><span class="comment">// res1: Either[String, Unit] = Left(value = &quot;failed&quot;)
 </span><span>
-</span><span class="identifier">scala</span><span>&gt; </span><span class="identifier">t2</span><span>.</span><span class="identifier">cata</span><span>(</span><span class="identifier">msg</span><span> =&gt; </span><span class="string-literal">s&quot;URL is valid!&quot;</span><span>, </span><span class="identifier">error</span><span> =&gt; </span><span class="string-literal">s&quot;URL is invalid: </span><span class="substitution">${error.getMessage}</span><span class="string-literal">&quot;</span><span>)
-</span><span class="identifier">res3</span><span>: </span><span class="type-name">String</span><span> = </span><span class="type-name">URL</span><span> </span><span class="identifier">is</span><span> </span><span class="identifier">invalid</span><span>: </span><span class="identifier">no</span><span> </span><span class="identifier">protocol</span><span>: </span><span class="identifier">https</span><span class="comment">//www.github.com
+</span><span class="boolean-literal">false</span><span>.</span><span class="identifier">whenA</span><span>(</span><span class="identifier">e1</span><span>)
+</span><span class="comment">// res2: Either[String, Unit] = Right(value = ())
 </span><span>
-</span><span class="identifier">scala</span><span>&gt; </span><span class="identifier">t2</span><span>.</span><span class="identifier">toEither</span><span>
-</span><span class="identifier">res4</span><span>: </span><span class="type-name">Either</span><span>[</span><span class="type-name">Throwable</span><span>,</span><span class="identifier">java</span><span>.</span><span class="identifier">net</span><span>.</span><span class="type-name">URL</span><span>] = </span><span class="type-name">Left</span><span>(</span><span class="identifier">java</span><span>.</span><span class="identifier">net</span><span>.</span><span class="type-name">MalformedURLException</span><span>: </span><span class="identifier">no</span><span> </span><span class="identifier">protocol</span><span>: </span><span class="identifier">https</span><span class="comment">//www.github.com)
+</span><span class="identifier">res0</span><span>.</span><span class="identifier">cata</span><span>(</span><span class="identifier">msg</span><span> =&gt; </span><span class="string-literal">s&quot;Message received: </span><span class="substitution">${msg}</span><span class="string-literal">&quot;</span><span>, </span><span class="string-literal">&quot;No message&quot;</span><span>)
+</span><span class="comment">// res3: String = &quot;Message received: Its true!&quot;
 </span><span>
-</span><span class="identifier">scala</span><span>&gt; </span><span class="keyword">val</span><span> </span><span class="identifier">intToBytes</span><span> = </span><span class="number-literal">123456789</span><span>.</span><span class="identifier">toByteArray</span><span>
-</span><span class="identifier">intToBytes</span><span>: </span><span class="type-name">Array</span><span>[</span><span class="type-name">Byte</span><span>] = </span><span class="type-name">Array</span><span>(</span><span class="number-literal">7</span><span>, </span><span class="number-literal">91</span><span>, -</span><span class="number-literal">51</span><span>, </span><span class="number-literal">21</span><span>)
-
-</span><span class="identifier">scala</span><span>&gt; </span><span class="keyword">val</span><span> </span><span class="identifier">longToBase64</span><span> = </span><span class="number-literal">123456789L</span><span>.</span><span class="identifier">toBase64</span><span>
-</span><span class="identifier">longToBase64</span><span>: </span><span class="type-name">String</span><span> = </span><span class="type-name">AAAAAAdbzRU</span><span>
-
-</span><span class="identifier">scala</span><span>&gt; </span><span class="number-literal">5</span><span>.</span><span class="identifier">squared</span><span>
-</span><span class="identifier">res0</span><span>: </span><span class="type-name">Int</span><span> = </span><span class="number-literal">25</span><span>
-
-</span><span class="identifier">scala</span><span>&gt; </span><span class="number-literal">1.5</span><span> |&gt; (</span><span class="identifier">_</span><span>.</span><span class="identifier">toInt</span><span>) |&gt; (</span><span class="identifier">_</span><span>.</span><span class="identifier">toString</span><span>)
-</span><span class="identifier">res0</span><span>: </span><span class="type-name">String</span><span> = </span><span class="number-literal">1</span><span>
-
+</span><span class="string-literal">&quot;1.0&quot;</span><span>.</span><span class="identifier">parseFloat</span><span>
+</span><span class="comment">// res4: Either[NumberFormatException, Float] = Right(value = 1.0F)
+</span><span>
+</span><span class="string-literal">&quot;foo&quot;</span><span>.</span><span class="identifier">parseIntValidated</span><span>
+</span><span class="comment">// res5: cats.data.Validated[NumberFormatException, Int] = Invalid(
+//   e = java.lang.NumberFormatException: For input string: &quot;foo&quot;
+// )
+</span><span>
+</span><span class="keyword">val</span><span> </span><span class="identifier">t1</span><span> = </span><span class="identifier">scala</span><span>.</span><span class="identifier">util</span><span>.</span><span class="type-name">Try</span><span>(</span><span class="keyword">new</span><span> </span><span class="identifier">java</span><span>.</span><span class="identifier">net</span><span>.</span><span class="type-name">URL</span><span>(</span><span class="string-literal">&quot;https://www.github.com&quot;</span><span>))
+</span><span class="comment">// t1: util.Try[java.net.URL] = Success(value = https://www.github.com)
+</span><span>
+</span><span class="identifier">t1</span><span>.</span><span class="identifier">cata</span><span>(</span><span class="identifier">msg</span><span> =&gt; </span><span class="string-literal">s&quot;URL is valid!&quot;</span><span>, </span><span class="identifier">error</span><span> =&gt; </span><span class="string-literal">s&quot;URL is invalid: </span><span class="substitution">${error.getMessage}</span><span class="string-literal">&quot;</span><span>)
+</span><span class="comment">// res6: String = &quot;URL is valid!&quot;
+</span><span>
+</span><span class="identifier">t1</span><span>.</span><span class="identifier">toEither</span><span>
+</span><span class="comment">// res7: Either[Throwable, java.net.URL] = Right(
+//   value = https://www.github.com
+// )
+</span><span>
+</span><span class="keyword">val</span><span> </span><span class="identifier">t2</span><span> = </span><span class="identifier">scala</span><span>.</span><span class="identifier">util</span><span>.</span><span class="type-name">Try</span><span>(</span><span class="keyword">new</span><span> </span><span class="identifier">java</span><span>.</span><span class="identifier">net</span><span>.</span><span class="type-name">URL</span><span>(</span><span class="string-literal">&quot;https//www.github.com&quot;</span><span>))
+</span><span class="comment">// t2: util.Try[java.net.URL] = Failure(
+//   exception = java.net.MalformedURLException: no protocol: https//www.github.com
+// )
+</span><span>
+</span><span class="identifier">t2</span><span>.</span><span class="identifier">cata</span><span>(</span><span class="identifier">msg</span><span> =&gt; </span><span class="string-literal">s&quot;URL is valid!&quot;</span><span>, </span><span class="identifier">error</span><span> =&gt; </span><span class="string-literal">s&quot;URL is invalid: </span><span class="substitution">${error.getMessage}</span><span class="string-literal">&quot;</span><span>)
+</span><span class="comment">// res8: String = &quot;URL is invalid: no protocol: https//www.github.com&quot;
+</span><span>
+</span><span class="identifier">t2</span><span>.</span><span class="identifier">toEither</span><span>
+</span><span class="comment">// res9: Either[Throwable, java.net.URL] = Left(
+//   value = java.net.MalformedURLException: no protocol: https//www.github.com
+// )
+</span><span>
+</span><span class="keyword">val</span><span> </span><span class="identifier">intToBytes</span><span> = </span><span class="number-literal">123456789</span><span>.</span><span class="identifier">toByteArray</span><span>
+</span><span class="comment">// intToBytes: Array[Byte] = Array(7, 91, -51, 21)
+</span><span>
+</span><span class="keyword">val</span><span> </span><span class="identifier">longToBase64</span><span> = </span><span class="number-literal">123456789L</span><span>.</span><span class="identifier">toBase64</span><span>
+</span><span class="comment">// longToBase64: String = &quot;AAAAAAdbzRU&quot;
+</span><span>
+</span><span class="number-literal">5</span><span>.</span><span class="identifier">squared</span><span>
+</span><span class="comment">// res10: Int = 25
+</span><span>
+</span><span class="number-literal">1.5</span><span> |&gt; (</span><span class="identifier">_</span><span>.</span><span class="identifier">toInt</span><span>) |&gt; (</span><span class="identifier">_</span><span>.</span><span class="identifier">toString</span><span>)
+</span><span class="comment">// res11: String = &quot;1&quot;
+</span><span>
 </span><span class="comment">//lift a partial function into a total function to an Either, when you want to treat unhandled input cases as an error
-</span><span class="identifier">scala</span><span>&gt; </span><span class="identifier">liftEither</span><span>[</span><span class="type-name">Option</span><span>[</span><span class="type-name">Int</span><span>]]({</span><span class="keyword">case</span><span> </span><span class="type-name">Some</span><span>(</span><span class="identifier">n</span><span>) =&gt; </span><span class="identifier">n</span><span>}, </span><span class="identifier">a</span><span> =&gt; </span><span class="string-literal">s&quot;Unexpected: </span><span class="substitution">$a</span><span class="string-literal">&quot;</span><span>)(</span><span class="type-name">Some</span><span>(</span><span class="number-literal">6</span><span>))
-</span><span class="identifier">res0</span><span>: </span><span class="type-name">Either</span><span>[</span><span class="type-name">String</span><span>,</span><span class="type-name">Int</span><span>] = </span><span class="type-name">Right</span><span>(</span><span class="number-literal">6</span><span>)
-
-</span><span class="identifier">scala</span><span>&gt; </span><span class="keyword">val</span><span> </span><span class="identifier">mapped</span><span> = </span><span class="type-name">Map</span><span>(</span><span class="number-literal">1</span><span> -&gt; </span><span class="number-literal">2</span><span>, </span><span class="number-literal">3</span><span> -&gt; </span><span class="number-literal">4</span><span>).</span><span class="identifier">mapKeys</span><span>(</span><span class="identifier">_</span><span> * </span><span class="number-literal">2</span><span>)
-</span><span class="identifier">mapped</span><span>: </span><span class="type-name">Map</span><span>[</span><span class="type-name">Int</span><span>,</span><span class="type-name">Int</span><span>] = </span><span class="type-name">Map</span><span>(</span><span class="number-literal">2</span><span> -&gt; </span><span class="number-literal">2</span><span>, </span><span class="number-literal">6</span><span> -&gt; </span><span class="number-literal">4</span><span>)
-
-</span><span class="identifier">scala</span><span>&gt; </span><span class="keyword">val</span><span> </span><span class="identifier">foption</span><span> = </span><span class="type-name">List</span><span>(</span><span class="type-name">Option</span><span>(</span><span class="number-literal">1</span><span>), </span><span class="type-name">Option</span><span>(</span><span class="number-literal">2</span><span>), </span><span class="type-name">Option</span><span>(</span><span class="number-literal">4</span><span>)).</span><span class="identifier">mapIn</span><span>(</span><span class="identifier">_</span><span> * </span><span class="number-literal">2</span><span>)
-</span><span class="identifier">foption</span><span>: </span><span class="type-name">List</span><span>[</span><span class="type-name">Option</span><span>[</span><span class="type-name">Int</span><span>]] = </span><span class="type-name">List</span><span>(</span><span class="type-name">Some</span><span>(</span><span class="number-literal">2</span><span>), </span><span class="type-name">Some</span><span>(</span><span class="number-literal">4</span><span>), </span><span class="type-name">Some</span><span>(</span><span class="number-literal">8</span><span>))
-
-</span><span class="identifier">scala</span><span>&gt; </span><span class="keyword">val</span><span> </span><span class="identifier">feither</span><span> = </span><span class="type-name">List</span><span>(</span><span class="type-name">Either</span><span>.</span><span class="identifier">cond</span><span>(</span><span class="boolean-literal">true</span><span>, </span><span class="number-literal">1</span><span>, </span><span class="string-literal">&quot;0&quot;</span><span>)).</span><span class="identifier">mapIn</span><span>(</span><span class="identifier">_</span><span> * </span><span class="number-literal">2</span><span>)
-</span><span class="identifier">foption</span><span>: </span><span class="type-name">List</span><span>[</span><span class="type-name">Either</span><span>[</span><span class="type-name">String</span><span>, </span><span class="type-name">Int</span><span>]] = </span><span class="type-name">List</span><span>(</span><span class="type-name">Right</span><span>(</span><span class="number-literal">2</span><span>))
-
-</span><span class="identifier">scala</span><span>&gt; </span><span class="keyword">val</span><span> </span><span class="identifier">listOption</span><span> = </span><span class="type-name">List</span><span>(</span><span class="type-name">Option</span><span>(</span><span class="number-literal">1</span><span>), </span><span class="type-name">Option</span><span>(</span><span class="number-literal">2</span><span>)).</span><span class="identifier">mapNested2</span><span>(</span><span class="identifier">_</span><span> * </span><span class="number-literal">2</span><span>)
-</span><span class="identifier">listOption</span><span>: </span><span class="type-name">List</span><span>[</span><span class="type-name">Option</span><span>[</span><span class="type-name">Int</span><span>]] = </span><span class="type-name">List</span><span>(</span><span class="type-name">Some</span><span>(</span><span class="number-literal">2</span><span>), </span><span class="type-name">Some</span><span>(</span><span class="number-literal">4</span><span>))
-
-</span><span class="identifier">scala</span><span>&gt; </span><span class="keyword">val</span><span> </span><span class="identifier">listOptionList</span><span> = </span><span class="type-name">List</span><span>(</span><span class="type-name">Option</span><span>(</span><span class="type-name">List</span><span>(</span><span class="number-literal">1</span><span>)), </span><span class="type-name">Option</span><span>(</span><span class="type-name">List</span><span>(</span><span class="number-literal">2</span><span>))).</span><span class="identifier">mapNested3</span><span>(</span><span class="identifier">_</span><span> * </span><span class="number-literal">2</span><span>)
-</span><span class="identifier">listOptionList</span><span>: </span><span class="type-name">List</span><span>[</span><span class="type-name">Option</span><span>[</span><span class="type-name">List</span><span>[</span><span class="type-name">Int</span><span>]]] = </span><span class="type-name">List</span><span>(</span><span class="type-name">Some</span><span>(</span><span class="type-name">List</span><span>(</span><span class="number-literal">2</span><span>)), </span><span class="type-name">Some</span><span>(</span><span class="type-name">List</span><span>(</span><span class="number-literal">4</span><span>)))
-
-</span><span class="identifier">scala</span><span>&gt; </span><span class="keyword">val</span><span> </span><span class="identifier">tupleHead</span><span> = (</span><span class="number-literal">1</span><span>, </span><span class="number-literal">2</span><span>, </span><span class="number-literal">4</span><span>, </span><span class="number-literal">8</span><span>).</span><span class="identifier">head</span><span>
-</span><span class="identifier">tupleHead</span><span>: </span><span class="type-name">Int</span><span> = </span><span class="number-literal">1</span><span>
-
-</span><span class="identifier">scala</span><span>&gt; </span><span class="keyword">val</span><span> </span><span class="identifier">tupleLast</span><span> = (</span><span class="number-literal">1</span><span>, </span><span class="number-literal">2</span><span>, </span><span class="number-literal">4</span><span>, </span><span class="number-literal">8</span><span>).</span><span class="identifier">last</span><span>
-</span><span class="identifier">tupleHead</span><span>: </span><span class="type-name">Int</span><span> = </span><span class="number-literal">8</span></code></pre>
+</span><span class="identifier">liftEither</span><span>[</span><span class="type-name">Option</span><span>[</span><span class="type-name">Int</span><span>]]({</span><span class="keyword">case</span><span> </span><span class="type-name">Some</span><span>(</span><span class="identifier">n</span><span>) =&gt; </span><span class="identifier">n</span><span>}, </span><span class="identifier">a</span><span> =&gt; </span><span class="string-literal">s&quot;Unexpected: </span><span class="substitution">$a</span><span class="string-literal">&quot;</span><span>)(</span><span class="type-name">Some</span><span>(</span><span class="number-literal">6</span><span>))
+</span><span class="comment">// res12: Either[String, Int] = Right(value = 6)
+</span><span>
+</span><span class="keyword">val</span><span> </span><span class="identifier">mapped</span><span> = </span><span class="type-name">Map</span><span>(</span><span class="number-literal">1</span><span> -&gt; </span><span class="number-literal">2</span><span>, </span><span class="number-literal">3</span><span> -&gt; </span><span class="number-literal">4</span><span>).</span><span class="identifier">mapKeys</span><span>(</span><span class="identifier">_</span><span> * </span><span class="number-literal">2</span><span>)
+</span><span class="comment">// mapped: Map[Int, Int] = Map(2 -&gt; 2, 6 -&gt; 4)
+</span><span>
+</span><span class="keyword">val</span><span> </span><span class="identifier">foption</span><span> = </span><span class="type-name">List</span><span>(</span><span class="type-name">Option</span><span>(</span><span class="number-literal">1</span><span>), </span><span class="type-name">Option</span><span>(</span><span class="number-literal">2</span><span>), </span><span class="type-name">Option</span><span>(</span><span class="number-literal">4</span><span>)).</span><span class="identifier">mapIn</span><span>(</span><span class="identifier">_</span><span> * </span><span class="number-literal">2</span><span>)
+</span><span class="comment">// foption: List[Option[Int]] = List(
+//   Some(value = 2),
+//   Some(value = 4),
+//   Some(value = 8)
+// )
+</span><span>
+</span><span class="keyword">val</span><span> </span><span class="identifier">feither</span><span> = </span><span class="type-name">List</span><span>(</span><span class="type-name">Either</span><span>.</span><span class="identifier">cond</span><span>(</span><span class="boolean-literal">true</span><span>, </span><span class="number-literal">1</span><span>, </span><span class="string-literal">&quot;0&quot;</span><span>)).</span><span class="identifier">mapIn</span><span>(</span><span class="identifier">_</span><span> * </span><span class="number-literal">2</span><span>)
+</span><span class="comment">// feither: List[Either[String, Int]] = List(Right(value = 2))
+</span><span>
+</span><span class="keyword">val</span><span> </span><span class="identifier">listOption</span><span> = </span><span class="type-name">List</span><span>(</span><span class="type-name">Option</span><span>(</span><span class="number-literal">1</span><span>), </span><span class="type-name">Option</span><span>(</span><span class="number-literal">2</span><span>)).</span><span class="identifier">mapNested2</span><span>(</span><span class="identifier">_</span><span> * </span><span class="number-literal">2</span><span>)
+</span><span class="comment">// listOption: List[Option[Int]] = List(Some(value = 2), Some(value = 4))
+</span><span>
+</span><span class="keyword">val</span><span> </span><span class="identifier">listOptionList</span><span> = </span><span class="type-name">List</span><span>(</span><span class="type-name">Option</span><span>(</span><span class="type-name">List</span><span>(</span><span class="number-literal">1</span><span>)), </span><span class="type-name">Option</span><span>(</span><span class="type-name">List</span><span>(</span><span class="number-literal">2</span><span>))).</span><span class="identifier">mapNested3</span><span>(</span><span class="identifier">_</span><span> * </span><span class="number-literal">2</span><span>)
+</span><span class="comment">// listOptionList: List[Option[List[Int]]] = List(
+//   Some(value = List(2)),
+//   Some(value = List(4))
+// )
+</span><span>
+</span><span class="keyword">val</span><span> </span><span class="identifier">tupleHead</span><span> = (</span><span class="number-literal">1</span><span>, </span><span class="number-literal">2</span><span>, </span><span class="number-literal">4</span><span>, </span><span class="number-literal">8</span><span>).</span><span class="identifier">head</span><span>
+</span><span class="comment">// tupleHead: Int = 1
+</span><span>
+</span><span class="keyword">val</span><span> </span><span class="identifier">tupleLast</span><span> = (</span><span class="number-literal">1</span><span>, </span><span class="number-literal">2</span><span>, </span><span class="number-literal">4</span><span>, </span><span class="number-literal">8</span><span>).</span><span class="identifier">last</span><span>
+</span><span class="comment">// tupleLast: Int = 8</span></code></pre>
         
         <h3 id="contributing" class="section">Contributing<a class="anchor-link right" href="#contributing"><i class="icofont-laika">&#xef71;</i></a></h3>
         <p>Mouse is maintained by <a href="https://github.com/benhutchison">@benhutchison</a> and <a href="https://github.com/danicheg">@danicheg</a>.</p>
