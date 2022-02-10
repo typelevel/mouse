@@ -9,6 +9,7 @@ trait AllSharedSyntax
     with FEitherSyntax
     with FNestedSyntax
     with FOptionSyntax
+    with FTupleSyntax
     with IntSyntax
     with LongSyntax
     with MapSyntax
