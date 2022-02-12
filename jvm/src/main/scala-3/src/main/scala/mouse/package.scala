@@ -8,6 +8,7 @@ package object mouse extends MouseFunctions {
   object feither extends FEitherSyntax
   object fnested extends FNestedSyntax
   object foption extends FOptionSyntax
+  object ftuple extends FTupleSyntax
   object int extends IntSyntax
   object long extends LongSyntax
   object map extends MapSyntax

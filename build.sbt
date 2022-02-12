@@ -40,7 +40,8 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform)
         case _                         => Nil
       }
     },
-    mimaPreviousArtifacts ~= { _.filterNot(_.revision == "1.0.1") }
+    mimaPreviousArtifacts ~= { _.filterNot(_.revision == "1.0.1") },
+    Compile / sourceGenerators += (Compile / sourceManaged).map(Boilerplate.gen).taskValue
   )
   .jsSettings(
     crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2"))
