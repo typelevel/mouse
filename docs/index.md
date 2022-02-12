@@ -33,6 +33,7 @@ Mouse includes enrichments for:
 - [F\[Option\[A\]\]](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/FOptionOps.html)
 - [F\[G\[A\]\]](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/FNested2SyntaxOps.html)
 - [F\[G\[H\[A\]\]\]](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/FNested3SyntaxOps.html)
+- [F\[TupleN\]](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/FTupleNSyntax.html)
 - [Int](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/IntOps.html)
 - [Long](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/LongOps.html)
 - [Map\[K, V\]](https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest/mouse/MapOps.html)
