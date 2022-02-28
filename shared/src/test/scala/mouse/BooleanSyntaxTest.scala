@@ -19,6 +19,16 @@ class BooleanSyntaxTest extends MouseSuite {
     assertEquals(false.eitherNel("error", 1), Either.left(NonEmptyList.one("error")))
   }
 
+  test("BooleanSyntax.validated") {
+    assertEquals(true.validated("error", 1), Validated.valid(1))
+    assertEquals(false.validated("error", 1), Validated.invalid("error"))
+  }
+
+  test("BooleanSyntax.validatedNec") {
+    assertEquals(true.validatedNec("error", 1), Validated.validNec(1))
+    assertEquals(false.validatedNec("error", 1), Validated.invalidNec("error"))
+  }
+
   test("BooleanSyntax.validatedNel") {
     assertEquals(true.validatedNel("error", 1), Validated.validNel(1))
     assertEquals(false.validatedNel("error", 1), Validated.invalidNel("error"))
