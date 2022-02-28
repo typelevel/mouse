@@ -1,6 +1,6 @@
 package mouse
 
-import cats.data.{EitherNel, NonEmptyList, Validated, ValidatedNel}
+import cats.data.{EitherNel, NonEmptyList, Validated, ValidatedNec, ValidatedNel}
 import cats.{Applicative, ApplicativeError, Monoid}
 import mouse.BooleanSyntax.LiftToPartiallyApplied
 
@@ -22,6 +22,12 @@ final class BooleanOps(private val b: Boolean) extends AnyVal {
   @inline def either[L, R](l: => L, r: => R): Either[L, R] = fold(Right(r), Left(l))
 
   @inline def eitherNel[L, R](ifFalse: => L, ifTrue: => R): EitherNel[L, R] = either(NonEmptyList.one(ifFalse), ifTrue)
+
+  @inline def validated[L, R](ifFalse: => L, ifTrue: => R): Validated[L, R] =
+    fold(Validated.valid(ifTrue), Validated.invalid(ifFalse))
+
+  @inline def validatedNec[L, R](ifFalse: => L, ifTrue: => R): ValidatedNec[L, R] =
+    fold(Validated.validNec(ifTrue), Validated.invalidNec(ifFalse))
 
   @inline def validatedNel[L, R](ifFalse: => L, ifTrue: => R): ValidatedNel[L, R] =
     fold(Validated.validNel(ifTrue), Validated.invalidNel(ifFalse))
