@@ -1,6 +1,3 @@
-import laika.ast.Path.Root
-import laika.helium.config.Favicon
-
 val Scala212 = "2.12.15"
 val Scala213 = "2.13.8"
 val Scala3 = "3.0.2"
@@ -51,14 +48,6 @@ lazy val docs = project
   .in(file("site"))
   .dependsOn(cross.jvm)
   .enablePlugins(TypelevelSitePlugin)
-  .settings(
-    // temporary workaround, see https://github.com/typelevel/sbt-typelevel/issues/121
-    tlSiteHeliumConfig ~= {
-      _.site.favIcons(
-        Favicon.internal(Root / "images" / "favicon.png", "32x32")
-      )
-    }
-  )
 
 val JDK8 = JavaSpec.temurin("8")
 val JDK17 = JavaSpec.temurin("17")
