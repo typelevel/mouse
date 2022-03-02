@@ -25,7 +25,7 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform)
       "org.scalameta" %%% "munit" % "0.7.29" % Test,
       "org.scalameta" %%% "munit-scalacheck" % "0.7.29" % Test
     ),
-    licenses := List("MIT license" -> url("http://opensource.org/licenses/MIT")),
+    ThisBuild / licenses := List("MIT license" -> url("http://opensource.org/licenses/MIT")),
     developers := List(
       Developer("benhutchison", "Ben Hutchison", "brhutchison@gmail.com", url = url("https://github.com/benhutchison"))
     ),
