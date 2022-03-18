@@ -4,6 +4,8 @@ import cats.data.OptionT
 import cats.data.EitherT
 import cats.syntax.either._
 
+import scala.util.{Failure, Success, Try}
+
 class FOptionSyntaxTest extends MouseSuite {
   test("FOptionSyntax.cata") {
     assertEquals(List(Option(1)).cata(0, _ => 2), List(2))
@@ -74,6 +76,22 @@ class FOptionSyntaxTest extends MouseSuite {
   test("FOptionSyntax.getOrElse") {
     assertEquals(List(Option(1)).getOrElse(0), List(1))
     assertEquals(List(Option.empty[Int]).getOrElse(0), List(0))
+  }
+
+  test("FOptionSyntax.getOrRaise") {
+    val ex1 = new RuntimeException("BOOM 1!")
+    val ex2 = new RuntimeException("BOOM 2!")
+
+    assertEquals(Try(Option(1)).getOrRaise(ex1), Success(1))
+    assertEquals(Try(Option.empty[Int]).getOrRaise(ex1), Failure(ex1))
+    assertEquals(Try[Option[Int]](throw ex1).getOrRaise(ex2), Failure(ex1))
+  }
+
+  test("FOptionSyntax.getOrRaiseMsg") {
+    val ex1 = new RuntimeException("BOOM 1!")
+    assertEquals(Try(Option(1)).getOrRaiseMsg("BOOM!"), Success(1))
+    assertEquals(Try(Option.empty[Int]).getOrRaiseMsg("BOOM!").failed.map(_.getMessage), Success("BOOM!"))
+    assertEquals(Try[Option[Int]](throw ex1).getOrRaiseMsg("BOOM!"), Failure(ex1))
   }
 
   test("FOptionSyntax.getOrElseF") {

@@ -1,7 +1,7 @@
 package mouse
 
 import cats.data.EitherT
-import cats.{Applicative, FlatMap, Functor, Monad, Traverse}
+import cats.{Applicative, FlatMap, Functor, Monad, MonadError, MonadThrow, Traverse}
 import cats.instances.either._
 
 trait FEitherSyntax {
@@ -41,6 +41,12 @@ final class FEitherOps[F[_], L, R](private val felr: F[Either[L, R]]) extends An
 
   def getOrElseIn[A >: R](right: => A)(implicit F: Functor[F]): F[A] =
     F.map(felr)(_.fold(_ => right, identity))
+
+  def getOrRaise[E](e: => E)(implicit F: MonadError[F, _ >: E]): F[R] =
+    getOrElseF(F.raiseError(e))
+
+  def getOrRaiseMsg(msg: => String)(implicit F: MonadThrow[F]): F[R] =
+    getOrRaise[Throwable](new RuntimeException(msg))
 
   def getOrElseF[A >: R](right: => F[A])(implicit F: Monad[F]): F[A] =
     F.flatMap(felr)(_.fold(_ => right, F.pure))

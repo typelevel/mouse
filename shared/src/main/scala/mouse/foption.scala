@@ -2,7 +2,7 @@ package mouse
 
 import cats.data.EitherT
 import cats.data.OptionT
-import cats.{Applicative, FlatMap, Functor, Monad, Traverse}
+import cats.{Applicative, FlatMap, Functor, Monad, MonadError, MonadThrow, Traverse}
 
 trait FOptionSyntax {
   implicit final def FOptionSyntaxMouse[F[_], A](foa: F[Option[A]]): FOptionOps[F, A] = new FOptionOps(foa)
@@ -69,6 +69,12 @@ final class FOptionOps[F[_], A](private val foa: F[Option[A]]) extends AnyVal {
 
   def getOrElse[B >: A](a: => B)(implicit F: Functor[F]): F[B] =
     F.map(foa)(_.fold(a)(identity))
+
+  def getOrRaise[E](e: => E)(implicit F: MonadError[F, _ >: E]): F[A] =
+    getOrElseF(F.raiseError(e))
+
+  def getOrRaiseMsg(msg: => String)(implicit F: MonadThrow[F]): F[A] =
+    getOrRaise(new RuntimeException(msg))
 
   def getOrElseF[B >: A](fa: => F[B])(implicit F: Monad[F]): F[B] =
     F.flatMap(foa)(_.fold(fa)(F.pure))
