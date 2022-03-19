@@ -3,6 +3,8 @@ package mouse
 import cats.data.EitherT
 import cats.syntax.either._
 
+import scala.util.{Failure, Success, Try}
+
 class FEitherSyntaxTest extends MouseSuite {
   private val rightValue = List(42.asRight[String])
   private val leftValue = List("42".asLeft[Int])
@@ -40,6 +42,22 @@ class FEitherSyntaxTest extends MouseSuite {
   test("FEitherSyntax.getOrElseIn") {
     assertEquals(rightValue.getOrElseIn(0), List(42))
     assertEquals(leftValue.getOrElseIn(0), List(0))
+  }
+
+  test("FEitherSyntax.getOrRaise") {
+    val ex1 = new RuntimeException("BOOM 1!")
+    val ex2 = new RuntimeException("BOOM 2!")
+
+    assertEquals(Try(1.asRight).getOrRaise(ex1), Success(1))
+    assertEquals(Try("ERROR".asLeft).getOrRaise(ex1), Failure(ex1))
+    assertEquals(Try[Either[String, Int]](throw ex1).getOrRaise(ex2), Failure(ex1))
+  }
+
+  test("FEitherSyntax.getOrRaiseMsg") {
+    val ex1 = new RuntimeException("BOOM 1!")
+    assertEquals(Try(1.asRight).getOrRaiseMsg("BOOM!"), Success(1))
+    assertEquals(Try("ERROR".asLeft).getOrRaiseMsg("BOOM!").failed.map(_.getMessage), Success("BOOM!"))
+    assertEquals(Try[Either[String, Int]](throw ex1).getOrRaiseMsg("BOOM!"), Failure(ex1))
   }
 
   test("FEitherSyntax.getOrElseF") {
