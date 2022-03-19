@@ -13,6 +13,9 @@ ThisBuild / tlSiteApiUrl := Some(url("https://www.javadoc.io/doc/org.typelevel/m
 
 lazy val root = project
   .in(file("."))
+  .settings(
+    name := "mouse"
+  )
   .aggregate(js, jvm)
   .enablePlugins(NoPublishPlugin)
 
