@@ -65,13 +65,13 @@ res0.cata(msg => s"Message received: ${msg}", "No message")
 
 val t1 = scala.util.Try(new java.net.URL("https://www.github.com"))
 
-t1.cata(msg => s"URL is valid!", error => s"URL is invalid: ${error.getMessage}")
+t1.cata(_ => s"URL is valid!", error => s"URL is invalid: ${error.getMessage}")
 
 t1.toEither
 
 val t2 = scala.util.Try(new java.net.URL("https//www.github.com"))
 
-t2.cata(msg => s"URL is valid!", error => s"URL is invalid: ${error.getMessage}")
+t2.cata(_ => s"URL is valid!", error => s"URL is invalid: ${error.getMessage}")
 
 t2.toEither
 
