@@ -24,7 +24,6 @@ package mouse
 import cats.data.EitherT
 import cats.data.OptionT
 import cats.syntax.option._
-import cats.syntax.functor._
 import cats.syntax.either._
 import cats.{~>, Id}
 

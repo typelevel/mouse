@@ -33,11 +33,12 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform)
     developers := List(
       Developer("benhutchison", "Ben Hutchison", "brhutchison@gmail.com", url = url("https://github.com/benhutchison"))
     ),
-    scalacOptions ++= Seq("-feature", "-deprecation", "-language:implicitConversions", "-language:higherKinds"),
+    scalacOptions ++=
+      (if (tlIsScala3.value) Nil
+       else Seq("-language:implicitConversions", "-language:higherKinds")),
     scalacOptions ++= {
       scalaVersion.value match {
         case v if v.startsWith("2.12") => Seq("-Ypartial-unification")
-        case v if v.startsWith("3")    => Seq("-source", "3.0-migration")
         case _                         => Nil
       }
     },

@@ -22,7 +22,6 @@
 package mouse
 
 import java.net.{MalformedURLException, URI, URISyntaxException, URL}
-import cats.Eq
 import cats.syntax.all._
 
 import java.util.UUID
@@ -33,13 +32,6 @@ class StringJvmTests extends MouseSuite with StringJvmSyntax {
   }
 
   test("parseURL") {
-    implicit val urlEq: Eq[URL] = Eq.fromUniversalEquals
-    implicit val malformedURLExceptionEq: Eq[MalformedURLException] =
-      new Eq[MalformedURLException] {
-        override def eqv(x: MalformedURLException, y: MalformedURLException): Boolean =
-          x.getMessage == y.getMessage
-      }
-
     assertEquals(
       "http://example.com".parseURL,
       new URL("http://example.com").asRight[MalformedURLException]
