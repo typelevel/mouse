@@ -14,7 +14,8 @@ ThisBuild / tlSiteApiUrl := Some(url("https://www.javadoc.io/doc/org.typelevel/m
 lazy val root = project
   .in(file("."))
   .settings(
-    name := "mouse"
+    name := "mouse",
+    licenses := List(License.MIT)
   )
   .aggregate(js, jvm)
   .enablePlugins(NoPublishPlugin)
@@ -32,16 +33,19 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform)
     developers := List(
       Developer("benhutchison", "Ben Hutchison", "brhutchison@gmail.com", url = url("https://github.com/benhutchison"))
     ),
-    scalacOptions ++= Seq("-feature", "-deprecation", "-language:implicitConversions", "-language:higherKinds"),
+    scalacOptions ++=
+      (if (tlIsScala3.value) Nil
+       else Seq("-language:implicitConversions", "-language:higherKinds")),
     scalacOptions ++= {
       scalaVersion.value match {
         case v if v.startsWith("2.12") => Seq("-Ypartial-unification")
-        case v if v.startsWith("3")    => Seq("-source", "3.0-migration")
         case _                         => Nil
       }
     },
     mimaPreviousArtifacts ~= { _.filterNot(_.revision == "1.0.1") },
-    Compile / sourceGenerators += (Compile / sourceManaged).map(Boilerplate.gen).taskValue
+    Compile / sourceGenerators += (Compile / sourceManaged).map(Boilerplate.gen).taskValue,
+    licenses := List(License.MIT),
+    startYear := Some(2016)
   )
   .jsSettings(
     crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2"))

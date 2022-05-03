@@ -30,6 +30,11 @@ jobs:
         os: [ubuntu-latest]
         scala: [2.12.15, 3.0.2, 2.13.8]
         java: [temurin@8, temurin@17]
+        exclude:
+          - scala: 2.12.15
+            java: temurin@17
+          - scala: 3.0.2
+            java: temurin@17
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout current branch (full)
@@ -86,6 +91,10 @@ jobs:
 
       - name: Check formatting
         run: sbt '++${{ matrix.scala }}' scalafmtCheckAll 'project /' scalafmtSbtCheck
+
+      - name: Check headers and formatting
+        if: matrix.java == 'temurin@8'
+        run: sbt '++${{ matrix.scala }}' headerCheckAll scalafmtCheckAll 'project /' scalafmtSbtCheck
 
       - name: Test
         run: sbt '++${{ matrix.scala }}' test
@@ -179,26 +188,6 @@ jobs:
           name: target-${{ matrix.os }}-${{ matrix.java }}-2.12.15
 
       - name: Inflate target directories (2.12.15)
-        run: |
-          tar xf targets.tar
-          rm targets.tar
-
-      - name: Download target directories (2.12.15)
-        uses: actions/download-artifact@v2
-        with:
-          name: target-${{ matrix.os }}-${{ matrix.java }}-2.12.15
-
-      - name: Inflate target directories (2.12.15)
-        run: |
-          tar xf targets.tar
-          rm targets.tar
-
-      - name: Download target directories (3.0.2)
-        uses: actions/download-artifact@v2
-        with:
-          name: target-${{ matrix.os }}-${{ matrix.java }}-3.0.2
-
-      - name: Inflate target directories (3.0.2)
         run: |
           tar xf targets.tar
           rm targets.tar
