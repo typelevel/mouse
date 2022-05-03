@@ -14,7 +14,8 @@ ThisBuild / tlSiteApiUrl := Some(url("https://www.javadoc.io/doc/org.typelevel/m
 lazy val root = project
   .in(file("."))
   .settings(
-    name := "mouse"
+    name := "mouse",
+    licenses := List(License.MIT)
   )
   .aggregate(js, jvm)
   .enablePlugins(NoPublishPlugin)
@@ -41,7 +42,8 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform)
       }
     },
     mimaPreviousArtifacts ~= { _.filterNot(_.revision == "1.0.1") },
-    Compile / sourceGenerators += (Compile / sourceManaged).map(Boilerplate.gen).taskValue
+    Compile / sourceGenerators += (Compile / sourceManaged).map(Boilerplate.gen).taskValue,
+    licenses := List(License.MIT)
   )
   .jsSettings(
     crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2"))
