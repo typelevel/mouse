@@ -162,7 +162,7 @@
 </span><span class="keyword">val</span><span> </span><span class="identifier">t1</span><span> = </span><span class="identifier">scala</span><span>.</span><span class="identifier">util</span><span>.</span><span class="type-name">Try</span><span>(</span><span class="keyword">new</span><span> </span><span class="identifier">java</span><span>.</span><span class="identifier">net</span><span>.</span><span class="type-name">URL</span><span>(</span><span class="string-literal">&quot;https://www.github.com&quot;</span><span>))
 </span><span class="comment">// t1: util.Try[java.net.URL] = Success(value = https://www.github.com)
 </span><span>
-</span><span class="identifier">t1</span><span>.</span><span class="identifier">cata</span><span>(</span><span class="identifier">msg</span><span> =&gt; </span><span class="string-literal">s&quot;URL is valid!&quot;</span><span>, </span><span class="identifier">error</span><span> =&gt; </span><span class="string-literal">s&quot;URL is invalid: </span><span class="substitution">${error.getMessage}</span><span class="string-literal">&quot;</span><span>)
+</span><span class="identifier">t1</span><span>.</span><span class="identifier">cata</span><span>(</span><span class="identifier">_</span><span> =&gt; </span><span class="string-literal">s&quot;URL is valid!&quot;</span><span>, </span><span class="identifier">error</span><span> =&gt; </span><span class="string-literal">s&quot;URL is invalid: </span><span class="substitution">${error.getMessage}</span><span class="string-literal">&quot;</span><span>)
 </span><span class="comment">// res6: String = &quot;URL is valid!&quot;
 </span><span>
 </span><span class="identifier">t1</span><span>.</span><span class="identifier">toEither</span><span>
@@ -175,7 +175,7 @@
 //   exception = java.net.MalformedURLException: no protocol: https//www.github.com
 // )
 </span><span>
-</span><span class="identifier">t2</span><span>.</span><span class="identifier">cata</span><span>(</span><span class="identifier">msg</span><span> =&gt; </span><span class="string-literal">s&quot;URL is valid!&quot;</span><span>, </span><span class="identifier">error</span><span> =&gt; </span><span class="string-literal">s&quot;URL is invalid: </span><span class="substitution">${error.getMessage}</span><span class="string-literal">&quot;</span><span>)
+</span><span class="identifier">t2</span><span>.</span><span class="identifier">cata</span><span>(</span><span class="identifier">_</span><span> =&gt; </span><span class="string-literal">s&quot;URL is valid!&quot;</span><span>, </span><span class="identifier">error</span><span> =&gt; </span><span class="string-literal">s&quot;URL is invalid: </span><span class="substitution">${error.getMessage}</span><span class="string-literal">&quot;</span><span>)
 </span><span class="comment">// res8: String = &quot;URL is invalid: no protocol: https//www.github.com&quot;
 </span><span>
 </span><span class="identifier">t2</span><span>.</span><span class="identifier">toEither</span><span>
