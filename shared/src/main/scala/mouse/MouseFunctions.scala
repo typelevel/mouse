@@ -21,6 +21,8 @@
 
 package mouse
 
+import scala.annotation.nowarn
+
 trait MouseFunctions {
 
   /**
@@ -30,6 +32,6 @@ trait MouseFunctions {
    * @param a
    *   - the value to be evaluated and ignored.
    */
-  def ignore(a: Any): Unit = ()
+  def ignore(@nowarn a: Any): Unit = ()
 
 }
