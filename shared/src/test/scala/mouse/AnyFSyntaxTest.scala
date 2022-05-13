@@ -28,25 +28,25 @@ import cats.syntax.either._
 import cats.{~>, Id}
 
 class AnyFSyntaxTest extends MouseSuite {
-  private val emptyK = new (List ~> List) {
+  private val emptyK = new List ~> List {
     def apply[A](x: List[A]) = Nil
   }
 
-  private val double = new (List ~> List) {
+  private val double = new List ~> List {
     def apply[A](x: List[A]) = x ::: x
   }
 
   private type E[B] = Either[String, B]
 
-  private val toRight = new (Option ~> E) {
+  private val toRight = new Option ~> E {
     def apply[A](x: Option[A]) = x.toRight("foo")
   }
 
-  private val headOption = new (List ~> Option) {
+  private val headOption = new List ~> Option {
     def apply[A](x: List[A]) = x.headOption
   }
 
-  private val optionGet = new (Option ~> Id) {
+  private val optionGet = new Option ~> Id {
     def apply[A](x: Option[A]) = x.get
   }
 

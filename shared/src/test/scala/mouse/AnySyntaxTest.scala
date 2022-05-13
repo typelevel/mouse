@@ -36,7 +36,7 @@ class AnySyntaxTest extends MouseSuite with MouseFunctions {
 
     assertEquals(ignore(true), ())
 
-    assertEquals(1200 |> (_ * 2) |> (_ - 5) |> (_ / 3), ((1200 * 2) - 5) / 3)
+    assertEquals(1200 |> (_ * 2) |> (_ - 5) |> (_ / 3), (1200 * 2 - 5) / 3)
 
     assertEquals("anythingAtAll" |> ignore, ())
   }

@@ -45,28 +45,28 @@ class TupleSyntaxTest extends MouseSuite {
   private class A21()
   private class A22()
 
-  private val a1 = new A1()
-  private val a2 = new A2()
-  private val a3 = new A3()
-  private val a4 = new A4()
-  private val a5 = new A5()
-  private val a6 = new A6()
-  private val a7 = new A7()
-  private val a8 = new A8()
-  private val a9 = new A9()
-  private val a10 = new A10()
-  private val a11 = new A11()
-  private val a12 = new A12()
-  private val a13 = new A13()
-  private val a14 = new A14()
-  private val a15 = new A15()
-  private val a16 = new A16()
-  private val a17 = new A17()
-  private val a18 = new A18()
-  private val a19 = new A19()
-  private val a20 = new A20()
-  private val a21 = new A21()
-  private val a22 = new A22()
+  private val a1 = new A1
+  private val a2 = new A2
+  private val a3 = new A3
+  private val a4 = new A4
+  private val a5 = new A5
+  private val a6 = new A6
+  private val a7 = new A7
+  private val a8 = new A8
+  private val a9 = new A9
+  private val a10 = new A10
+  private val a11 = new A11
+  private val a12 = new A12
+  private val a13 = new A13
+  private val a14 = new A14
+  private val a15 = new A15
+  private val a16 = new A16
+  private val a17 = new A17
+  private val a18 = new A18
+  private val a19 = new A19
+  private val a20 = new A20
+  private val a21 = new A21
+  private val a22 = new A22
 
   test("Tuple2Syntax.head") {
     assertEquals((a1, a2).head, a1)

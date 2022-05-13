@@ -24,7 +24,7 @@ package mouse
 trait PartialFunctionLift {
 
   def liftEither[A]: PartialFunctionLift.LiftEitherPartiallyApplied[A] =
-    new PartialFunctionLift.LiftEitherPartiallyApplied()
+    new PartialFunctionLift.LiftEitherPartiallyApplied
 
 }
 object PartialFunctionLift {
