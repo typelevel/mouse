@@ -61,15 +61,6 @@ val JDK17 = JavaSpec.temurin("17")
 
 ThisBuild / githubWorkflowJavaVersions := Seq(JDK8, JDK17)
 
-ThisBuild / githubWorkflowBuild ~= { steps =>
-  val formatStep = WorkflowStep
-    .Sbt(
-      List("scalafmtCheckAll", "project /", "scalafmtSbtCheck"),
-      name = Some("Check formatting")
-    )
-  formatStep +: steps
-}
-
 lazy val jvm = cross.jvm
 lazy val js = cross.js
 
