@@ -89,9 +89,6 @@ jobs:
       - name: Check that workflows are up to date
         run: sbt '++${{ matrix.scala }}' 'project /' githubWorkflowCheck
 
-      - name: Check formatting
-        run: sbt '++${{ matrix.scala }}' scalafmtCheckAll 'project /' scalafmtSbtCheck
-
       - name: Check headers and formatting
         if: matrix.java == 'temurin@8'
         run: sbt '++${{ matrix.scala }}' headerCheckAll scalafmtCheckAll 'project /' scalafmtSbtCheck
