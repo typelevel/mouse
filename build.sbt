@@ -1,6 +1,6 @@
 val Scala212 = "2.12.16"
 val Scala213 = "2.13.8"
-val Scala3 = "3.0.2"
+val Scala3 = "3.1.2"
 
 ThisBuild / organization := "org.typelevel"
 ThisBuild / organizationName := "Typelevel"
