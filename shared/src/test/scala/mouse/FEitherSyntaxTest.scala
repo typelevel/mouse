@@ -148,4 +148,19 @@ class FEitherSyntaxTest extends MouseSuite {
   test("FEitherSyntax.asRightF") {
     assertEquals(FEitherSyntax.asRightF[List, String, Int](42), List(Right(42)))
   }
+
+  test("FEitherSyntax.bimapIn") {
+    assertEquals(rightValue.bimapIn(_.toInt, _.toString), List("42".asRight[Int]))
+    assertEquals(leftValue.bimapIn(_.toInt, _.toString), List(42.asLeft[String]))
+  }
+
+  test("FEitherSyntax.swapIn") {
+    assertEquals(rightValue.swapIn, List(42.asLeft[String]))
+    assertEquals(leftValue.swapIn, List("42".asRight[Int]))
+  }
+
+  test("FEitherSyntax.mergeIn") {
+    assertEquals(List(42.asRight[Int]).mergeIn, List(42))
+    assertEquals(List("42".asLeft[String]).mergeIn, List("42"))
+  }
 }

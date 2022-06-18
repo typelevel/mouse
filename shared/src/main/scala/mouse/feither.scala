@@ -22,8 +22,8 @@
 package mouse
 
 import cats.data.EitherT
-import cats.{Applicative, FlatMap, Functor, Monad, MonadError, MonadThrow, Traverse}
 import cats.instances.either._
+import cats.{Applicative, FlatMap, Functor, Monad, MonadError, MonadThrow, Traverse}
 
 trait FEitherSyntax {
   implicit final def FEitherSyntaxMouse[F[_], L, R](felr: F[Either[L, R]]): FEitherOps[F, L, R] =
@@ -104,6 +104,18 @@ final class FEitherOps[F[_], L, R](private val felr: F[Either[L, R]]) extends An
 
   def mapIn[A](f: R => A)(implicit F: Functor[F]): F[Either[L, A]] =
     F.map(felr)(_.map(f))
+
+  def bimapIn[A, B](left: L => A, right: R => B)(implicit F: Functor[F]): F[Either[A, B]] =
+    F.map(felr) {
+      case Left(value)  => Left(left(value))
+      case Right(value) => Right(right(value))
+    }
+
+  def swapIn(implicit F: Functor[F]): F[Either[R, L]] =
+    F.map(felr)(_.swap)
+
+  def mergeIn[A >: L](implicit ev: R <:< A, F: Functor[F]): F[A] =
+    F.map(felr)(_.fold(identity, ev))
 
   def orElseIn[A >: L, B >: R](f: => Either[A, B])(implicit F: Functor[F]): F[Either[A, B]] =
     F.map(felr) {
