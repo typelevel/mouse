@@ -115,6 +115,12 @@ final class FOptionOps[F[_], A](private val foa: F[Option[A]]) extends AnyVal {
       case x    => F.pure(x)
     }
 
+  def toRightIn[L](left: => L)(implicit F: Functor[F]): F[Either[L, A]] =
+    F.map(foa) {
+      case None    => Left(left)
+      case Some(a) => Right(a)
+    }
+
   def traverseIn[G[_]: Applicative, B](f: A => G[B])(implicit F: Functor[F]): F[G[Option[B]]] =
     F.map(foa)(a => Traverse[Option].traverse(a)(f))
 

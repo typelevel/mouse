@@ -126,6 +126,11 @@ class FEitherSyntaxTest extends MouseSuite {
     assertEquals(leftValue.orElseF(List(0.asRight[String])), List(0.asRight[String]))
   }
 
+  test("FEitherSyntax.toOptionIn") {
+    assertEquals(rightValue.toOptionIn, List(Option(42)))
+    assertEquals(leftValue.toOptionIn, List(Option.empty[Int]))
+  }
+
   test("FEitherSyntax.traverseIn") {
     assertEquals(rightValue.traverseIn(_ => Option(1)), List(Option(1.asRight[String])))
     assertEquals(leftValue.traverseIn(_ => Option(0)), List(Option("42".asLeft[Int])))
