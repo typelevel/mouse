@@ -129,6 +129,9 @@ final class FEitherOps[F[_], L, R](private val felr: F[Either[L, R]]) extends An
       case _              => f
     }
 
+  def toOptionIn(implicit F: Functor[F]): F[Option[R]] =
+    F.map(felr)(_.toOption)
+
   def traverseIn[G[_]: Applicative, A](f: R => G[A])(implicit F: Functor[F]): F[G[Either[L, A]]] =
     F.map(felr)(elr => catsStdInstancesForEither[L].traverse(elr)(f))
 

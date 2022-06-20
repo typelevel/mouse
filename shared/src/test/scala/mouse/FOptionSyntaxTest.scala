@@ -135,6 +135,12 @@ class FOptionSyntaxTest extends MouseSuite {
     assertEquals(List(Option.empty[Int]).orElseF(List(Option(0))), List(Option(0)))
   }
 
+  test("FOptionSyntax.toRightIn") {
+    assertEquals(List(Option(1)).toRightIn("none"), List(1.asRight[String]))
+    assertEquals(List.empty[Option[Int]].toRightIn("none"), List.empty[Either[String, Int]])
+    assertEquals(List(Option.empty[Int]).toRightIn("none"), List("none".asLeft[Int]))
+  }
+
   test("FOptionSyntax.traverseIn") {
     assertEquals(List(Option(1)).traverseIn(a => List(a * 2)), List(List(Option(2))))
     assertEquals(List.empty[Option[Int]].traverseIn(a => List(a * 2)), List.empty[List[Option[Int]]])
