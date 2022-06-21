@@ -135,10 +135,28 @@ class FOptionSyntaxTest extends MouseSuite {
     assertEquals(List(Option.empty[Int]).orElseF(List(Option(0))), List(Option(0)))
   }
 
+  test("FOptionSyntax.toLeftIn") {
+    assertEquals(List(Option(1)).toLeftIn("right"), List(1.asLeft[String]))
+    assertEquals(List.empty[Option[Int]].toLeftIn("right"), List.empty[Either[Int, String]])
+    assertEquals(List(Option.empty[Int]).toLeftIn("right"), List("right".asRight[Int]))
+  }
+
+  test("FOptionSyntax.toLeftInF") {
+    assertEquals(List(Option(1)).toLeftInF(List("right")), List(1.asLeft[String]))
+    assertEquals(List.empty[Option[Int]].toLeftInF(List("right")), List.empty[Either[Int, String]])
+    assertEquals(List(Option.empty[Int]).toLeftInF(List("right")), List("right".asRight[Int]))
+  }
+
   test("FOptionSyntax.toRightIn") {
     assertEquals(List(Option(1)).toRightIn("none"), List(1.asRight[String]))
     assertEquals(List.empty[Option[Int]].toRightIn("none"), List.empty[Either[String, Int]])
     assertEquals(List(Option.empty[Int]).toRightIn("none"), List("none".asLeft[Int]))
+  }
+
+  test("FOptionSyntax.toRightInF") {
+    assertEquals(List(Option(1)).toRightInF(List("none")), List(1.asRight[String]))
+    assertEquals(List.empty[Option[Int]].toRightInF(List("none")), List.empty[Either[String, Int]])
+    assertEquals(List(Option.empty[Int]).toRightInF(List("none")), List("none".asLeft[Int]))
   }
 
   test("FOptionSyntax.traverseIn") {
