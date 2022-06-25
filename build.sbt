@@ -48,7 +48,7 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform)
     startYear := Some(2016)
   )
   .jsSettings(
-    crossScalaVersions := (ThisBuild / crossScalaVersions).value.filter(_.startsWith("2"))
+    tlVersionIntroduced := Map("3" -> "1.0.13")
   )
 
 lazy val docs = project
