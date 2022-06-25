@@ -1,6 +1,6 @@
 val Scala212 = "2.12.16"
 val Scala213 = "2.13.8"
-val Scala3 = "3.0.2"
+val Scala3 = "3.1.2"
 
 ThisBuild / organization := "org.typelevel"
 ThisBuild / organizationName := "Typelevel"
@@ -25,7 +25,7 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform)
   .settings(
     name := "mouse",
     libraryDependencies ++= Seq(
-      "org.typelevel" %%% "cats-core" % "2.7.0",
+      "org.typelevel" %%% "cats-core" % "2.8.0",
       "org.scalameta" %%% "munit" % "0.7.29" % Test,
       "org.scalameta" %%% "munit-scalacheck" % "0.7.29" % Test
     ),
