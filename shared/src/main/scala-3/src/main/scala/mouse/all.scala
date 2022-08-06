@@ -38,3 +38,5 @@ trait AllSharedSyntax
     with PartialFunctionLift
     with StringSyntax
     with TrySyntax
+    with SetSyntax
+    with ListSyntax

@@ -39,3 +39,5 @@ trait AllSharedSyntax
     with StringSyntax
     with TrySyntax
     with TupleSyntax
+    with SetSyntax
+    with ListSyntax

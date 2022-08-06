@@ -37,4 +37,6 @@ package object mouse extends MouseFunctions {
   object string extends StringSyntax with StringJvmSyntax
   object `try` extends TrySyntax
   object tuple extends TupleSyntax
+  object list extends ListSyntax
+  object set extends SetSyntax
 }

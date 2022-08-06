@@ -28,9 +28,11 @@ Mouse includes enrichments for:
 - [F\[G\[H\[A\]\]\]](./shared/src/main/scala/mouse/fnested.scala)
 - [F\[TupleN\]](./shared/src/main/scala/mouse/ftuple.scala)
 - [Int](./shared/src/main/scala/mouse/int.scala)
+- [List](./shared/src/main/scala/mouse/list.scala)
 - [Long](./shared/src/main/scala/mouse/long.scala)
 - [Map](./shared/src/main/scala/mouse/map.scala)
 - [Option](./shared/src/main/scala/mouse/option.scala)
+- [Set](./shared/src/main/scala/mouse/set.scala)
 - [String](./shared/src/main/scala/mouse/string.scala)
 - [Try](./shared/src/main/scala/mouse/try.scala)
 - [Tuple](./shared/src/main/scala-2.x/src/main/scala/mouse/tuple.scala)
@@ -119,6 +121,18 @@ tupleHead: Int = 1
 
 scala> val tupleLast = (1, 2, 4, 8).last
 tupleHead: Int = 8
+
+scala> Set(0).tailOrEmpty
+val res3: Set[Int] = Set()
+
+scala> Nil.tailOrEmpty
+val res1: List[Nothing] = List()
+
+scala> Set(0).tailOption
+val res4: Option[Set[Int]] = None
+
+scala> List(0,1,2).tailOption
+val res5: Option[List[Int]] = Some(List(1, 2))
 ```
 
 ## Scope of Library
