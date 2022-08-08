@@ -7,7 +7,7 @@ trait SetSyntax {
 final class SetOps[A](private val sa: Set[A]) extends AnyVal {
 
   /**
-   * `Set.empty[A].tail` throws an exception, whereas `Set.empty[A].safeTail` produces `Set.empty[A]`
+   * `Set.empty[A].tail` throws an exception, whereas `Set.empty[A].tailOrEmpty` produces `Set.empty[A]`
    */
   @inline def tailOrEmpty: Set[A] = sa.drop(1)
 
