@@ -1,7 +1,7 @@
 package mouse
 
 trait SetSyntax {
-  implicit final def setyntaxMouse[A](set: Set[A]): SetOps[A] = new SetOps[A](set)
+  implicit final def setSyntaxMouse[A](set: Set[A]): SetOps[A] = new SetOps[A](set)
 }
 
 final class SetOps[A](private val sa: Set[A]) extends AnyVal {
