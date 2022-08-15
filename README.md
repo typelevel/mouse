@@ -129,10 +129,10 @@ scala> Nil.tailOrEmpty
 val res1: List[Nothing] = List()
 
 scala> Set(0).tailOption
-val res4: Option[Set[Int]] = None
+val res4: Option[cats.data.NonEmptySet[Int]] = None
 
 scala> List(0,1,2).tailOption
-val res5: Option[List[Int]] = Some(List(1, 2))
+val res5: Option[cats.data.NonEmptyList[Int]] = Some(NonEmptyList(1, 2))
 ```
 
 ## Scope of Library
