@@ -31,7 +31,7 @@ trait SetSyntax {
 final class SetOps[A](private val sa: Set[A]) extends AnyVal {
 
   /**
-   * A safe counterpart to [[Set.tail]] that returns empty `Set[A]` for an empty set.
+   * A safe counterpart to `Set.tail` that returns empty `Set[A]` for an empty set.
    */
   @inline def tailOrEmpty: Set[A] = sa.drop(1)
 
