@@ -21,6 +21,8 @@
 
 package mouse
 
+import cats.data.NonEmptyList
+
 trait ListSyntax {
   implicit final def listSyntaxMouse[A](list: List[A]): ListOps[A] = new ListOps[A](list)
 }
@@ -33,8 +35,8 @@ final class ListOps[A](private val list: List[A]) extends AnyVal {
   @inline def tailOrEmpty: List[A] = list.drop(1)
 
   /**
-   * Some if there's elements in the tail, None if there's not
+   * Returns `Some` if the tail is non-empty, otherwise `None`.
    */
-  @inline def tailOption: Option[List[A]] = Option(tailOrEmpty).filterNot(_.isEmpty)
+  @inline def tailOption: Option[NonEmptyList[A]] = NonEmptyList.fromList(list.drop(1))
 
 }

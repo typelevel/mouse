@@ -21,6 +21,8 @@
 
 package mouse
 
+import cats.data.NonEmptyList
+
 class ListSyntaxTest extends MouseSuite {
   test("ListSyntax.tailOrEmpty") {
     assertEquals(List.empty[Int].tailOrEmpty, List.empty[Int])
@@ -29,8 +31,8 @@ class ListSyntaxTest extends MouseSuite {
   }
 
   test("ListSyntax.tailOption") {
-    assertEquals(List.empty[Int].tailOption, Option.empty[List[Int]])
-    assertEquals(List(0).tailOption, Option.empty[List[Int]])
-    assertEquals(List(0, 1, 2).tailOption, Some(List(1, 2)))
+    assertEquals(List.empty[Int].tailOption, None)
+    assertEquals(List(0).tailOption, None)
+    assertEquals(List(0, 1, 2).tailOption, Some(NonEmptyList.of(1, 2)))
   }
 }
