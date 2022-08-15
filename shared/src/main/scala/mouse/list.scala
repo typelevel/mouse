@@ -28,7 +28,7 @@ trait ListSyntax {
 final class ListOps[A](private val list: List[A]) extends AnyVal {
 
   /**
-   * `Nil.tail` throws a runtime exception, whereas `Nil.tailOrEmpty` produces `Nil`
+   * A safe counterpart to [[List.tail]] that returns `Nil` for an empty list.
    */
   @inline def tailOrEmpty: List[A] = list.drop(1)
 
