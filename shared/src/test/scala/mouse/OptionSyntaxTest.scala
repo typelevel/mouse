@@ -23,6 +23,7 @@ package mouse
 
 import scala.util.{Failure, Success}
 
+@annotation.nowarn("cat=deprecation")
 class OptionSyntaxTest extends MouseSuite {
   implicit class ExtraTest[A](a: A) {
     def shouldBeA[T](implicit ev: T =:= A): Unit = ()
@@ -46,7 +47,7 @@ class OptionSyntaxTest extends MouseSuite {
     Option(3).right("S").shouldBeA[Either[String, Int]]
   }
 
-  test("OptionSyntax.") {
+  test("OptionSyntax.left") {
     assertEquals(Option(3).left("S"), Option(3).toLeft("S"))
     assertEquals(None.left("S"), None.toLeft("S"))
     Option(3).left("S").shouldBeA[Either[Int, String]]

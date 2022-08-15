@@ -39,11 +39,13 @@ final class OptionOps[A](private val oa: Option[A]) extends AnyVal {
    * Same as oa.toRight except that it fixes the type to Either[B, A] On Scala prior to 2.12, toRight returns
    * `Serializable with Product with Either[B, A]`
    */
+  @deprecated("Use toRight instead", "1.2.0")
   @inline def right[B](b: => B): Either[B, A] = oa.toRight(b)
 
   /**
    * Same as oa.toLeft except that it fixes the type to Either[A, B] On Scala prior to 2.12, toLeft returns
    * `Serializable with Product with Either[A, B]`
    */
+  @deprecated("Use toLeft instead", "1.2.0")
   @inline def left[B](b: => B): Either[A, B] = oa.toLeft(b)
 }
