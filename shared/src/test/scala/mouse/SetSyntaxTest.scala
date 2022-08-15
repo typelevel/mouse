@@ -21,6 +21,8 @@
 
 package mouse
 
+import cats.data.NonEmptySet
+
 class SetSyntaxTest extends MouseSuite {
   test("SetSyntax.tailOrEmpty") {
     assertEquals(Set.empty[Int].tailOrEmpty, Set.empty[Int])
@@ -29,8 +31,8 @@ class SetSyntaxTest extends MouseSuite {
   }
 
   test("SetSyntax.tailOption") {
-    assertEquals(Set.empty[Int].tailOption, Option.empty[Set[Int]])
-    assertEquals(Set(0).tailOption, Option.empty[Set[Int]])
-    assertEquals(Set(0, 1, 2).tailOption, Some(Set(1, 2)))
+    assertEquals(Set.empty[Int].tailOption, None)
+    assertEquals(Set(0).tailOption, None)
+    assertEquals(Set(0, 1, 2).tailOption, Some(NonEmptySet.of(1, 2)))
   }
 }
