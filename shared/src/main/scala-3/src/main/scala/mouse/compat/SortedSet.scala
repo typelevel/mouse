@@ -19,23 +19,11 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package object mouse extends MouseFunctions {
-  object all extends AllSharedSyntax with AllJsSyntax
-  object any extends AnySyntax
-  object anyf extends AnyFSyntax
-  object boolean extends BooleanSyntax
-  object double extends DoubleSyntax
-  object fboolean extends FBooleanSyntax
-  object feither extends FEitherSyntax
-  object fnested extends FNestedSyntax
-  object foption extends FOptionSyntax
-  object ftuple extends FTupleSyntax
-  object int extends IntSyntax
-  object list extends ListSyntax
-  object long extends LongSyntax
-  object map extends MapSyntax
-  object option extends OptionSyntax
-  object set extends SetSyntax
-  object string extends StringSyntax
-  object `try` extends TrySyntax
+package mouse.compat
+
+import scala.collection.immutable
+
+private[mouse] object SortedSet {
+  def from[A: Ordering](set: Set[A]): immutable.SortedSet[A] =
+    immutable.SortedSet.from(set)
 }

@@ -31,9 +31,11 @@ package object mouse extends MouseFunctions {
   object foption extends FOptionSyntax
   object ftuple extends FTupleSyntax
   object int extends IntSyntax
+  object list extends ListSyntax
   object long extends LongSyntax
   object map extends MapSyntax
   object option extends OptionSyntax
+  object set extends SetSyntax
   object string extends StringSyntax with StringJvmSyntax
   object `try` extends TrySyntax
 }

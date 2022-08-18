@@ -19,23 +19,20 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package object mouse extends MouseFunctions {
-  object all extends AllSharedSyntax with AllJsSyntax
-  object any extends AnySyntax
-  object anyf extends AnyFSyntax
-  object boolean extends BooleanSyntax
-  object double extends DoubleSyntax
-  object fboolean extends FBooleanSyntax
-  object feither extends FEitherSyntax
-  object fnested extends FNestedSyntax
-  object foption extends FOptionSyntax
-  object ftuple extends FTupleSyntax
-  object int extends IntSyntax
-  object list extends ListSyntax
-  object long extends LongSyntax
-  object map extends MapSyntax
-  object option extends OptionSyntax
-  object set extends SetSyntax
-  object string extends StringSyntax
-  object `try` extends TrySyntax
+package mouse
+
+import cats.data.NonEmptySet
+
+class SetSyntaxTest extends MouseSuite {
+  test("SetSyntax.tailOrEmpty") {
+    assertEquals(Set.empty[Int].tailOrEmpty, Set.empty[Int])
+    assertEquals(Set(0).tailOrEmpty, Set.empty[Int])
+    assertEquals(Set(0, 1, 2).tailOrEmpty, Set(1, 2))
+  }
+
+  test("SetSyntax.tailOption") {
+    assertEquals(Set.empty[Int].tailOption, None)
+    assertEquals(Set(0).tailOption, None)
+    assertEquals(Set(0, 1, 2).tailOption, Some(NonEmptySet.of(1, 2)))
+  }
 }

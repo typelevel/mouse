@@ -19,23 +19,26 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package object mouse extends MouseFunctions {
-  object all extends AllSharedSyntax with AllJsSyntax
-  object any extends AnySyntax
-  object anyf extends AnyFSyntax
-  object boolean extends BooleanSyntax
-  object double extends DoubleSyntax
-  object fboolean extends FBooleanSyntax
-  object feither extends FEitherSyntax
-  object fnested extends FNestedSyntax
-  object foption extends FOptionSyntax
-  object ftuple extends FTupleSyntax
-  object int extends IntSyntax
-  object list extends ListSyntax
-  object long extends LongSyntax
-  object map extends MapSyntax
-  object option extends OptionSyntax
-  object set extends SetSyntax
-  object string extends StringSyntax
-  object `try` extends TrySyntax
+package mouse
+
+import cats.data.NonEmptySet
+import mouse.compat.SortedSet
+
+trait SetSyntax {
+  implicit final def setSyntaxMouse[A](set: Set[A]): SetOps[A] = new SetOps[A](set)
+}
+
+final class SetOps[A](private val sa: Set[A]) extends AnyVal {
+
+  /**
+   * A safe counterpart to `Set.tail` that returns empty `Set[A]` for an empty set.
+   */
+  @inline def tailOrEmpty: Set[A] = sa.drop(1)
+
+  /**
+   * Returns `Some` if the tail is non-empty, otherwise `None`.
+   */
+  @inline def tailOption(implicit ordering: Ordering[A]): Option[NonEmptySet[A]] =
+    NonEmptySet.fromSet(SortedSet.from(tailOrEmpty))
+
 }
