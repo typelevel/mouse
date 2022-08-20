@@ -21,6 +21,7 @@
 
 package mouse
 
+import scala.annotation.nowarn
 import scala.util.{Failure, Success}
 
 class OptionSyntaxTest extends MouseSuite {
@@ -40,15 +41,22 @@ class OptionSyntaxTest extends MouseSuite {
     assertEquals(Option.empty[Int].toTry(ex), Failure(ex))
   }
 
-  test("OptionSyntax.right") {
-    assertEquals(Option(3).right("S"), Option(3).toRight("S"))
-    assertEquals(None.right("S"), None.toRight("S"))
-    Option(3).right("S").shouldBeA[Either[String, Int]]
-  }
+  @nowarn("cat=deprecation")
+  private def rightTest(): Unit =
+    test("OptionSyntax.right") {
+      assertEquals(Option(3).right("S"), Option(3).toRight("S"))
+      assertEquals(None.right("S"), None.toRight("S"))
+      Option(3).right("S").shouldBeA[Either[String, Int]]
+    }
 
-  test("OptionSyntax.") {
+  rightTest()
+
+  @nowarn("cat=deprecation")
+  private def leftTest(): Unit = test("OptionSyntax.left") {
     assertEquals(Option(3).left("S"), Option(3).toLeft("S"))
     assertEquals(None.left("S"), None.toLeft("S"))
     Option(3).left("S").shouldBeA[Either[Int, String]]
   }
+
+  leftTest()
 }
