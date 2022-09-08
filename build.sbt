@@ -8,7 +8,7 @@ ThisBuild / tlBaseVersion := "1.1"
 ThisBuild / scalaVersion := Scala213
 ThisBuild / crossScalaVersions := Seq(Scala212, Scala3, Scala213)
 ThisBuild / tlVersionIntroduced := Map("3" -> "1.0.3")
-ThisBuild / tlCiReleaseBranches := Seq()
+ThisBuild / tlCiReleaseBranches := Seq("main")
 ThisBuild / tlSiteApiUrl := Some(url("https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest"))
 
 lazy val root = project
