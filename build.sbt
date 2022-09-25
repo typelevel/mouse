@@ -50,6 +50,9 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .jsSettings(
     tlVersionIntroduced := Map("3" -> "1.0.13")
   )
+  .nativeSettings(
+    tlVersionIntroduced := List("2.12", "2.13", "3").map(_ -> "1.2.0").toMap
+  )
 
 lazy val docs = project
   .in(file("site"))
