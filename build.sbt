@@ -10,6 +10,7 @@ ThisBuild / crossScalaVersions := Seq(Scala212, Scala3, Scala213)
 ThisBuild / tlVersionIntroduced := Map("3" -> "1.0.3")
 ThisBuild / tlCiReleaseBranches := Seq("main")
 ThisBuild / tlSiteApiUrl := Some(url("https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest"))
+ThisBuild / githubWorkflowOSes := Seq("ubuntu-22.04")
 
 lazy val root = project
   .in(file("."))
