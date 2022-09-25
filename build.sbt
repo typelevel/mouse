@@ -17,17 +17,17 @@ lazy val root = project
     name := "mouse",
     licenses := List(License.MIT)
   )
-  .aggregate(js, jvm)
+  .aggregate(js, jvm, native)
   .enablePlugins(NoPublishPlugin)
 
-lazy val cross = crossProject(JSPlatform, JVMPlatform)
+lazy val cross = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .in(file("."))
   .settings(
     name := "mouse",
     libraryDependencies ++= Seq(
       "org.typelevel" %%% "cats-core" % "2.8.0",
-      "org.scalameta" %%% "munit" % "0.7.29" % Test,
-      "org.scalameta" %%% "munit-scalacheck" % "0.7.29" % Test
+      "org.scalameta" %%% "munit" % "1.0.0-M6" % Test,
+      "org.scalameta" %%% "munit-scalacheck" % "1.0.0-M6" % Test
     ),
     ThisBuild / licenses := List("MIT license" -> url("http://opensource.org/licenses/MIT")),
     developers := List(
@@ -63,6 +63,7 @@ ThisBuild / githubWorkflowJavaVersions := Seq(JDK8, JDK17)
 
 lazy val jvm = cross.jvm
 lazy val js = cross.js
+lazy val native = cross.native
 
 // Scalafmt
 addCommandAlias("fmt", "; Compile / scalafmt; Test / scalafmt; scalafmtSbt")
