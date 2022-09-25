@@ -36,5 +36,6 @@ package object mouse extends MouseFunctions {
   object map extends MapSyntax
   object option extends OptionSyntax
   object set extends SetSyntax
+  object string extends StringSyntax
   object `try` extends TrySyntax
 }
