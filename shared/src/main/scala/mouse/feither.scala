@@ -91,7 +91,10 @@ final class FEitherOps[F[_], L, R](private val felr: F[Either[L, R]]) extends An
     }
 
   def leftWidenIn[A >: L](implicit F: Functor[F]): F[Either[A, R]] =
-    leftMapIn[A](_.asInstanceOf[A])
+    F.map(felr) {
+      case l @ Left(_)  => l.asInstanceOf[Left[A, R]]
+      case r @ Right(_) => r.asInstanceOf[Right[A, R]]
+    }
 
   def leftTraverseIn[G[_], A](f: L => G[A])(implicit F: Functor[F], G: Applicative[G]): F[G[Either[A, R]]] =
     F.map(felr) {
