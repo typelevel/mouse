@@ -45,6 +45,13 @@ class FEitherSyntaxTest extends MouseSuite {
     assertEquals(leftValue.flatMapIn(i => (i * 2).asRight[String]), leftValue)
   }
 
+  test("FEitherSyntax.leftWidenIn") {
+    val initial: Option[Either[List[Int], String]] = Option(List(1).asLeft[String])
+    val expected: Option[Either[Seq[Int], String]] = Option(Seq(1).asLeft[String])
+
+    assertEquals(initial.leftWidenIn[Seq[Int]], expected)
+  }
+
   test("FEitherSyntax.flatMapF") {
     assertEquals(rightValue.flatMapF(i => List((i * 2).asRight[String])), List(84.asRight[String]))
     assertEquals(leftValue.flatMapF(i => List((i * 2).asRight[String])), leftValue)
