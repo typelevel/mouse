@@ -147,4 +147,9 @@ final class FEitherOps[F[_], L, R](private val felr: F[Either[L, R]]) extends An
   def liftEitherT: EitherT[F, L, R] =
     EitherT(felr)
 
+  def widenIn[A >: R](implicit F: Functor[F]): F[Either[L, A]] =
+    F.map(felr) {
+      case l @ Left(_)  => l.asInstanceOf[Left[L, A]]
+      case r @ Right(_) => r.asInstanceOf[Right[L, A]]
+    }
 }
