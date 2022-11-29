@@ -12,14 +12,12 @@ ThisBuild / tlCiReleaseBranches := Seq("main")
 ThisBuild / tlSiteApiUrl := Some(url("https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest"))
 ThisBuild / githubWorkflowOSes := Seq("ubuntu-22.04")
 
-lazy val root = project
-  .in(file("."))
+lazy val root = tlCrossRootProject
   .settings(
     name := "mouse",
     licenses := List(License.MIT)
   )
-  .aggregate(js, jvm, native)
-  .enablePlugins(NoPublishPlugin)
+  .aggregate(cross)
 
 lazy val cross = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .in(file("."))
