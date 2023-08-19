@@ -29,7 +29,9 @@ import org.scalacheck.{Arbitrary, Gen}
 class StringSyntaxTests extends MouseSuite {
   test("StringOps.parseInt") {
     assertEquals("123".parseInt, 123.asRight[NumberFormatException])
-    assertEquals("blah".parseInt.leftMap(_.getMessage), "For input string: \"blah\"".asLeft)
+    assertEquals("blah".parseInt.leftMap(_.getMessage.replace("string ", "string: ")),
+                 "For input string: \"blah\"".asLeft
+    )
   }
 
   property("scalacheck-suite: StringOps.parseInt") {
@@ -48,7 +50,9 @@ class StringSyntaxTests extends MouseSuite {
 
   test("StringOps.parseLong") {
     assertEquals("123".parseLong, 123L.asRight[NumberFormatException])
-    assertEquals("blah".parseLong.leftMap(_.getMessage), "For input string: \"blah\"".asLeft)
+    assertEquals("blah".parseLong.leftMap(_.getMessage.replace("string ", "string: ")),
+                 "For input string: \"blah\"".asLeft
+    )
   }
 
   property("scalacheck-suite: StringOps.parseLong") {
@@ -67,7 +71,9 @@ class StringSyntaxTests extends MouseSuite {
 
   test("StringOps.parseShort") {
     assertEquals("123".parseShort, 123.toShort.asRight[NumberFormatException])
-    assertEquals("blah".parseShort.leftMap(_.getMessage), "For input string: \"blah\"".asLeft)
+    assertEquals("blah".parseShort.leftMap(_.getMessage.replace("string ", "string: ")),
+                 "For input string: \"blah\"".asLeft
+    )
   }
 
   property("scalacheck-suite: StringOps.parseShort") {
@@ -86,7 +92,9 @@ class StringSyntaxTests extends MouseSuite {
 
   test("StringOps.parseDouble") {
     assertEquals("123.1".parseDouble, 123.1.asRight[NumberFormatException])
-    assertEquals("blah".parseDouble.leftMap(_.getMessage), "For input string: \"blah\"".asLeft)
+    assertEquals("blah".parseDouble.leftMap(_.getMessage.replace("string ", "string: ")),
+                 "For input string: \"blah\"".asLeft
+    )
   }
 
   property("scalacheck-suite: StringOps.parseDouble") {
@@ -104,7 +112,9 @@ class StringSyntaxTests extends MouseSuite {
   }
 
   test("StringOps.parseFloat") {
-    assertEquals("blah".parseFloat.leftMap(_.getMessage), "For input string: \"blah\"".asLeft)
+    assertEquals("blah".parseFloat.leftMap(_.getMessage.replace("string ", "string: ")),
+                 "For input string: \"blah\"".asLeft
+    )
   }
 
   property("scalacheck-suite: StringOps.parseFloat") {
@@ -123,7 +133,9 @@ class StringSyntaxTests extends MouseSuite {
 
   test("StringOps.parseByte") {
     assertEquals("123".parseByte, 123.toByte.asRight[NumberFormatException])
-    assertEquals("blah".parseByte.leftMap(_.getMessage), "For input string: \"blah\"".asLeft)
+    assertEquals("blah".parseByte.leftMap(_.getMessage.replace("string ", "string: ")),
+                 "For input string: \"blah\"".asLeft
+    )
   }
 
   property("scalacheck-suite: StringOps.parseByte") {
@@ -142,7 +154,9 @@ class StringSyntaxTests extends MouseSuite {
 
   test("StringOps.parseBigInt") {
     assertEquals("123".parseBigInt, BigInt("123").asRight[NumberFormatException])
-    assertEquals("blah".parseBigInt.leftMap(_.getMessage), "For input string: \"blah\"".asLeft)
+    assertEquals("blah".parseBigInt.leftMap(_.getMessage.replace("string ", "string: ")),
+                 "For input string: \"blah\"".asLeft
+    )
   }
 
   property("scalacheck-suite: StringOps.parseBigInt") {
@@ -196,7 +210,9 @@ class StringSyntaxTests extends MouseSuite {
       Arbitrary.arbString.arbitrary.filter(s => !s.equalsIgnoreCase("true") && !s.equalsIgnoreCase("false"))
 
     forAll(stringGen) { (s: String) =>
-      assertEquals(s.parseBoolean.leftMap(_.getMessage), ("For input string: \"" + s + "\"").asLeft)
+      assertEquals(s.parseBoolean.leftMap(_.getMessage.replace("string ", "string: ")),
+                   ("For input string: \"" + s + "\"").asLeft
+      )
     }
   }
 
