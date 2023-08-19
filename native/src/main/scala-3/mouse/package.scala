@@ -19,18 +19,23 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package mouse
-
-import scala.annotation.nowarn
-
-trait MouseFunctions {
-
-  /**
-   * Evaluate but ignore the provided argument. This function makes value discarding an explicit operation, helpful when
-   * the `-Ywarn-discard-values` compiler flag is enable to explicitly satisfy warnings.
-   *
-   * @param a
-   *   - the value to be evaluated and ignored.
-   */
-  def ignore(@nowarn a: Any): Unit = (): Unit
+package object mouse extends MouseFunctions {
+  object all extends AllSharedSyntax
+  object any extends AnySyntax
+  object anyf extends AnyFSyntax
+  object boolean extends BooleanSyntax
+  object double extends DoubleSyntax
+  object fboolean extends FBooleanSyntax
+  object feither extends FEitherSyntax
+  object fnested extends FNestedSyntax
+  object foption extends FOptionSyntax
+  object ftuple extends FTupleSyntax
+  object int extends IntSyntax
+  object list extends ListSyntax
+  object long extends LongSyntax
+  object map extends MapSyntax
+  object option extends OptionSyntax
+  object set extends SetSyntax
+  object string extends StringSyntax
+  object `try` extends TrySyntax
 }

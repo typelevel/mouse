@@ -1,6 +1,6 @@
-val Scala212 = "2.12.16"
-val Scala213 = "2.13.8"
-val Scala3 = "3.1.3"
+val Scala212 = "2.12.18"
+val Scala213 = "2.13.11"
+val Scala3 = "3.3.0"
 
 ThisBuild / organization := "org.typelevel"
 ThisBuild / organizationName := "Typelevel"
@@ -10,24 +10,23 @@ ThisBuild / crossScalaVersions := Seq(Scala212, Scala3, Scala213)
 ThisBuild / tlVersionIntroduced := Map("3" -> "1.0.3")
 ThisBuild / tlCiReleaseBranches := Seq("series/2.x")
 ThisBuild / tlSiteApiUrl := Some(url("https://www.javadoc.io/doc/org.typelevel/mouse_2.13/latest"))
+ThisBuild / githubWorkflowOSes := Seq("ubuntu-22.04")
 
-lazy val root = project
-  .in(file("."))
+lazy val root = tlCrossRootProject
   .settings(
     name := "mouse",
     licenses := List(License.MIT)
   )
-  .aggregate(js, jvm)
-  .enablePlugins(NoPublishPlugin)
+  .aggregate(cross)
 
-lazy val cross = crossProject(JSPlatform, JVMPlatform)
+lazy val cross = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .in(file("."))
   .settings(
     name := "mouse",
     libraryDependencies ++= Seq(
-      "org.typelevel" %%% "cats-core" % "2.8.0",
-      "org.scalameta" %%% "munit" % "0.7.29" % Test,
-      "org.scalameta" %%% "munit-scalacheck" % "0.7.29" % Test
+      "org.typelevel" %%% "cats-core" % "2.10.0",
+      "org.scalameta" %%% "munit" % "1.0.0-M8" % Test,
+      "org.scalameta" %%% "munit-scalacheck" % "1.0.0-M8" % Test
     ),
     ThisBuild / licenses := List("MIT license" -> url("http://opensource.org/licenses/MIT")),
     developers := List(
@@ -50,6 +49,9 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform)
   .jsSettings(
     tlVersionIntroduced := Map("3" -> "1.0.13")
   )
+  .nativeSettings(
+    tlVersionIntroduced := List("2.12", "2.13", "3").map(_ -> "1.2.0").toMap
+  )
 
 lazy val docs = project
   .in(file("site"))
@@ -63,6 +65,7 @@ ThisBuild / githubWorkflowJavaVersions := Seq(JDK8, JDK17)
 
 lazy val jvm = cross.jvm
 lazy val js = cross.js
+lazy val native = cross.native
 
 // Scalafmt
 addCommandAlias("fmt", "; Compile / scalafmt; Test / scalafmt; scalafmtSbt")
