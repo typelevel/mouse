@@ -41,7 +41,6 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform, NativePlatform)
         case _                         => Nil
       }
     },
-    mimaPreviousArtifacts ~= { _.filterNot(_.revision == "1.0.1") },
     Compile / sourceGenerators += (Compile / sourceManaged).map(Boilerplate.gen).taskValue,
     licenses := List(License.MIT),
     startYear := Some(2016)
