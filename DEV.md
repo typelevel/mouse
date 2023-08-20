@@ -15,7 +15,7 @@ short or generic names if possible.
 
 However, for new operations, simply providing a lazy by-name variant is often the best choice unless there are clear reasons (eg performance impact) for needing an eager variant.
  
-### Release Process
+## Release Process
 
 Mouse uses Github Actions, https://github.com/djspiewak/sbt-github-actions and https://github.com/typelevel/sbt-typelevel for CI releases. Use the Github Create Release feature to tag a release, and it will publish to Sonatype automatically (using @benhutchison credentials).
 
