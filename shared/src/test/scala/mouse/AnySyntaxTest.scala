@@ -21,7 +21,7 @@
 
 package mouse
 
-class AnySyntaxTest extends MouseSuite with MouseFunctions {
+class AnySyntaxTest extends MouseSuite {
   test("AnySyntax.|>") {
     assertEquals(true |> (!_), false)
 
