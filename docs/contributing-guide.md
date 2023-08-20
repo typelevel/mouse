@@ -23,6 +23,14 @@ Mouse uses Github Actions, [sbt-github-actions] and [sbt-typelevel] for CI relea
 Use the Github Create Release feature to tag a release, 
 and it will publish to Sonatype automatically (using @benhutchison credentials).
 
+### Choosing the appropriate base branch
+
+There are two options for choosing a base branch for your PRs:
+
+* Use the `main` branch if you would like to deliver changes within the `1.x` series. It's for binary-compatible changes only.
+
+* Use the `series/2.x` branch if you would like to deliver changes within the `2.x` series. It's for non-binary-compatible changes and basically stands for the next major `mouse` release.
+
 
 [sbt-github-actions]: https://github.com/djspiewak/sbt-github-actions
 [sbt-typelevel]: https://github.com/typelevel/sbt-typelevel
