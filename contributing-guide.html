@@ -99,6 +99,7 @@
           <li class="level1"><a href="#design-process-for-adding-a-feature">Design Process for Adding a Feature</a></li>
           <li class="level1"><a href="#conventions">Conventions</a></li>
           <li class="level1"><a href="#release-process">Release Process</a></li>
+          <li class="level1"><a href="#choosing-the-appropriate-base-branch">Choosing the appropriate base branch</a></li>
         </ul>
 
         <p class="footer"></p>
@@ -135,6 +136,17 @@
         <p>Mouse uses Github Actions, <a href="https://github.com/djspiewak/sbt-github-actions">sbt-github-actions</a> and <a href="https://github.com/typelevel/sbt-typelevel">sbt-typelevel</a> for CI releases. 
         Use the Github Create Release feature to tag a release, 
         and it will publish to Sonatype automatically (using @benhutchison credentials).</p>
+        
+        <h3 id="choosing-the-appropriate-base-branch" class="section">Choosing the appropriate base branch<a class="anchor-link right" href="#choosing-the-appropriate-base-branch"><i class="icofont-laika">&#xef71;</i></a></h3>
+        <p>There are two options for choosing a base branch for your PRs:</p>
+        <ul>
+          <li>
+            <p>Use the <code>main</code> branch if you would like to deliver changes within the <code>1.x</code> series. It&#39;s for binary-compatible changes only.</p>
+          </li>
+          <li>
+            <p>Use the <code>series/2.x</code> branch if you would like to deliver changes within the <code>2.x</code> series. It&#39;s for non-binary-compatible changes and basically stands for the next major <code>mouse</code> release.</p>
+          </li>
+        </ul>
 
         <hr style="margin-top: 30px"/>
         <footer style="font-size: 90%; text-align: center">
