@@ -23,7 +23,7 @@ Mouse uses Github Actions, [sbt-github-actions] and [sbt-typelevel] for CI relea
 Use the Github Create Release feature to tag a release, 
 and it will publish to Sonatype automatically (using @benhutchison credentials).
 
-### Choosing the appropriate base branch
+### Choosing an Appropriate Base Branch
 
 There are two options for choosing a base branch for your PRs:
 

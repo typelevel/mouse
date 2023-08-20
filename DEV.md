@@ -21,7 +21,7 @@ Mouse uses Github Actions, https://github.com/djspiewak/sbt-github-actions and h
 
 sbt-release and sbt-ci-release is no longer in use.
 
-## Choosing the appropriate base branch
+## Choosing an Appropriate Base Branch
 
 There are two options for choosing a base branch for your PRs:
 
