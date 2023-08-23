@@ -19,9 +19,9 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package object mouse extends MouseFunctions {
+package object mouse {
   object all extends AllSharedSyntax
-  object any extends AnySyntax
+  object any extends AnySyntax with MouseFunctions
   object anyf extends AnyFSyntax
   object boolean extends BooleanSyntax
   object double extends DoubleSyntax
@@ -30,6 +30,7 @@ package object mouse extends MouseFunctions {
   object fnested extends FNestedSyntax
   object foption extends FOptionSyntax
   object ftuple extends FTupleSyntax
+  object functions extends MouseFunctions
   object int extends IntSyntax
   object list extends ListSyntax
   object long extends LongSyntax

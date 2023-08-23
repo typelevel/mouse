@@ -35,6 +35,7 @@ trait AllSharedSyntax
     with ListSyntax
     with LongSyntax
     with MapSyntax
+    with MouseFunctions
     with OptionSyntax
     with PartialFunctionLift
     with SetSyntax

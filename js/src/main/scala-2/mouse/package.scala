@@ -19,9 +19,9 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package object mouse extends MouseFunctions {
+package object mouse {
   object all extends AllSharedSyntax with AllJsSyntax
-  object any extends AnySyntax
+  object any extends AnySyntax with MouseFunctions
   object anyf extends AnyFSyntax
   object boolean extends BooleanSyntax
   object double extends DoubleSyntax
