@@ -21,12 +21,13 @@
 
 package mouse
 
+import org.typelevel.scalaccompat.annotation._
 import scala.annotation.nowarn
 import scala.util.{Failure, Success}
 
 class OptionSyntaxTest extends MouseSuite {
   implicit class ExtraTest[A](a: A) {
-    def shouldBeA[T](implicit ev: T =:= A): Unit = ()
+    def shouldBeA[T](implicit @nowarn212 ev: T =:= A): Unit = ()
   }
 
   test("OptionSyntax.cata") {
