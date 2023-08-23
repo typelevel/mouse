@@ -23,6 +23,7 @@ package mouse
 
 import cats.syntax.eq._
 
+import org.typelevel.scalaccompat.annotation._
 import org.scalacheck.Gen
 import org.scalacheck.Prop._
 
@@ -73,7 +74,7 @@ class TrySyntaxTest extends MouseSuite {
   }
 
   implicit class ExtraTest[A](a: A) {
-    def shouldBeA[T](implicit ev: T =:= A): Unit = ()
+    def shouldBeA[T](implicit @nowarn212 ev: T =:= A): Unit = ()
   }
 
   property("toEither") {

@@ -19,7 +19,12 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package object mouse extends MouseFunctions {
+package mouse
+
+import org.typelevel.scalaccompat.annotation._
+
+@nowarn213("msg=package object inheritance is deprecated")
+object `package` extends MouseFunctions {
   object all extends AllSharedSyntax
   object any extends AnySyntax
   object anyf extends AnyFSyntax
