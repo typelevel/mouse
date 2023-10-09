@@ -34,6 +34,15 @@ final class AnyFOps[F[_], A](private val fa: F[A]) extends AnyVal {
   @inline def ||>[G[_]](f: F ~> G): G[A] = f(fa)
   @inline def thrushK[G[_]](f: F ~> G): G[A] = f(fa)
 
+  def asRightIn[L](implicit F: Functor[F]): F[Either[L, A]] =
+    Functor[F].map(fa)(Right(_))
+
+  def asLeftIn[R](implicit F: Functor[F]): F[Either[A, R]] =
+    Functor[F].map(fa)(Left(_))
+
+  def asSomeIn(implicit F: Functor[F]): F[Option[A]] =
+    Functor[F].map(fa)(Some(_))
+
   def liftEitherT[E](implicit F: Functor[F]): EitherT[F, E, A] =
     EitherT.right[E](fa)
 
