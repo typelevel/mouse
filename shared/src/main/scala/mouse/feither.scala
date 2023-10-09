@@ -90,6 +90,12 @@ final class FEitherOps[F[_], L, R](private val felr: F[Either[L, R]]) extends An
       case r @ Right(_) => r.asInstanceOf[Right[A, R]]
     }
 
+  def leftAsIn[B](b: => B)(implicit F: Functor[F]): F[Either[B, R]] =
+    leftMapIn(_ => b)
+
+  def leftVoidIn(implicit F: Functor[F]): F[Either[Unit, R]] =
+    leftAsIn(())
+
   def leftWidenIn[A >: L](implicit F: Functor[F]): F[Either[A, R]] =
     F.map(felr) {
       case l @ Left(_)  => l.asInstanceOf[Left[A, R]]
@@ -110,6 +116,12 @@ final class FEitherOps[F[_], L, R](private val felr: F[Either[L, R]]) extends An
 
   def mapIn[A](f: R => A)(implicit F: Functor[F]): F[Either[L, A]] =
     F.map(felr)(_.map(f))
+
+  def asIn[B](b: => B)(implicit F: Functor[F]): F[Either[L, B]] =
+    mapIn(_ => b)
+
+  def voidIn(implicit F: Functor[F]): F[Either[L, Unit]] =
+    asIn(())
 
   def bimapIn[A, B](left: L => A, right: R => B)(implicit F: Functor[F]): F[Either[A, B]] =
     F.map(felr) {
