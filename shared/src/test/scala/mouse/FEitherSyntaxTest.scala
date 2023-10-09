@@ -72,7 +72,7 @@ class FEitherSyntaxTest extends MouseSuite {
     assertEquals(leftValue.getOrElseIn(0), List(0))
   }
 
-  test("FEitherSyntax.getOrRethrow"){
+  test("FEitherSyntax.getOrRethrow") {
     val ex1 = new RuntimeException("BOOM 1!")
     assertEquals(Try(1.asRight).getOrRethrow, Success(1))
     assertEquals(Try(ex1.asLeft).getOrRethrow, Failure(ex1))
