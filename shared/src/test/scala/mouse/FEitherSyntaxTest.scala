@@ -27,8 +27,8 @@ import cats.syntax.either._
 import scala.util.{Failure, Success, Try}
 
 class FEitherSyntaxTest extends MouseSuite {
-  private val rightValue: Seq[Either[String, Int]] = List(42.asRight[String])
-  private val leftValue: Seq[Either[String, Int]] = List("42".asLeft[Int])
+  private val rightValue = List(42.asRight[String])
+  private val leftValue = List("42".asLeft[Int])
 
   test("FEitherSyntax.cata") {
     assertEquals(rightValue.cata(_ => 0, _ => 1), List(1))
