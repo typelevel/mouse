@@ -108,6 +108,16 @@ class FEitherSyntaxTest extends MouseSuite {
     assertEquals(leftValue.leftMapIn(_ => ""), List("".asLeft[Int]))
   }
 
+  test("FEitherSyntax.leftAsIn") {
+    assertEquals(rightValue.leftAsIn(""), rightValue)
+    assertEquals(leftValue.leftAsIn(""), List("".asLeft[Int]))
+  }
+
+  test("FEitherSyntax.leftVoidIn") {
+    assertEquals(rightValue.leftVoidIn, rightValue.leftMapIn(_ => ()))
+    assertEquals(leftValue.leftVoidIn, List(().asLeft[Int]))
+  }
+
   test("FEitherSyntax.leftTraverseIn") {
     assertEquals(rightValue.leftTraverseIn(_ => Option("")), List(Option(42.asRight[String])))
     assertEquals(leftValue.leftTraverseIn(_ => Option("")), List(Option("".asLeft[Int])))
@@ -121,6 +131,16 @@ class FEitherSyntaxTest extends MouseSuite {
   test("FEitherSyntax.mapIn") {
     assertEquals(rightValue.mapIn(_ * 2), List(84.asRight[String]))
     assertEquals(leftValue.mapIn(_ * 2), leftValue)
+  }
+
+  test("FEitherSyntax.asIn") {
+    assertEquals(rightValue.asIn(2), List(2.asRight[String]))
+    assertEquals(leftValue.asIn(2), leftValue)
+  }
+
+  test("FEitherSyntax.voidIn") {
+    assertEquals(rightValue.voidIn, List(().asRight[String]))
+    assertEquals(leftValue.voidIn, leftValue.mapIn(_ => ()))
   }
 
   test("FEitherSyntax.orElseIn") {
