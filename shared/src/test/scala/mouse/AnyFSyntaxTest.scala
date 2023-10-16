@@ -64,15 +64,15 @@ class AnyFSyntaxTest extends MouseSuite {
   }
 
   test("AnyFSyntax.asRightIn") {
-    assertEquals(List(1).asRightIn[String], List(1.asRight))
+    assertEquals(List(1).mapAsRight[String], List(1.asRight))
   }
 
   test("AnyFSyntax.asLeftIn") {
-    assertEquals(List(1).asLeftIn[String], List(1.asLeft))
+    assertEquals(List(1).mapAsLeft[String], List(1.asLeft))
   }
 
   test("AnyFSyntax.asSomeIn") {
-    assertEquals(List(1).asSomeIn, List(1.some))
+    assertEquals(List(1).mapAsSome, List(1.some))
   }
 
   test("AnyFSyntax.liftEitherT") {
