@@ -25,8 +25,8 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform, NativePlatform)
     name := "mouse",
     libraryDependencies ++= Seq(
       "org.typelevel" %%% "cats-core" % "2.10.0",
-      "org.scalameta" %%% "munit" % "1.0.0-M10" % Test,
-      "org.scalameta" %%% "munit-scalacheck" % "1.0.0-M10" % Test
+      "org.scalameta" %%% "munit" % "1.0.0-M11" % Test,
+      "org.scalameta" %%% "munit-scalacheck" % "1.0.0-M11" % Test
     ),
     ThisBuild / licenses := List("MIT license" -> url("http://opensource.org/licenses/MIT")),
     developers := List(
