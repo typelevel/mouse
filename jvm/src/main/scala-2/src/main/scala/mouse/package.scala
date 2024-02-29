@@ -21,9 +21,6 @@
 
 package mouse
 
-import org.typelevel.scalaccompat.annotation._
-
-@nowarn213("msg=package object inheritance is deprecated")
 object `package` extends MouseFunctions {
   object all extends AllSharedSyntax with AllJvmSyntax
   object any extends AnySyntax
