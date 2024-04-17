@@ -72,6 +72,16 @@ class FOptionSyntaxTest extends MouseSuite {
     assertEquals(List(Option.empty[Int]).flatMapF(a => List(Option(a * 2))), List(Option.empty[Int]))
   }
 
+  test("FOptionSyntax.flatTapIn") {
+    assertEquals(List(Option(1)).flatTapIn(a => Option(a * 2)), List(Option(1)))
+    assertEquals(List(Option.empty[Int]).flatTapIn(a => Option(a * 2)), List(Option.empty[Int]))
+  }
+
+  test("FOptionSyntax.flatMapF") {
+    assertEquals(List(Option(1)).flatTapF(a => List(Option(a * 2))), List(Option(1)))
+    assertEquals(List(Option.empty[Int]).flatTapF(a => List(Option(a * 2))), List(Option.empty[Int]))
+  }
+
   test("FOptionSyntax.foldIn") {
     assertEquals(List(Option(1)).foldIn(false)(_ => true), List(true))
     assertEquals(List(Option.empty[Int]).foldIn(false)(_ => true), List(false))

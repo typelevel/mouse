@@ -54,6 +54,12 @@ final class FEitherOps[F[_], L, R](private val felr: F[Either[L, R]]) extends An
       case Right(value) => f(value)
     }
 
+  def flatTapIn[A >: L, B](f: R => Either[A, B])(implicit F: Functor[F]): F[Either[A, R]] =
+    flatMapIn(value => f(value).map(_ => value))
+
+  def flatTapF[A >: L, B](f: R => F[Either[A, B]])(implicit F: Monad[F]): F[Either[A, R]] =
+    flatMapF(value => F.map(f(value))(_.map(_ => value)))
+
   def foldIn[A](left: L => A)(right: R => A)(implicit F: Functor[F]): F[A] =
     cata(left, right)
 

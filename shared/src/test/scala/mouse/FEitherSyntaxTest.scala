@@ -57,6 +57,16 @@ class FEitherSyntaxTest extends MouseSuite {
     assertEquals(leftValue.flatMapF(i => List((i * 2).asRight[String])), leftValue)
   }
 
+  test("FEitherSyntax.flatTapIn") {
+    assertEquals(rightValue.flatTapIn(i => (i * 2).asRight[String]), List(42.asRight[String]))
+    assertEquals(leftValue.flatTapIn(i => (i * 2).asRight[String]), leftValue)
+  }
+
+  test("FEitherSyntax.flatTapF") {
+    assertEquals(rightValue.flatTapF(i => List((i * 2).asRight[String])), List(42.asRight[String]))
+    assertEquals(leftValue.flatTapF(i => List((i * 2).asRight[String])), leftValue)
+  }
+
   test("FEitherSyntax.foldIn") {
     assertEquals(rightValue.foldIn(_ => 0)(_ => 1), List(1))
     assertEquals(leftValue.foldIn(_ => 0)(_ => 1), List(0))

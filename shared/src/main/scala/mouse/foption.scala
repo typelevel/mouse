@@ -73,6 +73,12 @@ final class FOptionOps[F[_], A](private val foa: F[Option[A]]) extends AnyVal {
   def flatMapF[B](f: A => F[Option[B]])(implicit F: Monad[F]): F[Option[B]] =
     F.flatMap(foa)(_.fold(F.pure(Option.empty[B]))(f))
 
+  def flatTapIn[B](f: A => Option[B])(implicit F: Functor[F]): F[Option[A]] =
+    flatMapIn(value => f(value).map(_ => value))
+
+  def flatTapF[B](f: A => F[Option[B]])(implicit F: Monad[F]): F[Option[A]] =
+    flatMapF { value => F.map(f(value))(_.map(_ => value)) }
+
   def foldIn[B](default: => B)(f: A => B)(implicit F: Functor[F]): F[B] =
     cata(default, f)
 
