@@ -15,7 +15,8 @@ ThisBuild / githubWorkflowOSes := Seq("ubuntu-22.04")
 lazy val root = tlCrossRootProject
   .settings(
     name := "mouse",
-    licenses := List(License.MIT)
+    licenses := List(License.MIT),
+    startYear := Some(2016)
   )
   .aggregate(cross)
 
@@ -28,7 +29,7 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform, NativePlatform)
       "org.scalameta" %%% "munit" % "1.0.0-M11" % Test,
       "org.scalameta" %%% "munit-scalacheck" % "1.0.0-M11" % Test
     ),
-    ThisBuild / licenses := List("MIT license" -> url("http://opensource.org/licenses/MIT")),
+    licenses := List(License.MIT),
     developers := List(
       Developer("benhutchison", "Ben Hutchison", "brhutchison@gmail.com", url = url("https://github.com/benhutchison"))
     ),
