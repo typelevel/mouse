@@ -4,6 +4,8 @@ val Scala3 = "3.3.3"
 
 ThisBuild / organization := "org.typelevel"
 ThisBuild / organizationName := "Typelevel"
+ThisBuild / licenses := List(License.MIT)
+ThisBuild / startYear := Some(2016)
 ThisBuild / tlBaseVersion := "1.2"
 ThisBuild / scalaVersion := Scala213
 ThisBuild / crossScalaVersions := Seq(Scala212, Scala3, Scala213)
@@ -14,9 +16,7 @@ ThisBuild / githubWorkflowOSes := Seq("ubuntu-22.04")
 
 lazy val root = tlCrossRootProject
   .settings(
-    name := "mouse",
-    licenses := List(License.MIT),
-    startYear := Some(2016)
+    name := "mouse"
   )
   .aggregate(cross)
 
@@ -29,7 +29,6 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform, NativePlatform)
       "org.scalameta" %%% "munit" % "1.0.0-M11" % Test,
       "org.scalameta" %%% "munit-scalacheck" % "1.0.0-M11" % Test
     ),
-    licenses := List(License.MIT),
     developers := List(
       Developer("benhutchison", "Ben Hutchison", "brhutchison@gmail.com", url = url("https://github.com/benhutchison"))
     ),
@@ -43,9 +42,7 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform, NativePlatform)
       }
     },
     mimaPreviousArtifacts ~= { _.filterNot(_.revision == "1.0.1") },
-    Compile / sourceGenerators += (Compile / sourceManaged).map(Boilerplate.gen).taskValue,
-    licenses := List(License.MIT),
-    startYear := Some(2016)
+    Compile / sourceGenerators += (Compile / sourceManaged).map(Boilerplate.gen).taskValue
   )
   .jsSettings(
     tlVersionIntroduced := Map("3" -> "1.0.13")
