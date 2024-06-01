@@ -25,9 +25,9 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .settings(
     name := "mouse",
     libraryDependencies ++= Seq(
-      "org.typelevel" %%% "cats-core" % "2.11.0",
+      "org.typelevel" %%% "cats-core" % "2.12.0",
       "org.scalameta" %%% "munit" % "1.0.0" % Test,
-      "org.scalameta" %%% "munit-scalacheck" % "1.0.0-M11" % Test
+      "org.scalameta" %%% "munit-scalacheck" % "1.0.0" % Test
     ),
     developers := List(
       Developer("benhutchison", "Ben Hutchison", "brhutchison@gmail.com", url = url("https://github.com/benhutchison"))
@@ -48,7 +48,7 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform, NativePlatform)
     tlVersionIntroduced := Map("3" -> "1.0.13")
   )
   .nativeSettings(
-    tlVersionIntroduced := List("2.12", "2.13", "3").map(_ -> "1.2.0").toMap
+    tlVersionIntroduced := List("2.12", "2.13", "3").map(_ -> "1.3.0").toMap
   )
 
 lazy val docs = project
