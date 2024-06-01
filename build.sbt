@@ -27,7 +27,7 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform, NativePlatform)
     libraryDependencies ++= Seq(
       "org.typelevel" %%% "cats-core" % "2.12.0",
       "org.scalameta" %%% "munit" % "1.0.0" % Test,
-      "org.scalameta" %%% "munit-scalacheck" % "1.0.0-M11" % Test
+      "org.scalameta" %%% "munit-scalacheck" % "1.0.0" % Test
     ),
     developers := List(
       Developer("benhutchison", "Ben Hutchison", "brhutchison@gmail.com", url = url("https://github.com/benhutchison"))
