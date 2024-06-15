@@ -117,6 +117,9 @@ final class FEitherOps[F[_], L, R](private val felr: F[Either[L, R]]) extends An
   def mapIn[A](f: R => A)(implicit F: Functor[F]): F[Either[L, A]] =
     F.map(felr)(_.map(f))
 
+  def mapOrKeepIn[A >: R](pf: PartialFunction[R, A])(implicit F: Functor[F]): F[Either[L, A]] =
+    F.map(felr)(_.map(a => pf.applyOrElse(a, identity[A])))
+
   def asIn[B](b: => B)(implicit F: Functor[F]): F[Either[L, B]] =
     mapIn(_ => b)
 
