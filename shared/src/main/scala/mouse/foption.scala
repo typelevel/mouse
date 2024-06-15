@@ -103,6 +103,9 @@ final class FOptionOps[F[_], A](private val foa: F[Option[A]]) extends AnyVal {
   def mapIn[B](f: A => B)(implicit F: Functor[F]): F[Option[B]] =
     F.map(foa)(_.map(f))
 
+  def mapOrKeepIn[B >: A](pf: PartialFunction[A, B])(implicit F: Functor[F]): F[Option[B]] =
+    F.map(foa)(_.map(a => pf.applyOrElse(a, identity[B])))
+
   def asIn[B](b: => B)(implicit F: Functor[F]): F[Option[B]] =
     mapIn(_ => b)
 
