@@ -125,6 +125,12 @@ class FOptionSyntaxTest extends MouseSuite {
     assertEquals(List(Option.empty[Int]).mapIn(_ + 1), List(Option.empty[Int]))
   }
 
+  test("FOptionSyntax.mapOrKeepIn") {
+    assertEquals(List(Option(1)).mapOrKeepIn { case 1 => 2 }, List(Option(2)))
+    assertEquals(List(Option(1)).mapOrKeepIn { case 2 => 1 }, List(Option(1)))
+    assertEquals(List(Option.empty[Int]).mapOrKeepIn { case 1 => 2 }, List(Option.empty[Int]))
+  }
+
   test("FOptionSyntax.asIn") {
     assertEquals(List(Option(1)).asIn(1), List(Option(1)))
     assertEquals(List(Option.empty[Int]).asIn(1), List(Option.empty[Int]))
