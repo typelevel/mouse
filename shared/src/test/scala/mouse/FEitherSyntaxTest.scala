@@ -133,6 +133,12 @@ class FEitherSyntaxTest extends MouseSuite {
     assertEquals(leftValue.mapIn(_ * 2), leftValue)
   }
 
+  test("FEitherSyntax.mapOrKeepIn") {
+    assertEquals(rightValue.mapOrKeepIn { case 42 => 84 }, List(84.asRight[String]))
+    assertEquals(rightValue.mapOrKeepIn { case 84 => 42 }, rightValue)
+    assertEquals(leftValue.mapOrKeepIn { case 42 => 84 }, leftValue)
+  }
+
   test("FEitherSyntax.asIn") {
     assertEquals(rightValue.asIn(2), List(2.asRight[String]))
     assertEquals(leftValue.asIn(2), leftValue)
