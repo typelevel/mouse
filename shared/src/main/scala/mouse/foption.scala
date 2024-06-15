@@ -70,6 +70,9 @@ final class FOptionOps[F[_], A](private val foa: F[Option[A]]) extends AnyVal {
   def flatMapIn[B](f: A => Option[B])(implicit F: Functor[F]): F[Option[B]] =
     F.map(foa)(_.flatMap(f))
 
+  def flatMapOrKeepIn[B >: A](pfa: PartialFunction[A, Option[B]])(implicit F: Monad[F]): F[Option[B]] =
+    F.map(foa)(_.flatMap(a => pfa.applyOrElse(a, Option[B](_))))
+
   def flatMapF[B](f: A => F[Option[B]])(implicit F: Monad[F]): F[Option[B]] =
     F.flatMap(foa)(_.fold(F.pure(Option.empty[B]))(f))
 
