@@ -48,6 +48,9 @@ final class FEitherOps[F[_], L, R](private val felr: F[Either[L, R]]) extends An
   def flatMapIn[A >: L, B](f: R => Either[A, B])(implicit F: Functor[F]): F[Either[A, B]] =
     F.map(felr)(_.flatMap(f))
 
+  def flatMapOrKeepIn[A >: L, B >: R](pfa: PartialFunction[R, Either[A, B]])(implicit F: Functor[F]): F[Either[A, B]] =
+    F.map(felr)(_.flatMap(a => pfa.applyOrElse(a, Right[A, B](_))))
+
   def flatMapF[A >: L, B](f: R => F[Either[A, B]])(implicit F: Monad[F]): F[Either[A, B]] =
     F.flatMap(felr) {
       case l @ Left(_)  => F.pure(l.asInstanceOf[Left[A, B]])
