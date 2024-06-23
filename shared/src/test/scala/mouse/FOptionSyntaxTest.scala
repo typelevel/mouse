@@ -67,6 +67,12 @@ class FOptionSyntaxTest extends MouseSuite {
     assertEquals(List(Option.empty[Int]).flatMapIn(a => Option(a * 2)), List(Option.empty[Int]))
   }
 
+  test("FOptionSyntax.flatMapOrKeepIn") {
+    assertEquals(List(Option(1)).flatMapOrKeepIn { case 1 => Option(2) }, List(Option(2)))
+    assertEquals(List(Option(1)).flatMapOrKeepIn { case 2 => Option(1) }, List(Option(1)))
+    assertEquals(List(Option.empty[Int]).flatMapOrKeepIn { case 1 => Option(2) }, List(Option.empty[Int]))
+  }
+
   test("FOptionSyntax.flatMapF") {
     assertEquals(List(Option(1)).flatMapF(a => List(Option(a * 2))), List(Option(2)))
     assertEquals(List(Option.empty[Int]).flatMapF(a => List(Option(a * 2))), List(Option.empty[Int]))
@@ -123,6 +129,12 @@ class FOptionSyntaxTest extends MouseSuite {
   test("FOptionSyntax.mapIn") {
     assertEquals(List(Option(1)).mapIn(_ + 1), List(Option(2)))
     assertEquals(List(Option.empty[Int]).mapIn(_ + 1), List(Option.empty[Int]))
+  }
+
+  test("FOptionSyntax.mapOrKeepIn") {
+    assertEquals(List(Option(1)).mapOrKeepIn { case 1 => 2 }, List(Option(2)))
+    assertEquals(List(Option(1)).mapOrKeepIn { case 2 => 1 }, List(Option(1)))
+    assertEquals(List(Option.empty[Int]).mapOrKeepIn { case 1 => 2 }, List(Option.empty[Int]))
   }
 
   test("FOptionSyntax.asIn") {
