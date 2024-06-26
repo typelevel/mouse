@@ -108,7 +108,7 @@ scala> val foption = List(Option(1), Option(2), Option(4)).mapIn(_ * 2)
 foption: List[Option[Int]] = List(Some(2), Some(4), Some(8))
 
 scala> val feither = List(Either.cond(true, 1, "0")).mapIn(_ * 2)
-foption: List[Either[String, Int]] = List(Right(2))
+feither: List[Either[String, Int]] = List(Right(2))
 
 scala> val listOption = List(Option(1), Option(2)).mapNested2(_ * 2)
 listOption: List[Option[Int]] = List(Some(2), Some(4))
@@ -120,7 +120,7 @@ scala> val tupleHead = (1, 2, 4, 8).head
 tupleHead: Int = 1
 
 scala> val tupleLast = (1, 2, 4, 8).last
-tupleHead: Int = 8
+tupleLast: Int = 8
 
 scala> Set(0).tailOrEmpty
 val res3: Set[Int] = Set()
