@@ -93,6 +93,12 @@ final class FEitherOps[F[_], L, R](private val felr: F[Either[L, R]]) extends An
       case r @ Right(_) => r.asInstanceOf[Right[A, R]]
     }
 
+  def leftMapOrKeepIn[LL >: L](pf: PartialFunction[L, LL])(implicit F: Functor[F]): F[Either[LL, R]] =
+    F.map(felr) {
+      case Left(a)        => Left(pf.applyOrElse(a, identity[LL]))
+      case r: Right[L, R] => r.asInstanceOf[Right[LL, R]]
+    }
+
   def leftAsIn[B](b: => B)(implicit F: Functor[F]): F[Either[B, R]] =
     leftMapIn(_ => b)
 
