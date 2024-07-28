@@ -81,6 +81,14 @@ final class FEitherOps[F[_], L, R](private val felr: F[Either[L, R]]) extends An
       case r @ Right(_) => r.asInstanceOf[Right[A, B]]
     }
 
+  def leftFlatMapOrKeepIn[LL >: L, RR >: R](
+    pf: PartialFunction[L, Either[LL, RR]]
+  )(implicit F: Functor[F]): F[Either[LL, RR]] =
+    F.map(felr) {
+      case l @ Left(a)    => pf.applyOrElse(a, (_: L) => l)
+      case r: Right[L, R] => r.asInstanceOf[Right[LL, RR]]
+    }
+
   def leftFlatMapF[A, B >: R](f: L => F[Either[A, B]])(implicit F: Monad[F]): F[Either[A, B]] =
     F.flatMap(felr) {
       case Left(left)   => f(left)
@@ -91,6 +99,12 @@ final class FEitherOps[F[_], L, R](private val felr: F[Either[L, R]]) extends An
     F.map(felr) {
       case Left(value)  => Left(f(value))
       case r @ Right(_) => r.asInstanceOf[Right[A, R]]
+    }
+
+  def leftMapOrKeepIn[LL >: L](pf: PartialFunction[L, LL])(implicit F: Functor[F]): F[Either[LL, R]] =
+    F.map(felr) {
+      case Left(a)        => Left(pf.applyOrElse(a, identity[LL]))
+      case r: Right[L, R] => r.asInstanceOf[Right[LL, R]]
     }
 
   def leftAsIn[B](b: => B)(implicit F: Functor[F]): F[Either[B, R]] =

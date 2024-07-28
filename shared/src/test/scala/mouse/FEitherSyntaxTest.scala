@@ -104,6 +104,13 @@ class FEitherSyntaxTest extends MouseSuite {
     assertEquals(leftValue.leftFlatMapIn(_ => "".asLeft[Int]), List("".asLeft[Int]))
   }
 
+  test("FEitherSyntax.leftFlatMapOrKeepIn") {
+    assertEquals(rightValue.leftFlatMapOrKeepIn { case "42" => Left("") }, rightValue)
+    assertEquals(leftValue.leftFlatMapOrKeepIn { case "4242" => Right(42) }, leftValue)
+    assertEquals(leftValue.leftFlatMapOrKeepIn { case "42" => Left("") }, List(Left("")))
+    assertEquals(leftValue.leftFlatMapOrKeepIn { case "42" => Right(42) }, rightValue)
+  }
+
   test("FEitherSyntax.leftFlatMapF") {
     assertEquals(rightValue.leftFlatMapF(_ => List("".asLeft[Int])), rightValue)
     assertEquals(leftValue.leftFlatMapF(_ => List("".asLeft[Int])), List("".asLeft[Int]))
@@ -112,6 +119,12 @@ class FEitherSyntaxTest extends MouseSuite {
   test("FEitherSyntax.leftMapIn") {
     assertEquals(rightValue.leftMapIn(_ => ""), rightValue)
     assertEquals(leftValue.leftMapIn(_ => ""), List("".asLeft[Int]))
+  }
+
+  test("FEitherSyntax.leftMapOrKeepIn") {
+    assertEquals(rightValue.leftMapOrKeepIn { case "42" => "" }, rightValue)
+    assertEquals(leftValue.leftMapOrKeepIn { case "4242" => "" }, leftValue)
+    assertEquals(leftValue.leftMapOrKeepIn { case "42" => "" }, List(Left("")))
   }
 
   test("FEitherSyntax.leftAsIn") {
