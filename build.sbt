@@ -22,7 +22,7 @@ lazy val cross = crossProject(JSPlatform, JVMPlatform, NativePlatform)
     name := "mouse",
     libraryDependencies ++= Seq(
       "org.typelevel" %%% "cats-core" % "2.13.0",
-      "org.scalameta" %%% "munit" % "1.1.1" % Test,
+      "org.scalameta" %%% "munit" % "1.2.0" % Test,
       "org.scalameta" %%% "munit-scalacheck" % "1.1.0" % Test
     ),
     developers := List(
