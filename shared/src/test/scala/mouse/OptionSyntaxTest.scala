@@ -26,7 +26,7 @@ import scala.annotation.nowarn
 import scala.util.{Failure, Success}
 
 class OptionSyntaxTest extends MouseSuite {
-  implicit class ExtraTest[A](a: A) {
+  implicit class ExtraTest[A](@nowarn3 a: A) {
     def shouldBeA[T](implicit @nowarn212 ev: T =:= A): Unit = ()
   }
 
