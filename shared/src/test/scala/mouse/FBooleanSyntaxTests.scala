@@ -75,7 +75,7 @@ class FBooleanSyntaxTests extends MouseSuite {
     assertEquals(functionWasCalled, false)
   }
 
-  test("FBooleanSyntax.onTrue (when true)") {
+  test("FBooleanSyntax.whenA (when true)") {
     var evalWasEvaluated = false
     var functionWasCalled = false
     def other = {
@@ -85,12 +85,12 @@ class FBooleanSyntaxTests extends MouseSuite {
       }
     }
 
-    Eval.now(true).onTrue(other).value
+    Eval.now(true).whenA(other).value
     assertEquals(evalWasEvaluated, true)
     assertEquals(functionWasCalled, true)
   }
 
-  test("FBooleanSyntax.onTrue (when false)") {
+  test("FBooleanSyntax.whenA (when false)") {
     var evalWasEvaluated = false
     var functionWasCalled = false
     def other = {
@@ -100,12 +100,12 @@ class FBooleanSyntaxTests extends MouseSuite {
       }
     }
 
-    Eval.now(false).onTrue(other).value
+    Eval.now(false).whenA(other).value
     assertEquals(evalWasEvaluated, false)
     assertEquals(functionWasCalled, false)
   }
 
-  test("FBooleanSyntax.onFalse (when true)") {
+  test("FBooleanSyntax.unlessA (when true)") {
     var evalWasEvaluated = false
     var functionWasCalled = false
     def other = {
@@ -115,12 +115,12 @@ class FBooleanSyntaxTests extends MouseSuite {
       }
     }
 
-    Eval.now(false).onFalse(other).value
+    Eval.now(false).unlessA(other).value
     assertEquals(evalWasEvaluated, true)
     assertEquals(functionWasCalled, true)
   }
 
-  test("FBooleanSyntax.onFalse (when false)") {
+  test("FBooleanSyntax.unlessA (when false)") {
     var evalWasEvaluated = false
     var functionWasCalled = false
     def other = {
@@ -130,7 +130,7 @@ class FBooleanSyntaxTests extends MouseSuite {
       }
     }
 
-    Eval.now(true).onFalse(other).value
+    Eval.now(true).unlessA(other).value
     assertEquals(evalWasEvaluated, false)
     assertEquals(functionWasCalled, false)
   }
