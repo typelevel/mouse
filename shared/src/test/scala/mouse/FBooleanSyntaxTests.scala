@@ -74,4 +74,65 @@ class FBooleanSyntaxTests extends MouseSuite {
     assertEquals(evalWasEvaluated, false)
     assertEquals(functionWasCalled, false)
   }
+
+  test("FBooleanSyntax.whenA (when true)") {
+    var evalWasEvaluated = false
+    var functionWasCalled = false
+    def other = {
+      functionWasCalled = true
+      Eval.later {
+        evalWasEvaluated = true
+      }
+    }
+
+    Eval.now(true).whenA(other).value
+    assertEquals(evalWasEvaluated, true)
+    assertEquals(functionWasCalled, true)
+  }
+
+  test("FBooleanSyntax.whenA (when false)") {
+    var evalWasEvaluated = false
+    var functionWasCalled = false
+    def other = {
+      functionWasCalled = true
+      Eval.later {
+        evalWasEvaluated = true
+      }
+    }
+
+    Eval.now(false).whenA(other).value
+    assertEquals(evalWasEvaluated, false)
+    assertEquals(functionWasCalled, false)
+  }
+
+  test("FBooleanSyntax.unlessA (when true)") {
+    var evalWasEvaluated = false
+    var functionWasCalled = false
+    def other = {
+      functionWasCalled = true
+      Eval.later {
+        evalWasEvaluated = true
+      }
+    }
+
+    Eval.now(false).unlessA(other).value
+    assertEquals(evalWasEvaluated, true)
+    assertEquals(functionWasCalled, true)
+  }
+
+  test("FBooleanSyntax.unlessA (when false)") {
+    var evalWasEvaluated = false
+    var functionWasCalled = false
+    def other = {
+      functionWasCalled = true
+      Eval.later {
+        evalWasEvaluated = true
+      }
+    }
+
+    Eval.now(true).unlessA(other).value
+    assertEquals(evalWasEvaluated, false)
+    assertEquals(functionWasCalled, false)
+  }
+
 }

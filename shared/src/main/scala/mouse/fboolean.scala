@@ -57,4 +57,25 @@ final class FBooleanOps[F[_]](private val fBoolean: F[Boolean]) extends AnyVal {
       case true  => F.pure(true)
       case false => other
     }
+
+  /**
+   * Evaluates the given effect if the boolean is `true`.
+   *
+   * Wont evaluate `f` unless this evaluates to `true`.
+   */
+  def whenA[A](f: => F[A])(implicit F: Monad[F]): F[Unit] = F.flatMap(fBoolean) {
+    case true  => F.flatMap(f)(_ => F.unit)
+    case false => F.unit
+  }
+
+  /**
+   * Evaluates the given effect if the boolean is `false`.
+   *
+   * Wont evaluate `f` unless this evaluates to `false`.
+   */
+  def unlessA[A](f: => F[A])(implicit F: Monad[F]): F[Unit] = F.flatMap(fBoolean) {
+    case true  => F.unit
+    case false => F.flatMap(f)(_ => F.unit)
+  }
+
 }
