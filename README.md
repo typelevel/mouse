@@ -1,4 +1,4 @@
-# Mouse ![Continuous Integration](https://github.com/typelevel/mouse/workflows/Continuous%20Integration/badge.svg) [![Maven Central](https://img.shields.io/maven-central/v/org.typelevel/mouse_2.13)](https://img.shields.io/maven-central/v/org.typelevel/mouse_2.13) <a href="https://typelevel.org/cats/"><img src="https://typelevel.org/cats/img/cats-badge.svg" height="40px" align="right" alt="Cats friendly" /></a>
+# Mouse ![Continuous Integration](https://github.com/typelevel/mouse/workflows/Continuous%20Integration/badge.svg) [![Maven Central](https://img.shields.io/maven-central/v/org.typelevel/mouse_2.13)](https://central.sonatype.com/artifact/org.typelevel/mouse_2.13) <a href="https://typelevel.org/cats/"><img src="https://typelevel.org/cats/img/cats-badge.svg" height="40px" align="right" alt="Cats friendly" /></a>
 
 Mouse is a small companion to the [Cats](https://github.com/typelevel/cats) functional programming library and the Scala standard library.
 
