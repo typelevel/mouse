@@ -89,6 +89,8 @@ final class BooleanOps(private val b: Boolean) extends AnyVal {
 
   @inline def liftTo[F[_]]: LiftToPartiallyApplied[F] = new LiftToPartiallyApplied(b)
 
+  @inline def otherwise[F[_], E](e: => E)(implicit F: ApplicativeError[F, E]): F[Unit] = F.raiseUnless(b)(e)
+
 }
 
 object BooleanSyntax {

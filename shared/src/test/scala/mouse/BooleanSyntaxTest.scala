@@ -136,4 +136,12 @@ class BooleanSyntaxTest extends MouseSuite {
     )
     assertEquals(lazinessChecker, 0)
   }
+
+  test("BooleanSyntax.otherwise") {
+    type E = String
+    type F[A] = Either[E, A]
+
+    assertEquals(true.otherwise[F, E]("error"), Either.right(()))
+    assertEquals(false.otherwise[F, E]("error"), Either.left("error"))
+  }
 }
