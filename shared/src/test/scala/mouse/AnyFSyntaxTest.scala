@@ -82,4 +82,12 @@ class AnyFSyntaxTest extends MouseSuite {
   test("AnyFSyntax.liftOptionT") {
     assertEquals(List(1).liftOptionT, OptionT(List(Option(1))))
   }
+
+  test("AnyFSyntax.withFilter") {
+    assertEquals(1.asRight[String].withFilter(_ => ().asRight[String]), 1.asRight[String])
+
+    assertEquals(1.asRight[String].withFilter(_ => "rejected".asLeft[Unit]), "rejected".asLeft[Int])
+
+    assertEquals("error".asLeft[Int].withFilter(_ => ().asRight[String]), "error".asLeft[Int])
+  }
 }

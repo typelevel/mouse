@@ -23,8 +23,7 @@ package mouse
 
 import cats.data.EitherT
 import cats.data.OptionT
-import cats.~>
-import cats.Functor
+import cats.{~>, Functor, MonadError}
 
 trait AnyFSyntax {
   implicit final def anyfSyntaxMouse[F[_], A](fa: F[A]): AnyFOps[F, A] = new AnyFOps(fa)
@@ -48,5 +47,8 @@ final class AnyFOps[F[_], A](private val fa: F[A]) extends AnyVal {
 
   def liftOptionT(implicit F: Functor[F]): OptionT[F, A] =
     OptionT.liftF(fa)
+
+  def withFilter[E](f: A => F[Unit])(implicit F: MonadError[F, E]): F[A] =
+    F.flatMap(fa)(a => F.as(f(a), a))
 
 }
