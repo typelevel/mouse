@@ -89,5 +89,14 @@ class AnyFSyntaxTest extends MouseSuite {
     assertEquals(1.asRight[String].withFilter(_ => "rejected".asLeft[Unit]), "rejected".asLeft[Int])
 
     assertEquals("error".asLeft[Int].withFilter(_ => ().asRight[String]), "error".asLeft[Int])
+
+    // `if <x>` desugars to `.withFilter(<x>)` inside a for-expr.
+    // This test case asserts that AnyFSyntax.withFilter can be used in
+    // for-expressions over MonadError types such as Either.
+    val result = for {
+      age <- 15.asRight[String]
+      if (age >= 18).otherwise("Age must be at least 18")
+    } yield age
+    assertEquals(result, Left("Age must be at least 18"))
   }
 }
