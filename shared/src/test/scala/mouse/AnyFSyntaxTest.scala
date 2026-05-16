@@ -23,9 +23,11 @@ package mouse
 
 import cats.data.EitherT
 import cats.data.OptionT
-import cats.syntax.option._
-import cats.syntax.either._
-import cats.{~>, Id}
+import cats.syntax.option.*
+import cats.syntax.either.*
+import cats.{Id, ~>}
+
+import scala.util.{Success, Try}
 
 class AnyFSyntaxTest extends MouseSuite {
   private val emptyK = new (List ~> List) {
@@ -73,6 +75,55 @@ class AnyFSyntaxTest extends MouseSuite {
 
   test("AnyFSyntax.asSomeIn") {
     assertEquals(List(1).mapAsSome, List(1.some))
+  }
+
+  test("AnyFSyntax.recoverEither") {
+    assertEquals(
+      Try[Int](1).recoverEither {
+        case _: Throwable => Right(2)
+      },
+      Success(1.asRight)
+    )
+
+    assertEquals(
+      Try[Int](throw new RuntimeException("boom")).recoverEither {
+        case _: Throwable => Right(2)
+      },
+      Success(2.asRight)
+    )
+  }
+
+
+  test("AnyFSyntax.recoverAsRight") {
+    assertEquals(
+      Try[Int](1).recoverAsRight {
+        case _: Throwable => 2
+      },
+      Success(1.asRight)
+    )
+
+    assertEquals(
+      Try[Int](throw new RuntimeException("boom")).recoverAsRight {
+        case _: Throwable => 2
+      },
+      Success(2.asRight)
+    )
+  }
+
+  test("AnyFSyntax.recoverAsLeft") {
+    assertEquals(
+      Try(1).recoverAsLeft {
+        case _: Throwable => "foo"
+      },
+      Success(1.asRight)
+    )
+
+    assertEquals(
+      Try(throw new RuntimeException("boom")).recoverAsLeft {
+        case _: Throwable => "error"
+      },
+      Success("error".asLeft)
+    )
   }
 
   test("AnyFSyntax.liftEitherT") {
