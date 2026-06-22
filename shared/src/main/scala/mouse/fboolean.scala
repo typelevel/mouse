@@ -64,7 +64,7 @@ final class FBooleanOps[F[_]](private val fBoolean: F[Boolean]) extends AnyVal {
    * Wont evaluate `f` unless this evaluates to `true`.
    */
   def whenA[A](f: => F[A])(implicit F: Monad[F]): F[Unit] = F.flatMap(fBoolean) {
-    case true  => F.flatMap(f)(_ => F.unit)
+    case true  => F.void(f)
     case false => F.unit
   }
 
@@ -75,7 +75,7 @@ final class FBooleanOps[F[_]](private val fBoolean: F[Boolean]) extends AnyVal {
    */
   def unlessA[A](f: => F[A])(implicit F: Monad[F]): F[Unit] = F.flatMap(fBoolean) {
     case true  => F.unit
-    case false => F.flatMap(f)(_ => F.unit)
+    case false => F.void(f)
   }
 
 }
